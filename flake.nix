@@ -12,10 +12,11 @@
     };
   };
 
-
   outputs = {
     self,
     nixpkgs,
+    home-manager,
+    ...
   }: {
     # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
@@ -24,9 +25,17 @@
     nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-      ./hardware-configuration.nix
-      ./configuration.nix
-      ./home.nix
+        ./hardware-configuration.nix
+        ./configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.exec = import ./home.nix;
+
+          # Optionally, use home-manager.extraSpecialArgs to pass
+          # arguments to home.nix
+        }
       ];
     };
   };

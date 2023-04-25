@@ -9,8 +9,9 @@
 }: {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    <home-manager/nixos>
+    # ./hardware-configuration.nix
+    # <home-manager/nixos>
+    ./clash.nix
   ];
 
   # Bootloader.
@@ -109,11 +110,11 @@
   };
   users.defaultUserShell = pkgs.zsh;
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.exec = import ./home.nix;
-  };
+  # home-manager = {
+  #   useGlobalPkgs = true;
+  #   useUserPackages = true;
+  #   users.exec = import ./home.nix;
+  # };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -175,7 +176,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     clang
-    clash
     discord
     docker-compose
     dua
@@ -212,7 +212,11 @@
     libvterm
     appimage-run
     lldb
+    steam-run
     file
+    polkit
+    sysfsutils
+    pciutils
   ];
 
   nix.settings.substituters = ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
@@ -258,6 +262,12 @@
     enableExtraSocket = true;
   };
 
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = false;
+    };
+  };
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
@@ -299,7 +309,7 @@
         "man"
         "grc"
       ];
-      theme = "avit";
+      # theme = "mlh";
       customPkgs = [
         pkgs.nix-zsh-completions
       ];

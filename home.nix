@@ -48,6 +48,8 @@
     pkgs.zsh-powerlevel10k
     pkgs.vimpager
     pkgs.most
+    pkgs.inetutils
+    pkgs.du-dust
   ];
 
   programs.home-manager.enable = true;
