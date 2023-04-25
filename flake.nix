@@ -1,6 +1,17 @@
 {
   description = "Eval EXEC's NixOS flake";
 
+  inputs = rec {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    hardware.url = "github:nixos/nixos-hardware";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
 
   outputs = {
     self,
