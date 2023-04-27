@@ -51,6 +51,10 @@
     pkgs.inetutils
     pkgs.du-dust
     pkgs.proxychains
+
+    pkgs.emacsPackages.telega
+    pkgs.emacsPackages.vterm
+
   ];
 
   programs.home-manager.enable = true;
