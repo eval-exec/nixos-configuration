@@ -316,6 +316,19 @@
     };
   };
 
+  programs.proxychains = {
+    enable = true;
+    package = "proxychains-ng";
+    proxies = {
+      myproxy = {
+        type = "http";
+        host = "127.0.0.1";
+        port = 7890;
+        enable = true;
+      };
+    };
+  };
+
   # programs.nix-index.enable = true;
 
   programs.nix-ld.enable = true;

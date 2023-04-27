@@ -53,9 +53,6 @@
 
     pkgs.emacsPackages.telega
     pkgs.emacsPackages.vterm
-
-    pkgs.proxychains-ng
-
   ];
 
   programs.home-manager.enable = true;

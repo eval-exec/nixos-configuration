@@ -46,5 +46,4 @@
   # high-resolution display
   # hardware.video.hidpi.enable = lib.mkDefault true;
   hardware.bluetooth.enable = true;
-
 }
