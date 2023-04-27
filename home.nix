@@ -50,6 +50,7 @@
     pkgs.most
     pkgs.inetutils
     pkgs.du-dust
+    pkgs.proxychains
   ];
 
   programs.home-manager.enable = true;
