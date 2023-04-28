@@ -53,7 +53,6 @@
 
     pkgs.emacsPackages.telega
     pkgs.emacsPackages.vterm
-    pkgs.mosh
   ];
 
   programs.home-manager.enable = true;

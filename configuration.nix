@@ -217,6 +217,7 @@
     polkit
     sysfsutils
     pciutils
+    proxychains-ng
   ];
 
   nix.settings.substituters = ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
@@ -316,22 +317,23 @@
     };
   };
 
-  programs.proxychains = {
-    enable = true;
-    package = "pkgs.proxychains-ng";
-    proxies = {
-      myproxy = {
-        type = "http";
-        host = "127.0.0.1";
-        port = 7890;
-        enable = true;
-      };
-    };
-  };
+  # programs.proxychains = {
+  #   enable = true;
+  #   package = "pkgs.proxychains-ng";
+  #   proxies = {
+  #     myproxy = {
+  #       type = "http";
+  #       host = "127.0.0.1";
+  #       port = 7890;
+  #       enable = true;
+  #     };
+  #   };
+  # };
 
   # programs.nix-index.enable = true;
 
   programs.nix-ld.enable = true;
+  programs.mosh.enable = true;
 
   virtualisation.docker.enable = true;
 
