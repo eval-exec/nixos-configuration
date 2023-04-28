@@ -318,7 +318,7 @@
 
   programs.proxychains = {
     enable = true;
-    package = "proxychains-ng";
+    package = "pkgs.proxychains-ng";
     proxies = {
       myproxy = {
         type = "http";
