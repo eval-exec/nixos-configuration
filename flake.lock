@@ -35,7 +35,42 @@
         "type": "github"
       }
     },
+    "nix-software-center": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1680477702,
+        "narHash": "sha256-1KUe0zlXCeBpqTDHPWBBMjkGnRLthJEpQc+82Q7Pp1w=",
+        "owner": "vlinkz",
+        "repo": "nix-software-center",
+        "rev": "8c66618ebb85263e58c4b1b5e46bc954d55a418b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vlinkz",
+        "repo": "nix-software-center",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1680213900,
+        "narHash": "sha256-cIDr5WZIj3EkKyCgj/6j3HBH4Jj1W296z7HTcWj1aMA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e3652e0735fbec227f342712f180f4f21f0594f2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1682362401,
         "narHash": "sha256-/UMUHtF2CyYNl4b60Z2y4wwTTdIWGKhj9H301EDcT9M=",
@@ -55,7 +90,23 @@
       "inputs": {
         "hardware": "hardware",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nix-software-center": "nix-software-center",
+        "nixpkgs": "nixpkgs_2"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1678901627,
+        "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     }
   },

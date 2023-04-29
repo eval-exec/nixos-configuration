@@ -181,7 +181,6 @@
     docker-compose
     dua
     duf
-    emacs
     gcc
     git
     gnumake
@@ -220,8 +219,6 @@
     pciutils
     proxychains-ng
     clash-meta
-    inputs.nix-software-center.packages.${system}.nix-software-center
-
   ];
 
   nix.settings.substituters = ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
@@ -231,6 +228,14 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  
+  services.emacs.package = pkgs.emacsUnstable;
+
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
