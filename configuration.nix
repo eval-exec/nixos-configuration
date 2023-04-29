@@ -12,6 +12,7 @@
     # ./hardware-configuration.nix
     # <home-manager/nixos>
     ./clash.nix
+    ./g810-led.nix
   ];
 
   # Bootloader.
@@ -218,6 +219,7 @@
     sysfsutils
     pciutils
     proxychains-ng
+    clash-meta
   ];
 
   nix.settings.substituters = ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
