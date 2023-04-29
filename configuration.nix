@@ -220,6 +220,8 @@
     pciutils
     proxychains-ng
     clash-meta
+    inputs.nix-software-center.packages.${system}.nix-software-center
+
   ];
 
   nix.settings.substituters = ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];

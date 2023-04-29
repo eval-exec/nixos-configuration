@@ -10,6 +10,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-software-center.url = "github:vlinkz/nix-software-center";
   };
 
   outputs = {
