@@ -39,6 +39,15 @@
           # Optionally, use home-manager.extraSpecialArgs to pass
           # arguments to home.nix
         }
+
+        {
+          nixpkgs.overlays = [
+            (import (builtins.fetchTarball {
+              url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+              sha256 = "1fjjh69z82a1lj4p0psn4jm6yqms2jjb5fvc1wfv8bmx5kahywc1";
+            }))
+          ];
+        }
       ];
     };
   };

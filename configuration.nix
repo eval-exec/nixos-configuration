@@ -12,6 +12,7 @@
     # ./hardware-configuration.nix
     # <home-manager/nixos>
     ./clash.nix
+    # ./cachix.nix
     ./g810-led.nix
   ];
 
@@ -59,6 +60,11 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+
+  # services.nix-serve = {
+  #   enable = true;
+  #   # secretKeyFile = "/var/cache-priv-key.pem";
+  # };
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -194,6 +200,8 @@
     openssl
     pinentry-curses
     pinentry-emacs
+    emacsGit
+    cachix
     pinentry-qt
     pkg-config
     python3
@@ -221,21 +229,19 @@
     clash-meta
   ];
 
-  nix.settings.substituters = ["https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"];
+  nix.settings.substituters = [
+    "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+    "https://nix-community.cachix.org"
+    "https://cache.nixos.org/"
+  ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-  
-  services.emacs.package = pkgs.emacsUnstable;
 
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-    }))
-  ];
+  # services.emacs.package = pkgs.emacsGit;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

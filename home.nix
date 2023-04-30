@@ -52,8 +52,6 @@
     pkgs.du-dust
     pkgs.lm_sensors
 
-
-
     pkgs.emacsPackages.telega
     pkgs.emacsPackages.vterm
   ];
