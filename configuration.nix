@@ -200,7 +200,7 @@
     openssl
     pinentry-curses
     pinentry-emacs
-    emacsGit
+    # emacsGit
     cachix
     pinentry-qt
     pkg-config
@@ -245,7 +245,7 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # services.emacs.package = pkgs.emacsGit;
+  services.emacs.package = pkgs.emacsGit;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
