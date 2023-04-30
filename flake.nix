@@ -12,6 +12,11 @@
     };
 
     nix-software-center.url = "github:vlinkz/nix-software-center";
+
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -19,6 +24,7 @@
     nixpkgs,
     home-manager,
     nix-software-center,
+    emacs-overlay,
     ...
   }: {
     # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
@@ -38,15 +44,6 @@
 
           # Optionally, use home-manager.extraSpecialArgs to pass
           # arguments to home.nix
-        }
-
-        {
-          nixpkgs.overlays = [
-            (import (builtins.fetchTarball {
-              url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-              sha256 = "1fjjh69z82a1lj4p0psn4jm6yqms2jjb5fvc1wfv8bmx5kahywc1";
-            }))
-          ];
         }
       ];
     };

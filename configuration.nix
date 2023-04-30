@@ -200,7 +200,6 @@
     openssl
     pinentry-curses
     pinentry-emacs
-    # emacsGit
     cachix
     pinentry-qt
     pkg-config
