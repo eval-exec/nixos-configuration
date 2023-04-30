@@ -12,7 +12,7 @@
     # ./hardware-configuration.nix
     # <home-manager/nixos>
     ./clash.nix
-    # ./cachix.nix
+    ./cachix.nix
     ./g810-led.nix
   ];
 
