@@ -1,1 +1,1 @@
-sudo nixos-rebuild switch --flake /home/exec/my-flake/.#Mufasa --show-trace
+sudo nixos-rebuild switch --flake /home/exec/my-flake/.#Mufasa --verbose
