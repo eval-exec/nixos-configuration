@@ -202,6 +202,7 @@
     pinentry-emacs
     cachix
     pinentry-qt
+    emacsGit
     pkg-config
     python3
     qv2ray
