@@ -15,7 +15,8 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
-  boot.kernelParams = ["loglevel=7" "module_blacklist=i915"];
+  boot.blacklistedKernelModules = ["i915"];
+  boot.kernelParams = ["quiet" "loglevel=7" "module_blacklist=i915" ];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
