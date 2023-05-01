@@ -103,6 +103,8 @@
   services.xserver.libinput.touchpad.disableWhileTyping = true;
   services.xserver.libinput.touchpad.accelSpeed = "0.5"; # null
 
+  services.xserver.videoDrivers = ["nvidia"];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.exec = {
     isNormalUser = true;
@@ -202,7 +204,7 @@
     pinentry-emacs
     cachix
     pinentry-qt
-    emacsGit
+    emacs
     pkg-config
     python3
     qv2ray
