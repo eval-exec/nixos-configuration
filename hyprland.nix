@@ -7,6 +7,6 @@
     # "hyprland"
   ];
 
-#   programs.hyprland.enable = false;
-#   programs.hyprland.xwayland.hidpi = true;
+  #   programs.hyprland.enable = false;
+  #   programs.hyprland.xwayland.hidpi = true;
 }

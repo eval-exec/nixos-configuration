@@ -13,6 +13,11 @@
 
     nix-software-center.url = "github:vlinkz/nix-software-center";
 
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+
+    };
 
     # hyprland.url = "github:hyprwm/Hyprland";
   };
@@ -22,6 +27,7 @@
     nixpkgs,
     home-manager,
     nix-software-center,
+    emacs-overlay,
     # hyprland,
     ...
   }: {
@@ -43,13 +49,6 @@
 
           # Optionally, use home-manager.extraSpecialArgs to pass
           # arguments to home.nix
-        }
-        {
-
-          emacs-overlay = {
-            url = "github:nix-community/emacs-overlay";
-            inputs.nixpkgs.follows = "nixpkgs";
-          };
         }
       ];
     };

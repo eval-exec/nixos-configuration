@@ -61,6 +61,5 @@
     pkgs.direnv
   ];
 
-
   programs.home-manager.enable = true;
 }
