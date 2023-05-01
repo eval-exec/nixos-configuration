@@ -15,9 +15,8 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
   boot.kernelModules = ["kvm-intel"];
-  boot.blacklistedKernelModules = [];
-  # boot.kernelParams = ["quiet" "loglevel=7" "module_blacklist=i915" "nvidia-drm.modeset=1"];
-  boot.kernelParams = ["quiet" "loglevel=7" "nvidia-drm.modeset=1"];
+  boot.blacklistedKernelModules = ["i915"];
+  boot.kernelParams = ["quiet" "loglevel=7" "module_blacklist=i915" "nvidia-drm.modeset=1"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
