@@ -15,7 +15,7 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
-  boot.kernelParams = ["i915.enable_guc=3" "loglevel=7" "module_blacklist=i915"];
+  boot.kernelParams = ["loglevel=7" "module_blacklist=i915"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
