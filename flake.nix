@@ -13,10 +13,9 @@
 
     nix-software-center.url = "github:vlinkz/nix-software-center";
 
-    emacs-overlay = {
+    emacs-overlay.url = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
-
     };
 
     # hyprland.url = "github:hyprwm/Hyprland";
@@ -40,7 +39,6 @@
       modules = [
         ./hardware-configuration.nix
         ./configuration.nix
-        # ./hyprland.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;

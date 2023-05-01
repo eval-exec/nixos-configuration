@@ -5,6 +5,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -188,6 +189,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
+
   environment.systemPackages = with pkgs; [
     clang
     discord
@@ -209,7 +211,8 @@
     pinentry-emacs
     cachix
     pinentry-qt
-    # emacsGit
+    emacsGit
+
     pkg-config
     python3
     qv2ray
