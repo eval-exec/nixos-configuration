@@ -47,7 +47,7 @@
   # high-resolution display
   # hardware.video.hidpi.enable = lib.mkDefault true;
   hardware.bluetooth.enable = true;
-  hardware.opengl.enable = true;
+  # hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.modesetting.enable = true;
 }
