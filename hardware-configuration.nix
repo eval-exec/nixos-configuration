@@ -15,7 +15,7 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
-  boot.kernelParams = ["i915.enable_guc=3" "loglevel=7"];
+  boot.kernelParams = ["i915.enable_guc=3" "loglevel=7" "module_blacklist=i915"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
@@ -48,4 +48,5 @@
   hardware.bluetooth.enable = true;
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # hardware.nvidia.modesetting.enable = true;
 }
