@@ -13,10 +13,10 @@
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
   boot.kernelModules = ["kvm-intel"];
   boot.blacklistedKernelModules = ["i915"];
-  boot.kernelParams = ["quiet" "loglevel=7" "module_blacklist=i915" ];
+  boot.kernelParams = ["quiet" "loglevel=7" "module_blacklist=i915" "nvidia-drm.modeset=1"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
@@ -49,5 +49,5 @@
   hardware.bluetooth.enable = true;
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  hardware.nvidia.modesetting.enable = true;
+  # hardware.nvidia.modesetting.enable = true;
 }
