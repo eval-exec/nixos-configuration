@@ -68,7 +68,8 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.sddm.enableHidpi = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -266,7 +267,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-  programs.kdeconnect.enable = true;
+  # programs.kdeconnect.enable = true;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
 
