@@ -76,8 +76,8 @@
     xkbVariant = "";
 
     videoDrivers = [
-      # "intel"
-      "nvidia"
+      "intel"
+      # "nvidia"
     ];
   };
 
