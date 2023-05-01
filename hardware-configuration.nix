@@ -16,7 +16,7 @@
   boot.initrd.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
   boot.kernelModules = ["kvm-intel"];
   boot.blacklistedKernelModules = ["i915"];
-  boot.kernelParams = ["quiet" "loglevel=7" "module_blacklist=i915" "nvidia-drm.modeset=1"];
+  boot.kernelParams = ["loglevel=7" "module_blacklist=i915" "nvidia-drm.modeset=1"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
@@ -47,7 +47,7 @@
   # high-resolution display
   # hardware.video.hidpi.enable = lib.mkDefault true;
   hardware.bluetooth.enable = true;
-  # hardware.opengl.enable = true;
+  hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.modesetting.enable = true;
 }
