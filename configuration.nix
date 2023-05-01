@@ -74,6 +74,11 @@
   services.xserver = {
     layout = "us";
     xkbVariant = "";
+
+    videoDrivers = [
+      # "intel"
+      "nvidia"
+    ];
   };
 
   # Enable CUPS to print documents.
@@ -102,8 +107,6 @@
   services.xserver.libinput.touchpad.scrollMethod = "twofinger";
   services.xserver.libinput.touchpad.disableWhileTyping = true;
   services.xserver.libinput.touchpad.accelSpeed = "0.5"; # null
-
-  services.xserver.videoDrivers = ["nvidia"];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.exec = {

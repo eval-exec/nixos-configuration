@@ -13,10 +13,11 @@
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
-  boot.initrd.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
+  boot.initrd.kernelModules = [];
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = ["kvm-intel"];
-  boot.blacklistedKernelModules = ["i915"];
-  boot.kernelParams = ["loglevel=7" "module_blacklist=i915" "nvidia-drm.modeset=1"];
+  boot.blacklistedKernelModules = [];
+  boot.kernelParams = [];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
@@ -48,6 +49,18 @@
   # hardware.video.hidpi.enable = lib.mkDefault true;
   hardware.bluetooth.enable = true;
   hardware.opengl.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    prime = {
+      sync.enable = true;
+
+      # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+      nvidiaBusId = "PCI:1:0:0";
+
+      # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+      intelBusId = "PCI:0:2:0";
+    };
+  };
 }
