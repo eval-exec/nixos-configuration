@@ -57,6 +57,8 @@
 
     pkgs.wofi
     pkgs.dolphin
+    pkgs.g810-led
+    pkgs.direnv
   ];
 
 
