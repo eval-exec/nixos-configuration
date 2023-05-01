@@ -4,9 +4,9 @@
   ...
 }: {
   imports = [
-    "hyprland"
+    # "hyprland"
   ];
 
-  programs.hyprland.enable = true;
-  programs.hyprland.xwayland.hidpi = true;
+#   programs.hyprland.enable = false;
+#   programs.hyprland.xwayland.hidpi = true;
 }

@@ -54,7 +54,11 @@
 
     pkgs.emacsPackages.telega
     pkgs.emacsPackages.vterm
+
+    pkgs.wofi
+    pkgs.dolphin
   ];
+
 
   programs.home-manager.enable = true;
 }

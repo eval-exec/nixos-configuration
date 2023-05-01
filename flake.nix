@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = {
@@ -27,7 +27,7 @@
     home-manager,
     nix-software-center,
     emacs-overlay,
-    hyprland,
+    # hyprland,
     ...
   }: {
     # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
@@ -39,7 +39,7 @@
       modules = [
         ./hardware-configuration.nix
         ./configuration.nix
-        ./hyprland.nix
+        # ./hyprland.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
