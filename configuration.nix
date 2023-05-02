@@ -244,6 +244,7 @@
     pciutils
     proxychains-ng
     clash-meta
+    qemu
   ];
 
   nix.settings.trusted-public-keys = [
