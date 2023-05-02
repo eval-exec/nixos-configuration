@@ -60,6 +60,7 @@
     pkgs.g810-led
     pkgs.direnv
     pkgs.yt-dlp
+    pkgs.dmidecode
   ];
 
   programs.home-manager.enable = true;
