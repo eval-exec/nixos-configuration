@@ -61,6 +61,7 @@
     pkgs.direnv
     pkgs.yt-dlp
     pkgs.dmidecode
+    pkgs.unzip
   ];
 
   programs.home-manager.enable = true;
