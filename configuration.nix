@@ -133,6 +133,7 @@
 
   # Allow unfree packages
   fonts.fonts = with pkgs; [
+    jetbrains-mono
     nerdfonts
     symbola
     noto-fonts
