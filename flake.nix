@@ -13,21 +13,18 @@
 
     nix-software-center.url = "github:vlinkz/nix-software-center";
 
-    emacs-overlay.url = {
+    emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
     nixpkgs,
     home-manager,
-    nix-software-center,
-    emacs-overlay,
-    # hyprland,
+    # nix-software-center,
+    # emacs-overlay,
     ...
   }: {
     # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
@@ -36,6 +33,7 @@
 
     nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
       modules = [
         ./hardware-configuration.nix
         ./configuration.nix

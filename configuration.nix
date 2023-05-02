@@ -78,7 +78,7 @@
     xkbVariant = "";
 
     videoDrivers = [
-      "intel"
+      "modesetting"
       # "nvidia"
     ];
   };
@@ -131,7 +131,6 @@
   # };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
   fonts.fonts = with pkgs; [
     nerdfonts
     symbola
@@ -188,7 +187,12 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+    overlays = [inputs.emacs-overlay.overlay];
+  };
 
   environment.systemPackages = with pkgs; [
     clang
@@ -254,8 +258,6 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
-  services.emacs.package = pkgs.emacsGit;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
