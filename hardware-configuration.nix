@@ -48,6 +48,9 @@
   # high-resolution display
   hardware.bluetooth.enable = true;
   hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = with pkgs; [
+    intel-media-driver
+  ];
   # hardware.nvidia = {
   #   package = config.boot.kernelPackages.nvidiaPackages.stable;
   #   modesetting.enable = true;
