@@ -61,6 +61,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.thermald.enable = true;
 
   # services.nix-serve = {
   #   enable = true;

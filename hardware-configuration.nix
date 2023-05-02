@@ -17,7 +17,7 @@
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = ["kvm-intel"];
   boot.blacklistedKernelModules = [];
-  boot.kernelParams = [];
+  boot.kernelParams = ["mem_sleep_default=deep"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
