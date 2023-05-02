@@ -7,7 +7,7 @@
 lib.mkIf (config.networking.hostName == "Mufasa") {
   systemd.services.clash = {
     wantedBy = ["multi-user.target"];
-    after = ["network.target"];
+    after = ["network-online.target"];
     description = "Start the Clash.";
     serviceConfig = {
       Type = "simple";
