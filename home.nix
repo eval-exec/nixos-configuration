@@ -59,6 +59,7 @@
     pkgs.dolphin
     pkgs.g810-led
     pkgs.direnv
+    pkgs.yt-dlp
   ];
 
   programs.home-manager.enable = true;
