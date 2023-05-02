@@ -133,18 +133,19 @@
 
   # Allow unfree packages
   fonts.fonts = with pkgs; [
-    jetbrains-mono
-    nerdfonts
-    symbola
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    liberation_ttf
+    dina-font
     fira-code
     fira-code-symbols
+    jetbrains-mono
+    liberation_ttf
     mplus-outline-fonts.githubRelease
-    dina-font
+    nerdfonts
+    noto-fonts
+    noto-fonts-cjk
     proggyfonts
+    noto-fonts-emoji
+    sarasa-gothic
+    symbola
     unifont
   ];
   fonts.fontconfig.localConf = ''
