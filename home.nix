@@ -62,6 +62,7 @@
     pkgs.yt-dlp
     pkgs.dmidecode
     pkgs.unzip
+    pkgs.logseq
   ];
 
   programs.home-manager.enable = true;
