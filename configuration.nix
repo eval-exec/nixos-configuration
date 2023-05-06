@@ -147,6 +147,7 @@
     sarasa-gothic
     symbola
     unifont
+    ibm-plex
   ];
   fonts.fontconfig.localConf = ''
     <?xml version="1.0"?>
