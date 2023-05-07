@@ -287,6 +287,10 @@
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
 
+  programs.steam = {
+    enable = true;
+  };
+
   # programs.vscode = {
   # 	enable = true;
   # 	package = pkgs.vscode.fhs;
