@@ -285,6 +285,7 @@
   # programs.kdeconnect.enable = true;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
+  programs.zsh.enable = true;
 
   programs.steam = {
     enable = true;
@@ -314,12 +315,10 @@
     };
   };
 
-  programs.nix-index.enable = true;
   programs.nix-ld.enable = true;
   programs.mosh.enable = true;
 
   virtualisation.docker.enable = true;
-
   virtualisation.docker.rootless = {
     enable = true;
     setSocketVariable = true;

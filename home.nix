@@ -63,15 +63,21 @@
     pkgs.dmidecode
     pkgs.unzip
     pkgs.logseq
+    pkgs.zsh-autosuggestions
   ];
   programs = {
     home-manager.enable = true;
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     zsh = {
       enable = true;
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
+      enableAutosuggestions = true;
+      enableSyntaxHighlighting = true;
       enableCompletion = true;
-      interactiveShellInit = ''
+      defaultKeymap = "emacs";
+      initExtra = ''
           # Preview file content using bat (https://github.com/sharkdp/bat)
                 export FZF_CTRL_T_OPTS="
                 --preview 'bat -n --color=always {}'
@@ -101,7 +107,7 @@
       # 		size = 1000000;
       # 		path = "${config.xdg.dataHome}/zsh/history";
       # 	};
-      ohMyZsh = {
+      oh-my-zsh = {
         enable = true;
         plugins = [
           "git"
