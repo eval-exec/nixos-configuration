@@ -64,6 +64,56 @@
     pkgs.unzip
     pkgs.logseq
   ];
+  programs = {
+    home-manager.enable = true;
+    zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+      enableCompletion = true;
+      interactiveShellInit = ''
+          # Preview file content using bat (https://github.com/sharkdp/bat)
+                export FZF_CTRL_T_OPTS="
+                --preview 'bat -n --color=always {}'
+                --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+          # CTRL-/ to toggle small preview window to see the full command
+          # CTRL-Y to copy the command into clipboard using pbcopy
+                export FZF_CTRL_R_OPTS="
+                --preview 'echo {}' --preview-window up:3:hidden:wrap
+                --bind 'ctrl-/:toggle-preview'
+                --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+                --color header:italic
+                --header 'Press CTRL-Y to copy command into clipboard'"
+          # Print tree structure in the preview window
+                export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+                NPM_CONFIG_PREFIX=~/.npm-global
 
-  programs.home-manager.enable = true;
+        export ZSH_WAKATIME_PROJECT_DETECTION=true
+      '';
+
+      shellAliases = {
+        ll = "ls -l";
+        cat = "bat -p";
+        vim = "lvim";
+        update = "sudo nixos-rebuild switch";
+      };
+      # 	history = {
+      # 		size = 1000000;
+      # 		path = "${config.xdg.dataHome}/zsh/history";
+      # 	};
+      ohMyZsh = {
+        enable = true;
+        plugins = [
+          "git"
+          "fzf"
+          "man"
+          "grc"
+          "zsh-wakatime"
+          "fzf-tab"
+        ];
+        # theme = "mlh";
+        custom = "/home/exec/.oh-my-zsh/custom";
+      };
+    };
+  };
 }
