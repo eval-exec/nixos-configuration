@@ -48,27 +48,27 @@
   # high-resolution display
   hardware.bluetooth.enable = true;
   hardware.opengl.enable = true;
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
-  };
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
+  # };
   hardware.opengl.extraPackages = with pkgs; [
-    intel-media-driver # LIBVA_DRIVER_NAME=iHD
+    # intel-media-driver # LIBVA_DRIVER_NAME=iHD
     vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
     vaapiVdpau
     libvdpau-va-gl
   ];
-  # hardware.nvidia = {
-  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-  #   modesetting.enable = true;
-  #   powerManagement.enable = true;
-  #   prime = {
-  #     sync.enable = true;
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    prime = {
+      sync.enable = true;
 
-  #     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-  #     nvidiaBusId = "PCI:1:0:0";
+      # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+      nvidiaBusId = "PCI:1:0:0";
 
-  #     # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-  #     intelBusId = "PCI:0:2:0";
-  #   };
-  # };
+      # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+      intelBusId = "PCI:0:2:0";
+    };
+  };
 }

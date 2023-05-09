@@ -79,8 +79,8 @@
     xkbVariant = "";
 
     videoDrivers = [
-      "modesetting"
-      # "nvidia"
+      # "modesetting"
+      "nvidia"
     ];
   };
 
