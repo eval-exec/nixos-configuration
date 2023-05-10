@@ -244,6 +244,7 @@
     wakatime
     wget
     zlib
+    nvidia-vaapi-driver
   ];
 
   nix.settings.trusted-users = ["root" "exec"];
