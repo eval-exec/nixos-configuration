@@ -14,6 +14,7 @@
     pkgs.atool
     pkgs.bat
     pkgs.cargo-expand
+    pkgs.cargo-machete
     pkgs.cmake
     pkgs.copyq
     pkgs.cpupower-gui
