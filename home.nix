@@ -32,6 +32,7 @@
     pkgs.g810-led
     pkgs.gh
     pkgs.grc
+    pkgs.google-chrome-dev
     pkgs.htop
     pkgs.httpie
     pkgs.inetutils
