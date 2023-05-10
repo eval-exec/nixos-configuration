@@ -19,21 +19,33 @@
     pkgs.cpupower-gui
     pkgs.delta
     pkgs.dig
+    pkgs.direnv
+    pkgs.dmidecode
+    pkgs.dolphin
+    pkgs.du-dust
+    pkgs.emacsPackages.telega
+    pkgs.emacsPackages.vterm
     pkgs.fd
     pkgs.flameshot
     pkgs.fzf
+    pkgs.g810-led
     pkgs.gh
     pkgs.grc
     pkgs.htop
     pkgs.httpie
+    pkgs.inetutils
     pkgs.jq
     pkgs.kitty
     pkgs.kitty-themes
     pkgs.libstdcxx5
+    pkgs.lm_sensors
+    pkgs.logseq
     pkgs.mlocate
     pkgs.mold
+    pkgs.most
     pkgs.mpv
     pkgs.neovide
+    pkgs.powershell
     pkgs.powertop
     pkgs.ripgrep
     pkgs.rust-analyzer
@@ -41,29 +53,16 @@
     pkgs.sccache
     pkgs.spotify
     pkgs.tmux
-    pkgs.variety
-    pkgs.wakatime
-    pkgs.xclip
-    pkgs.zsh
-    pkgs.zsh-powerlevel10k
-    pkgs.vimpager
-    pkgs.most
-    pkgs.inetutils
-    pkgs.du-dust
-    pkgs.lm_sensors
-
-    pkgs.emacsPackages.telega
-    pkgs.emacsPackages.vterm
-
-    pkgs.wofi
-    pkgs.dolphin
-    pkgs.g810-led
-    pkgs.direnv
-    pkgs.yt-dlp
-    pkgs.dmidecode
     pkgs.unzip
-    pkgs.logseq
+    pkgs.variety
+    pkgs.vimpager
+    pkgs.wakatime
+    pkgs.wofi
+    pkgs.xclip
+    pkgs.yt-dlp
+    pkgs.zsh
     pkgs.zsh-autosuggestions
+    pkgs.zsh-powerlevel10k
   ];
   programs = {
     home-manager.enable = true;
