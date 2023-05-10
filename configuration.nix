@@ -198,11 +198,16 @@
   };
 
   environment.systemPackages = with pkgs; [
+    appimage-run
+    cachix
     clang
+    clash-meta
     discord
     docker-compose
     dua
     duf
+    emacsGit
+    file
     gcc
     git
     gnumake
@@ -210,19 +215,24 @@
     jetbrains.clion
     libclang
     libcxx
+    libvterm
+    lldb
     ncurses
     neovim
     nodejs
     openssl
+    pciutils
     pinentry-curses
     pinentry-emacs
-    cachix
     pinentry-qt
-    emacsGit
-
     pkg-config
+    polkit
+    proxychains-ng
     python3
+    qemu
     qv2ray
+    steam-run
+    sysfsutils
     tdesktop
     tdrop
     tree
@@ -234,17 +244,6 @@
     wakatime
     wget
     zlib
-    libvterm
-    appimage-run
-    lldb
-    steam-run
-    file
-    polkit
-    sysfsutils
-    pciutils
-    proxychains-ng
-    clash-meta
-    qemu
   ];
 
   nix.settings.trusted-users = ["root" "exec"];
