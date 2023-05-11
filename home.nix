@@ -35,6 +35,7 @@
     pkgs.google-chrome-dev
     pkgs.htop
     pkgs.httpie
+    pkgs.hugo
     pkgs.inetutils
     pkgs.jq
     pkgs.kitty
