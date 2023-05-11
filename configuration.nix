@@ -135,18 +135,20 @@
     dina-font
     fira-code
     fira-code-symbols
+    ibm-plex
     jetbrains-mono
     liberation_ttf
     mplus-outline-fonts.githubRelease
     nerdfonts
     noto-fonts
     noto-fonts-cjk
-    proggyfonts
     noto-fonts-emoji
+    proggyfonts
     sarasa-gothic
+    source-han-sans
+    source-han-serif
     symbola
     unifont
-    ibm-plex
   ];
   fonts.fontconfig.localConf = ''
     <?xml version="1.0"?>
