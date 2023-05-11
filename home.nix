@@ -47,6 +47,7 @@
     pkgs.most
     pkgs.mpv
     pkgs.neovide
+    pkgs.pastebinit
     pkgs.powershell
     pkgs.powertop
     pkgs.ripgrep
