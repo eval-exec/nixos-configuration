@@ -65,6 +65,7 @@
     pkgs.xclip
     pkgs.yt-dlp
     pkgs.zsh
+    pkgs.sioyek
     pkgs.zsh-autosuggestions
     pkgs.zsh-powerlevel10k
   ];
