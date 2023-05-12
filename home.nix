@@ -37,6 +37,12 @@
     pkgs.httpie
     pkgs.hugo
     pkgs.inetutils
+    pkgs.leiningen
+    pkgs.clojure
+    pkgs.clojure-lsp
+    pkgs.clj-kondo
+    pkgs.babashka
+    pkgs.joker
     pkgs.jq
     pkgs.kitty
     pkgs.kitty-themes
