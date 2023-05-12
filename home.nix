@@ -43,6 +43,7 @@
     pkgs.clj-kondo
     pkgs.babashka
     pkgs.joker
+    pkgs.protobuf
     pkgs.jq
     pkgs.kitty
     pkgs.kitty-themes
