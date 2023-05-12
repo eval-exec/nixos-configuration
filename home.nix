@@ -57,6 +57,8 @@
     pkgs.neovide
     pkgs.pastebinit
     pkgs.powershell
+    pkgs.llvmPackages.libcxxClang
+    pkgs.llvmPackages.libcxx
     pkgs.powertop
     pkgs.ripgrep
     pkgs.rust-analyzer
