@@ -106,6 +106,7 @@
                 NPM_CONFIG_PREFIX=~/.npm-global
 
         export ZSH_WAKATIME_PROJECT_DETECTION=true
+        export LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib";
       '';
 
       shellAliases = {
