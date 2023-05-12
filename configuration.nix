@@ -355,6 +355,7 @@
       systemd
       icu
       openssl
+      openssl_1_1
       xorg.libX11
       xorg.libXScrnSaver
       xorg.libXcomposite
