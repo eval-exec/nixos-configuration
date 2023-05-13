@@ -60,6 +60,7 @@
     pkgs.llvmPackages.libcxxClang
     pkgs.llvmPackages.libcxx
     pkgs.mercurial
+    pkgs.typos
     pkgs.powertop
     pkgs.ripgrep
     pkgs.rust-analyzer
