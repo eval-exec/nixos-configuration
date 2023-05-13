@@ -225,6 +225,7 @@
     neovim
     nodejs
     openssl
+    openssl_1_1
     pciutils
     pinentry-curses
     pinentry-emacs
