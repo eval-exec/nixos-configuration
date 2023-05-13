@@ -59,6 +59,7 @@
     pkgs.powershell
     pkgs.llvmPackages.libcxxClang
     pkgs.llvmPackages.libcxx
+    pkgs.mercurial
     pkgs.powertop
     pkgs.ripgrep
     pkgs.rust-analyzer
