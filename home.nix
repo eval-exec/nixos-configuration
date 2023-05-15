@@ -63,7 +63,7 @@
     pkgs.typos
     pkgs.powertop
     pkgs.ripgrep
-    pkgs.rust-analyzer
+    # pkgs.rust-analyzer
     pkgs.rustup
     pkgs.sccache
     pkgs.spotify
