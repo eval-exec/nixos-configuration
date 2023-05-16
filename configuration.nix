@@ -212,7 +212,6 @@
     duf
     emacsGit
     file
-    gcc
     git
     gnumake
     google-chrome
