@@ -11,6 +11,7 @@
   home.packages = [
     pkgs.alacritty
     pkgs.alejandra
+    pkgs.jetbrains.idea-ultimate
     pkgs.atool
     pkgs.bat
     pkgs.cargo-expand
