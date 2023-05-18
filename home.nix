@@ -111,6 +111,11 @@
 
         export ZSH_WAKATIME_PROJECT_DETECTION=true
         export LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib";
+        zstyle ':completion:*' sort false
+        zstyle ':completion:*:descriptions' format '[%d]'
+
+        zstyle ':fzf-tab:*' switch-group ',' '.'
+
       '';
 
       shellAliases = {
