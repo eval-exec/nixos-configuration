@@ -307,7 +307,7 @@
   # programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "curses";
+    pinentryFlavor = "qt";
     enableSSHSupport = true;
     enableExtraSocket = true;
   };
