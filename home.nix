@@ -113,6 +113,7 @@
         export LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib";
         zstyle ':completion:*' sort false
         zstyle ':completion:*:descriptions' format '[%d]'
+        zstyle ':fzf-tab:*' prefix ' '
 
         zstyle ':fzf-tab:*' switch-group ',' '.'
 
