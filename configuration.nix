@@ -188,6 +188,7 @@
     variables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
+      LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
     };
   };
   environment.localBinInPath = true;
