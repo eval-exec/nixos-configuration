@@ -124,6 +124,7 @@
         cat = "bat -p";
         vim = "lvim";
         update = "sudo nixos-rebuild switch";
+        emacs = "emacsclient -nw";
       };
       # 	history = {
       # 		size = 1000000;
