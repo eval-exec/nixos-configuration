@@ -9,6 +9,7 @@
   home.stateVersion = "23.05";
 
   home.packages = [
+    (import ./td.nix)
     pkgs.alacritty
     pkgs.alejandra
     pkgs.jetbrains.idea-ultimate
@@ -67,6 +68,8 @@
     pkgs.rustup
     pkgs.sccache
     pkgs.spotify
+    pkgs.ffmpeg-full
+    pkgs.exercism
     pkgs.tmux
     pkgs.unzip
     pkgs.variety
