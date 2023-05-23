@@ -85,6 +85,12 @@
   ];
   home.file.".emacs.d/early-init.el" = {source = ./emacs-early-init.el;};
   home.file.".emacs.d/init.el" = {source = ./emacs-init.el;};
+  services = {
+    kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
+  };
   programs = {
     home-manager.enable = true;
     nix-index = {
