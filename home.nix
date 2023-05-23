@@ -82,6 +82,7 @@
     pkgs.sioyek
     pkgs.zsh-autosuggestions
     pkgs.zsh-powerlevel10k
+    pkgs.libfaketime
   ];
   home.file.".emacs.d/early-init.el" = {source = ./emacs-early-init.el;};
   home.file.".emacs.d/init.el" = {source = ./emacs-init.el;};
