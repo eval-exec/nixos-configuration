@@ -10,6 +10,7 @@
 
   home.packages = [
     pkgs.alacritty
+    pkgs.microsoft-edge-dev
     pkgs.alejandra
     pkgs.jetbrains.idea-ultimate
     pkgs.atool
