@@ -11,30 +11,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-software-center.url = "github:vlinkz/nix-software-center";
-
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    devenv = {
-      url = "github:cachix/devenv/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs @ {
+  outputs = {
     self,
     nixpkgs,
     home-manager,
-    devenv,
-    # nix-software-center,
-    # emacs-overlay,
+    emacs-overlay,
     ...
-  }: {
+  } @ inputs: {
     # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
     packages.
-      packages.x86_64-linux = [devenv.packages.x86_64-linux.devenv];
+      packages.x86_64-linux = [
+    ];
 
     # packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
 
