@@ -198,7 +198,11 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "openssl-1.1.1t"
+      ];
     };
+
     overlays = [inputs.emacs-overlay.overlay];
   };
 
