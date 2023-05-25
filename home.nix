@@ -9,7 +9,6 @@
   home.stateVersion = "23.05";
 
   home.packages = [
-    (import ./td.nix)
     pkgs.alacritty
     pkgs.alejandra
     pkgs.jetbrains.idea-ultimate
