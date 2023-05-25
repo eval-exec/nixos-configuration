@@ -215,7 +215,6 @@
     docker-compose
     dua
     duf
-    emacsGit
     file
     git
     gnumake

@@ -83,12 +83,19 @@
     pkgs.zsh-autosuggestions
     pkgs.zsh-powerlevel10k
   ];
+  home.file.".emacs.d/early-init.el" = {source = ./emacs-early-init.el;};
+  home.file.".emacs.d/init.el" = {source = ./emacs-init.el;};
   programs = {
     home-manager.enable = true;
     nix-index = {
       enable = true;
       enableZshIntegration = true;
     };
+    emacs = {
+      enable = true;
+      package = pkgs.emacsGit;
+    };
+
     zsh = {
       enable = true;
       enableAutosuggestions = true;
