@@ -151,6 +151,7 @@
     source-han-serif
     symbola
     unifont
+    sarasa-gothic
   ];
   fonts.fontconfig.localConf = ''
     <?xml version="1.0"?>
@@ -177,12 +178,12 @@
     </fontconfig>
   '';
 
-  fonts.fontconfig.defaultFonts = {
-    serif = ["Serif" "Noto Sans CJK SC"];
-    sansSerif = ["Sans Serif" "Noto Sans CJK SC"];
-    monospace = ["Jetbrains Mono"];
-    emoji = ["Noto Color Emoji"]; # "Twitter Color Emoji" "JoyPixels" "Unifont" "Unifont Upper" ];
-  };
+  # fonts.fontconfig.defaultFonts = {
+  #   serif = ["Serif" "Noto Sans CJK SC"];
+  #   sansSerif = ["Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic"];
+  #   monospace = ["Jetbrains Mono"];
+  #   emoji = ["Noto Color Emoji"]; # "Twitter Color Emoji" "JoyPixels" "Unifont" "Unifont Upper" ];
+  # };
 
   environment = {
     variables = {

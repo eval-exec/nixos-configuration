@@ -55,93 +55,6 @@
 (set-keyboard-coding-system 'utf-8)
 
 
-(use-package general
-  :demand t
-  :config
-  (general-create-definer global-definer
-	:keymaps 'override
-	:states  '(insert emacs normal hybrid motion visual operator)
-	:prefix  "SPC"
-	:non-normal-prefix "S-SPC")
-  (defmacro +general-global-menu! (name infix-key &rest body)
-	"Create a definer named +general-global-NAME wrapping global-definer.
-Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY."
-	(declare (indent 2))
-	`(progn
-	   (general-create-definer ,(intern (concat "+general-global-" name))
-		 :wrapping global-definer
-		 :prefix-map (quote ,(intern (concat "+general-global-" name "-map")))
-		 :infix ,infix-key
-		 :wk-full-keys nil
-		 "" '(:ignore t :which-key ,name))
-	   (,(intern (concat "+general-global-" name))
-		,@body)))
-
-  (general-create-definer global-leader
-	:keymaps 'override
-	:states '(emacs normal hybrid motion visual operator)
-	:prefix "SPC m"
-	"" '(:ignore t :which-key (lambda (arg) `(,(cadr (split-string (car arg) " ")) . ,(replace-regexp-in-string "-mode$" "" (symbol-name major-mode))))))
-  )
-
-
-
-(use-package evil
-  :init
-  (setq evil-want-keybinding nil
-		evil-want-integration t)
-  :demand t
-  :general
-  (general-imap "C-h" 'left-char)
-  (general-imap "C-l" 'right-char)
-  :config
-  (evil-mode t)
-  (general-evil-setup)
-
-  (setq evil-disable-insert-state-bindings nil)
-  (setq evil-search-module 'evil-search)
-  (setq evil-symbol-word-search t)
-
-  ;; (defalias #'forward-evil-word #'forward-evil-symbol)
-
-  (setq evil-want-minibuffer t)
-  (setq evil-want-C-i-jump t)
-  (setq evil-jumps-cross-buffers t)
-  (setq evil-search-wrap-ring-bell t) ;;
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-fine-undo t)
-
-  (setq evil-undo-system  'undo-redo)
-
-  (setq evil-ex-search-highlight-all nil)
-  (setq undo-tree-auto-save-history nil)
-  (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
-  (evil-define-key 'normal org-mode-map (kbd "RET") #'org-return)
-  (general-define-key [remap evil-quit] 'kill-buffer-and-window)
-
-  (evil-add-command-properties #'find-file-at-point :jump t)
-  (evil-add-command-properties #'consult-line :jump t)
-
-  (setq evil-normal-state-tag   (propertize "N" 'face '((:background "Green" :foreground "black")))
-		evil-emacs-state-tag    (propertize "E" 'face '((:background "Yellow"       :foreground "black")))
-		evil-insert-state-tag   (propertize "I" 'face '((:background "Red"    :foreground "black")))
-		evil-replace-state-tag  (propertize "R" 'face '((:background "chocolate"      :foreground "black")))
-		evil-motion-state-tag   (propertize "M" 'face '((:background "plum3"          :foreground "black")))
-		evil-visual-state-tag   (propertize "V" 'face '((:background "Purple"           :foreground "white")))
-		evil-operator-state-tag (propertize "O" 'face '((:background "Blue"    :foreground "white"))))
-
-  )
-
-(use-package evil-collection
-  :after evil
-  :custom
-  (evil-collection-setup-minibuffer t)
-  (evil-collection-want-find-usages-bindings t)
-  :init
-  (evil-collection-init))
-
-
-
 (defun exec/with-face (str &rest face-plist)
   (propertize str 'face face-plist))
 (defun exec/make-header ()
@@ -340,6 +253,95 @@ i.e. windows tiled side-by-side."
 		)
 
   )
+
+
+
+(use-package general
+  :demand t
+  :config
+  (general-create-definer global-definer
+	:keymaps 'override
+	:states  '(insert emacs normal hybrid motion visual operator)
+	:prefix  "SPC"
+	:non-normal-prefix "S-SPC")
+  (defmacro +general-global-menu! (name infix-key &rest body)
+	"Create a definer named +general-global-NAME wrapping global-definer.
+Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY."
+	(declare (indent 2))
+	`(progn
+	   (general-create-definer ,(intern (concat "+general-global-" name))
+		 :wrapping global-definer
+		 :prefix-map (quote ,(intern (concat "+general-global-" name "-map")))
+		 :infix ,infix-key
+		 :wk-full-keys nil
+		 "" '(:ignore t :which-key ,name))
+	   (,(intern (concat "+general-global-" name))
+		,@body)))
+
+  (general-create-definer global-leader
+	:keymaps 'override
+	:states '(emacs normal hybrid motion visual operator)
+	:prefix "SPC m"
+	"" '(:ignore t :which-key (lambda (arg) `(,(cadr (split-string (car arg) " ")) . ,(replace-regexp-in-string "-mode$" "" (symbol-name major-mode))))))
+  )
+
+
+
+(use-package evil
+  :init
+  (setq evil-want-keybinding nil
+		evil-want-integration t)
+  :demand t
+  :general
+  (general-imap "C-h" 'left-char)
+  (general-imap "C-l" 'right-char)
+  :config
+  (evil-mode t)
+  (general-evil-setup)
+
+  (setq evil-disable-insert-state-bindings nil)
+  (setq evil-search-module 'evil-search)
+  (setq evil-symbol-word-search t)
+
+  ;; (defalias #'forward-evil-word #'forward-evil-symbol)
+
+  (setq evil-want-minibuffer t)
+  (setq evil-want-C-i-jump t)
+  (setq evil-jumps-cross-buffers t)
+  (setq evil-search-wrap-ring-bell t) ;;
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-fine-undo t)
+
+  (setq evil-undo-system  'undo-redo)
+
+  (setq evil-ex-search-highlight-all nil)
+  (setq undo-tree-auto-save-history nil)
+  (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+  (evil-define-key 'normal org-mode-map (kbd "RET") #'org-return)
+  (general-define-key [remap evil-quit] 'kill-buffer-and-window)
+
+  (evil-add-command-properties #'find-file-at-point :jump t)
+  (evil-add-command-properties #'consult-line :jump t)
+
+  (setq evil-normal-state-tag   (propertize "N" 'face '((:background "Green" :foreground "black")))
+		evil-emacs-state-tag    (propertize "E" 'face '((:background "Yellow"       :foreground "black")))
+		evil-insert-state-tag   (propertize "I" 'face '((:background "Red"    :foreground "black")))
+		evil-replace-state-tag  (propertize "R" 'face '((:background "chocolate"      :foreground "black")))
+		evil-motion-state-tag   (propertize "M" 'face '((:background "plum3"          :foreground "black")))
+		evil-visual-state-tag   (propertize "V" 'face '((:background "Purple"           :foreground "white")))
+		evil-operator-state-tag (propertize "O" 'face '((:background "Blue"    :foreground "white"))))
+
+  )
+
+(use-package evil-collection
+  :after evil
+  :custom
+  (evil-collection-setup-minibuffer t)
+  (evil-collection-want-find-usages-bindings t)
+  :init
+  (evil-collection-init))
+
+
 
 ;; (use-package unicode-fonts
 ;;   :config
@@ -737,10 +739,8 @@ i.e. windows tiled side-by-side."
   (setq flycheck-display-errors-delay 0
 		flycheck-idle-change-delay 0.2
 		)
-  (setq flycheck-disabled-checkers '(
-									 rust-cargo
-									 rust
-									 )
+  (setq flycheck-disabled-checkers '(rust rust-cargo))
+  (setq flycheck-rust-executable "cargo-clippy"
 		)
   (global-flycheck-mode)
   )
@@ -1169,7 +1169,7 @@ i.e. windows tiled side-by-side."
 							orderless
 							;; partial-completion
 							;; substring
-							;; flex
+							flex
 							basic
 							))
 
@@ -1498,6 +1498,7 @@ i.e. windows tiled side-by-side."
 						;; :width normal
 						;; :foreground "light gray"
 						;; :background "dim gray"
+						:underline '(:color "white" :style wave)
 						)))))))
 	)
   (defun lsp-goto-symbol-occurence (direction)
@@ -1937,7 +1938,12 @@ i.e. windows tiled side-by-side."
   :config (setq inferior-lisp-program "sbcl"))
 
 
-(use-package rust-playground)
+(use-package rust-playground
+  :config
+  (setq rust-playground-cargo-toml-template
+		"[package]\nname = \"rust-playground\"\nversion = \"0.1.0\"\nauthors = [\"Eval EXEC<execvy@gmail.com>\"]\nedition = \"2021\"\n\n[dependencies]"
+		)
+  )
 (use-package cargo-mode)
 (use-package js2-mode)
 
@@ -3951,14 +3957,14 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   "Open config file."
   (interactive)
   ;; if "init.el" buffer has already opened in current frame, then focus to that window
-  (if (equal (buffer-name) "init.el")
+  (if (equal (buffer-name) "emacs-init.el")
 	  (switch-to-buffer (other-buffer))
 	;; open user-init-file buffer of open this file
 	;; (if (get-buffer "init.el")
 	;; 	(switch-to-buffer "init.el")
 	(if (get-buffer-window "init.el")
-		(select-window (get-buffer-window "init.el"))
-	  (find-file user-init-file))
+		(select-window (get-buffer-window "emacs-init.el"))
+	  (find-file "~/my-flake/emacs-init.el"))
 	)
   )
 
