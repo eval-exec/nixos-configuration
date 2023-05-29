@@ -25,4 +25,4 @@
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-(set-face-attribute 'default nil  :family "Noto Sans Mono" :height 80 :weight 'normal)
+(set-face-attribute 'default nil  :family "Noto Sans Mono" :height 100 :weight 'normal)

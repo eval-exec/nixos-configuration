@@ -228,9 +228,9 @@ i.e. windows tiled side-by-side."
   ;; ;; 👿
   (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
   (set-fontset-font t 'ascii "Jetbrains Mono" nil 'prepend)
-  ;; (set-fontset-font t 'han "Sarasa Mono Slab Sc" ) ;; 中文字体
+  (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
   ;; (set-fontset-font t 'han "Noto Serif" nil 'prepend) ;; 中文字体
-  (set-fontset-font t 'han "Source Han Sans SC") ;; 中文字体
+  ;; (set-fontset-font t 'han "Source Han Sans SC") ;; 中文字体
 
   (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
   (set-fontset-font t 'latin (font-spec :family "Symbola"))
@@ -2373,7 +2373,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (setq org-redisplay-inline-images t)
 (setq org-startup-with-inline-images "inlineimages")
 (setq org-confirm-babel-evaluate nil)
-(setq org-ellipsis "⭍"
+(setq org-ellipsis
+	  ;; "⭍"
+	  "⤵"
 	  )
 (setq org-default-notes-file  "~/org/notes/")
 (setq org-capture-templates '(
@@ -2473,13 +2475,15 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
  )
 
 
-;; (use-package org-download
-;;   :config
+(use-package org-download
+  :config
 
-;;   ;; (setq org-download-method 'directory)
-;;   (setq org-download-method 'attach)
-;;   (setq org-download-screenshot-method "flameshot gui -d 1000 --raw > %s")
-;;   )
+  (setq org-download-method
+		;; 'attach
+		'directory
+		org-download-screenshot-method "flameshot gui -d 1000 --raw > %s"
+		)
+  )
 (use-package org-present)
 ;; (use-package org-ref)
 
