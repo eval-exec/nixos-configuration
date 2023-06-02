@@ -326,7 +326,7 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      # stdenv.cc.cc
+      stdenv.cc.cc
       fuse3
       alsa-lib
       at-spi2-atk

@@ -85,6 +85,7 @@
     pkgs.libfaketime
     pkgs.qrcp
     pkgs.qbittorrent
+    pkgs.ninja
   ];
   home.file.".emacs.d/early-init.el" = {source = ./emacs-early-init.el;};
   home.file.".emacs.d/init.el" = {source = ./emacs-init.el;};
