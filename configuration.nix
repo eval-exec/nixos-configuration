@@ -319,7 +319,10 @@
     enable = true;
     settings = {
       add_newline = false;
-      command_timeout = 10000;
+      command_timeout = 200;
+      git_status = {
+        disabled = true;
+      };
     };
   };
 
