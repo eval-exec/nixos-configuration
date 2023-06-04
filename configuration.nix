@@ -32,6 +32,20 @@
   # Enable networking
   networking.networkmanager.enable = true;
   networking.networkmanager.dns = "none";
+  networking.firewall = {
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1763;
+      }
+    ];
+    allowedUDPPortRanges = [
+      {
+        from = 1714;
+        to = 1763;
+      }
+    ];
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
