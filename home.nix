@@ -108,7 +108,7 @@
     };
 
     zsh = {
-      enable = true;
+      enable = false;
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
       enableCompletion = true;
@@ -164,6 +164,10 @@
         # theme = "mlh";
         custom = "/home/exec/.oh-my-zsh/custom";
       };
+    };
+    bash = {
+      enable = true;
+      enableCompletion = true;
     };
   };
 }

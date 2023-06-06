@@ -138,7 +138,7 @@
       neofetch
     ];
   };
-  users.defaultUserShell = pkgs.zsh;
+  # users.defaultUserShell = pkgs.zsh;
 
   # home-manager = {
   #   useGlobalPkgs = true;
@@ -306,7 +306,7 @@
 
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
-  programs.zsh.enable = true;
+  # programs.zsh.enable = true;
 
   programs.steam = {
     enable = true;
