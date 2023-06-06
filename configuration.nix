@@ -205,8 +205,11 @@
       VISUAL = "nvim";
       LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
     };
+    localBinInPath = true;
+    pathsToLink = [
+      "/share/bash-completion"
+    ];
   };
-  environment.localBinInPath = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -327,17 +330,6 @@
     pinentryFlavor = "qt";
     enableSSHSupport = true;
     enableExtraSocket = true;
-  };
-
-  programs.starship = {
-    enable = true;
-    settings = {
-      add_newline = false;
-      command_timeout = 200;
-      git_status = {
-        disabled = true;
-      };
-    };
   };
 
   programs.nix-ld = {
