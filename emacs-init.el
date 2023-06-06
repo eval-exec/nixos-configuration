@@ -229,14 +229,9 @@ i.e. windows tiled side-by-side."
   (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
   (set-fontset-font t 'ascii "Jetbrains Mono" nil 'prepend)
   (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
-  ;; (set-fontset-font t 'han "Noto Serif" nil 'prepend) ;; 中文字体
-  ;; (set-fontset-font t 'han "Source Han Sans SC") ;; 中文字体
-
   (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
   (set-fontset-font t 'latin (font-spec :family "Symbola"))
-
   (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji" ))
-
   (set-fontset-font t 'symbol (font-spec :family "Noto Sans"))
 
 
@@ -1046,7 +1041,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		 )
   :config
   (setq
-   vertico-count 10
+   vertico-count 40
    vertico-resize nil
    vertico-count-format '("%-6s " . "%2s/%5s")
    vertico-buffer-display-action
@@ -1078,8 +1073,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		)
   (setq vertico-posframe-border-width 1)
   (setq vertico-posframe-poshandler 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width nil
-		vertico-posframe-font nil
+		vertico-posframe-width 80
+		vertico-posframe-font "Jetbrains Mono 8"
 		vertico-posframe-min-height 10
 		)
 
@@ -1087,7 +1082,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
    '(vertico-posframe-border ((t (:inherit default :background "pink"))))
    )
 
-  ;; (vertico-posframe-mode)
+  (vertico-posframe-mode)
   )
 
 (use-package mini-frame
@@ -4182,11 +4177,11 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 							  (load-theme
 							   ;; 'nasy
 							   ;; 'doom-vibrant
-							   ;; 'atom-one-dark
+							   'atom-one-dark
 							   ;; 'professional
 							   ;; 'modus-vivendi
 							   ;; 'almost-mono-black
-							   'sanityinc-tomorrow-bright
+							   ;; 'sanityinc-tomorrow-bright
 							   )
 							  ))
 
