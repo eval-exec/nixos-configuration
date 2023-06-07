@@ -138,7 +138,7 @@
       neofetch
     ];
   };
-  # users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.zsh;
 
   # home-manager = {
   #   useGlobalPkgs = true;
@@ -161,11 +161,12 @@
     noto-fonts-emoji
     proggyfonts
     sarasa-gothic
+    sarasa-gothic
     source-han-sans
     source-han-serif
     symbola
+    twitter-color-emoji
     unifont
-    sarasa-gothic
   ];
   fonts.fontconfig.localConf = ''
     <?xml version="1.0"?>
@@ -207,7 +208,6 @@
     };
     localBinInPath = true;
     pathsToLink = [
-      "/share/bash-completion"
     ];
   };
 
@@ -309,7 +309,7 @@
 
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
-  # programs.zsh.enable = true;
+  programs.zsh.enable = true;
 
   programs.steam = {
     enable = true;

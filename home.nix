@@ -87,6 +87,8 @@
     pkgs.qbittorrent
     pkgs.ninja
     pkgs.sysstat
+    pkgs.github-desktop
+    pkgs.ghostie
   ];
   home.file.".emacs.d/early-init.el" = {source = ./emacs-early-init.el;};
   home.file.".emacs.d/init.el" = {source = ./emacs-init.el;};
@@ -108,27 +110,20 @@
     };
 
     zsh = {
-      enable = false;
+      enable = true;
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
       enableCompletion = true;
       defaultKeymap = "emacs";
       initExtra = ''
-          # Preview file content using bat (https://github.com/sharkdp/bat)
-                export FZF_CTRL_T_OPTS="
-                --preview 'bat -n --color=always {}'
-                --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-          # CTRL-/ to toggle small preview window to see the full command
-          # CTRL-Y to copy the command into clipboard using pbcopy
-                export FZF_CTRL_R_OPTS="
-                --preview 'echo {}' --preview-window up:3:hidden:wrap
-                --bind 'ctrl-/:toggle-preview'
-                --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-                --color header:italic
-                --header 'Press CTRL-Y to copy command into clipboard'"
-          # Print tree structure in the preview window
-                export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
-                NPM_CONFIG_PREFIX=~/.npm-global
+        # Preview file content using bat (https://github.com/sharkdp/bat)
+        export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+        # CTRL-/ to toggle small preview window to see the full command
+        # CTRL-Y to copy the command into clipboard using pbcopy
+        export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+        # Print tree structure in the preview window
+        export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+        NPM_CONFIG_PREFIX=~/.npm-global
 
         export ZSH_WAKATIME_PROJECT_DETECTION=true
         export LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib";
@@ -166,8 +161,8 @@
       };
     };
     bash = {
-      enable = true;
-      enableCompletion = true;
+      enable = false;
+      enableCompletion = false;
       enableVteIntegration = true;
       historyFile = "/home/exec/.bash_history";
       initExtra = ''

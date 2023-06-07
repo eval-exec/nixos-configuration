@@ -231,7 +231,7 @@ i.e. windows tiled side-by-side."
   (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
   (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
   (set-fontset-font t 'latin (font-spec :family "Symbola"))
-  (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji" ))
+  (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji" :height 0.8))
   (set-fontset-font t 'symbol (font-spec :family "Noto Sans"))
 
 
@@ -1073,8 +1073,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		)
   (setq vertico-posframe-border-width 1)
   (setq vertico-posframe-poshandler 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width 80
-		vertico-posframe-font "Jetbrains Mono 8"
+		vertico-posframe-width 100
+		vertico-posframe-font "Jetbrains Mono 7"
 		vertico-posframe-min-height 10
 		)
 
