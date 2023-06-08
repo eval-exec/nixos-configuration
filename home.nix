@@ -104,6 +104,9 @@
       enable = true;
       enableZshIntegration = true;
     };
+    java = {
+      enable = true;
+    };
     emacs = {
       enable = true;
       package = pkgs.emacsGit;
