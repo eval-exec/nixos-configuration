@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
   # home config example
   home.username = "exec";
   home.homeDirectory = "/home/exec";
@@ -11,6 +7,7 @@
   home.packages = [
     pkgs.alacritty
     pkgs.microsoft-edge-dev
+    pkgs.nixfmt
     pkgs.alejandra
     pkgs.jetbrains.idea-ultimate
     pkgs.atool
@@ -90,8 +87,8 @@
     pkgs.github-desktop
     pkgs.ghostie
   ];
-  home.file.".emacs.d/early-init.el" = {source = ./emacs-early-init.el;};
-  home.file.".emacs.d/init.el" = {source = ./emacs-init.el;};
+  home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
+  home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
   services = {
     kdeconnect = {
       enable = true;
@@ -104,12 +101,10 @@
       enable = true;
       enableZshIntegration = true;
     };
-    java = {
-      enable = true;
-    };
+    java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.emacsGit;
+      package = pkgs.emacs-git;
     };
 
     zsh = {
@@ -151,14 +146,7 @@
       # 	};
       oh-my-zsh = {
         enable = true;
-        plugins = [
-          "git"
-          "fzf"
-          "man"
-          "grc"
-          "zsh-wakatime"
-          "fzf-tab"
-        ];
+        plugins = [ "git" "fzf" "man" "grc" "zsh-wakatime" "fzf-tab" ];
         # theme = "mlh";
         custom = "/home/exec/.oh-my-zsh/custom";
       };
@@ -191,9 +179,7 @@
       settings = {
         add_newline = false;
         command_timeout = 200;
-        git_status = {
-          disabled = true;
-        };
+        git_status = { disabled = true; };
       };
     };
   };

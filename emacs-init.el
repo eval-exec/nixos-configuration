@@ -2159,6 +2159,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq telega-animation-play-inline nil)
   (setq telega-chat-show-avatars nil)
   (setq telega-photo-show-details nil)
+  (setq telega-translate-to-language-by-default "zh-CN")
   (setq telega-server-libs-prefix "/nix/store/lbaib784k1dz4jih21x05bcd22ln63xf-tdlib-1.8.14")
   ;; (setq telega-proxies
   ;; 		(list

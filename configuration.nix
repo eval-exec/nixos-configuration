@@ -2,17 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 # test suda sudoa
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{ config, pkgs, inputs, ... }: {
   imports = [
     # Include the results of the hardware scan.
     # ./hardware-configuration.nix
     # <home-manager/nixos>
-    ./clash.nix
+    ./my_systemd.nix
     ./cachix.nix
     ./g810-led.nix
   ];
@@ -33,18 +28,14 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.dns = "none";
   networking.firewall = {
-    allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1763;
-      }
-    ];
-    allowedUDPPortRanges = [
-      {
-        from = 1714;
-        to = 1763;
-      }
-    ];
+    allowedTCPPortRanges = [{
+      from = 1714;
+      to = 1763;
+    }];
+    allowedUDPPortRanges = [{
+      from = 1714;
+      to = 1763;
+    }];
   };
 
   # Set your time zone.
@@ -131,12 +122,8 @@
   users.users.exec = {
     isNormalUser = true;
     description = "exec";
-    extraGroups = ["networkmanager" "wheel" "docker"];
-    packages = with pkgs; [
-      firefox
-      kate
-      neofetch
-    ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    packages = with pkgs; [ firefox kate neofetch ];
   };
   users.defaultUserShell = pkgs.zsh;
 
@@ -194,10 +181,12 @@
   '';
 
   fonts.fontconfig.defaultFonts = {
-    serif = ["Serif" "Noto Sans CJK SC" "Sarasa Gothic SC"];
-    sansSerif = ["Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic SC"];
-    monospace = ["Jetbrains Mono"];
-    emoji = ["Noto Color Emoji"]; # "Twitter Color Emoji" "JoyPixels" "Unifont" "Unifont Upper" ];
+    serif = [ "Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
+    sansSerif = [ "Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
+    monospace = [ "Jetbrains Mono" ];
+    emoji = [
+      "Noto Color Emoji"
+    ]; # "Twitter Color Emoji" "JoyPixels" "Unifont" "Unifont Upper" ];
   };
 
   environment = {
@@ -207,8 +196,7 @@
       LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
     };
     localBinInPath = true;
-    pathsToLink = [
-    ];
+    pathsToLink = [ ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -216,12 +204,10 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      permittedInsecurePackages = [
-        "openssl-1.1.1u"
-      ];
+      permittedInsecurePackages = [ "openssl-1.1.1u" ];
     };
 
-    overlays = [inputs.emacs-overlay.overlay];
+    overlays = [ inputs.emacs-overlay.overlay ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -272,7 +258,7 @@
     nvidia-vaapi-driver
   ];
 
-  nix.settings.trusted-users = ["root" "exec"];
+  nix.settings.trusted-users = [ "root" "exec" ];
 
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -286,7 +272,7 @@
     "https://nix-community.cachix.org"
     "https://devenv.cachix.org"
   ];
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # List services that you want to enable:
 
@@ -311,9 +297,7 @@
   programs.neovim.defaultEditor = true;
   programs.zsh.enable = true;
 
-  programs.steam = {
-    enable = true;
-  };
+  programs.steam = { enable = true; };
 
   # programs.vscode = {
   # 	enable = true;
@@ -368,6 +352,7 @@
       systemd
       icu
       openssl
+      "openssl-1.1.1u"
       xorg.libX11
       xorg.libXScrnSaver
       xorg.libXcomposite

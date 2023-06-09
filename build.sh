@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-alejandra *.nix
+nixfmt *.nix
 
 git diff --exit-code
 

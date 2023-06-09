@@ -17,13 +17,7 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    emacs-overlay,
-    ...
-  } @ inputs: {
+  outputs = { self, nixpkgs, home-manager, emacs-overlay, ... }@inputs: {
     # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
     # packages.x86_64-linux = [
@@ -33,7 +27,7 @@
 
     nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {inherit inputs;};
+      specialArgs = { inherit inputs; };
       modules = [
         ./hardware-configuration.nix
         ./configuration.nix
