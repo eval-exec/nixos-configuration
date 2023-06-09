@@ -229,10 +229,11 @@ i.e. windows tiled side-by-side."
   (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
   (set-fontset-font t 'ascii "Jetbrains Mono" nil 'prepend)
   (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
+  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
   (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
   (set-fontset-font t 'latin (font-spec :family "Symbola"))
   (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji" :height 0.8))
-  (set-fontset-font t 'symbol (font-spec :family "Noto Sans"))
+  (set-fontset-font t 'symbol (font-spec :family "Symbola"))
 
 
   :hook
@@ -1041,7 +1042,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		 )
   :config
   (setq
-   vertico-count 40
+   vertico-count 10
    vertico-resize nil
    vertico-count-format '("%-6s " . "%2s/%5s")
    vertico-buffer-display-action
@@ -1074,7 +1075,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq vertico-posframe-border-width 1)
   (setq vertico-posframe-poshandler 'posframe-poshandler-frame-top-right-corner
 		vertico-posframe-width 100
-		vertico-posframe-font "Jetbrains Mono 7"
+		vertico-posframe-font "Jetbrains Mono"
 		vertico-posframe-min-height 10
 		)
 
@@ -2155,8 +2156,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (use-package telega
   :config
-  (setq telega-animation-play-inline t)
-  (setq telega-chat-show-avatars t)
+  (setq telega-animation-play-inline nil)
+  (setq telega-chat-show-avatars nil)
   (setq telega-photo-show-details nil)
   (setq telega-server-libs-prefix "/nix/store/lbaib784k1dz4jih21x05bcd22ln63xf-tdlib-1.8.14")
   ;; (setq telega-proxies
