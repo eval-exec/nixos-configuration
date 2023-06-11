@@ -122,10 +122,18 @@
   users.users.exec = {
     isNormalUser = true;
     description = "exec";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" ];
     packages = with pkgs; [ firefox kate neofetch ];
   };
   users.defaultUserShell = pkgs.zsh;
+
+  # virtualisation.libvirtd.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.guest.enable = true;
+  # virtualisation.virtualbox.guest.x11 = true;
+
+  users.extraGroups.vboxusers.members = [ "exec" ];
 
   # home-manager = {
   #   useGlobalPkgs = true;

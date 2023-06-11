@@ -12,10 +12,8 @@
     pkgs.jetbrains.idea-ultimate
     pkgs.atool
     pkgs.bat
-    pkgs.cargo-expand
-    pkgs.cargo-machete
-    pkgs.cargo-cross
     pkgs.zulip
+    pkgs.vagrant
     pkgs.pkgconfig
     pkgs.cmake
     pkgs.copyq
@@ -66,6 +64,7 @@
     pkgs.powertop
     pkgs.ripgrep
     pkgs.rustup
+    pkgs.zlib
     pkgs.sccache
     pkgs.spotify
     pkgs.go-ethereum
