@@ -14,6 +14,9 @@
     pkgs.bat
     pkgs.cargo-expand
     pkgs.cargo-machete
+    pkgs.cargo-cross
+    pkgs.zulip
+    pkgs.pkgconfig
     pkgs.cmake
     pkgs.copyq
     pkgs.cpupower-gui
@@ -65,6 +68,7 @@
     pkgs.rustup
     pkgs.sccache
     pkgs.spotify
+    pkgs.go-ethereum
     pkgs.ffmpeg-full
     pkgs.exercism
     pkgs.tmux

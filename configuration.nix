@@ -232,6 +232,7 @@
     neovim
     nodejs
     openssl
+    openssl_1_1
     pciutils
     pinentry-curses
     pinentry-emacs
@@ -352,7 +353,7 @@
       systemd
       icu
       openssl
-      "openssl-1.1.1u"
+      openssl_1_1
       xorg.libX11
       xorg.libXScrnSaver
       xorg.libXcomposite
