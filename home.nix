@@ -65,6 +65,7 @@
     pkgs.ripgrep
     pkgs.rustup
     pkgs.zlib
+    pkgs.patchelf
     pkgs.sccache
     pkgs.spotify
     pkgs.go-ethereum
