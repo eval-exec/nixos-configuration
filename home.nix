@@ -82,6 +82,7 @@
     pkgs.zsh
     pkgs.sioyek
     pkgs.zsh-autosuggestions
+    pkgs.ncurses
     pkgs.zsh-powerlevel10k
     pkgs.libfaketime
     pkgs.qrcp
@@ -129,11 +130,12 @@
 
         export ZSH_WAKATIME_PROJECT_DETECTION=true
         export LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib";
+
         zstyle ':completion:*' sort false
         zstyle ':completion:*:descriptions' format '[%d]'
         zstyle ':fzf-tab:*' prefix ' '
-
         zstyle ':fzf-tab:*' switch-group ',' '.'
+
 
       '';
 

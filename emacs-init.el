@@ -731,13 +731,14 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 
 (use-package flycheck
+  :custom
+  (flycheck-disabled-checkers '(rust rust-cargo))
+
   :config
   (setq flycheck-display-errors-delay 0
 		flycheck-idle-change-delay 0.2
 		)
-  (setq flycheck-disabled-checkers '(rust rust-cargo))
-  (setq flycheck-rust-executable "cargo-clippy"
-		)
+  (setq flycheck-rust-executable "cargo-clippy")
   (global-flycheck-mode)
   )
 
@@ -1042,7 +1043,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		 )
   :config
   (setq
-   vertico-count 10
+   vertico-count 20
    vertico-resize nil
    vertico-count-format '("%-6s " . "%2s/%5s")
    vertico-buffer-display-action
@@ -1076,7 +1077,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq vertico-posframe-poshandler 'posframe-poshandler-frame-top-right-corner
 		vertico-posframe-width 100
 		vertico-posframe-font "Jetbrains Mono"
-		vertico-posframe-min-height 10
+		vertico-posframe-min-height 1
 		)
 
   (custom-set-faces
@@ -1371,7 +1372,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
   ;; `consult-register-store' and the Emacs built-ins.
-  (setq register-preview-delay 0.0
+  (setq register-preview-delay 1.0
 		register-preview-function #'consult-register-format)
 
   ;; Optionally tweak the register preview window.
@@ -1395,8 +1396,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   ;; :preview-key on a per-command basis using the `consult-customize' macro.
 
   (setq consult-preview-key
-		;; '(:debounce 0.1 any)
-		'any
+		'(:debounce 0.3 any)
+		;; 'any
 		)
   (consult-customize
    consult-theme
@@ -3077,7 +3078,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (use-package dired
   :straight (:type built-in)
-  :hook (dired-mode . dired-omit-mode)
+  :hook
+  (dired-mode . dired-filter-mode)
   :config
 
   (setq dired-listing-switches "-alFh --group-directories-first")
@@ -3092,6 +3094,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	)
   (use-package dired-filter
 	:config
+	(setq dired-filter-inherit-filter-stack t
+		  dired-filter-revert 'always
+		  )
 	)
   (use-package dired-open)
 
@@ -3951,6 +3956,11 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 (general-define-key
  :keymaps 'diff-hl-mode-map
  "C-M-z" 'diff-hl-revert-hunk
+ )
+
+(general-define-key
+ :keymaps 'flycheck-mode-map
+ "M-g n" 'flycheck-next-error
  )
 
 
