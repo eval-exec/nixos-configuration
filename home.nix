@@ -63,7 +63,6 @@
     pkgs.typos
     pkgs.powertop
     pkgs.ripgrep
-    pkgs.rustup
     pkgs.zlib
     pkgs.patchelf
     pkgs.sccache
@@ -94,6 +93,12 @@
   ];
   home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
   home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
+
+  home.sessionPath = [
+
+    "/home/exec/.cargo/bin"
+  ];
+
   services = {
     kdeconnect = {
       enable = true;

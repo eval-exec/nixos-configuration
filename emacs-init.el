@@ -231,7 +231,7 @@ i.e. windows tiled side-by-side."
   (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
   (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
-  (set-fontset-font t 'latin (font-spec :family "Symbola"))
+  (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
   (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji" :height 0.8))
   (set-fontset-font t 'symbol (font-spec :family "Symbola"))
 
@@ -456,6 +456,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 
 (set-default-coding-systems 'utf-8)
+
+(setenv "PKG_CONFIG_PATH" "/nix/store/80rbkkz1jh3ybsc5r4dz2bmn02vljn1c-openssl-3.0.8-dev/lib/pkgconfig")
 
 (setenv "LANG" "en_US.UTF-8")
 (setenv "LC_ALL" "en_US.UTF-8")
@@ -1043,16 +1045,16 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		 )
   :config
   (setq
-   vertico-count 20
+   vertico-count 10
    vertico-resize nil
    vertico-count-format '("%-6s " . "%2s/%5s")
    vertico-buffer-display-action
-   ;; '(display-buffer-below-selected (window-height . 16))
+   '(display-buffer-below-selected (window-height . 10))
    ;; '(display-buffer-below-selected )
-   '(display-buffer-in-direction
-	 (direction . right)
-	 (window-width . 0.5)
-	 )
+   ;; '(display-buffer-in-direction
+   ;; 	 ;; (direction . down)
+   ;; 	 (window-width . 0.5)
+   ;; 	 )
    )
 
   (setq vertico-cycle t)
@@ -1075,7 +1077,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		)
   (setq vertico-posframe-border-width 1)
   (setq vertico-posframe-poshandler 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width 100
+		vertico-posframe-width nil
 		vertico-posframe-font "Jetbrains Mono"
 		vertico-posframe-min-height 1
 		)
@@ -1558,8 +1560,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   :hook
   (
    ((shell-mode clojure-mode) . lsp)
-   (rust-mode . exec/rust-mode-lsp-hook)
-   (rust-ts-mode . exec/rust-mode-lsp-hook)
+   ;; (rust-mode . exec/rust-mode-lsp-hook)
+   ;; (rust-ts-mode . exec/rust-mode-lsp-hook)
    )
   :config
 
@@ -1583,14 +1585,14 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
    lsp-enable-symbol-highlighting t
    lsp-enable-text-document-color t
    lsp-headerline-breadcrumb-enable-diagnostics nil
-   lsp-idle-delay 0
-   lsp-lens-enable t
+   lsp-idle-delay 1
+   lsp-lens-enable nil
    lsp-log-io nil
    lsp-references-exclude-definition nil
    lsp-response-timeout nil
-   lsp-semantic-tokens-enable t
+   lsp-semantic-tokens-enable nil
    lsp-ui-doc-show-with-cursor t
-   lsp-ui-doc-delay 0.2
+   lsp-ui-doc-delay 1.0
    lsp-ui-doc-header t
    lsp-ui-doc-use-childframe t
    lsp-ui-doc-use-webkit nil
@@ -1601,7 +1603,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
    lsp-eldoc-render-all nil
    lsp-eldoc-enable-hover nil
 
-   lsp-completion-no-cache t
+   lsp-completion-no-cache nil
    lsp-enable-snippet t
 
    lsp-references-exclude-definition t
@@ -3105,7 +3107,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	 (diredfl-global-mode))
 
   (use-package dired-sidebar
-	:hook (dired-sidebar-mode .  (lambda()
+	:hook
+	(dired-sidebar-mode .  (lambda()
 								   (interactive)
 								   (dired-omit-mode)
 								   (visual-line-mode -1)
@@ -3118,7 +3121,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		  dired-sidebar-use-one-instance t
 		  dired-sidebar-use-custom-font t
 		  )
-  (custom-set-faces '(dired-sidebar-face ((t (:family "Iosevka" :height 0.8)))))
+  (custom-set-faces '(dired-sidebar-face ((t (:family "Iosevka" :height 1.2)))))
 	)
   (use-package dired-subtree)
   (use-package dired-ranger)
@@ -3219,7 +3222,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (defun exec/non-mono-font()
   (interactive)
-  (setq-local buffer-face-mode-face '(:family "Sarasa Fixed SC"))
+  (setq-local buffer-face-mode-face '(:family "Noto Sans"))
   (buffer-face-mode))
 
 (add-hook 'org-mode-hook 'exec/non-mono-font)
@@ -4010,6 +4013,10 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
  )
 
+(general-define-key
+ "M-0" 'dired-sidebar-show-sidebar
+ )
+
 
 
 (setq debug-on-error nil)
@@ -4020,6 +4027,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (add-hook 'emacs-startup-hook '(lambda()
 								 ;; (treemacs)
+								 (dired-sidebar-show-sidebar)
+
 								 (switch-to-buffer "*scratch*")
 								 ;; (exec/set-top-priority)
 								 ))
