@@ -1078,7 +1078,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq vertico-posframe-border-width 1)
   (setq vertico-posframe-poshandler 'posframe-poshandler-frame-top-right-corner
 		vertico-posframe-width nil
-		vertico-posframe-font "Jetbrains Mono"
+		vertico-posframe-font "Noto Sans Mono 8"
 		vertico-posframe-min-height 1
 		)
 

@@ -157,7 +157,7 @@
       # 	};
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" "fzf" "man" "grc" "zsh-wakatime" "fzf-tab" ];
+        plugins = [ "git" "fzf" "man" "warhol" "zsh-wakatime" "fzf-tab" ];
         # theme = "mlh";
         custom = "/home/exec/.oh-my-zsh/custom";
       };
