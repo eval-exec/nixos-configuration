@@ -111,6 +111,13 @@
       enable = true;
       enableZshIntegration = true;
     };
+    exa = {
+      enable = true;
+      enableAliases = true;
+      icons = true;
+      # extraOptions = [];
+    };
+
     java = { enable = true; };
     emacs = {
       enable = true;
@@ -145,7 +152,6 @@
       '';
 
       shellAliases = {
-        ll = "ls -l";
         cat = "bat -p";
         vim = "lvim";
         update = "sudo nixos-rebuild switch";
