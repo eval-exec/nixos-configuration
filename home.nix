@@ -7,6 +7,7 @@
   home.packages = [
     pkgs.alacritty
     pkgs.microsoft-edge-dev
+    pkgs.go
     pkgs.nixfmt
     pkgs.alejandra
     pkgs.jetbrains.idea-ultimate
