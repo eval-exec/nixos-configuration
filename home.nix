@@ -158,10 +158,10 @@
         update = "sudo nixos-rebuild switch";
         emacs = "emacsclient -nw";
       };
-      # 	history = {
-      # 		size = 1000000;
-      # 		path = "${config.xdg.dataHome}/zsh/history";
-      # 	};
+      history = {
+        size = 10000000;
+        path = "${config.xdg.dataHome}/zsh/history";
+      };
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "fzf" "man" "warhol" "zsh-wakatime" "fzf-tab" ];
