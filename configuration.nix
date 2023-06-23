@@ -230,7 +230,6 @@
     file
     git
     gnumake
-    google-chrome
     jetbrains.clion
     libclang
     libcxx

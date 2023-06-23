@@ -151,6 +151,8 @@
         zstyle ':fzf-tab:*' switch-group ',' '.'
 
 
+        zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
       '';
 
       shellAliases = {

@@ -211,6 +211,11 @@ i.e. windows tiled side-by-side."
   (setq read-extended-command-predicate
 		#'command-completion-default-include-p)
 
+  (defun my-minibuffer-setup ()
+	(set (make-local-variable 'face-remapping-alist)
+          '((default :height 0.8))))
+  (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup)
+
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t)
@@ -309,6 +314,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq evil-want-fine-undo t)
 
   (setq evil-undo-system  'undo-redo)
+  
 
   (setq evil-ex-search-highlight-all nil)
   (setq undo-tree-auto-save-history nil)
@@ -432,7 +438,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (setq word-wrap t)
 (global-visual-line-mode t)
-(fringe-mode 16)
+(fringe-mode 0)
 (setf left-margin 16)
 
 (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
@@ -1086,7 +1092,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
    '(vertico-posframe-border ((t (:inherit default :background "pink"))))
    )
 
-  (vertico-posframe-mode)
+  ;; (vertico-posframe-mode)
   )
 
 (use-package mini-frame
@@ -1560,8 +1566,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   :hook
   (
    ((shell-mode clojure-mode) . lsp)
-   ;; (rust-mode . exec/rust-mode-lsp-hook)
-   ;; (rust-ts-mode . exec/rust-mode-lsp-hook)
+   (rust-mode . exec/rust-mode-lsp-hook)
+   (rust-ts-mode . exec/rust-mode-lsp-hook)
    )
   :config
 
@@ -2672,6 +2678,13 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (use-package makefile-executor
   :hook makefile-mode
   )
+(use-package engine-mode
+  :demand t
+  :config
+  (defengine github
+	"https://github.com/search?ref=simplesearch&q=%s&type=code")
+  (engine-mode t)
+  )
 
 (use-package projectile
   :bind("C-c p" . projectile-command-map)
@@ -2682,14 +2695,16 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq projectile-enable-caching nil)
   (setq projectile-project-enable-cmd-caching nil)
   (setq projectile-per-project-compilation-buffer t)
-  (setq projectile-ignored-project-function
-		'(lambda(project-root)
-		   (or 
-			(string-prefix-p "~/.emacs.d/" project-root)
-			(string-prefix-p "~/.cargo/" project-root)
-			(string-prefix-p "~/.rustup/" project-root)
-			)
-		   ))
+  (setq projectile-ignored-projects '(
+									  "~/.emacs.d/"
+									  ))
+  (defun projectile-ignored-project-function(project-root)
+		   (message project-root)
+		   (or (string-prefix-p "~/.emacs.d/" project-root)
+			   (string-prefix-p "~/.cargo/" project-root)
+			   (string-prefix-p "~/.rustup/" project-root)
+			   )
+		   )
   ;; bind consult-projectile-find-file to C-c p f use general
 
 
@@ -3462,9 +3477,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (use-package python-mode)
 (use-package clojure-mode)
 (use-package typescript-mode)
-(use-package rust-mode
-  :mode "\\.rs\\'"
-  )
+;; (use-package rust-mode
+;;   :mode "\\.rs\\'"
+;;   )
 
 (use-package go-mode
   :config
@@ -3520,7 +3535,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (defun exec/vterm-buffer-face()
   (interactive)
   (setq-local  buffer-face-mode-face '(
-								 ;; :family "Noto Sans Mono"
+								 :family "Noto Sans Mono"
+										 :scale 0.8
 								 :background "black"
 								 ))
   (buffer-face-mode)
@@ -3965,6 +3981,10 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
  :keymaps 'flycheck-mode-map
  "M-g n" 'flycheck-next-error
  )
+
+(general-evil-define-key 'normal 'global
+  "M-f" 'consult-line
+  )
 
 
 (defun exec/open-config()
