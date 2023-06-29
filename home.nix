@@ -80,6 +80,8 @@
     typos
     unzip
     vagrant
+    autoconf
+    automake
     variety
     vimpager
     wakatime
