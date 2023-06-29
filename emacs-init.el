@@ -291,7 +291,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (use-package evil
   :init
   (setq evil-want-keybinding nil
-		evil-want-integration t)
+		evil-want-integration t
+		evil-respect-visual-line-mode t
+		)
   :demand t
   :general
   (general-imap "C-h" 'left-char)
@@ -2678,6 +2680,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (use-package makefile-executor
   :hook makefile-mode
   )
+
+
 (use-package engine-mode
   :demand t
   :config
@@ -3516,12 +3520,17 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 
 (use-package gptel
+  :hook
+  (gptel-mode . (lambda()
+				  (copilot-mode -1)
+				  ))
   :config
   ;; get first line content of ~/.config/openai_api_key/key.private file to gptel-api-key, without newline
   (setq gptel-api-key
 		(with-temp-buffer
 		  (insert-file-contents "~/.config/openai_api_key/key.private")
 		  (buffer-substring-no-properties (point-min) (line-end-position)))
+		gptel-default-mode 'org-mode
 		)
   )
 
