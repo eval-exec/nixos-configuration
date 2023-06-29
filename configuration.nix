@@ -146,7 +146,7 @@
     dina-font
     fira-code
     fira-code-symbols
-    ibm-plex
+    # ibm-plex
     jetbrains-mono
     liberation_ttf
     mplus-outline-fonts.githubRelease
