@@ -7,6 +7,10 @@
   home.packages = with pkgs; [
     alacritty
     alejandra
+    pipenv
+    heroic-unwrapped
+    wineWowPackages.stable
+    winetricks
     atool
     babashka
     bat
@@ -131,7 +135,7 @@
     zsh = {
       enable = true;
       enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
       enableCompletion = true;
       defaultKeymap = "emacs";
       initExtra = ''

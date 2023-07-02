@@ -239,6 +239,8 @@ i.e. windows tiled side-by-side."
   (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
   (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji" :height 0.8))
   (set-fontset-font t 'symbol (font-spec :family "Symbola"))
+  (setq revert-without-query '(".*"))
+
 
 
   :hook
@@ -1493,7 +1495,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	 lsp-rust-analyzer-server-display-inlay-hints t
 	 )
 	(lsp)
-	(lsp-rust-analyzer-inlay-hints-mode)
+	;; (lsp-rust-analyzer-inlay-hints-mode)
 	(flycheck-add-next-checker 'rust-cargo 'rust-clippy)
 	(add-hook 'lsp-rust-analyzer-inlay-hints-mode-hook
 			  (lambda nil
@@ -1966,6 +1968,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;; (use-package tree-sitter-indent)
 ;; (use-package tree-sitter)
 
+(global-tree-sitter-mode)
 (use-package magit
   :config
  (use-package forge)
@@ -3481,9 +3484,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (use-package python-mode)
 (use-package clojure-mode)
 (use-package typescript-mode)
-;; (use-package rust-mode
-;;   :mode "\\.rs\\'"
-;;   )
+(use-package rust-mode
+  :mode "\\.rs\\'"
+  )
 
 (use-package go-mode
   :config
