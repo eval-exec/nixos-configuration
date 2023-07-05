@@ -1968,7 +1968,6 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;; (use-package tree-sitter-indent)
 ;; (use-package tree-sitter)
 
-(global-tree-sitter-mode)
 (use-package magit
   :config
  (use-package forge)
