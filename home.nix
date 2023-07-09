@@ -11,6 +11,11 @@
     heroic-unwrapped
     wineWowPackages.stable
     winetricks
+    bitcoin
+    iftop
+
+    jetbrains.clion
+    jetbrains.goland
     atool
     babashka
     bat
@@ -37,7 +42,6 @@
     gh
     ghostie
     github-desktop
-    go
     go-ethereum
     google-chrome-dev
     grc
@@ -118,6 +122,10 @@
     nix-index = {
       enable = true;
       enableZshIntegration = true;
+    };
+    go = {
+      enable = true;
+
     };
     exa = {
       enable = true;

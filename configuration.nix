@@ -230,7 +230,6 @@
     file
     git
     gnumake
-    jetbrains.clion
     libclang
     libcxx
     libvterm
@@ -329,6 +328,9 @@
     libraries = with pkgs; [
       stdenv.cc.cc
       fuse3
+      fuse
+      boost
+      libevent
       alsa-lib
       at-spi2-atk
       at-spi2-core
