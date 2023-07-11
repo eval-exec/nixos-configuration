@@ -65,6 +65,9 @@
       fcitx5-gtk
     ];
   };
+  services.logind.extraConfig = ''
+    RuntimeDirectorySize=16G
+  '';
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;

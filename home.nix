@@ -123,6 +123,10 @@
       enable = true;
       enableZshIntegration = true;
     };
+    thunderbird = {
+      enable = true;
+      profiles = { exec = { isDefault = true; }; };
+    };
     go = {
       enable = true;
 
