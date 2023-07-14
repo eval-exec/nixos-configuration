@@ -8,7 +8,6 @@
     alacritty
     alejandra
     pipenv
-    heroic-unwrapped
     wineWowPackages.stable
     winetricks
     bitcoin
@@ -82,6 +81,7 @@
     ripgrep
     sccache
     sioyek
+    lsof
     spotify
     sysstat
     tmux

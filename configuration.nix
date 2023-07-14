@@ -268,6 +268,7 @@
     nvidia-vaapi-driver
   ];
 
+  nix.settings.auto-optimise-store = true;
   nix.settings.trusted-users = [ "root" "exec" ];
 
   nix.settings.trusted-public-keys = [
