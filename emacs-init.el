@@ -393,7 +393,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (toggle-scroll-bar -1)
 (setq scroll-conservatively 101
-	  scroll-margin 7
+	  scroll-margin 0
 	  scroll-up-aggressively 0.01
 	  scroll-down-aggressively 0.01
 	  )
@@ -3014,6 +3014,16 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
+  :config
+  (setq doom-modeline-battery nil
+		doom-modeline-buffer-encoding nil
+		doom-modeline-continuous-word-count-modes nil
+		doom-modeline-github nil
+		doom-modeline-hud nil
+		doom-modeline-icon t
+		doom-modeline-lsp t
+		doom-modeline-minor-modes t
+		)
   )
 
 (use-package doom-themes
@@ -3084,7 +3094,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		which-key-posframe-border-width 1
 		which-key-posframe-font nil
 		)
-  (which-key-posframe-mode)
+  ;; (which-key-posframe-mode)
   )
 
 
