@@ -54,6 +54,7 @@
     kitty
     kitty-themes
     leiningen
+    parallel
     libfaketime
     libstdcxx5
     llvmPackages.libcxx
