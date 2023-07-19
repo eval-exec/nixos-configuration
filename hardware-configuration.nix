@@ -10,7 +10,11 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-intel" ];
   boot.blacklistedKernelModules = [ ];
-  boot.kernelParams = [ "mem_sleep_default=deep" ];
+  boot.kernelParams = [
+    "mem_sleep_default=deep"
+    # "amdgpu.ppfeaturemask=0xffffffff"
+    # "amdgpu.aspm=0"
+  ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {

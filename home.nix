@@ -55,6 +55,7 @@
     kitty-themes
     leiningen
     parallel
+    amdgpu_top
     libfaketime
     libstdcxx5
     llvmPackages.libcxx
