@@ -56,6 +56,8 @@
     leiningen
     parallel
     amdgpu_top
+    lshw
+    xorg.xdpyinfo
     libfaketime
     libstdcxx5
     llvmPackages.libcxx

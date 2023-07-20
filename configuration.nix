@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 # test suda sudoa
-{ config, pkgs, inputs, ... }: {
+{ config, pkgs, inputs, lib, ... }: {
   imports = [
     # Include the results of the hardware scan.
     # ./hardware-configuration.nix
@@ -16,6 +16,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.extraModprobeConfig = ''
+    options kvm_intel nested=1
+    options kvm_intel emulate_invalid_guest_state=0
+    options kvm ignore_msrs=1
+  '';
 
   networking.hostName = "Mufasa"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -95,6 +100,36 @@
       # "modesetting"
       # "nvidia"
     ];
+    #   config = lib.mkAfter ''
+    #     Section "Module"
+    #         Load           "modesetting"
+    #     EndSection
+
+    #     Section "Device"
+    #         Identifier     "amdgpu"
+    #         Driver         "amdgpu"
+    #         BusID          "PCI:9@0:0:0"
+    #         Option         "AllowEmptyInitialConfiguration"
+    #         Option         "AllowExternalGpus" "True"
+    #     EndSection
+
+    #     Section "Screen"
+    #         Identifier "Screen-amdgpu[0]"
+    #     	  Device "amdgpu"
+    #     EndSection
+
+    #     Section "Device"
+    #     	  Identifier "Screen0"
+    #     	  Driver "modesetting"
+    #     	  BusId "PCI:0:2:0"
+    #     EndSection
+
+    #     Section "Screen"
+    #         Identifier "eDP-1-1"
+    #         Monitor "eDP-1-1"
+    #         Device "Screen0"
+    #     EndSection
+    #   '';
   };
 
   # Enable CUPS to print documents.
@@ -104,6 +139,10 @@
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.pam.services.kwallet = {
+    name = "kwallet";
+    enableKwallet = true;
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -133,11 +172,13 @@
   };
   users.defaultUserShell = pkgs.zsh;
 
-  # virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.enable = true;
   virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;
   # virtualisation.virtualbox.guest.enable = true;
   # virtualisation.virtualbox.guest.x11 = true;
+
+  users.extraUsers.exec.extraGroups = [ "libvirtd" ];
 
   users.extraGroups.vboxusers.members = [ "exec" ];
 

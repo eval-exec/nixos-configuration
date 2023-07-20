@@ -3023,6 +3023,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		doom-modeline-icon t
 		doom-modeline-lsp t
 		doom-modeline-minor-modes t
+		doom-modeline-buffer-file-name-style 'relative-from-project
 		)
   )
 
