@@ -2607,7 +2607,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 				   )
 		 :render (
 				  ;; gts-buffer-render
-				  gts-posframe-pop-render
+				  gts-posframe-pin-render
+				  ;; gts-posframe-pop-render
 				  )))
   (add-hook 'gts-after-buffer-render-hook ;; use 'gts-after-buffer-multiple-render-hook instead if you have multiple engines
 			(defun your-hook-that-disable-evil-mode-in-go-translate-buffer (&rest _)

@@ -46,6 +46,7 @@
     grc
     htop
     httpie
+    intel-gpu-tools
     hugo
     inetutils
     jetbrains.idea-ultimate
@@ -189,7 +190,8 @@
       };
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" "fzf" "man" "warhol" "zsh-wakatime" "fzf-tab" ];
+        plugins =
+          [ "git" "fzf" "man" "warhol" "zsh-wakatime" "fzf-tab" "nix-shell" ];
         # theme = "mlh";
         custom = "/home/exec/.oh-my-zsh/custom";
       };
