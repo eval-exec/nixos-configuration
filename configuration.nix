@@ -11,157 +11,186 @@
     ./cachix.nix
     ./g810-led.nix
   ];
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+    };
+    # Bootloader.
+    extraModprobeConfig = ''
+      options kvm_intel nested=1
+      options kvm_intel emulate_invalid_guest_state=0
+      options kvm ignore_msrs=1
+    '';
+  };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.extraModprobeConfig = ''
-    options kvm_intel nested=1
-    options kvm_intel emulate_invalid_guest_state=0
-    options kvm ignore_msrs=1
-  '';
+  networking = {
+    hostName = "Mufasa"; # Define your hostname.
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  networking.hostName = "Mufasa"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    # Configure network proxy if necessary
+    # networking.proxy.default = "http://user:password@proxy:port/";
+    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  networking.networkmanager.dns = "none";
-  networking.firewall = {
-    allowedTCPPortRanges = [{
-      from = 1714;
-      to = 1763;
-    }];
-    allowedUDPPortRanges = [{
-      from = 1714;
-      to = 1763;
-    }];
+    # Enable networking
+    networkmanager = {
+      enable = true;
+      dns = "none";
+    };
+    firewall = {
+      allowedTCPPortRanges = [{
+        from = 1714;
+        to = 1763;
+      }];
+      allowedUDPPortRanges = [{
+        from = 1714;
+        to = 1763;
+      }];
+    };
   };
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+  i18n = {
+    # Select internationalisation properties.
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
+
+    inputMethod = {
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [
+        fcitx5-rime
+        fcitx5-chinese-addons
+        fcitx5-with-addons
+        fcitx5-configtool
+        fcitx5-gtk
+      ];
+    };
+
   };
 
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-rime
-      fcitx5-chinese-addons
-      fcitx5-with-addons
-      fcitx5-configtool
-      fcitx5-gtk
-    ];
+  services = {
+
+    logind.extraConfig = ''
+      RuntimeDirectorySize=16G
+    '';
+
+    # Enable the X11 windowing system.
+    thermald.enable = true;
+
+    # services.nix-serve = {
+    #   enable = true;
+    #   # secretKeyFile = "/var/cache-priv-key.pem";
+    # };
+
+    # Configure keymap in X11
+    xserver = {
+      enable = true;
+      layout = "us";
+      xkbVariant = "";
+
+      videoDrivers = [
+        "amdgpu"
+        # "modesetting"
+        # "nvidia"
+      ];
+      #   config = lib.mkAfter ''
+      #     Section "Module"
+      #         Load           "modesetting"
+      #     EndSection
+
+      #     Section "Device"
+      #         Identifier     "amdgpu"
+      #         Driver         "amdgpu"
+      #         BusID          "PCI:9@0:0:0"
+      #         Option         "AllowEmptyInitialConfiguration"
+      #         Option         "AllowExternalGpus" "True"
+      #     EndSection
+
+      #     Section "Screen"
+      #         Identifier "Screen-amdgpu[0]"
+      #     	  Device "amdgpu"
+      #     EndSection
+
+      #     Section "Device"
+      #     	  Identifier "Screen0"
+      #     	  Driver "modesetting"
+      #     	  BusId "PCI:0:2:0"
+      #     EndSection
+
+      #     Section "Screen"
+      #         Identifier "eDP-1-1"
+      #         Monitor "eDP-1-1"
+      #         Device "Screen0"
+      #     EndSection
+      #   '';
+
+      # Enable touchpad support (enabled default in most desktopManager).
+      libinput.enable = true;
+      libinput.touchpad.naturalScrolling = true;
+      libinput.touchpad.scrollMethod = "twofinger";
+      libinput.touchpad.disableWhileTyping = true;
+      libinput.touchpad.accelSpeed = "0.5"; # null
+
+      # Enable the KDE Plasma Desktop Environment.
+      displayManager = {
+        sddm = {
+          enable = true;
+          enableHidpi = true;
+
+        };
+
+        autoLogin = {
+          enable = true;
+          user = "exec";
+        };
+      };
+      desktopManager.plasma5.enable = true;
+    };
+
+    # Enable CUPS to print documents.
+    printing.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
+
+      # use the example session manager (no others are packaged yet so this is enabled by default,
+      # no need to redefine it in your config for now)
+      #media-session.enable = true;
+    };
+
   };
-  services.logind.extraConfig = ''
-    RuntimeDirectorySize=16G
-  '';
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.thermald.enable = true;
-
-  # services.nix-serve = {
-  #   enable = true;
-  #   # secretKeyFile = "/var/cache-priv-key.pem";
-  # };
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.enableHidpi = true;
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "exec";
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-
-    videoDrivers = [
-      "amdgpu"
-      # "modesetting"
-      # "nvidia"
-    ];
-    #   config = lib.mkAfter ''
-    #     Section "Module"
-    #         Load           "modesetting"
-    #     EndSection
-
-    #     Section "Device"
-    #         Identifier     "amdgpu"
-    #         Driver         "amdgpu"
-    #         BusID          "PCI:9@0:0:0"
-    #         Option         "AllowEmptyInitialConfiguration"
-    #         Option         "AllowExternalGpus" "True"
-    #     EndSection
-
-    #     Section "Screen"
-    #         Identifier "Screen-amdgpu[0]"
-    #     	  Device "amdgpu"
-    #     EndSection
-
-    #     Section "Device"
-    #     	  Identifier "Screen0"
-    #     	  Driver "modesetting"
-    #     	  BusId "PCI:0:2:0"
-    #     EndSection
-
-    #     Section "Screen"
-    #         Identifier "eDP-1-1"
-    #         Monitor "eDP-1-1"
-    #         Device "Screen0"
-    #     EndSection
-    #   '';
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  security.pam.services.kwallet = {
-    name = "kwallet";
-    enableKwallet = true;
-  };
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+  security = {
+    rtkit.enable = true;
+    pam.services.kwallet = {
+      name = "kwallet";
+      enableKwallet = true;
+    };
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-  services.xserver.libinput.touchpad.naturalScrolling = true;
-  services.xserver.libinput.touchpad.scrollMethod = "twofinger";
-  services.xserver.libinput.touchpad.disableWhileTyping = true;
-  services.xserver.libinput.touchpad.accelSpeed = "0.5"; # null
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.exec = {
@@ -171,12 +200,19 @@
     packages = with pkgs; [ firefox kate neofetch ];
   };
   users.defaultUserShell = pkgs.zsh;
+  virtualisation = {
+    libvirtd.enable = true;
+    virtualbox.host.enable = true;
+    # virtualbox.host.enableExtensionPack = true;
+    # virtualbox.guest.enable = true;
+    # virtualbox.guest.x11 = true;
+    docker.enable = true;
+    docker.rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
 
-  virtualisation.libvirtd.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-  # virtualisation.virtualbox.host.enableExtensionPack = true;
-  # virtualisation.virtualbox.guest.enable = true;
-  # virtualisation.virtualbox.guest.x11 = true;
+  };
 
   users.extraUsers.exec.extraGroups = [ "libvirtd" ];
 
@@ -311,23 +347,31 @@
     zlib
     nvidia-vaapi-driver
   ];
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+    };
 
-  nix.settings.auto-optimise-store = true;
-  nix.settings.trusted-users = [ "root" "exec" ];
+    settings = {
+      auto-optimise-store = true;
+      trusted-users = [ "root" "exec" ];
 
-  nix.settings.trusted-public-keys = [
-    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
-  ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      ];
 
-  nix.settings.substituters = [
-    "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
-    "https://cache.nixos.org/"
-    "https://nix-community.cachix.org"
-    "https://devenv.cachix.org"
-  ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      substituters = [
+        "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+        "https://cache.nixos.org/"
+        "https://nix-community.cachix.org"
+        "https://devenv.cachix.org"
+      ];
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+  };
 
   # List services that you want to enable:
 
@@ -429,9 +473,4 @@
   };
   programs.mosh.enable = true;
 
-  virtualisation.docker.enable = true;
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
 }
