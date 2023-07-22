@@ -59,6 +59,8 @@
     amdgpu_top
     lshw
     xorg.xdpyinfo
+    xorg.xmodmap
+    cloudflared
     libfaketime
     libstdcxx5
     llvmPackages.libcxx
