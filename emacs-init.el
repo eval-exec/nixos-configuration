@@ -3545,6 +3545,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		  (insert-file-contents "~/.config/openai_api_key/key.private")
 		  (buffer-substring-no-properties (point-min) (line-end-position)))
 		gptel-default-mode 'org-mode
+		gptel-prompt-prefix-alist
+		'((markdown-mode . "# ") (org-mode . "* ") (text-mode . "# "))
 		)
   )
 

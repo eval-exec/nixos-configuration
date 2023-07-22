@@ -177,6 +177,10 @@
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
       '';
+      envExtra = ''
+        export NIXPKGS_ALLOW_UNFREE=1;
+
+      '';
 
       shellAliases = {
         cat = "bat -p";
