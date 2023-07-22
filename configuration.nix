@@ -345,7 +345,7 @@
     wakatime
     wget
     zlib
-    nvidia-vaapi-driver
+    # nvidia-vaapi-driver
   ];
   nix = {
     gc = {
