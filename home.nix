@@ -12,7 +12,7 @@
     winetricks
     bitcoin
     iftop
-
+    cool-retro-term
     jetbrains.clion
     jetbrains.goland
     atool
