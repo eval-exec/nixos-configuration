@@ -61,6 +61,8 @@
     xorg.xdpyinfo
     xorg.xmodmap
     cloudflared
+    ddcui
+    ddcutil
     libfaketime
     libstdcxx5
     llvmPackages.libcxx
