@@ -71,4 +71,5 @@
   #     intelBusId = "PCI:0:2:0";
   #   };
   # };
+  hardware.i2c.enable = true;
 }
