@@ -7,7 +7,6 @@
     # Include the results of the hardware scan.
     # ./hardware-configuration.nix
     # <home-manager/nixos>
-    ./my_systemd.nix
     ./cachix.nix
     ./g810-led.nix
   ];

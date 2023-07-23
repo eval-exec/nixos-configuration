@@ -236,4 +236,14 @@
       };
     };
   };
+  systemd.user.services = {
+    clash = {
+      Unit = { Description = "clash"; };
+      Service = {
+        ExecStart =
+          "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
+        Restart = "always";
+      };
+    };
+  };
 }
