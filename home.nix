@@ -13,6 +13,7 @@
     bitcoin
     iftop
     cool-retro-term
+    moreutils
     jetbrains.clion
     jetbrains.goland
     atool
