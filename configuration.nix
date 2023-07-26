@@ -25,6 +25,7 @@
       options kvm ignore_msrs=1
     '';
   };
+  console.useXkbConfig = true;
 
   networking = {
     hostName = "Mufasa"; # Define your hostname.
@@ -103,8 +104,8 @@
       xkbVariant = "";
 
       videoDrivers = [
-        "amdgpu"
-        # "modesetting"
+        # "amdgpu"
+        "modesetting"
         # "nvidia"
       ];
       #   config = lib.mkAfter ''
@@ -471,5 +472,21 @@
     ];
   };
   programs.mosh.enable = true;
+
+  systemd = {
+    services = {
+      disable_cpu_turbo = {
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+          ExecStart = ''
+            /bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+          ExecStop = ''
+            /bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+        };
+      };
+    };
+  };
 
 }

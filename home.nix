@@ -56,7 +56,6 @@
     kitty
     kitty-themes
     leiningen
-    parallel
     amdgpu_top
     lshw
     xorg.xdpyinfo
@@ -240,6 +239,7 @@
   systemd.user.services = {
     clash = {
       Unit = { Description = "clash"; };
+      Install = { WantedBy = [ "multi-user.target" ]; };
       Service = {
         ExecStart =
           "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
