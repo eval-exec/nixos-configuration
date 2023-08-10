@@ -104,8 +104,8 @@
       xkbVariant = "";
 
       videoDrivers = [
-        # "amdgpu"
-        "modesetting"
+        "amdgpu"
+        # "modesetting"
         # "nvidia"
       ];
       #   config = lib.mkAfter ''
@@ -210,6 +210,12 @@
     docker.rootless = {
       enable = true;
       setSocketVariable = true;
+    };
+    vmware = {
+      host = {
+        enable = true;
+
+      };
     };
 
   };
@@ -476,7 +482,7 @@
   systemd = {
     services = {
       disable_cpu_turbo = {
-        wantedBy = [ "multi-user.target" ];
+        wantedBy = [ "sysinit.target" ];
         serviceConfig = {
           Type = "oneshot";
           User = "root";
@@ -484,6 +490,8 @@
             /bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
           ExecStop = ''
             /bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+          RemainAfterExit = true;
+
         };
       };
     };

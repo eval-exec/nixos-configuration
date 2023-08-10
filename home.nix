@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     alacritty
     alejandra
+    wmctrl
+    xdotool
     pipenv
     wineWowPackages.stable
     winetricks
@@ -239,11 +241,11 @@
   systemd.user.services = {
     clash = {
       Unit = { Description = "clash"; };
-      Install = { WantedBy = [ "multi-user.target" ]; };
       Service = {
         ExecStart =
           "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
         Restart = "always";
+        WantedBy = [ "network-online.target" ];
       };
     };
   };
