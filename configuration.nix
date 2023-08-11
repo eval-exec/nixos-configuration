@@ -84,6 +84,10 @@
   };
 
   services = {
+    acpid = {
+      enable = true;
+      logEvents = true;
+    };
 
     logind.extraConfig = ''
       RuntimeDirectorySize=16G
