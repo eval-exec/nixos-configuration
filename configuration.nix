@@ -105,7 +105,8 @@
 
       videoDrivers = [
         "amdgpu"
-        # "modesetting"
+        "modesetting"
+        # "fbdev"
         # "nvidia"
       ];
       #   config = lib.mkAfter ''
@@ -185,8 +186,9 @@
   hardware.pulseaudio.enable = false;
   security = {
     rtkit.enable = true;
-    pam.services.kwallet = {
-      name = "kwallet";
+    pam.services.sddm.enableKwallet = true;
+    pam.services.kdewallet = {
+      name = "kdewallet";
       enableKwallet = true;
     };
 
