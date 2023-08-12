@@ -159,6 +159,8 @@ i.e. windows tiled side-by-side."
   (setq switch-to-buffer-obey-display-actions t)
   (setq auto-save-default nil)
   (setq next-line-add-newlines t)
+  (line-number-mode -1)
+  (column-number-mode -1)
 
   (setq vc-follow-symlinks t)
 
@@ -2193,6 +2195,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (use-package ement
   :config
+  (setq ement-notify-dbus-p nil)
   (defun exec/ement-connect ()
 	(interactive)
 	(ement-connect
@@ -3014,7 +3017,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;;   :straight (matrix-emacs-theme :type git :host github :repo "monkeyjunglejuice/matrix-emacs-theme"))
 
 (use-package doom-modeline
-  :hook (after-init . doom-modeline-mode)
+  :hook
+  ;; (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-battery nil
 		doom-modeline-buffer-encoding nil
