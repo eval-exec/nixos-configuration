@@ -10,12 +10,14 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-intel" ];
-  boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.blacklistedKernelModules = [ ];
   boot.kernelParams = [
     "video=eDP-1:3840x2160@60"
     "mem_sleep_default=deep"
     # "i915.enable_psr=0"
     "i915.fastboot=1"
+    "i915.enable_guc=3"
+    "intel_idle.max_cstate=1"
     # "amdgpu.ppfeaturemask=0xffffffff"
     # "amdgpu.aspm=0"
   ];
