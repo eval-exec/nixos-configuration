@@ -16,7 +16,7 @@
 ;; Disable package.el in favor of straight.el
 (setq package-enable-at-startup nil)
 
-(setq native-comp-async-report-warnings-errors nil)
+(setq-default native-comp-async-report-warnings-errors nil)
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
@@ -26,3 +26,7 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 (set-face-attribute 'default nil  :family "Noto Sans Mono" :height 100 :weight 'normal)
+
+(provide 'emacs-early-init)
+
+;;; emacs-early-init.el ends here

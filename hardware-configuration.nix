@@ -10,7 +10,7 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-intel" ];
-  boot.blacklistedKernelModules = [ "nouveau"];
+  boot.blacklistedKernelModules = [ "nouveau" ];
   boot.kernelParams = [
     "video=eDP-1:3840x2160@60"
     "mem_sleep_default=deep"

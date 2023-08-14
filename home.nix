@@ -9,6 +9,11 @@
     alejandra
     wmctrl
     xdotool
+    peek
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-ugly
+    gifski
     pipenv
     wineWowPackages.stable
     winetricks

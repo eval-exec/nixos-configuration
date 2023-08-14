@@ -162,6 +162,11 @@ i.e. windows tiled side-by-side."
   (line-number-mode -1)
   (column-number-mode -1)
 
+  (setq font-lock-maximum-decoration '(
+									   (markdown-mode . nil)
+									   (t . t)
+									   ))
+
   (setq vc-follow-symlinks t)
 
   ;; Add prompt indicator to `completing-read-multiple'.
@@ -1098,7 +1103,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
    '(vertico-posframe-border ((t (:inherit default :background "pink"))))
    )
 
-  ;; (vertico-posframe-mode)
+  (vertico-posframe-mode -1)
   )
 
 (use-package mini-frame
@@ -2034,8 +2039,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq buffer-face-mode-face '(
 								;; :family "Noto Sans"
 								:height 1.5
-								:background "white"
-								:foreground "black"
+								;; :background "white"
+								;; :foreground "black"
 								))
   (make-local-variable 'buffer-face-mode-face)
   (buffer-face-mode)
@@ -2695,6 +2700,11 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	"https://github.com/search?ref=simplesearch&q=%s&type=code")
   (engine-mode t)
   )
+(use-package empv
+  :straight (:host github :repo "isamert/empv.el")
+  :config
+  (setq empv-invidious-instance "https://vid.puffyan.us/api/v1")
+  )
 
 (use-package projectile
   :bind("C-c p" . projectile-command-map)
@@ -3017,7 +3027,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;;   :straight (matrix-emacs-theme :type git :host github :repo "monkeyjunglejuice/matrix-emacs-theme"))
 
 (use-package doom-modeline
-  :hook
+  ; :hook
   ;; (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-battery nil
@@ -3168,7 +3178,16 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (use-package fd-dired)
   )
 
-(use-package dirvish)
+(use-package dirvish
+  :init
+  (dirvish-override-dired-mode)
+  :config
+  (setq dirvish-hide-details t)
+  (setq dirvish-attributes
+		'(vc-state subtree-state all-the-icons collapse git-msg file-time
+				   ;; file-size
+				   ))
+  )
 
 (use-package info-colors
   :hook (Info-selection . info-colors-fontify-node)
@@ -4063,7 +4082,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
  )
 
 (general-define-key
- "M-0" 'dired-sidebar-show-sidebar
+ "M-0"
+ ;; 'dired-sidebar-show-sidebar
  )
 
 
@@ -4202,6 +4222,9 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 
+(load "/home/exec/Projects/github.com/eval-exec/crazy-theme.el/crazy-theme.el")
+(setq crazy-theme-prefer-dark nil)
+(load-theme 'crazy)
 
 
 (custom-set-faces
@@ -4226,11 +4249,6 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
  '(imenu-list-entry-face ((t (:height 0.8))))
  )
-
-
-;; ;; (load "/home/exec/Projects/github.com/eval-exec/crazy-theme.el/crazy-theme.el")
-;; ;; (load-theme 'crazy)
-
 
 
 (defun disable-all-themes ()
