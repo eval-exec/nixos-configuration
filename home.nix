@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     alacritty
     alejandra
+    qt6.full
     wmctrl
     xdotool
     peek
@@ -157,7 +158,7 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.emacs-git;
+      package = (pkgs.emacs-git.override { withGTK3 = true; });
     };
 
     zsh = {

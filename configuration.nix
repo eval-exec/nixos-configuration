@@ -237,7 +237,7 @@
   # };
 
   # Allow unfree packages
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     dina-font
     fira-code
     fira-code-symbols

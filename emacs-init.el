@@ -3052,9 +3052,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   )
 (use-package all-the-icons)
 (use-package all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode)
-  :config
-  (setq all-the-icons-dired-monochrome nil)
+  ;; :hook (dired-mode . all-the-icons-dired-mode)
+  ;; :config
+  ;; (setq all-the-icons-dired-monochrome nil)
   )
 ;; (use-package treemacs-all-the-icons  )
 
@@ -3127,8 +3127,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (use-package dired
   :straight (:type built-in)
-  :hook
-  (dired-mode . dired-filter-mode)
+  ;; :hook
+  ;; (dired-mode . dired-filter-mode)
   :config
 
   (setq dired-listing-switches "-alFh --group-directories-first")
@@ -3139,28 +3139,29 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq auto-revert-verbose nil)
 
   (use-package dired-hacks-utils
-	:hook (dired-mode . dired-utils-format-information-line-mode)
+	;; :hook (dired-mode . dired-utils-format-information-line-mode)
 	)
   (use-package dired-filter
 	:config
-	(setq dired-filter-inherit-filter-stack t
-		  dired-filter-revert 'always
-		  )
+	;; (setq dired-filter-inherit-filter-stack nil
+	;; 	  dired-filter-revert 'always
+		  ;; )
 	)
   (use-package dired-open)
 
   (use-package diredfl
-	:config
-	 (diredfl-global-mode))
+	;; :config
+	;; (diredfl-global-mode)
+	)
 
   (use-package dired-sidebar
-	:hook
-	(dired-sidebar-mode .  (lambda()
-								   (interactive)
-								   (dired-omit-mode)
-								   (visual-line-mode -1)
-								   (dired-sidebar-set-font)
-								   ))
+	;; :hook
+	;; (dired-sidebar-mode .  (lambda()
+	;; 							   (interactive)
+	;; 							   (dired-omit-mode)
+	;; 							   (visual-line-mode -1)
+	;; 							   (dired-sidebar-set-font)
+	;; 							   ))
 	:config
 	(setq dired-sidebar-theme 'vscode
 		  dired-sidebar-follow-file-idle-delay 0.1
@@ -3181,13 +3182,24 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (use-package dirvish
   :init
   (dirvish-override-dired-mode)
+  (dirvish-side-follow-mode)
   :config
   (setq dirvish-hide-details t)
   (setq dirvish-attributes
-		'(vc-state subtree-state all-the-icons collapse git-msg file-time
-				   ;; file-size
+		'(vc-state subtree-state
+				   all-the-icons
+				   collapse
+				   git-msg
+				   file-time
+				   file-size
 				   ))
   )
+(use-package dired-x
+  :straight (:type built-in)
+  :config
+  ;; Make dired-omit-mode hide all "dotfiles"
+  (setq dired-omit-files
+        (concat dired-omit-files "\\|^\\..*$")))
 
 (use-package info-colors
   :hook (Info-selection . info-colors-fontify-node)
@@ -3352,6 +3364,17 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (add-to-list 'load-path "~/.emacs.d/elisp/blink-search")
 (require 'blink-search)
 
+
+(use-package holo-layer
+  :ensure nil
+  :straight (:host github :repo "manateelazycat/holo-layer" :files ("*.el" "*.py" "plugin" "resources"))
+  :config
+  (holo-layer-enable)
+  (setq
+   holo-layer-python-command "/home/exec/.emacs.d/holo-layer-venv/.venv/bin/python3"
+   holo-layer-enable-cursor-animation t
+		)
+  )
 
 
 (use-package xterm-color
@@ -4096,7 +4119,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (add-hook 'emacs-startup-hook '(lambda()
 								 ;; (treemacs)
-								 (dired-sidebar-show-sidebar)
+								 ;; (dired-sidebar-show-sidebar)
 
 								 (switch-to-buffer "*scratch*")
 								 ;; (exec/set-top-priority)
