@@ -7,7 +7,12 @@
   home.packages = with pkgs; [
     alacritty
     alejandra
+    gdb
+    gf
+    qtcreator
+
     qt6.full
+    qt6.qtbase
     wmctrl
     xdotool
     peek
@@ -66,8 +71,14 @@
     leiningen
     amdgpu_top
     lshw
+    nodePackages.parcel
+
     xorg.xdpyinfo
+    xorg.xcbutilwm
+    xorg.xcbutilimage
     xorg.xmodmap
+    xorg.libxcb
+    xorg.xcbutil
     cloudflared
     ddcui
     ddcutil

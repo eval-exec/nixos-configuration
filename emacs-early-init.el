@@ -3,10 +3,10 @@
 ;;; early init
 ;;; Code:
 
-(menu-bar-mode -1)
+(menu-bar-mode t)
 
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(tool-bar-mode t)
+(scroll-bar-mode t)
 
 (setq
   native-comp-async-jobs-number 10
@@ -25,7 +25,11 @@
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-(set-face-attribute 'default nil  :family "Noto Sans Mono" :height 100 :weight 'normal)
+
+(set-frame-parameter nil 'alpha-background 100)
+(set-frame-parameter nil 'alpha 1.0)
+
+;; (set-face-attribute 'default nil  :family "Noto Sans Mono" :height 100 :weight 'normal)
 
 (provide 'emacs-early-init)
 

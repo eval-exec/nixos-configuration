@@ -236,7 +236,7 @@ i.e. windows tiled side-by-side."
   ;; (add-to-list 'default-frame-alist '(background-color . "black"))
   ;; (add-to-list 'default-frame-alist '(cursor-color . "coral"))
 
-  (setq use-default-font-for-symbols nil)
+  (setq use-default-font-for-symbols t)
   ;; ;; 👿
   ;; (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
   ;; (set-fontset-font t 'ascii "Jetbrains Mono" nil 'prepend)
@@ -324,7 +324,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq evil-want-C-u-scroll t)
   (setq evil-want-fine-undo t)
 
-  (setq evil-undo-system  'undo-redo)
+  (evil-set-undo-system  'undo-redo)
   
 
   (setq evil-ex-search-highlight-all nil)
@@ -399,8 +399,10 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	  warning-suppress-types '((comp)))
 
 (toggle-scroll-bar -1)
-(setq scroll-conservatively 101
-	  scroll-margin 0
+(setq scroll-conservatively 100000
+	  scroll-margin 1
+	  scroll-step 3
+	  scroll-preserve-screen-position t
 	  scroll-up-aggressively 0.01
 	  scroll-down-aggressively 0.01
 	  )
@@ -811,12 +813,12 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   ;; hollo world
   )
 
-(use-package emojify
-  :hook (after-init . global-emojify-mode) ;; 👿
-  :config
-  (setq emojify-display-style 'unicode
-		emojify-emoji-styles '(unicode))
-  )
+;; (use-package emojify
+;;   :hook (after-init . global-emojify-mode) ;; 👿
+;;   :config
+;;   (setq emojify-display-style 'unicode
+;; 		emojify-emoji-styles '(unicode))
+;;   )
 
 (use-package sudo-edit
   :straight (sudo-edit :type git :host github :repo "nflath/sudo-edit")
@@ -1063,7 +1065,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   :config
   (setq
    vertico-count 10
-   vertico-resize nil
+   vertico-resize t
    vertico-count-format '("%-6s " . "%2s/%5s")
    vertico-buffer-display-action
    '(display-buffer-below-selected (window-height . 10))
@@ -1095,7 +1097,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq vertico-posframe-border-width 1)
   (setq vertico-posframe-poshandler 'posframe-poshandler-frame-top-right-corner
 		vertico-posframe-width nil
-		vertico-posframe-font "Noto Sans Mono 8"
+		vertico-posframe-font
+		;; "Noto Sans Mono 8"
+		nil
 		vertico-posframe-min-height 1
 		)
 
@@ -1294,6 +1298,11 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   ;; (add-to-list 'completion-at-point-functions #'cape-dict)
   ;; (add-to-list 'completion-at-point-functions #'cape-symbol)
   ;; (add-to-list 'completion-at-point-functions #'cape-line)
+  (use-package yasnippet-capf
+	:straight (:host github :repo "elken/yasnippet-capf")
+	:config
+	(add-to-list 'completion-at-point-functions #'yasnippet-capf)
+	)
   )
 
 
@@ -3369,11 +3378,11 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   :ensure nil
   :straight (:host github :repo "manateelazycat/holo-layer" :files ("*.el" "*.py" "plugin" "resources"))
   :config
-  (holo-layer-enable)
-  (setq
-   holo-layer-python-command "/home/exec/.emacs.d/holo-layer-venv/.venv/bin/python3"
-   holo-layer-enable-cursor-animation t
-		)
+  ; (holo-layer-enable)
+  ; (setq holo-layer-python-command "/home/exec/.emacs.d/straight/repos/holo-layer/.venv/bin/python3"
+		; holo-layer-enable-cursor-animation t
+		; holo-layer-enable-debug t
+		; holo-layer-enable-log t)
   )
 
 
@@ -4132,15 +4141,16 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
  )
 
 
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*helpful *"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (dedicated)
-			   )
-			 )
+(setq  display-buffer-alist nil)
+;; (add-to-list 'display-buffer-alist
+			 ;; '(
+			 ;;   "\\*helpful *"
+			 ;;   (display-buffer-in-side-window)
+			 ;;   (side . bottom)
+			 ;;   (slot . 0)
+			 ;;   (dedicated)
+			 ;;   )
+			 ;; )
 
 (add-to-list 'display-buffer-alist
 			 '(
