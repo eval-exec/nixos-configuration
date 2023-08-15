@@ -238,14 +238,14 @@ i.e. windows tiled side-by-side."
 
   (setq use-default-font-for-symbols nil)
   ;; ;; 👿
-  (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
-  (set-fontset-font t 'ascii "Jetbrains Mono" nil 'prepend)
-  (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
-  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
-  (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
-  (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
-  (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji" :height 0.8))
-  (set-fontset-font t 'symbol (font-spec :family "Symbola"))
+  ;; (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
+  ;; (set-fontset-font t 'ascii "Jetbrains Mono" nil 'prepend)
+  ;; (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
+  ;; (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
+  ;; (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
+  ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
+  ;; (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji" :height 0.8))
+  ;; (set-fontset-font t 'symbol (font-spec :family "Symbola"))
   (setq revert-without-query '(".*"))
 
 
@@ -3606,8 +3606,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (defun exec/vterm-buffer-face()
   (interactive)
   (setq-local  buffer-face-mode-face '(
-								 :family "Noto Sans Mono"
-										 :scale 0.8
+								 ;; :family "Noto Sans Mono"
+										 :height  0.8
 								 :background "black"
 								 ))
   (buffer-face-mode)
@@ -3618,33 +3618,33 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   )
 
 (use-package vterm
-  :bind ("C-<return>" . vterm-send-return)
-  :hook (vterm-mode  . exec/vterm-buffer-face)
+  ;; :bind ("C-<return>" . vterm-send-return)
+  ;; :hook (vterm-mode  . exec/vterm-buffer-face)
   :config
-  (general-evil-define-key 'insert 'vterm-mode-map
-	"C-r" 'vterm--self-insert
+  ;; (general-evil-define-key 'insert 'vterm-mode-map
+  ;; 	"C-r" 'vterm--self-insert
 
-	"C-p" 'vterm--self-insert
-	"C-n" 'vterm--self-insert
+  ;; 	"C-p" 'vterm--self-insert
+  ;; 	"C-n" 'vterm--self-insert
 
-	"C-a" 'vterm--self-insert
-	"C-e" 'vterm--self-insert
+  ;; 	"C-a" 'vterm--self-insert
+  ;; 	"C-e" 'vterm--self-insert
 
-	"C-w" 'vterm--self-insert
+  ;; 	"C-w" 'vterm--self-insert
 
-	"C-d" 'vterm--self-insert
-	"C-c" 'vterm--self-insert
+  ;; 	"C-d" 'vterm--self-insert
+  ;; 	"C-c" 'vterm--self-insert
 
-	"C-e" 'vterm--self-insert
-	"C-h" 'vterm--self-insert
-	"C-l" 'vterm--self-insert
-	"<escape>" 'vterm--self-insert
-	)
+  ;; 	"C-e" 'vterm--self-insert
+  ;; 	"C-h" 'vterm--self-insert
+  ;; 	"C-l" 'vterm--self-insert
+  ;; 	"<escape>" 'vterm--self-insert
+  ;; 	)
 
-  (setq vterm-always-compile-module t
-		vterm-set-bold-hightbright t)
-  (set-face-attribute 'vterm-color-blue  nil :foreground "#268bd2" :background "#839496")
-  (set-face-attribute 'vterm-color-black nil :foreground "gray"    :background "dim gray")
+  ;; (setq vterm-always-compile-module t
+  ;; 		vterm-set-bold-hightbright t)
+  ;; (set-face-attribute 'vterm-color-blue  nil :foreground "#268bd2" :background "#839496")
+  ;; (set-face-attribute 'vterm-color-black nil :foreground "gray"    :background "dim gray")
   )
 
 (use-package fcitx

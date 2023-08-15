@@ -208,7 +208,7 @@
   users.defaultUserShell = pkgs.zsh;
   virtualisation = {
     libvirtd.enable = true;
-    virtualbox.host.enable = true;
+    virtualbox.host.enable = false;
     # virtualbox.host.enableExtensionPack = true;
     # virtualbox.guest.enable = true;
     # virtualbox.guest.x11 = true;
@@ -219,7 +219,7 @@
     };
     vmware = {
       host = {
-        enable = true;
+        enable = false;
 
       };
     };
