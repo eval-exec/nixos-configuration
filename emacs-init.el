@@ -1149,7 +1149,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (custom-set-faces '(child-frame-border
 					 ((t (:background "green")))))
 
-  (mini-frame-mode -1)
+  ; (mini-frame-mode)
   )
 
 
