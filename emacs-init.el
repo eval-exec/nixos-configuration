@@ -245,13 +245,13 @@ i.e. windows tiled side-by-side."
   ;; (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
   ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
   ;; (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji"))
-  (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji"))
+  (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji" :height 1.0))
+  (set-fontset-font t 'unicode (font-spec :family "NotoSansM Nerd Font Mono") nil 'append)
   ;; (set-fontset-font t 'emoji nil)
   (setq face-font-rescale-alist '(
-								  ("Twitter Color Emoji" . 0.8)
-								  ("Noto Color Emoji" . 0.9)
-								  ("JetBrainsMonoNL Nerd Font Propo" . 0.8)
-								  ("NotoSansMNerdFontMono" . 0.9)
+								  ;; ("Noto Color Emoji" . 0.9)
+								  ;; ("NotoMono Nerd Font Propo" . 0.9)
+								  ;; ("Arimo Nerd Font" . 0.9)
 								  ))
   ;; (set-fontset-font t 'symbol (font-spec :family "Symbola"))
   (setq revert-without-query '(".*"))
@@ -3639,11 +3639,10 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (defun exec/vterm-buffer-face()
   (interactive)
   (setq-local  buffer-face-mode-face '(
-									   :family
-									   ;; "JetBrainsMono Nerd Font"
-								 "NotoSansMNerdFontMono"
-										 :height  0.8
-								 :background "black"
+									   ;; :family "Noto Sans Mono"
+								 ;; "NotoSansMNerdFontMono"
+										 :height  1.0
+								 ;; :background "black"
 								 ))
   (buffer-face-mode)
   (origami-mode -1)
