@@ -430,7 +430,7 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      stdenv.cc.cc
+      stdenv.cc.cc.lib
       fuse3
       fuse
       boost

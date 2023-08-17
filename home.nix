@@ -201,6 +201,8 @@
 
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
+        setopt NO_HUP
+
       '';
       envExtra = ''
         export NIXPKGS_ALLOW_UNFREE=1;
