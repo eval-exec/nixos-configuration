@@ -71,7 +71,9 @@
     leiningen
     amdgpu_top
     lshw
-    nodePackages.parcel
+    # nodePackages.parcel
+    bluemail
+    calibre
 
     xorg.xdpyinfo
     xorg.xcbutilwm
