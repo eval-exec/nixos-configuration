@@ -176,8 +176,8 @@ i.e. windows tiled side-by-side."
   (setq tab-always-indent 'complete)
   (setq visible-bell t)
   (setq ring-bell-function
-		'exec/double-flash-mode-line
-		;; 'ignore
+		;; 'exec/double-flash-mode-line
+		'ignore
 		)
   (setq show-paren-ring-bell-on-mismatch t)
   (setq large-file-warning-threshold 1000000000)
@@ -189,12 +189,13 @@ i.e. windows tiled side-by-side."
   (setq buffer-save-without-query t)
   (setq byte-compile-warnings '(unresolved))
 
-  (setq frame-title-format
-    '((:eval (if (buffer-file-name)
-                  (abbreviate-file-name (buffer-file-name))
-                    "%b"))
-      " - GNU Emacs at " system-name)
-  )
+  (setq frame-title-format "Eval EXEC - GNU Emacs at Mufasa")
+  ;; (setq frame-title-format
+  ;;   '((:eval (if (buffer-file-name)
+  ;;                 (abbreviate-file-name (buffer-file-name))
+  ;;                   "%b"))
+  ;;     " - GNU Emacs at " system-name)
+  ;; )
 
   ;; (setq header-line-format '(:eval (if (buffer-file-name) (abbreviate-file-name (buffer-file-name)) "%b")))
 
@@ -246,7 +247,7 @@ i.e. windows tiled side-by-side."
   ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
   ;; (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji"))
   (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji" :height 1.0))
-  (set-fontset-font t 'unicode (font-spec :family "NotoSansM Nerd Font Mono") nil 'append)
+  (set-fontset-font t 'unicode (font-spec :family "Hack Nerd Font Mono"))
   ;; (set-fontset-font t 'emoji nil)
   (setq face-font-rescale-alist '(
 								  ;; ("Noto Color Emoji" . 0.9)
@@ -255,6 +256,7 @@ i.e. windows tiled side-by-side."
 								  ))
   ;; (set-fontset-font t 'symbol (font-spec :family "Symbola"))
   (setq revert-without-query '(".*"))
+
 
 
 
@@ -1074,7 +1076,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   :config
   (setq
    vertico-count 10
-   vertico-resize t
+   vertico-resize nil
    vertico-count-format '("%-6s " . "%2s/%5s")
    vertico-buffer-display-action
    '(display-buffer-below-selected (window-height . 10))
@@ -1103,17 +1105,19 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		  (font-height . 0.1)
 		  )
 		)
-  (setq vertico-posframe-border-width 1)
-  (setq vertico-posframe-poshandler 'posframe-poshandler-frame-top-right-corner
+  (setq vertico-posframe-border-width 2)
+  (setq vertico-posframe-poshandler
+		'posframe-poshandler-frame-bottom-center
+		;; 'posframe-poshandler-frame-top-right-corner
 		vertico-posframe-width nil
 		vertico-posframe-font
-		;; "Noto Sans Mono 8"
-		nil
-		vertico-posframe-min-height 1
+		"Noto Sans Mono"
+		vertico-posframe-min-height 10
 		)
 
   (custom-set-faces
-   '(vertico-posframe-border ((t (:inherit default :background "pink"))))
+   '(vertico-posframe-border
+	 ((t (:inherit default :background "pink"))))
    )
 
   (vertico-posframe-mode -1)
@@ -1134,16 +1138,18 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		mini-frame-resize-min-height 20
 		mini-frame-resize-max-height 20
 		mini-frame-ignore-functions '(exec/set-top-priority)
-		mini-frame-show-parameters '((left . 0.0)
-									 (width . 1.0)
-									 (top . 0.5)
-									 ;; (height . 1.0)
-									 ))
+		mini-frame-show-parameters '(
+									 (left . 0.5)
+									 (height . 0.33)
+									 (width . 0.99)
+									 (top . 0.94)
+									 )
+		)
 
   (custom-set-faces '(child-frame-border
 					 ((t (:background "green")))))
 
-  ;; (mini-frame-mode)
+  (mini-frame-mode -1)
   )
 
 
@@ -1260,7 +1266,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
    corfu-preview-current nil
    )
    (global-corfu-mode)
-   (corfu-popupinfo-mode)
+   (corfu-popupinfo-mode -1)
   )
 
 (use-package corfu-terminal)
@@ -2918,6 +2924,10 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (use-package centaur-tabs
   ;; :hook
   ;; (vertico-buffer-mode . centaur-tabs-local-mode)
+  :bind
+  (:map evil-normal-state-map
+        ("g t" . centaur-tabs-forward)
+        ("g T" . centaur-tabs-backward))
   :config
   (setq
    centaur-tabs-set-icons t
@@ -2925,9 +2935,18 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
    centaur-tabs-set-bar 'over
    centaur-tabs-set-modified-marker t
    centaur-tabs-background-color "black"
+   centaur-tabs-height 32
+   centaur-tabs-icon-scale-factor 1.2
    )
+  (set-face-attribute 'centaur-tabs-selected nil :weight 'normal)
+  (set-face-attribute 'centaur-tabs-selected-modified nil :weight 'normal)
+  (set-face-attribute 'centaur-tabs-unselected nil :weight 'normal)
+  (set-face-attribute 'centaur-tabs-unselected-modified nil :weight 'normal)
+
+
   (centaur-tabs-mode)
   (centaur-tabs-headline-match)
+  (centaur-tabs-change-fonts "Noto Sans" 1.2)
   )
 
 
@@ -3642,7 +3661,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 									   ;; :family "Noto Sans Mono"
 								 ;; "NotoSansMNerdFontMono"
 										 :height  1.0
-								 ;; :background "black"
+								 :background "black"
 								 ))
   (buffer-face-mode)
   (origami-mode -1)
@@ -3675,16 +3694,18 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	"<escape>" 'vterm--self-insert
 	)
 
-  ;; (setq vterm-always-compile-module t
-  ;; 		vterm-set-bold-hightbright t)
-  ;; (set-face-attribute 'vterm-color-blue  nil :foreground "#268bd2" :background "#839496")
-  ;; (set-face-attribute 'vterm-color-black nil :foreground "gray"    :background "dim gray")
+  (setq vterm-always-compile-module t
+		vterm-set-bold-hightbright t)
+  (set-face-attribute 'vterm-color-blue nil :foreground "#268bd2" :background "#268bd2")
+  (set-face-attribute 'vterm-color-black nil :foreground "gray"    :background "dim gray")
   )
 
 (use-package fcitx
+  :disabled t
   :after evil
   :config
   (setq fcitx-remote-command "fcitx5-remote")
+  (fcitx-prefix-keys-turn-off)
   (fcitx-default-setup))
 
 
@@ -3965,9 +3986,6 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   "=" 'text-scale-increase
   "-" 'text-scale-decrease
   "c" 'calendar
-  "p" '(nil :which-key "package? profiler?")
-  "p1" 'profiler-start
-  "p2" 'profiler-stop
   )
 
 (general-define-key
@@ -4137,6 +4155,10 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		  )
 
  "H-d" 'describe-char
+
+  "H-p" '(nil :which-key "package? profiler?")
+  "H-p 1" 'profiler-start
+  "H-p 2" 'profiler-stop
  )
 
 (general-define-key
