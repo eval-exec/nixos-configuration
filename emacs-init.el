@@ -246,8 +246,8 @@ i.e. windows tiled side-by-side."
   ;; (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
   ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
   ;; (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji"))
-  (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji" :height 1.0))
   (set-fontset-font t 'unicode (font-spec :family "Hack Nerd Font Mono"))
+  (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji"))
   ;; (set-fontset-font t 'emoji nil)
   (setq face-font-rescale-alist '(
 								  ;; ("Noto Color Emoji" . 0.9)
@@ -404,7 +404,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 			(newline))
 		(insert (sh/current-time-microseconds) " ")))))
 
-(advice-add 'message :before 'sh/ad-timestamp-message)
+;; (advice-add 'message :before 'sh/ad-timestamp-message)
+;; (advice-remove 'message 'sh/ad-timestamp-message)
 
 (setq warning-suppress-log-types '((comp))
 	  warning-suppress-types '((comp)))
@@ -440,8 +441,6 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 
 (setq history-delete-duplicates t)
-(frame-height)
-(frame-width)
 
 (setq display-buffer-base-action nil)
 (setq create-lock-file nil)
@@ -556,10 +555,10 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		 )
   :config
   (setq
-   gcmh-verbose nil
+   gcmh-verbose t
    gcmh-idle-delay 'auto
    
-   garbage-collection-messages nil
+   garbage-collection-messages t
    gcmh-high-cons-threshold (* 32 1024 1024)
    gc-cons-percentage 1.0
    )
@@ -1077,7 +1076,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq
    vertico-count 10
    vertico-resize nil
-   vertico-count-format '("%-6s " . "%2s/%5s")
+   vertico-count-format nil ;'("%-6s " . "%2s/%5s")
    vertico-buffer-display-action
    '(display-buffer-below-selected (window-height . 10))
    ;; '(display-buffer-below-selected )
@@ -1105,14 +1104,14 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		  (font-height . 0.1)
 		  )
 		)
-  (setq vertico-posframe-border-width 2)
-  (setq vertico-posframe-poshandler
+  (setq vertico-posframe-border-width 2
+		vertico-posframe-poshandler
 		'posframe-poshandler-frame-bottom-center
 		;; 'posframe-poshandler-frame-top-right-corner
 		vertico-posframe-width nil
 		vertico-posframe-font
 		"Noto Sans Mono"
-		vertico-posframe-min-height 10
+		vertico-posframe-min-height nil ;10
 		)
 
   (custom-set-faces
@@ -1199,13 +1198,13 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (use-package orderless
   :init
-  (setq completion-search-distance 15000)
+  (setq completion-search-distance 200)
   (setq completion-styles '(
 							orderless
 							;; partial-completion
 							;; substring
-							flex
-							basic
+							;; flex
+							;; basic
 							))
 
   (setq completion-category-defaults nil
@@ -1238,7 +1237,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
    )
   ;; (gptai-list-models)
   )
-
+;; (evil-line-move 1)
 
 (use-package corfu
   :straight (:files (:defaults "extensions/*"))
@@ -1757,6 +1756,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;;   )
 
 
+(use-package keycast
+  ;; :hook (after-init . keycast-mode-line-mode)
+  )
 
 (use-package powerthesaurus)
 
@@ -2745,7 +2747,6 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 									  "~/.emacs.d/"
 									  ))
   (defun projectile-ignored-project-function(project-root)
-		   (message project-root)
 		   (or (string-prefix-p "~/.emacs.d/" project-root)
 			   (string-prefix-p "~/.cargo/" project-root)
 			   (string-prefix-p "~/.rustup/" project-root)
@@ -3045,6 +3046,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (use-package parchment-theme)
 (use-package atom-one-dark-theme)
+(use-package wildcharm-theme)
 (use-package color-theme-sanityinc-tomorrow)
 (use-package tron-legacy-theme)
 (use-package kaolin-themes)
@@ -3059,6 +3061,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;; (use-package spacemacs-theme)
 (use-package inkpot-theme)
 (use-package organic-green-theme)
+(use-package nyan-mode)
 ;; (use-package nasy-theme
 ;;   :ensure nil
 ;;   :straight (nasy-theme :type git :host github :repo "nasyxx/emacs-nasy-theme" :files ("*.el")))
@@ -3168,7 +3171,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;; https://www.google.com/search?q=%s&pws=0&gl=us&gws_rd=cr
 
   :config
-  (setq eww-search-prefix "https://www.google.com/search?pws=0&gl=us&gws_rd=cr&q=")
+  (setq eww-search-prefix "https://www.google.com/search?pws=0&gl=us&gws_rd=cr&q="
+		eww-retrieve-command nil
+		)
   )
 
 (use-package dired
@@ -3411,22 +3416,24 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (require 'blink-search)
 
 
-(use-package holo-layer
-  :ensure nil
-  :straight (:host github :repo "manateelazycat/holo-layer" :files ("*.el" "*.py" "plugin" "resources"))
-  :config
-  ;; (holo-layer-enable)
-  (setq holo-layer-python-command "/home/exec/.emacs.d/straight/repos/holo-layer/.venv/bin/python3"
-		holo-layer-enable-cursor-animation nil
-		holo-layer-cursor-animation-type "jelly"
-		holo-layer-cursor-animation-duration 200
-		holo-layer-cursor-animation-interval 10
-		holo-layer-hide-mode-line nil
-		holo-layer-cursor-color "black"
-		holo-layer-cursor-alpha 255
-		holo-layer-enable-debug nil)
-		
-  )
+;; (use-package holo-layer
+;;   :ensure nil
+;;   :disabled t
+;;   :straight (:host github :repo "manateelazycat/holo-layer" :files ("*.el" "*.py" "plugin" "resources"))
+;;   :config
+;;   (holo-layer-enable)
+;;   (setq holo-layer-python-command "/home/exec/.emacs.d/straight/repos/holo-layer/.venv/bin/python3"
+;; 		holo-layer-enable-cursor-animation t
+;; 		holo-layer-cursor-animation-type "jelly"
+;; 		holo-layer-cursor-animation-duration 200
+;; 		holo-layer-cursor-animation-interval 10
+;; 		holo-layer-hide-mode-line nil
+;; 		holo-layer-cursor-color "blue"
+;; 		holo-layer-cursor-alpha 220
+;; 		holo-layer-enable-debug nil
+;; 		holo-layer-enable-place-info nil
+;; 		)
+;;   )
 
 
 (use-package xterm-color
@@ -4354,5 +4361,3 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 							   )
 							  ))
 
-
-;; (load "~/.emacs.d/elisp/doctor_chatgpt.el")

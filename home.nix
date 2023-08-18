@@ -42,6 +42,7 @@
     dig
     direnv
     dmidecode
+    element-desktop
     dolphin
     du-dust
     emacsPackages.telega
