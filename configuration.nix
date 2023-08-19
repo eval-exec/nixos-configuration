@@ -433,6 +433,7 @@
       stdenv.cc.cc.lib
       fuse3
       fuse
+      libgit2
       boost
       libevent
       alsa-lib

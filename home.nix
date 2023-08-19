@@ -43,7 +43,10 @@
     direnv
     dmidecode
     element-desktop
+    silver-searcher
+    pharo
     dolphin
+    helix
     du-dust
     emacsPackages.telega
     emacsPackages.vterm

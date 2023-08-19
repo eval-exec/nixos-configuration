@@ -156,21 +156,18 @@ i.e. windows tiled side-by-side."
   (global-unset-key (kbd "M-l"))
   (global-unset-key (kbd "M-i"))
   (global-unset-key (kbd "M-o"))
-  (setq switch-to-buffer-obey-display-actions t)
-  (setq auto-save-default nil)
-  (setq next-line-add-newlines t)
   (line-number-mode -1)
   (column-number-mode -1)
 
+  (setq switch-to-buffer-obey-display-actions t)
+  (setq auto-save-default nil)
+  (setq next-line-add-newlines t)
   (setq font-lock-maximum-decoration '(
 									   (markdown-mode . nil)
 									   (t . t)
 									   ))
 
   (setq vc-follow-symlinks t)
-
-  ;; Add prompt indicator to `completing-read-multiple'.
-  ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
   (setq custom-safe-themes t)
   (setq completion-cycle-threshold 3)
   (setq tab-always-indent 'complete)
@@ -190,39 +187,32 @@ i.e. windows tiled side-by-side."
   (setq byte-compile-warnings '(unresolved))
 
   (setq frame-title-format "Eval EXEC - GNU Emacs at Mufasa")
-  ;; (setq frame-title-format
-  ;;   '((:eval (if (buffer-file-name)
-  ;;                 (abbreviate-file-name (buffer-file-name))
-  ;;                   "%b"))
-  ;;     " - GNU Emacs at " system-name)
-  ;; )
-
-  ;; (setq header-line-format '(:eval (if (buffer-file-name) (abbreviate-file-name (buffer-file-name)) "%b")))
+  (setq header-line-format '(:eval (if (buffer-file-name) (abbreviate-file-name (buffer-file-name)) "%b")))
 
 
-  (defun crm-indicator (args)
-	(cons (format "[CRM%s] %s"
-				  (replace-regexp-in-string
-				   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-				   crm-separator)
-				  (car args))
-		  (cdr args)))
-  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+  ;; (defun crm-indicator (args)
+  ;; 	(cons (format "[CRM%s] %s"
+  ;; 				  (replace-regexp-in-string
+  ;; 				   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+  ;; 				   crm-separator)
+  ;; 				  (car args))
+  ;; 		  (cdr args)))
+  ;; (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
   ;; Do not allow the cursor in the minibuffer prompt
-  (setq minibuffer-prompt-properties
-		'(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+  ;; (setq minibuffer-prompt-properties
+  ;; 		'(read-only t cursor-intangible t face minibuffer-prompt))
+  ;; (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
   ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
   ;; Vertico commands are hidden in normal buffers.
-  (setq read-extended-command-predicate
-		#'command-completion-default-include-p)
+  ;; (setq read-extended-command-predicate
+  ;; 		#'command-completion-default-include-p)
 
-  (defun my-minibuffer-setup ()
-	(set (make-local-variable 'face-remapping-alist)
-          '((default :height 0.8))))
-  (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup)
+  ;; (defun my-minibuffer-setup ()
+  ;; 	(set (make-local-variable 'face-remapping-alist)
+  ;;         '((default :height 0.8))))
+  ;; (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup)
 
 
   ;; Enable recursive minibuffers
@@ -241,16 +231,24 @@ i.e. windows tiled side-by-side."
   ;; ;; 👿
   ;; (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
   ;; (set-fontset-font t 'ascii "Jetbrains Mono" nil 'prepend)
-  ;; (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
-  ;; (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
   ;; (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
   ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
   ;; (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji"))
-  (set-fontset-font t 'unicode (font-spec :family "Hack Nerd Font Mono"))
-  (set-fontset-font t 'emoji (font-spec :family "Noto Color Emoji"))
+  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
+  (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
+  (set-fontset-font t 'unicode (font-spec :family
+										  ;; "Hack Nerd Font Mono"
+										  "JetBrainsMonoNL Nerd Font Mono"
+										  ))
+  (set-fontset-font t 'emoji (font-spec :family
+										"Noto Color Emoji"
+										;; "Twitter Color Emoji"
+										))
   ;; (set-fontset-font t 'emoji nil)
+
   (setq face-font-rescale-alist '(
-								  ;; ("Noto Color Emoji" . 0.9)
+								  ("Noto Color Emoji" . 0.9)
+								  ("JetBrainsMonoNL Nerd Font Mono" . 0.9)
 								  ;; ("NotoMono Nerd Font Propo" . 0.9)
 								  ;; ("Arimo Nerd Font" . 0.9)
 								  ))
@@ -262,7 +260,7 @@ i.e. windows tiled side-by-side."
 
   :hook
   (
-   (after-init . savehist-mode)
+   ;; (after-init . savehist-mode)
    ;; (after-init . size-indication-mode)
    (after-init . global-auto-revert-mode)
    )
@@ -412,7 +410,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (toggle-scroll-bar -1)
 (setq scroll-conservatively 100000
-	  scroll-margin 1
+	  scroll-margin 7
 	  scroll-step 3
 	  scroll-preserve-screen-position t
 	  scroll-up-aggressively 0.01
@@ -532,6 +530,650 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;;; package --- Summary
 ;;; Commentary:
 
+(defun exec/imenu-goto--closest-dir (direction)
+  "Jump to the closest imenu item on the current buffer.
+If direction is 1, jump to next imenu item.
+If direction is -1, jump to previous imenu item.
+See https://emacs.stackexchange.com/questions/30673
+Adapted from `which-function' in::
+https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
+  ;; Ensure `imenu--index-alist' is populated.
+  (imenu--make-index-alist)
+
+  (let ((alist imenu--index-alist)
+        (minoffset (point-max))
+        offset pair mark imstack destination)
+    ;; Elements of alist are either ("name" . marker), or
+    ;; ("submenu" ("name" . marker) ... ). The list can be
+    ;; Arbitrarily nested.
+    (while (or alist imstack)
+      (if alist
+          (progn
+            (setq pair (car-safe alist)
+                  alist (cdr-safe alist))
+            (cond
+             ((atom pair)) ;; Skip anything not a cons.
+
+             ((imenu--subalist-p pair)
+              (setq imstack   (cons alist imstack)
+                    alist     (cdr pair)))
+
+             ((number-or-marker-p (setq mark (cdr pair)))
+              (when (> (setq offset (* (- mark (point)) direction)) 0)
+                (when (< offset minoffset) ;; Find the closest item.
+                  (setq minoffset offset
+                        destination mark))))))
+
+        (setq alist   (car imstack)
+              imstack (cdr imstack))))
+    (when destination
+      (imenu-default-goto-function "" destination ""))))
+
+(defun exec/imenu-goto-next ()
+  (interactive)
+  (unless (exec/imenu-goto--closest-dir 1)
+    (goto-char (point-max))))
+
+(defun exec/imenu-goto-prev ()
+  (interactive)
+  (unless (exec/imenu-goto--closest-dir -1)
+    (goto-char (point-min))))
+
+
+
+(general-define-key
+ :states '(normal visual)
+ :keymaps 'override
+ "M-j" 'exec/imenu-goto-next
+ "M-k" 'exec/imenu-goto-prev
+ )
+
+
+(general-def 'normal "gd" 'xref-find-definitions)
+(general-def 'normal "gr" 'xref-find-references)
+
+(general-define-key :state
+					'normal "C-S-c" 'exec/put-file-name-on-clipboard)
+
+
+(general-evil-define-key '(normal visual) 'global
+  "<f8>" 'exec/set-mono-buffer
+  "gr" 'xref-find-references
+  "gd" 'xref-find-definitions
+  "ga" 'xref-find-apropos
+  )
+
+
+;; (with-eval-after-load 'evil-mode
+;; )
+
+(global-definer
+  "i" 'consult-imenu
+  "!"   'shell-command
+  ":"   'eval-expression)
+
+(+general-global-menu! "buffer" "b"
+  "d"  'kill-current-buffer
+  "o" '((lambda () (interactive) (switch-to-buffer nil))
+		:which-key "other-buffer")
+  "p"  'previous-buffer
+  "r"  'rename-buffer
+  "M" '((lambda () (interactive) (switch-to-buffer "*Messages*"))
+		:which-key "messages-buffer")
+  "n"  'next-buffer
+  "s" '((lambda () (interactive) (switch-to-buffer "*scratch*"))
+		:which-key "scratch-buffer")
+  "TAB" '((lambda () (interactive) (switch-to-buffer nil))
+		  :which-key "other-buffer")
+  "b" 'consult-buffer
+  "k" 'kill-current-buffer
+  )
+
+(+general-global-menu! "org-roam" "n"
+
+  "l" 'org-roam-buffer-toggle
+  "f" 'org-roam-node-find
+  "s" 'consult-org-roam-search
+  "F" 'org-roam-ref-find
+  "g" 'org-roam-graph
+  "i" 'org-roam-node-insert
+  "I" 'org-id-get-create
+  "c" 'org-roam-capture
+  "R" 'org-roam-refile
+
+  ;; org roam properties
+  "o" '(nil :which-key "Org Roam Properties")
+  "o a" 'org-roam-alias-add
+  "o A" 'org-roam-alias-remove
+  "o t" 'org-roam-tag-add
+  "o T" 'org-roam-tag-remove
+  "o r" 'org-roam-ref-add
+  "o R" 'org-roam-ref-remove
+
+  ;; org roam dailies
+  "d" '(nil :which-key "Org Roam Dailies")
+  "d c d" 'org-roam-dailies-capture-date
+  "d c c" 'org-roam-dailies-capture-today
+  "d c m" 'org-roam-dailies-capture-tomorrow
+  "d c y" 'org-roam-dailies-capture-yesterday
+  "d d" 'org-roam-dailies-goto-date
+  "d m" 'org-roam-dailies-goto-tomorrow
+  "d t" 'org-roam-dailies-goto-today
+  "d y" 'org-roam-dailies-goto-yesterday
+  "d -" 'org-roam-dailies-find-directory
+  )
+
+(+general-global-menu! "Emacs Stuff" "e"
+  "c" 'customize-group
+  "h" '(nil :which-key "Emacs Hook")
+  "hr" 'remove-hook
+  ;; "f" '(lambda()
+  ;; 		 (interactive)
+  ;; 		 (rg-define-search exec/search-init
+  ;; 				  :query ask
+  ;; 				  :format literal
+  ;; 				  :files "init.el"
+  ;; 				  :dir user-emacs-directory
+  ;; 				  )
+  ;; 		 ;; interactive call exec/search-init
+  ;; 		 (call-interactively 'exec/search-init)
+  ;; 		 )
+  "f" '(lambda()
+		 (interactive)
+		 (let ((consult-project-root-function (lambda nil nil))
+			   (consult-ripgrep-args
+				(concat "rg "
+						"--null "
+						"--line-buffered "
+						"--color=never "
+						"--line-number "
+						"--smart-case "
+						"--no-heading "
+						"--max-columns=1000 "
+						"--max-columns-preview "
+						"--search-zip "
+						"--with-filename "
+						(shell-quote-argument "/home/exec/.emacs.d/init.el" ))))
+		   (consult-ripgrep))
+		 )
+  )
+		 
+
+(+general-global-menu! "Keybinding" "k"
+
+  "M" '(nil :which-key "Major mode Keybinding")
+  "Mk" 'which-key-show-major-mode
+  "MK" 'which-key-show-full-major-mode
+
+  "m" '(nil :which-key "Minor mode Keybinding")
+  "mk" 'which-key-show-minor-mode-keymap
+  "mK" 'which-key-show-full-minor-mode-keymap
+  )
+
+(+general-global-menu! "Org Mode" "o"
+  "l" 'org-cliplink
+  "a" 'org-agenda
+  "c" 'org-capture
+  "j" 'org-journal-new-entry
+  "m" 'org-redisplay-inline-images
+  )
+
+(+general-global-menu! "Consult" "c"
+  "m" 'woman
+  )
+
+
+(+general-global-menu! "Misc" "m"
+  "s" 'deadgrep
+  "r" 'rust-playground
+  ;; "t" 'bing-dict-brief
+  ;; "t" 'fanyi-dwim2
+  ;; "t" 'exec/look-up-dict-at-point
+  "t" 'gts-do-translate
+  "T" 'exec/prompt-dict	
+  ;; "T" nil :which-key "Toggle"
+  ;; "=" 'cnfonts-increase-fontsize
+  ;; "-" 'cnfonts-decrease-fontsize
+  "=" 'text-scale-increase
+  "-" 'text-scale-decrease
+  "c" 'calendar
+  )
+
+(general-define-key
+ :prefix "C-c"
+ "o" '(nil :which-key "Org")
+ "oa" 'org-agenda
+ "oc" 'org-capture
+ "oj" 'org-journal-new-entry
+
+ "s" 'deadgrep
+
+ "n" '(nil :which-key "Org Roam")
+ "nl" 'org-roam-buffer-toggle
+ "nf" 'org-roam-node-find
+ "ns" 'consult-org-roam-search
+ "nF" 'org-roam-ref-find
+ "ng" 'org-roam-graph
+ "ni" 'org-roam-node-insert
+ "nI" 'org-id-get-create
+ "nc" 'org-roam-capture
+ "nr" 'org-roam-refile
+
+ ;; org roam properties
+ "no" '(nil :which-key "Org Roam Properties")
+ "noa"  'org-roam-alias-add
+ "noA"  'org-roam-alias-remove
+ "not"  'org-roam-tag-add
+ "noT"  'org-roam-tag-remove
+ "nor"  'org-roam-ref-add
+ "noR"  'org-roam-ref-remove
+ "nd" '(nil :which-key "Org Roam Dailies")
+ "ndcd" 'org-roam-dailies-capture-date
+ "ndcc" 'org-roam-dailies-capture-today
+ "ndcm" 'org-roam-dailies-capture-tomorrow
+ "ndcy" 'org-roam-dailies-capture-yesterday
+ "ndd"  'org-roam-dailies-goto-date
+ "ndm"  'org-roam-dailies-goto-tomorrow
+ "ndt"  'org-roam-dailies-goto-today
+ "ndy"  'org-roam-dailies-goto-yesterday
+ "nd-"  'org-roam-dailies-find-directory
+ )
+
+
+
+;;; hyper key bindings
+(global-set-key (kbd "H-h") 'help-command)
+(general-def
+  :prefix "H-h"
+  "k" 'helpful-key
+  "v" 'helpful-variable
+  "o" 'helpful-symbol
+  "P" 'helpful-at-point
+  "f" 'helpful-function
+  "m" 'helpful-macro
+  "c" 'helpful-command
+  "C" 'helpful-callable
+  )
+
+
+(general-def
+  "H-h" 'help-command
+  "H-k" 'kill-current-buffer
+  "H-<left>" 'winner-undo
+  "H-<right>" 'winner-redo
+
+  "C-H-<left>" 'centaur-tabs-backward
+  "C-H-<right>" 'centaur-tabs-forward
+  "H-`" 'garbage-collect
+  ;; "H-i" 'yas-insert-snippet
+  )
+
+
+(general-evil-define-key 'insert 'global
+  "<escape>" '(lambda()
+				(interactive)
+				(if (bound-and-true-p corfu-mode)
+					(corfu-quit))
+				(if (bound-and-true-p copilot-mode)
+					(copilot-clear-overlay))
+				(evil-normal-state)
+				)
+  )
+
+(general-evil-define-key 'insert copilot-mode-map
+  "<tab>" '(lambda()
+			 (interactive)
+			 (if (copilot--overlay-visible)
+				 (copilot-accept-completion)
+			   (tab-to-tab-stop))
+			 )
+  "C-/" 'copilot-next-completion
+  "C-f" 'copilot-accept-completion-by-line
+  "M-f" 'copilot-accept-completion-by-word
+  "C-<escape>" 'copilot-clear-overlay
+  )
+
+
+(general-define-key
+ :keymaps 'projectile-command-map
+ "f" 'consult-projectile-find-file
+ "b" 'consult-projectile-switch-to-buffer
+ )
+
+(general-define-key
+ :keymaps 'origami-mode-map
+ "<tab>" 'origami-recursively-toggle-node
+ "<backtab>" 'origami-toggle-all-nodes
+ )
+
+(general-define-key
+ :keymaps 'diff-hl-mode-map
+ "C-M-z" 'diff-hl-revert-hunk
+ )
+
+(general-define-key
+ :keymaps 'flycheck-mode-map
+ "M-g n" 'flycheck-next-error
+ )
+
+(general-evil-define-key 'normal 'global
+  "M-f" 'consult-line
+  )
+
+
+(defun exec/open-config()
+  "Open config file."
+  (interactive)
+  ;; if "init.el" buffer has already opened in current frame, then focus to that window
+  (if (equal (buffer-name) "emacs-init.el")
+	  (switch-to-buffer (other-buffer))
+	;; open user-init-file buffer of open this file
+	;; (if (get-buffer "init.el")
+	;; 	(switch-to-buffer "init.el")
+	(if (get-buffer-window "init.el")
+		(select-window (get-buffer-window "emacs-init.el"))
+	  (find-file "~/my-flake/emacs-init.el"))
+	)
+  )
+
+(global-set-key (kbd "<f12>") 'exec/open-config)
+
+;; (general-def
+;;   :prefix "C-x"
+;;   "h" 'previous-buffer
+;;   "l" 'next-buffer
+;;   )
+
+;; define C-x C-e in evil visual line mode to eval-region
+(general-evil-define-key 'visual 'global
+  "C-x C-e" 'eval-region
+  )
+
+;; define C-x f to consult-recent-file
+(general-define-key
+ "C-x C-r" 'consult-recent-file
+ "C-x C-f" 'find-file
+ "C-S-f" 'deadgrep
+ "H-f" '(lambda()
+		  (interactive)
+		  ;; if vterm-buffer-name variable is not set, eval (vterm) and return
+		  (if (not (bound-and-true-p vterm-buffer-name))
+			  (vterm)
+			(if 
+				(equal (buffer-name) vterm-buffer-name)
+				(switch-to-buffer (other-buffer))
+			  (vterm)))
+		  )
+
+ "H-d" 'describe-char
+
+  "H-p" '(nil :which-key "package? profiler?")
+  "H-p 1" '(lambda()
+			 (interactive)
+			 (profiler-start 'cpu+mem))
+  "H-p 2" 'profiler-stop
+  )
+
+(general-define-key
+ "M-0" 'dirvish-side
+ ;; 'dired-sidebar-show-sidebar
+ )
+
+
+
+(setq debug-on-error nil)
+
+
+
+(setq default-directory "~")
+
+(add-hook 'emacs-startup-hook '(lambda()
+								 ;; (treemacs)
+								 ;; (dired-sidebar-show-sidebar)
+
+								 (switch-to-buffer "*scratch*")
+								 ;; (exec/set-top-priority)
+								 ))
+
+
+(setq
+ window-sides-slots '(nil nil nil nil) ;; (left top right bottom)
+ window-sides-vertical t
+ )
+
+
+(setq  display-buffer-alist nil)
+;; (add-to-list 'display-buffer-alist
+			 ;; '(
+			 ;;   "\\*helpful *"
+			 ;;   (display-buffer-in-side-window)
+			 ;;   (side . bottom)
+			 ;;   (slot . 0)
+			 ;;   (dedicated)
+			 ;;   )
+			 ;; )
+
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*info\\* *"
+			   (display-buffer-in-side-window)
+			   (side . bottom)
+			   (slot . 1)
+			   ))
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*Help\\* *"
+			   (display-buffer-in-side-window)
+			   (side . bottom)
+			   (slot . 2)
+			   ))
+
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*Outline *pdf\\*"
+			   (display-buffer-in-side-window)
+			   (side . right)
+			   (slot . 1)
+			   ))
+
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*Flycheck errors\\* *"
+			   (display-buffer-in-side-window)
+			   (side . bottom)
+			   (slot . 0)
+			   (window-height . 0.3)
+			   )
+			 )
+
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*Warnings\\* *"
+			   (display-buffer-in-side-window)
+			   (side . bottom)
+			   (slot . 0)
+			   (window-height . 0.3)
+			   )
+			 )
+
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*Process List\\*"
+			   (display-buffer-in-side-window)
+			   (side . bottom)
+			   (slot . 0)
+			   (window-height . 0.2)
+			   )
+			 )
+
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*Messages\\*"
+			   (display-buffer-in-side-window)
+			   (side . bottom)
+			   (slot . 0)
+			   (window-height . 0.2)
+			   )
+			 )
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*color-rg\\*"
+			   (display-buffer-in-side-window)
+			   (side . bottom)
+			   (slot . 0)
+			   (window-height . 0.25)
+			   )
+			 )
+
+
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*Ilist\\*"
+			   (display-buffer-in-side-window)
+			   (side . left)
+			   (slot . 2)
+			   (window-height . 0.3)
+			   )
+			 )
+
+(add-to-list 'display-buffer-alist
+			 '("\\*org-roam\\*"
+			   (display-buffer-in-side-window)
+			   (side . right)
+			   (slot . 1)
+			   (window-parameters . ((no-other-window . t)
+									 (no-delete-other-windows . t)))))
+
+(add-to-list 'display-buffer-alist
+			 '(
+			   "\\*Go-Translate\\*"
+			   (display-buffer-in-side-window)
+			   (side . bottom)
+			   (slot . 4)
+			   (window-height . 0.5)
+			   )
+			 )
+
+
+
+; (load "/home/exec/Projects/github.com/eval-exec/crazy-theme.el/crazy-theme.el")
+; (setq crazy-theme-prefer-dark nil)
+; (load-theme 'crazy)
+
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(line-number ((t (:family "Noto Sans Mono"
+							:width ultra-condensed
+							:foreground "grey"))))
+
+ '(line-number-current-line ((t (:background "#880000"
+											 :foreground "#ffffff"
+											 :width ultra-condensed
+											 :weight extra-bold
+											 :family "Noto Sans Mono"))))
+ '(mode-line ((t (:box nil))))
+ '(mode-line-active ((t (:inherit mode-line
+								  ;; :box (:line-width (1 . 1) :color "red")
+								  :foreground "white"
+								  :background "#880808"))))
+
+ '(imenu-list-entry-face ((t (:height 0.8))))
+ )
+
+
+(defun disable-all-themes ()
+  "Disable all active themes."
+  (dolist (i custom-enabled-themes)
+	(disable-theme i))
+  )
+
+(defadvice load-theme (before disable-themes-first activate)
+  (disable-all-themes))
+
+
+(add-hook 'after-init-hook '(lambda()
+							  (load-theme
+							   ;; 'nasy
+							   ;; 'doom-vibrant
+							   'atom-one-dark
+							   ;; 'professional
+							   ;; 'modus-vivendi
+							   ;; 'almost-mono-black
+							   ;; 'sanityinc-tomorrow-bright
+							   )
+							  ))
+
+
+
+(use-package vertico
+  :demand t
+  :straight (:files (:defaults "extensions/*"))
+  ;; :hook (vertico-buffer-mode . 'exec/vertico-buffer-mode-hook-func)
+  :custom-face
+  (vertico-group-title ((t (:foreground "pink" :weight bold))))
+  :bind (
+		 (:map vertico-map
+			   ("?" . minibuffer-completion-help)
+			   ("M-RET" . minibuffer-force-complete-and-exit)
+			   ("M-TAB" . minibuffer-complete)
+			   ("M-j" . vertico-next-group)
+			   ("M-k" . vertico-previous-group)
+		  )
+		 )
+  :config
+  (setq
+   vertico-count 10
+   vertico-resize nil
+   vertico-count-format '("%-6s " . "%2s/%5s")
+   ;; vertico-buffer-display-action
+   ;; '(display-buffer-below-selected (window-height . 10))
+   ;; '(display-buffer-below-selected )
+   ;; '(display-buffer-in-direction
+   ;; 	 ;; (direction . down)
+   ;; 	 (window-width . 0.5)
+   ;; 	 )
+   )
+
+  (setq vertico-cycle t)
+
+  (general-evil-define-key '(normal insert) vertico-map
+	"C-j" 'vertico-next
+	"C-k" 'vertico-previous)
+
+  (vertico-mode)
+  ;; (vertico-buffer-mode)
+  )
+
+
+(use-package vertico-posframe
+  :config
+  (setq vertico-posframe-parameters '((left-fringe . 2)
+									  (right-fringe . 2)
+									  )
+		vertico-posframe-border-width 2
+		vertico-posframe-poshandler
+		'posframe-poshandler-frame-bottom-center
+		;; 'posframe-poshandler-frame-top-right-corner
+		vertico-posframe-width nil
+		vertico-posframe-font
+		"Noto Sans Mono"
+		vertico-posframe-min-height nil
+		)
+
+  ;; (custom-set-faces
+  ;;  '(vertico-posframe-border
+  ;; 	 ((t (:inherit default :background "pink"))))
+  ;;  )
+
+  (vertico-posframe-mode)
+  )
+
+;;;; ============================================================
+
 
 (use-package xref
   :config
@@ -555,12 +1197,11 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		 )
   :config
   (setq
-   gcmh-verbose t
-   gcmh-idle-delay 'auto
-   
-   garbage-collection-messages t
-   gcmh-high-cons-threshold (* 32 1024 1024)
    gc-cons-percentage 1.0
+   garbage-collection-messages nil
+   gcmh-verbose nil
+   gcmh-idle-delay 'auto
+   gcmh-high-cons-threshold (* 32 1024 1024)
    )
   )
 
@@ -716,7 +1357,6 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;;   )
 
 
-(setq posframe-mouse-banish nil)
 (use-package avy
   :bind (("C-S-j"  . avy-goto-char-2-below)
 		 ("C-S-k"  . avy-goto-char-2-above)))
@@ -964,88 +1604,88 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   )
 
 
-;; get_file_info
-;; (use-package helm
-;;   :disabled t
-;;   :bind (
-;; 		 ("C-c h" . helm-command-prefix)
-;; 		 ("M-x" . helm-M-x)
-;; 		 ("C-x C-f" . helm-find-files)
-;; 		 ("C-x b" . helm-buffers-list)
-;; 		 ("C-x r b" . helm-filtered-bookmarks)
-;; 		 ("C-x r l" . helm-bookmarks)
+(use-package helm
+  :disabled 
+  :bind (
+		 ("C-c h" . helm-command-prefix)
+		 ("M-x" . helm-M-x)
+		 ("C-x C-f" . helm-find-files)
+		 ("C-x b" . helm-buffers-list)
+		 ("C-x r b" . helm-filtered-bookmarks)
+		 ("C-x r l" . helm-bookmarks)
 
-;; 		 ("M-s o" . helm-occur)
-;; 		 )
-;;   :config
-;;   (setq helm-M-x-fuzzy-match t
-;; 		helm-M-x-always-save-history t
-;; 		helm-M-x-reverse-history nil
-;; 		helm-M-x-show-short-doc t
-;; 		helm-buffers-fuzzy-matching t)
+		 ("M-s o" . helm-occur)
+		 )
+  :config
+  (setq helm-M-x-fuzzy-match t
+		helm-M-x-always-save-history t
+		helm-M-x-reverse-history nil
+		helm-M-x-show-short-doc t
+		helm-buffers-fuzzy-matching t)
 
-;;   (setq helm-follow-mode-persistent t)
+  (setq helm-follow-mode-persistent t)
 
-;;   (setq helm-display-function  'helm-default-display-buffer)
+  (setq helm-display-function  'helm-default-display-buffer)
 
-;;   (setq helm-buffer-max-length 10)
-;;   (setq helm-display-buffer-height 10)
-;;   (setq helm-always-two-windows nil
-;; 		helm-split-window-inside-p t
-;; 		helm-buffers-show-icons t
-;; 		)
+  (setq helm-buffer-max-length 10)
+  (setq helm-display-buffer-height 10)
+  (setq helm-always-two-windows nil
+		helm-split-window-inside-p t
+		helm-buffers-show-icons t
+		)
 
-;;   (setq helm-autoresize-max-height 30
-;; 		helm-autoresize-min-height 1
-;; 		)
+  (setq helm-autoresize-max-height 30
+		helm-autoresize-min-height 1
+		)
 
-;;   (use-package helm-wikipedia)
+  (use-package helm-wikipedia)
 
-;;   (use-package helm-xref
-;; 	:disabled t
-;; 	)
+  (use-package helm-xref
+	:disabled t
+	)
 
-;;   (use-package helm-flx
-;; 	:config
-;; 	(setq helm-flx-for-helm-find-files t ;; t by default
-;; 		  helm-flx-for-helm-locate t) ;; nil by default
-;; 	 (helm-flx-mode)
-;; 	)
+  (use-package helm-flx
+	:config
+	(setq helm-flx-for-helm-find-files t ;; t by default
+		  helm-flx-for-helm-locate t) ;; nil by default
+	 (helm-flx-mode)
+	)
 
-;;   (use-package helm-describe-modes)
-;;   (use-package helm-descbinds)
-;;   (use-package helm-ag)
+  (use-package helm-describe-modes)
+  (use-package helm-descbinds)
+  (use-package helm-ag)
 
-;;   (use-package helm-projectile)
+  (use-package helm-projectile)
 
-;;   (use-package helm-posframe
-;; 	:config
-;; 	(setq helm-posframe-height 30
-;; 		  helm-posframe-width 1000
-;; 		  helm-posframe-parameters '((left-fringe . 0) (right-fringe . 0)))
-;; 	(helm-posframe-enable)
-;; 	)
+  (use-package helm-posframe
+	:config
+	(setq helm-posframe-height 30
+		  helm-posframe-width 1000
+		  helm-posframe-parameters '((left-fringe . 0) (right-fringe . 0)))
+	(helm-posframe-enable)
+	)
 
-;;   (use-package helm-themes)
+  (use-package helm-themes)
 
-;;   (use-package helm-taskswitch
-;; 	;; should bind a key in X11 to: emacsclient -n -e '(helm-taskswitch)'
-;; 	)
+  (use-package helm-taskswitch
+	;; should bind a key in X11 to: emacsclient -n -e '(helm-taskswitch)'
+	)
 
-;;   (use-package helm-icons
-;; 	:config
-;; 	(setq helm-icons-provider 'all-the-icons)
-;; 	(helm-icons-enable)
-;; 	)
+  (use-package helm-icons
+	:config
+	(setq helm-icons-provider 'all-the-icons)
+	(helm-icons-enable)
+	)
 
-;;   (use-package helm-ls-git
-;; 	:bind (
-;; 		   ("C-x C-d" . helm-browse-project)
-;; 		   ("C-x r p" . helm-projects-history)
-;; 		   )
-;; 	)
-;;    helm-mode helm-autoresize-mode
-;;   )
+  (use-package helm-ls-git
+	:bind (
+		   ("C-x C-d" . helm-browse-project)
+		   ("C-x r p" . helm-projects-history)
+		   )
+	)
+  (helm-mode)
+  (helm-autoresize-mode)
+  )
 
 
 
@@ -1057,70 +1697,6 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 ;;   (buffer-face-mode)
 ;;   )
 
-(use-package vertico
-  :demand t
-  :straight (:files (:defaults "extensions/*"))
-  ;; :hook (vertico-buffer-mode . 'exec/vertico-buffer-mode-hook-func)
-  :custom-face
-  (vertico-group-title ((t (:foreground "pink" :weight bold))))
-  :bind (
-		 (:map vertico-map
-			   ("?" . minibuffer-completion-help)
-			   ("M-RET" . minibuffer-force-complete-and-exit)
-			   ("M-TAB" . minibuffer-complete)
-			   ("M-j" . vertico-next-group)
-			   ("M-k" . vertico-previous-group)
-		  )
-		 )
-  :config
-  (setq
-   vertico-count 10
-   vertico-resize nil
-   vertico-count-format nil ;'("%-6s " . "%2s/%5s")
-   vertico-buffer-display-action
-   '(display-buffer-below-selected (window-height . 10))
-   ;; '(display-buffer-below-selected )
-   ;; '(display-buffer-in-direction
-   ;; 	 ;; (direction . down)
-   ;; 	 (window-width . 0.5)
-   ;; 	 )
-   )
-
-  (setq vertico-cycle t)
-
-  (general-evil-define-key '(normal insert) vertico-map
-	"C-j" 'vertico-next
-	"C-k" 'vertico-previous)
-
-  (vertico-mode)
-  )
-
-
-(use-package vertico-posframe
-  :config
-  (setq vertico-posframe-parameters 
-		'((left-fringe . 2)
-		  (right-fringe . 2)
-		  (font-height . 0.1)
-		  )
-		)
-  (setq vertico-posframe-border-width 2
-		vertico-posframe-poshandler
-		'posframe-poshandler-frame-bottom-center
-		;; 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width nil
-		vertico-posframe-font
-		"Noto Sans Mono"
-		vertico-posframe-min-height nil ;10
-		)
-
-  (custom-set-faces
-   '(vertico-posframe-border
-	 ((t (:inherit default :background "pink"))))
-   )
-
-  (vertico-posframe-mode -1)
-  )
 
 (use-package mini-frame
   :config
@@ -1838,7 +2414,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 						  (mark modified read-only locked " " (name 36 36 :left :elide) " " (size 9 -1 :right) " " (mode 16 16 :left :elide) " " filename-and-process)
 						  (mark " " (name 16 -1) " " filename)))
 
-  
+
   )
 (use-package ibuffer-sidebar
   ;; :hook (after-init . ibuffer-sidebar-show-sidebar)
@@ -2987,7 +3563,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 				(when (eq mode major-mode)
 				  (setq mode-name mode-str)))))
 
- 
+
 ;; (add-hook 'after-change-major-mode-hook 'clean-mode-line)
 (use-package dockerfile-mode)
 (use-package gameoflife)
@@ -3152,7 +3728,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 		which-key-posframe-border-width 1
 		which-key-posframe-font nil
 		)
-  ;; (which-key-posframe-mode)
+  (which-key-posframe-mode)
   )
 
 
@@ -3182,52 +3758,23 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   ;; (dired-mode . dired-filter-mode)
   :config
 
-  (setq dired-listing-switches "-alFh --group-directories-first")
+  ;; (setq dired-listing-switches "-alFh --group-directories-first --no-group")
+  (setq dired-listing-switches
+		"-l --almost-all --human-readable --group-directories-first --no-group")
 
   (setq dired-kill-when-opening-new-dired-buffer t)
 
   (setq global-auto-revert-non-file-buffers t)
   (setq auto-revert-verbose nil)
 
-  (use-package dired-hacks-utils
-	;; :hook (dired-mode . dired-utils-format-information-line-mode)
-	)
-  (use-package dired-filter
-	:config
-	;; (setq dired-filter-inherit-filter-stack nil
-	;; 	  dired-filter-revert 'always
-		  ;; )
-	)
-  (use-package dired-open)
-
+  ;; Addtional syntax highlighting for dired
   (use-package diredfl
-	;; :config
-	;; (diredfl-global-mode)
-	)
-
-  (use-package dired-sidebar
-	;; :hook
-	;; (dired-sidebar-mode .  (lambda()
-	;; 							   (interactive)
-	;; 							   (dired-omit-mode)
-	;; 							   (visual-line-mode -1)
-	;; 							   (dired-sidebar-set-font)
-	;; 							   ))
+	:hook
+	((dired-mode . diredfl-mode)
+	 ;; highlight parent and directory preview as well
+	 (dirvish-directory-view-mode . diredfl-mode))
 	:config
-	(setq dired-sidebar-theme 'vscode
-		  dired-sidebar-follow-file-idle-delay 0.1
-		  dired-sidebar-should-follow-file t
-		  dired-sidebar-use-one-instance t
-		  dired-sidebar-use-custom-font t
-		  )
-  (custom-set-faces '(dired-sidebar-face ((t (:family "Iosevka" :height 1.2)))))
-	)
-  (use-package dired-subtree)
-  (use-package dired-ranger)
-  (use-package dired-narrow)
-  ;; (use-package dired-collapse
-  ;; 	:global-minor-mode dired-collapse-mode)
-  (use-package fd-dired)
+	(set-face-attribute 'diredfl-dir-name nil :bold t))
   )
 
 (use-package dirvish
@@ -3236,21 +3783,25 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (dirvish-side-follow-mode)
   :config
   (setq dirvish-hide-details t)
-  (setq dirvish-attributes
+  (setq dirvish-attributes 
 		'(vc-state subtree-state
 				   all-the-icons
 				   collapse
 				   git-msg
 				   file-time
 				   file-size
-				   ))
+				   )
+		)
+  (setq dirvish-mode-line-height 20)
+
   )
 (use-package dired-x
   :straight (:type built-in)
   :config
   ;; Make dired-omit-mode hide all "dotfiles"
-  (setq dired-omit-files
-        (concat dired-omit-files "\\|^\\..*$")))
+  (setq dired-omit-files "\\|^\\..*$")
+  ;; (concat dired-omit-files "\\|^\\..*$"))
+  )
 
 (use-package info-colors
   :hook (Info-selection . info-colors-fontify-node)
@@ -3666,10 +4217,11 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (interactive)
   (setq-local  buffer-face-mode-face '(
 									   ;; :family "Noto Sans Mono"
-								 ;; "NotoSansMNerdFontMono"
-										 :height  1.0
-								 :background "black"
-								 ))
+									   ;; "NotoSansMNerdFontMono"
+									   ;; :family "JetBrainsMonoNL Nerd Font"
+									   :height  1.0
+									   :background "black"
+									   ))
   (buffer-face-mode)
   (origami-mode -1)
   (fringe-mode -1)
@@ -3777,587 +4329,4 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   )
 
 
-
-(defun exec/garbage-collection()
-  (interactive)
-  (message "Garbage Collection Start")
-  (garbage-collect)
-  (message "Garbage Collection Done")
-  )
-
-
-(defun exec/imenu-goto--closest-dir (direction)
-  "Jump to the closest imenu item on the current buffer.
-If direction is 1, jump to next imenu item.
-If direction is -1, jump to previous imenu item.
-See https://emacs.stackexchange.com/questions/30673
-Adapted from `which-function' in::
-https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
-  ;; Ensure `imenu--index-alist' is populated.
-  (imenu--make-index-alist)
-
-  (let ((alist imenu--index-alist)
-        (minoffset (point-max))
-        offset pair mark imstack destination)
-    ;; Elements of alist are either ("name" . marker), or
-    ;; ("submenu" ("name" . marker) ... ). The list can be
-    ;; Arbitrarily nested.
-    (while (or alist imstack)
-      (if alist
-          (progn
-            (setq pair (car-safe alist)
-                  alist (cdr-safe alist))
-            (cond
-             ((atom pair)) ;; Skip anything not a cons.
-
-             ((imenu--subalist-p pair)
-              (setq imstack   (cons alist imstack)
-                    alist     (cdr pair)))
-
-             ((number-or-marker-p (setq mark (cdr pair)))
-              (when (> (setq offset (* (- mark (point)) direction)) 0)
-                (when (< offset minoffset) ;; Find the closest item.
-                  (setq minoffset offset
-                        destination mark))))))
-
-        (setq alist   (car imstack)
-              imstack (cdr imstack))))
-    (when destination
-      (imenu-default-goto-function "" destination ""))))
-
-(defun exec/imenu-goto-next ()
-  (interactive)
-  (unless (exec/imenu-goto--closest-dir 1)
-    (goto-char (point-max))))
-
-(defun exec/imenu-goto-prev ()
-  (interactive)
-  (unless (exec/imenu-goto--closest-dir -1)
-    (goto-char (point-min))))
-
-
-
-(general-define-key
- :states '(normal visual)
- :keymaps 'override
- "M-j" 'exec/imenu-goto-next
- "M-k" 'exec/imenu-goto-prev
- )
-
-
-(general-def 'normal "gd" 'xref-find-definitions)
-(general-def 'normal "gr" 'xref-find-references)
-
-(general-define-key :state
-					'normal "C-S-c" 'exec/put-file-name-on-clipboard)
-
-
-(general-evil-define-key '(normal visual) 'global
-  "<f8>" 'exec/set-mono-buffer
-  "gr" 'xref-find-references
-  "gd" 'xref-find-definitions
-  "ga" 'xref-find-apropos
-  )
-
-
-;; (with-eval-after-load 'evil-mode
-;; )
-
-(global-definer
-  "i" 'consult-imenu
-  "!"   'shell-command
-  ":"   'eval-expression)
-
-(+general-global-menu! "buffer" "b"
-  "d"  'kill-current-buffer
-  "o" '((lambda () (interactive) (switch-to-buffer nil))
-		:which-key "other-buffer")
-  "p"  'previous-buffer
-  "r"  'rename-buffer
-  "M" '((lambda () (interactive) (switch-to-buffer "*Messages*"))
-		:which-key "messages-buffer")
-  "n"  'next-buffer
-  "s" '((lambda () (interactive) (switch-to-buffer "*scratch*"))
-		:which-key "scratch-buffer")
-  "TAB" '((lambda () (interactive) (switch-to-buffer nil))
-		  :which-key "other-buffer")
-  "b" 'consult-buffer
-  "k" 'kill-current-buffer
-  )
-
-(+general-global-menu! "org-roam" "n"
-
-  "l" 'org-roam-buffer-toggle
-  "f" 'org-roam-node-find
-  "s" 'consult-org-roam-search
-  "F" 'org-roam-ref-find
-  "g" 'org-roam-graph
-  "i" 'org-roam-node-insert
-  "I" 'org-id-get-create
-  "c" 'org-roam-capture
-  "R" 'org-roam-refile
-
-  ;; org roam properties
-  "o" '(nil :which-key "Org Roam Properties")
-  "o a" 'org-roam-alias-add
-  "o A" 'org-roam-alias-remove
-  "o t" 'org-roam-tag-add
-  "o T" 'org-roam-tag-remove
-  "o r" 'org-roam-ref-add
-  "o R" 'org-roam-ref-remove
-
-  ;; org roam dailies
-  "d" '(nil :which-key "Org Roam Dailies")
-  "d c d" 'org-roam-dailies-capture-date
-  "d c c" 'org-roam-dailies-capture-today
-  "d c m" 'org-roam-dailies-capture-tomorrow
-  "d c y" 'org-roam-dailies-capture-yesterday
-  "d d" 'org-roam-dailies-goto-date
-  "d m" 'org-roam-dailies-goto-tomorrow
-  "d t" 'org-roam-dailies-goto-today
-  "d y" 'org-roam-dailies-goto-yesterday
-  "d -" 'org-roam-dailies-find-directory
-  )
-
-(+general-global-menu! "Emacs Stuff" "e"
-  "c" 'customize-group
-  "h" '(nil :which-key "Emacs Hook")
-  "hr" 'remove-hook
-  ;; "f" '(lambda()
-  ;; 		 (interactive)
-  ;; 		 (rg-define-search exec/search-init
-  ;; 				  :query ask
-  ;; 				  :format literal
-  ;; 				  :files "init.el"
-  ;; 				  :dir user-emacs-directory
-  ;; 				  )
-  ;; 		 ;; interactive call exec/search-init
-  ;; 		 (call-interactively 'exec/search-init)
-  ;; 		 )
-  "f" '(lambda()
-		 (interactive)
-		 (let ((consult-project-root-function (lambda nil nil))
-			   (consult-ripgrep-args
-				(concat "rg "
-						"--null "
-						"--line-buffered "
-						"--color=never "
-						"--line-number "
-						"--smart-case "
-						"--no-heading "
-						"--max-columns=1000 "
-						"--max-columns-preview "
-						"--search-zip "
-						"--with-filename "
-						(shell-quote-argument "/home/exec/.emacs.d/init.el" ))))
-		   (consult-ripgrep))
-		 )
-  )
-		 
-
-(+general-global-menu! "Keybinding" "k"
-
-  "M" '(nil :which-key "Major mode Keybinding")
-  "Mk" 'which-key-show-major-mode
-  "MK" 'which-key-show-full-major-mode
-
-  "m" '(nil :which-key "Minor mode Keybinding")
-  "mk" 'which-key-show-minor-mode-keymap
-  "mK" 'which-key-show-full-minor-mode-keymap
-  )
-
-(+general-global-menu! "Org Mode" "o"
-  "l" 'org-cliplink
-  "a" 'org-agenda
-  "c" 'org-capture
-  "j" 'org-journal-new-entry
-  "m" 'org-redisplay-inline-images
-  )
-
-(+general-global-menu! "Consult" "c"
-  "m" 'woman
-  )
-
-
-(+general-global-menu! "Misc" "m"
-  "s" 'deadgrep
-  "r" 'rust-playground
-  ;; "t" 'bing-dict-brief
-  ;; "t" 'fanyi-dwim2
-  ;; "t" 'exec/look-up-dict-at-point
-  "t" 'gts-do-translate
-  "T" 'exec/prompt-dict	
-  ;; "T" nil :which-key "Toggle"
-  ;; "=" 'cnfonts-increase-fontsize
-  ;; "-" 'cnfonts-decrease-fontsize
-  "=" 'text-scale-increase
-  "-" 'text-scale-decrease
-  "c" 'calendar
-  )
-
-(general-define-key
- :prefix "C-c"
- "o" '(nil :which-key "Org")
- "oa" 'org-agenda
- "oc" 'org-capture
- "oj" 'org-journal-new-entry
-
- "s" 'deadgrep
-
- "n" '(nil :which-key "Org Roam")
- "nl" 'org-roam-buffer-toggle
- "nf" 'org-roam-node-find
- "ns" 'consult-org-roam-search
- "nF" 'org-roam-ref-find
- "ng" 'org-roam-graph
- "ni" 'org-roam-node-insert
- "nI" 'org-id-get-create
- "nc" 'org-roam-capture
- "nr" 'org-roam-refile
-
- ;; org roam properties
- "no" '(nil :which-key "Org Roam Properties")
- "noa"  'org-roam-alias-add
- "noA"  'org-roam-alias-remove
- "not"  'org-roam-tag-add
- "noT"  'org-roam-tag-remove
- "nor"  'org-roam-ref-add
- "noR"  'org-roam-ref-remove
- "nd" '(nil :which-key "Org Roam Dailies")
- "ndcd" 'org-roam-dailies-capture-date
- "ndcc" 'org-roam-dailies-capture-today
- "ndcm" 'org-roam-dailies-capture-tomorrow
- "ndcy" 'org-roam-dailies-capture-yesterday
- "ndd"  'org-roam-dailies-goto-date
- "ndm"  'org-roam-dailies-goto-tomorrow
- "ndt"  'org-roam-dailies-goto-today
- "ndy"  'org-roam-dailies-goto-yesterday
- "nd-"  'org-roam-dailies-find-directory
- )
-
-
-
-;;; hyper key bindings
-(global-set-key (kbd "H-h") 'help-command)
-(general-def
-  :prefix "H-h"
-  "k" 'helpful-key
-  "v" 'helpful-variable
-  "o" 'helpful-symbol
-  "P" 'helpful-at-point
-  "f" 'helpful-function
-  "m" 'helpful-macro
-  "c" 'helpful-command
-  "C" 'helpful-callable
-  )
-
-
-(general-def
-  "H-h" 'help-command
-  "H-k" 'kill-current-buffer
-  "H-<left>" 'winner-undo
-  "H-<right>" 'winner-redo
-
-  "C-H-<left>" 'centaur-tabs-backward
-  "C-H-<right>" 'centaur-tabs-forward
-  "H-`" 'garbage-collect
-  ;; "H-i" 'yas-insert-snippet
-  )
-
-
-(general-evil-define-key 'insert 'global
-  "<escape>" '(lambda()
-				(interactive)
-				(if (bound-and-true-p corfu-mode)
-					(corfu-quit))
-				(if (bound-and-true-p copilot-mode)
-					(copilot-clear-overlay))
-				(evil-normal-state)
-				)
-  )
-
-(general-evil-define-key 'insert copilot-mode-map
-  "<tab>" '(lambda()
-			 (interactive)
-			 (if (copilot--overlay-visible)
-				 (copilot-accept-completion)
-			   (tab-to-tab-stop))
-			 )
-  "C-/" 'copilot-next-completion
-  "C-f" 'copilot-accept-completion-by-line
-  "M-f" 'copilot-accept-completion-by-word
-  "C-<escape>" 'copilot-clear-overlay
-  )
-
-
-(general-define-key
- :keymaps 'projectile-command-map
- "f" 'consult-projectile-find-file
- "b" 'consult-projectile-switch-to-buffer
- )
-
-(general-define-key
- :keymaps 'origami-mode-map
- "<tab>" 'origami-recursively-toggle-node
- "<backtab>" 'origami-toggle-all-nodes
- )
-
-(general-define-key
- :keymaps 'diff-hl-mode-map
- "C-M-z" 'diff-hl-revert-hunk
- )
-
-(general-define-key
- :keymaps 'flycheck-mode-map
- "M-g n" 'flycheck-next-error
- )
-
-(general-evil-define-key 'normal 'global
-  "M-f" 'consult-line
-  )
-
-
-(defun exec/open-config()
-  "Open config file."
-  (interactive)
-  ;; if "init.el" buffer has already opened in current frame, then focus to that window
-  (if (equal (buffer-name) "emacs-init.el")
-	  (switch-to-buffer (other-buffer))
-	;; open user-init-file buffer of open this file
-	;; (if (get-buffer "init.el")
-	;; 	(switch-to-buffer "init.el")
-	(if (get-buffer-window "init.el")
-		(select-window (get-buffer-window "emacs-init.el"))
-	  (find-file "~/my-flake/emacs-init.el"))
-	)
-  )
-
-(global-set-key (kbd "<f12>") 'exec/open-config)
-
-;; (general-def
-;;   :prefix "C-x"
-;;   "h" 'previous-buffer
-;;   "l" 'next-buffer
-;;   )
-
-;; define C-x C-e in evil visual line mode to eval-region
-(general-evil-define-key 'visual 'global
-  "C-x C-e" 'eval-region
-  )
-
-;; define C-x f to consult-recent-file
-(general-define-key
- "C-x C-r" 'consult-recent-file
- "C-x C-f" 'find-file
- "C-S-f" 'deadgrep
- "H-f" '(lambda()
-		  (interactive)
-		  ;; if vterm-buffer-name variable is not set, eval (vterm) and return
-		  (if (not (bound-and-true-p vterm-buffer-name))
-			  (vterm)
-			(if 
-				(equal (buffer-name) vterm-buffer-name)
-				(switch-to-buffer (other-buffer))
-			  (vterm)))
-		  )
-
- "H-d" 'describe-char
-
-  "H-p" '(nil :which-key "package? profiler?")
-  "H-p 1" 'profiler-start
-  "H-p 2" 'profiler-stop
- )
-
-(general-define-key
- "M-0"
- ;; 'dired-sidebar-show-sidebar
- )
-
-
-
-(setq debug-on-error nil)
-
-
-
-(setq default-directory org-directory)
-
-(add-hook 'emacs-startup-hook '(lambda()
-								 ;; (treemacs)
-								 ;; (dired-sidebar-show-sidebar)
-
-								 (switch-to-buffer "*scratch*")
-								 ;; (exec/set-top-priority)
-								 ))
-
-
-(setq
- window-sides-slots '(nil nil nil nil) ;; (left top right bottom)
- window-sides-vertical t
- )
-
-
-(setq  display-buffer-alist nil)
-;; (add-to-list 'display-buffer-alist
-			 ;; '(
-			 ;;   "\\*helpful *"
-			 ;;   (display-buffer-in-side-window)
-			 ;;   (side . bottom)
-			 ;;   (slot . 0)
-			 ;;   (dedicated)
-			 ;;   )
-			 ;; )
-
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*info\\* *"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 1)
-			   ))
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Help\\* *"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 2)
-			   ))
-
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Outline *pdf\\*"
-			   (display-buffer-in-side-window)
-			   (side . right)
-			   (slot . 1)
-			   ))
-
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Flycheck errors\\* *"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.3)
-			   )
-			 )
-
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Warnings\\* *"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.3)
-			   )
-			 )
-
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Process List\\*"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.2)
-			   )
-			 )
-
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Messages\\*"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.2)
-			   )
-			 )
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*color-rg\\*"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.25)
-			   )
-			 )
-
-
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Ilist\\*"
-			   (display-buffer-in-side-window)
-			   (side . left)
-			   (slot . 2)
-			   (window-height . 0.3)
-			   )
-			 )
-
-(add-to-list 'display-buffer-alist
-			 '("\\*org-roam\\*"
-			   (display-buffer-in-side-window)
-			   (side . right)
-			   (slot . 1)
-			   (window-parameters . ((no-other-window . t)
-									 (no-delete-other-windows . t)))))
-
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Go-Translate\\*"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 4)
-			   (window-height . 0.5)
-			   )
-			 )
-
-
-
-(load "/home/exec/Projects/github.com/eval-exec/crazy-theme.el/crazy-theme.el")
-(setq crazy-theme-prefer-dark nil)
-(load-theme 'crazy)
-
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(line-number ((t (:family "Noto Sans Mono"
-							:width ultra-condensed
-							:foreground "grey"))))
-
- '(line-number-current-line ((t (:background "#880000"
-											 :foreground "#ffffff"
-											 :width ultra-condensed
-											 :weight extra-bold
-											 :family "Noto Sans Mono"))))
- '(mode-line ((t (:box nil))))
- '(mode-line-active ((t (:inherit mode-line
-								  ;; :box (:line-width (1 . 1) :color "red")
-								  :foreground "white"
-								  :background "#880808"))))
-
- '(imenu-list-entry-face ((t (:height 0.8))))
- )
-
-
-(defun disable-all-themes ()
-  "Disable all active themes."
-  (dolist (i custom-enabled-themes)
-	(disable-theme i))
-  )
-
-(defadvice load-theme (before disable-themes-first activate)
-  (disable-all-themes))
-
-
-(add-hook 'after-init-hook '(lambda()
-							  (load-theme
-							   ;; 'nasy
-							   ;; 'doom-vibrant
-							   'atom-one-dark
-							   ;; 'professional
-							   ;; 'modus-vivendi
-							   ;; 'almost-mono-black
-							   ;; 'sanityinc-tomorrow-bright
-							   )
-							  ))
 
