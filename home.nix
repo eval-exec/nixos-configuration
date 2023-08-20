@@ -33,6 +33,7 @@
     babashka
     bat
     clj-kondo
+    sops
     clojure
     clojure-lsp
     cmake
@@ -70,6 +71,7 @@
     jetbrains.idea-ultimate
     joker
     jq
+    yq
     kitty
     kitty-themes
     leiningen
@@ -150,6 +152,59 @@
 
     "/home/exec/.cargo/bin"
   ];
+
+  accounts = {
+    email = {
+      accounts = {
+        execvy = {
+          primary = true;
+          realName = "Eval EXEC";
+          address = "execvy@gmail.com";
+          flavor = "gmail.com";
+          folders = {
+            drafts = "Drafts";
+            inbox = "Inbox";
+            sent = "Sent";
+            trash = "Trash";
+          };
+          gpg = { key = "4B453CE70F2646044171BACE0F0272C0D3AC91F7"; };
+          imap = {
+            host = "imap.gmail.com";
+            port = 993;
+            tls = { enable = true; };
+            imapnotify = {
+              enable = true;
+              boxes = [ "Inbox" ];
+              onNotify = "\${pkgs.isync}/bin/mbsync -aV";
+            };
+
+          };
+          mbsync = {
+            enable = true;
+            create = "both";
+            expunge = "both";
+            extraConfig = {
+              account = {
+
+              };
+              channel = { MaxMessages = 100; };
+              local = { };
+              remote = { };
+
+            };
+            patterns = [ "*" ];
+            remove = "both";
+            subFolders = "Verbatim";
+          };
+          msmtp = { enable = true; };
+          mu = { enable = true; };
+
+        };
+
+      };
+
+    };
+  };
 
   services = {
     kdeconnect = {
