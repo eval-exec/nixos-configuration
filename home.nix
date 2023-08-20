@@ -79,6 +79,10 @@
     bluemail
     calibre
 
+    xorg.xwininfo
+    vlc
+    mu
+    meson
     xorg.xdpyinfo
     xorg.xcbutilwm
     xorg.xcbutilimage
@@ -135,6 +139,8 @@
     zsh
     zsh-autosuggestions
     zsh-powerlevel10k
+    isync
+    goimapnotify
     zulip
   ];
   home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
@@ -149,6 +155,12 @@
     kdeconnect = {
       enable = true;
       indicator = true;
+    };
+    mbsync = {
+    enable = true;
+    frequency = "*:0/5";
+    postExec = "\$pkgs.mu}/bin/mu index";
+    verbose = true;
     };
   };
   programs = {
@@ -176,6 +188,17 @@
     emacs = {
       enable = true;
       package = (pkgs.emacs-git.override { withGTK3 = true; });
+      extraPackages = epkgs: [ pkgs.mu ];
+    };
+    offlineimap = {
+      enable = false;
+      # extraConfig = {
+      #   default = {
+      #   };
+      #   general = {
+      #   };
+      # };
+
     };
 
     zsh = {

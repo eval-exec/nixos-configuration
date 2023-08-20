@@ -185,6 +185,7 @@ i.e. windows tiled side-by-side."
   (setq package-native-compile t)
   (setq buffer-save-without-query t)
   (setq byte-compile-warnings '(unresolved))
+  (setq max-lisp-eval-depth 1600)
 
   (setq frame-title-format "Eval EXEC - GNU Emacs at Mufasa")
   (setq header-line-format '(:eval (if (buffer-file-name) (abbreviate-file-name (buffer-file-name)) "%b")))
@@ -234,8 +235,6 @@ i.e. windows tiled side-by-side."
   ;; (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
   ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
   ;; (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji"))
-  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
-  (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
   (set-fontset-font t 'unicode (font-spec :family
 										  ;; "Hack Nerd Font Mono"
 										  "JetBrainsMonoNL Nerd Font Mono"
@@ -244,6 +243,8 @@ i.e. windows tiled side-by-side."
 										"Noto Color Emoji"
 										;; "Twitter Color Emoji"
 										))
+  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
+  (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
   ;; (set-fontset-font t 'emoji nil)
 
   (setq face-font-rescale-alist '(
@@ -485,6 +486,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (set-default-coding-systems 'utf-8)
 
 (setenv "PKG_CONFIG_PATH" "/nix/store/80rbkkz1jh3ybsc5r4dz2bmn02vljn1c-openssl-3.0.8-dev/lib/pkgconfig")
+(setenv "LD_LIBRARY_PATH" "/run/current-system/sw/share/nix-ld/lib")
 
 (setenv "LANG" "en_US.UTF-8")
 (setenv "LC_ALL" "en_US.UTF-8")
@@ -496,8 +498,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (setenv "QT_IM_MODULE" "fcitx")
 (setenv "SDL_IM_MODULE" "fcitx")
 (setenv "XMODIFIERS" "@im=fcitx")
+(setenv "PATH" "/nix/store/k2j9x9kzss7jhqvwsaas9ikyiq8031q5-xwininfo-1.1.6/bin:/nix/store/ycvfy4cg0ky81gp0566dpdl6apxjzrjx-xdotool-3.20211022.1/bin:/nix/store/5fa4i3i5dgqk49lxbz952jnph01im948-xprop-1.2.6/bin:/nix/store/3mpa96b8hi3gfx17099xwgfnp6kbz4ga-gawk-5.2.2/bin:/nix/store/8fdd0nqajq5sk1m6p4qnn0z0j9d7n3q5-coreutils-9.3/bin:/nix/store/2hz0i9y0xck9y4pq1rabi0cwk4kylgrw-gnugrep-3.11/bin:/nix/store/sxk30xba5nyvw8p10pfpgq5p9skhhi0a-procps-3.3.17/bin:/home/exec/.cargo/bin:/home/exec/.local/bin:/run/wrappers/bin:/home/exec/.nix-profile/bin:/etc/profiles/per-user/exec/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/exec/.oh-my-zsh/custom/plugins/warhol/bin:/home/exec/.oh-my-zsh/custom/plugins/warhol/bin")
 
-(add-to-list 'exec-path "/home/exec/.local/bin")
+;; (add-to-list 'exec-path "/home/exec/.local/bin")
 										; (add-to-list 'exec-path "/home/exec/.cargo/bin")
 										; (add-to-list 'exec-path "/home/exec/.local/bin")
 ;; (setenv "HTTP_PROXY" "socks5://127.0.0.1:7891")
@@ -1158,9 +1161,9 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		vertico-posframe-poshandler
 		'posframe-poshandler-frame-bottom-center
 		;; 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width nil
-		vertico-posframe-font
-		"Noto Sans Mono"
+		vertico-posframe-width 200
+		vertico-posframe-font nil
+		;; "Noto Sans Mono"
 		vertico-posframe-min-height nil
 		)
 
@@ -2799,6 +2802,92 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 ;; 								))
   ;; )
 
+(use-package mu4e
+  :config
+
+  ;; use mu4e for e-mail in emacs
+  (setq mail-user-agent 'mu4e-user-agent)
+
+  ; (setq mu4e-drafts-folder "/[Gmail].Drafts")
+  ; (setq mu4e-sent-folder   "/[Gmail].Sent")
+  ; (setq mu4e-trash-folder  "/[Gmail].Trash")
+
+  ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+  ;; (setq mu4e-sent-messages-behavior 'delete)
+
+  ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
+  ;; additional non-Gmail addresses and want assign them different
+  ;; behavior.)
+
+  ;; setup some handy shortcuts
+  ;; you can quickly switch to your Inbox -- press ``ji''
+  ;; then, when you want archive some messages, move them to
+  ;; the 'All Mail' folder by pressing ``ma''.
+
+  ; (setq mu4e-maildir-shortcuts
+		; '( (:maildir "/INBOX"              :key ?i)
+		;    (:maildir "/[Gmail].Sent"  :key ?s)
+		;    (:maildir "/[Gmail].Trash"      :key ?t)
+		;    ;; (:maildir "/[Gmail].All Mail"   :key ?a)
+		;    ))
+
+  ; (add-to-list 'mu4e-bookmarks
+		; 	   ;; ':favorite t' i.e, use this one for the modeline
+		; 	   '(:query "maildir:/inbox" :name "Inbox" :key ?i :favorite t)
+		; 	   )
+
+  ;; allow for updating mail using 'U' in the main view:
+  (setq mu4e-get-mail-command "mbsync -a"
+		mu4e-index-update-in-background t
+		mu4e-update-interval 9
+		mu4e-index-cleanup nil
+		mu4e-index-lazy-check t
+		)
+
+
+  (setq mu4e-use-fancy-chars nil)
+  (setq mu4e-date-format-long "%c"
+		mu4e-headers-time-format "%X"
+		mu4e-headers-date-format "%x"
+		mu4e-headers-long-date-format "%c"
+		)
+
+
+  ;; something about ourselves
+  (setq
+   user-mail-address "execvy@gmail.com"
+   user-full-name  "Eval EXEC"
+   mu4e-compose-signature
+   (concat
+    ""
+    ""))
+
+  ;; sending mail -- replace USERNAME with your gmail username
+  ;; also, make sure the gnutls command line utils are installed
+  ;; package 'gnutls-bin' in Debian/Ubuntu
+
+  ;; (require 'smtpmail)
+  ;; (setq message-send-mail-function 'smtpmail-send-it
+  ;;    starttls-use-gnutls t
+  ;;    smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+  ;;    smtpmail-auth-credentials
+  ;;      '(("smtp.gmail.com" 587 "USERNAME@gmail.com" nil))
+  ;;    smtpmail-default-smtp-server "smtp.gmail.com"
+  ;;    smtpmail-smtp-server "smtp.gmail.com"
+  ;;    smtpmail-smtp-service 587)
+
+  ;; alternatively, for emacs-24 you can use:
+  ;;(setq message-send-mail-function 'smtpmail-send-it
+  ;;     smtpmail-stream-type 'starttls
+  ;;     smtpmail-default-smtp-server "smtp.gmail.com"
+  ;;     smtpmail-smtp-server "smtp.gmail.com"
+  ;;     smtpmail-smtp-service 587)
+
+  ;; don't keep message buffers around
+  (setq message-kill-buffer-on-exit t)
+
+  )
+
 (use-package ement
   :config
   (setq ement-notify-dbus-p nil)
@@ -3301,6 +3390,9 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 	"https://github.com/search?ref=simplesearch&q=%s&type=code")
   (engine-mode t)
   )
+
+(use-package yeetube)
+
 (use-package empv
   :straight (:host github :repo "isamert/empv.el")
   :config
@@ -3550,6 +3642,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 (use-package restart-emacs
   :config
   )
+(use-package emacs-everywhere)
 
 (defun clean-mode-line ()
   (interactive)
