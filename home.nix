@@ -157,10 +157,10 @@
       indicator = true;
     };
     mbsync = {
-    enable = true;
-    frequency = "*:0/5";
-    postExec = "\$pkgs.mu}/bin/mu index";
-    verbose = true;
+      enable = true;
+      frequency = "*-*-* *:*:00,30";
+      postExec = "${pkgs.mu}/bin/mu index";
+      verbose = true;
     };
   };
   programs = {
