@@ -3,6 +3,7 @@
 
   inputs = rec {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    sops-nix.url = "github:Mic92/sops-nix";
 
     hardware.url = "github:nixos/nixos-hardware";
 
@@ -19,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, emacs-overlay, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, emacs-overlay, sops-nix, ... }: {
     # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
     # packages.x86_64-linux = [
@@ -29,15 +30,18 @@
 
     nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit nixpkgs home-manager emacs-overlay sops-nix; };
       modules = [
         ./hardware-configuration.nix
         ./configuration.nix
+        sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.exec = import ./home.nix;
+          # home-manager.extraSpecialArgs = { inherit config; };
+          nixpkgs.overlays = [ emacs-overlay.overlay ];
 
           # Optionally, use home-manager.extraSpecialArgs to pass
           # arguments to home.nix

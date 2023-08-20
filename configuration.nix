@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 # test suda sudoa
-{ config, pkgs, inputs, lib, ... }: {
+{ config, pkgs, inputs, lib, emacs-overlay, ... }: {
   imports = [
     # Include the results of the hardware scan.
     # ./hardware-configuration.nix
@@ -10,6 +10,19 @@
     ./cachix.nix
     ./g810-led.nix
   ];
+
+  # sops = {
+  #   gnupg = {
+  #     home = "/home/exec/.gnupg";
+  #     sshKeyPaths = [ ];
+  #   };
+  #   defaultSopsFile = ./secrets.yaml;
+  #   secrets."google/execvy/application_password" = {
+  #     owner = config.users.users.nobody.name;
+  #     group = config.users.users.nobody.group;
+  #   };
+  # };
+
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -310,7 +323,7 @@
       permittedInsecurePackages = [ "openssl-1.1.1v" ];
     };
 
-    overlays = [ inputs.emacs-overlay.overlay ];
+    # overlays = [ emacs-overlay.overlay ];
   };
 
   environment.systemPackages = with pkgs; [

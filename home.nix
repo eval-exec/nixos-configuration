@@ -1,5 +1,6 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, lib, ... }: {
   # home config example
+
   home.username = "exec";
   home.homeDirectory = "/home/exec";
   home.stateVersion = "23.05";
@@ -160,6 +161,7 @@
           primary = true;
           realName = "Eval EXEC";
           address = "execvy@gmail.com";
+          userName = "execvy@gmail.com";
           flavor = "gmail.com";
           folders = {
             drafts = "Drafts";
@@ -168,17 +170,22 @@
             trash = "Trash";
           };
           gpg = { key = "4B453CE70F2646044171BACE0F0272C0D3AC91F7"; };
+          passwordCommand = "cat /home/exec/pass/gapp.txt";
           imap = {
             host = "imap.gmail.com";
             port = 993;
             tls = { enable = true; };
-            imapnotify = {
-              enable = true;
-              boxes = [ "Inbox" ];
-              onNotify = "\${pkgs.isync}/bin/mbsync -aV";
-            };
-
           };
+          imapnotify = {
+            enable = true;
+            boxes = [ "INBOX" ];
+            # extraConfig = { wait = 1; };
+            onNotify = "${pkgs.isync}/bin/mbsync --pull execvy:INBOX";
+            # onNotifyPost = "${pkgs.mu}/bin/mu index";
+            onNotifyPost =
+              "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index)'";
+          };
+
           mbsync = {
             enable = true;
             create = "both";
@@ -187,7 +194,7 @@
               account = {
 
               };
-              channel = { MaxMessages = 100; };
+              channel = { MaxMessages = 200; };
               local = { };
               remote = { };
 
@@ -197,6 +204,7 @@
             subFolders = "Verbatim";
           };
           msmtp = { enable = true; };
+          # smtp = { host = "gmail.com"; };
           mu = { enable = true; };
 
         };
@@ -207,19 +215,22 @@
   };
 
   services = {
+    imapnotify = { enable = true; };
     kdeconnect = {
       enable = true;
       indicator = true;
     };
     mbsync = {
       enable = true;
-      frequency = "*-*-* *:*:00,30";
+      # frequency = "*-*-* *:*:00,20,40";
       postExec = "${pkgs.mu}/bin/mu index";
       verbose = true;
     };
   };
   programs = {
     home-manager.enable = true;
+    mbsync = { enable = true; };
+    msmtp = { enable = true; };
     nix-index = {
       enable = true;
       enableZshIntegration = true;
@@ -341,6 +352,10 @@
       };
     };
   };
+  # systemd.user.services.mbsync.Unit.After = [ "sops-nix.service" ];
+  # systemd.users.services.mbsync.serviceConfig.SupplementaryGroups =
+  #   [ config.users.groups.keys.name ];
+
   systemd.user.services = {
     clash = {
       Unit = { Description = "clash"; };
@@ -348,7 +363,7 @@
         ExecStart =
           "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
         Restart = "always";
-        WantedBy = [ "network-online.target" ];
+        AfterBy = [ "network-online.target" ];
       };
     };
   };

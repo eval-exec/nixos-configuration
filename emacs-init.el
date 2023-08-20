@@ -2837,20 +2837,19 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		; 	   )
 
   ;; allow for updating mail using 'U' in the main view:
-  (setq mu4e-get-mail-command "mbsync -a"
-		mu4e-index-update-in-background t
-		mu4e-update-interval 9
+  (setq mu4e-get-mail-command "true"
+		mu4e-index-update-in-background nil
+		mu4e-update-interval nil
 		mu4e-index-cleanup nil
-		mu4e-index-lazy-check t
+		mu4e-index-lazy-check nil
 		)
 
 
   (setq mu4e-use-fancy-chars nil)
   (setq mu4e-date-format-long "%c"
-		mu4e-headers-time-format "%X"
-		mu4e-headers-date-format "%x"
-		mu4e-headers-long-date-format "%c"
-		)
+		mu4e-headers-date-format "%x %T"
+		mu4e-headers-long-date-format "%c %T"
+		mu4e-headers-time-format "%T")
 
 
   ;; something about ourselves
