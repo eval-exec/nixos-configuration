@@ -164,7 +164,7 @@ i.e. windows tiled side-by-side."
   (setq next-line-add-newlines t)
   (setq font-lock-maximum-decoration '(
 									   (markdown-mode . nil)
-									   (t . t)
+									   (t . 2)
 									   ))
 
   (setq vc-follow-symlinks t)
@@ -4352,7 +4352,6 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   )
 
 (use-package fcitx
-  :disabled t
   :after evil
   :config
   (setq fcitx-remote-command "fcitx5-remote")
@@ -4419,6 +4418,5 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   (set-face-attribute 'hl-line nil :background "#000000")
   ;; :global-minor-mode global-hl-line-mode
   )
-
 
 

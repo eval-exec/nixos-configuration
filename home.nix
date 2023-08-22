@@ -11,6 +11,7 @@
     gdb
     gf
     qtcreator
+    github-copilot-cli
 
     qt6.full
     qt6.qtbase
@@ -177,7 +178,7 @@
             tls = { enable = true; };
           };
           imapnotify = {
-            enable = true;
+            enable = false;
             boxes = [ "INBOX" ];
             # extraConfig = { wait = 1; };
             onNotify = "${pkgs.isync}/bin/mbsync --pull execvy:INBOX";
