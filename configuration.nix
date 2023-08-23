@@ -356,7 +356,6 @@
     proxychains-ng
     python3
     qemu
-    qv2ray
     steam-run
     sysfsutils
     tdesktop
