@@ -110,7 +110,6 @@
     sioyek
     sops
     spotify
-    sxhkd
     sysstat
     tmux
     typos
@@ -211,6 +210,15 @@
   };
 
   services = {
+    sxhkd = {
+      enable = true;
+      extraConfig = "";
+      keybindings = {
+        "super + f" = "/home/exec/Scripts/apps/terminal.sh";
+        "super + s" = "/home/exec/Scripts/apps/emacs.sh";
+      };
+
+    };
     imapnotify = { enable = true; };
     kdeconnect = {
       enable = true;
