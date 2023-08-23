@@ -11,7 +11,7 @@
     gdb
     gf
     github-copilot-cli
-
+    libsForQt5.khotkeys
     wmctrl
     xdotool
     peek
