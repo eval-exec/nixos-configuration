@@ -80,7 +80,6 @@
     amdgpu_top
     lshw
     # nodePackages.parcel
-    bluemail
     calibre
 
     xorg.xwininfo
