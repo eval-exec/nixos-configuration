@@ -121,10 +121,10 @@
       xkbVariant = "";
 
       videoDrivers = [
-        "amdgpu"
+        # "amdgpu"
         # "modesetting"
         # "fbdev"
-        # "nvidia"
+        "nvidia"
       ];
       #   config = lib.mkAfter ''
       #     Section "Module"
