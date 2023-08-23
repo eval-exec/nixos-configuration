@@ -8,46 +8,31 @@
   home.packages = with pkgs; [
     alacritty
     alejandra
-    gdb
-    gf
-    github-copilot-cli
-    libsForQt5.khotkeys
-    wmctrl
-    xdotool
-    peek
-    gst_all_1.gstreamer
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-ugly
-    gifski
-    pipenv
-    wineWowPackages.stable
-    winetricks
-    bitcoin
-    iftop
-    cool-retro-term
-    moreutils
-    jetbrains.clion
-    jetbrains.goland
+    amdgpu_top
     atool
+    autoconf
+    automake
     babashka
     bat
+    bitcoin
+    calibre
     clj-kondo
-    sops
     clojure
     clojure-lsp
+    cloudflared
     cmake
+    cool-retro-term
     copyq
     cpupower-gui
+    ddcui
+    ddcutil
     delta
     dig
     direnv
     dmidecode
-    element-desktop
-    silver-searcher
-    pharo
     dolphin
-    helix
     du-dust
+    element-desktop
     emacsPackages.telega
     emacsPackages.vterm
     exercism
@@ -56,60 +41,63 @@
     flameshot
     fzf
     g810-led
+    gdb
+    gf
     gh
     ghostie
+    gifski
+    github-copilot-cli
     github-desktop
     go-ethereum
+    goimapnotify
     google-chrome-dev
     grc
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gstreamer
+    helix
     htop
     httpie
-    intel-gpu-tools
     hugo
+    iftop
     inetutils
+    intel-gpu-tools
+    isync
+    jetbrains.clion
+    jetbrains.goland
     jetbrains.idea-ultimate
     joker
     jq
-    yq
     kitty
     kitty-themes
     leiningen
-    amdgpu_top
-    lshw
-    # nodePackages.parcel
-    calibre
-
-    xorg.xwininfo
-    vlc
-    mu
-    meson
-    xorg.xdpyinfo
-    xorg.xcbutilwm
-    xorg.xcbutilimage
-    xorg.xmodmap
-    xorg.libxcb
-    xorg.xcbutil
-    cloudflared
-    ddcui
-    ddcutil
     libfaketime
+    libsForQt5.khotkeys
     libstdcxx5
     llvmPackages.libcxx
     llvmPackages.libcxxClang
     lm_sensors
     logseq
+    lshw
+    lsof
     mercurial
+    meson
     microsoft-edge-dev
     mlocate
     mold
+    moreutils
     most
     mpv
+    mu
     ncurses
     neovide
     ninja
     nixfmt
     pastebinit
     patchelf
+    peek
+    pharo
+    pipenv
     pkgconfig
     powershell
     powertop
@@ -118,29 +106,39 @@
     qrcp
     ripgrep
     sccache
+    silver-searcher
     sioyek
-    lsof
+    sops
     spotify
     sysstat
     tmux
     typos
     unzip
     vagrant
-    autoconf
-    automake
     variety
     vimpager
+    vlc
     wakatime
     wezterm
+    winetricks
+    wineWowPackages.stable
+    wmctrl
     wofi
     xclip
+    xdotool
+    xorg.libxcb
+    xorg.xcbutil
+    xorg.xcbutilimage
+    xorg.xcbutilwm
+    xorg.xdpyinfo
+    xorg.xmodmap
+    xorg.xwininfo
+    yq
     yt-dlp
     zlib
     zsh
     zsh-autosuggestions
     zsh-powerlevel10k
-    isync
-    goimapnotify
     zulip
   ];
   home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
