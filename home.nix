@@ -10,11 +10,8 @@
     alejandra
     gdb
     gf
-    qtcreator
     github-copilot-cli
 
-    qt6.full
-    qt6.qtbase
     wmctrl
     xdotool
     peek
