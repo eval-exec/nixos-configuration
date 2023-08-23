@@ -110,6 +110,7 @@
     sioyek
     sops
     spotify
+    sxhkd
     sysstat
     tmux
     typos
