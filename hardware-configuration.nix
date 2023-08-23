@@ -8,7 +8,7 @@
   boot.initrd.availableKernelModules =
     [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "kvm-intel" ];
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.kernelParams = [
