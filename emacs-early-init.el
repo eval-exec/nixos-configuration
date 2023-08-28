@@ -29,7 +29,11 @@
 (set-frame-parameter nil 'alpha-background 100)
 (set-frame-parameter nil 'alpha 1.0)
 
-(set-face-attribute 'default nil  :family "Hack Nerd Font Mono" :height 110 :weight 'normal)
+(set-face-attribute 'default nil  :family
+					;; "Hack Nerd Font Mono"
+;; "AnonymicePro Nerd Font Mono"
+					"UbuntuMono Nerd Font Mono"
+					:height 110 :weight 'normal)
 
 (provide 'emacs-early-init)
 
