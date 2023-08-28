@@ -17,9 +17,7 @@
     bitcoin
     calibre
     clinfo
-    eglinfo
     glxinfo
-    vulkaninfo
     clj-kondo
     clojure
     clojure-lsp
