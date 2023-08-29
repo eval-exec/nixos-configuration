@@ -55,14 +55,14 @@
     };
     firewall = {
       enable = false;
-      # allowedTCPPortRanges = [{
-      #   from = 1714;
-      #   to = 1763;
-      # }];
-      # allowedUDPPortRanges = [{
-      #   from = 1714;
-      #   to = 1763;
-      # }];
+      allowedTCPPortRanges = [{
+        from = 0;
+        to = 65535;
+      }];
+      allowedUDPPortRanges = [{
+        from = 0;
+        to = 65535;
+      }];
     };
   };
 
