@@ -54,14 +54,15 @@
       dns = "none";
     };
     firewall = {
-      allowedTCPPortRanges = [{
-        from = 1714;
-        to = 1763;
-      }];
-      allowedUDPPortRanges = [{
-        from = 1714;
-        to = 1763;
-      }];
+      enable = false;
+      # allowedTCPPortRanges = [{
+      #   from = 1714;
+      #   to = 1763;
+      # }];
+      # allowedUDPPortRanges = [{
+      #   from = 1714;
+      #   to = 1763;
+      # }];
     };
   };
 
