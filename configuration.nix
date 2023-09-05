@@ -122,8 +122,8 @@
       xkbVariant = "";
 
       videoDrivers = [
-        # "modesetting"
-        "amdgpu"
+        "modesetting"
+        # "amdgpu"
         # "fbdev"
         # "nvidia"
       ];
