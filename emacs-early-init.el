@@ -25,6 +25,8 @@
 
 (add-to-list 'initial-frame-alist '(maximized . maximized))
 
+(setq initial-major-mode 'fundamental-mode)
+
 
 (set-frame-parameter nil 'alpha-background 100)
 (set-frame-parameter nil 'alpha 1.0)

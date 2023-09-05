@@ -1783,18 +1783,21 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 							;; partial-completion
 							;; substring
 							;; flex
-							;; basic
+							basic
 							))
 
   (setq completion-category-defaults nil
 		completion-category-overrides '(
-										(file (styles . (partial-completion)))))
+										(file (styles . (partial-completion)))
+										))
   (setq orderless-matching-styles '(
 									orderless-prefixes
 									orderless-literal
 									orderless-initialism
 									;; orderless-flex
-									orderless-regexp)))
+									orderless-regexp
+									))
+  )
 
 
 (use-package copilot

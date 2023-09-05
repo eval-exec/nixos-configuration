@@ -55,14 +55,14 @@
     };
     firewall = {
       enable = false;
-      allowedTCPPortRanges = [{
-        from = 0;
-        to = 65535;
-      }];
-      allowedUDPPortRanges = [{
-        from = 0;
-        to = 65535;
-      }];
+      # allowedTCPPortRanges = [{
+      #   from = 0;
+      #   to = 65535;
+      # }];
+      # allowedUDPPortRanges = [{
+      #   from = 0;
+      #   to = 65535;
+      # }];
     };
   };
 
@@ -122,8 +122,8 @@
       xkbVariant = "";
 
       videoDrivers = [
-        "amdgpu"
         # "modesetting"
+        "amdgpu"
         # "fbdev"
         # "nvidia"
       ];
@@ -227,10 +227,10 @@
     # virtualbox.guest.enable = true;
     # virtualbox.guest.x11 = true;
     docker.enable = true;
-    docker.rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
+    # docker.rootless = {
+    #   enable = false;
+    #   setSocketVariable = true;
+    # };
     vmware = {
       host = {
         enable = false;
