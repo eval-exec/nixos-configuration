@@ -37,6 +37,8 @@
       options kvm_intel emulate_invalid_guest_state=0
       options kvm ignore_msrs=1
     '';
+
+    tmp = { cleanOnBoot = true; };
   };
   console.useXkbConfig = true;
 
@@ -122,8 +124,8 @@
       xkbVariant = "";
 
       videoDrivers = [
-        "modesetting"
-        # "amdgpu"
+        "amdgpu"
+        # "modesetting"
         # "fbdev"
         # "nvidia"
       ];
@@ -202,6 +204,7 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
   security = {
     rtkit.enable = true;
     pam.services.sddm.enableKwallet = true;

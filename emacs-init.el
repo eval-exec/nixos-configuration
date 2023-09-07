@@ -1102,11 +1102,11 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 							  (load-theme
 							   ;; 'nasy
 							   ;; 'doom-vibrant
-							   'atom-one-dark
+							   ;; 'atom-one-dark
 							   ;; 'professional
 							   ;; 'modus-vivendi
 							   ;; 'almost-mono-black
-							   ;; 'sanityinc-tomorrow-bright
+							   'sanityinc-tomorrow-bright
 							   )
 							  ))
 
@@ -1157,11 +1157,11 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   (setq vertico-posframe-parameters '((left-fringe . 2)
 									  (right-fringe . 2)
 									  )
-		vertico-posframe-border-width 2
+		vertico-posframe-border-width 1
 		vertico-posframe-poshandler
 		'posframe-poshandler-frame-bottom-center
 		;; 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width 200
+		vertico-posframe-width 230
 		vertico-posframe-font nil
 		;; "Noto Sans Mono"
 		vertico-posframe-min-height nil
@@ -3420,6 +3420,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		   (or (string-prefix-p "~/.emacs.d/" project-root)
 			   (string-prefix-p "~/.cargo/" project-root)
 			   (string-prefix-p "~/.rustup/" project-root)
+			   (string-prefix-p "/nix/store/" project-root)
 			   )
 		   )
   ;; bind consult-projectile-find-file to C-c p f use general
@@ -4019,13 +4020,14 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   )
 
 (use-package deadgrep
-  :hook (deadgrep-mode . next-error-follow-minor-mode)
+  ;; :hook (deadgrep-mode . next-error-follow-minor-mode)
   :config
   (setq
    deadgrep-executable "rg"
    deadgrep-max-buffers nil
    deadgrep-max-line-length 500
    deadgrep-display-buffer-function 'switch-to-buffer
+   deadgrep--context '(1 . 1)
    )
   ;; set deadgrep-filename-face to inhirant font-lock-variable-name-face and bold and bigger
   (set-face-attribute 'deadgrep-filename-face nil :inherit 'font-lock-string-face :weight 'bold :height 1.2)

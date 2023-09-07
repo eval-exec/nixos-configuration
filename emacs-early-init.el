@@ -34,8 +34,9 @@
 (set-face-attribute 'default nil  :family
 					;; "Hack Nerd Font Mono"
 ;; "AnonymicePro Nerd Font Mono"
-					"UbuntuMono Nerd Font Mono"
-					:height 110 :weight 'normal)
+					;; "UbuntuMono Nerd Font Mono"
+					"JetBrains Mono"
+					:height 100 :weight 'normal)
 
 (provide 'emacs-early-init)
 
