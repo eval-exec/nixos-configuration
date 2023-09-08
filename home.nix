@@ -19,6 +19,8 @@
     clinfo
     glxinfo
     clj-kondo
+    libcamera
+
     clojure
     clojure-lsp
     cloudflared
