@@ -261,7 +261,7 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = (pkgs.emacs-git.override { withGTK3 = true; });
+      # package = (pkgs.emacs-git.override { withGTK3 = true; });
       extraPackages = epkgs: [ pkgs.mu ];
     };
     offlineimap = {
