@@ -55,6 +55,7 @@
     go-ethereum
     goimapnotify
     google-chrome-dev
+    google-chrome
     grc
     gst_all_1.gst-plugins-good
     gst_all_1.gst-plugins-ugly
@@ -239,6 +240,7 @@
     home-manager.enable = true;
     mbsync = { enable = true; };
     msmtp = { enable = true; };
+    chromium = { enable = true; };
     nix-index = {
       enable = true;
       enableZshIntegration = true;
