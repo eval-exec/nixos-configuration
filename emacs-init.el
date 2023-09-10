@@ -2808,6 +2808,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 (use-package mu4e
   :config
 
+
+    (setq mu4e-mu-binary (executable-find "mu"))
   ;; use mu4e for e-mail in emacs
   (setq mail-user-agent 'mu4e-user-agent)
 
