@@ -308,8 +308,7 @@
         setopt NO_HUP
 
       '';
-      initExtra = ''
-      '';
+      initExtra = "";
 
       shellAliases = {
         cat = "bat -p";
