@@ -124,10 +124,10 @@
       xkbVariant = "";
 
       videoDrivers = [
+        "nvidia"
         "amdgpu"
-        # "modesetting"
+        "modesetting"
         # "fbdev"
-        # "nvidia"
       ];
       #   config = lib.mkAfter ''
       #     Section "Module"
@@ -424,7 +424,14 @@
   programs.neovim.defaultEditor = true;
   programs.zsh.enable = true;
 
-  programs.steam = { enable = true; };
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override {
+      extraPkgs = pkgs: with pkgs; [ wqy_zenhei ];
+
+      extraProfile = "export STEAM_FORCE_DESKTOPUI_SCALING=2";
+    };
+  };
 
   # programs.vscode = {
   # 	enable = true;

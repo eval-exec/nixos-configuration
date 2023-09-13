@@ -628,7 +628,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		:which-key "scratch-buffer")
   "TAB" '((lambda () (interactive) (switch-to-buffer nil))
 		  :which-key "other-buffer")
-  "b" 'consult-buffer
+  "b" 'bufler
   "k" 'kill-current-buffer
   )
 
@@ -2412,6 +2412,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		)
   )
 
+(use-package bufler)
+
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
   :config
@@ -2806,6 +2808,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;; )
 
 (use-package mu4e
+  :disabled
   :config
 
 
