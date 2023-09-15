@@ -25,6 +25,8 @@
     clojure-lsp
     cloudflared
     cmake
+    jetbrains-toolbox
+    gptcommit
     cool-retro-term
     copyq
     cpupower-gui
@@ -37,8 +39,6 @@
     dolphin
     du-dust
     element-desktop
-    emacsPackages.telega
-    emacsPackages.vterm
     exercism
     fd
     ffmpeg-full
@@ -177,7 +177,7 @@
             tls = { enable = true; };
           };
           imapnotify = {
-            enable = false;
+            enable = true;
             boxes = [ "INBOX" ];
             # extraConfig = { wait = 1; };
             onNotify = "${pkgs.isync}/bin/mbsync --pull execvy:INBOX";
@@ -264,7 +264,12 @@
     emacs = {
       enable = true;
       # package = (pkgs.emacs-git.override { withGTK3 = true; });
-      extraPackages = epkgs: [ pkgs.mu ];
+      extraPackages = epkgs: [
+        pkgs.mu
+        pkgs.emacsPackages.telega
+        pkgs.emacsPackages.mu4e
+        pkgs.emacsPackages.vterm
+      ];
     };
     offlineimap = {
       enable = false;
@@ -306,7 +311,6 @@
         zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
         setopt NO_HUP
-
       '';
       initExtra = "";
 
@@ -353,10 +357,12 @@
     starship = {
       enable = true;
       enableBashIntegration = true;
+      enableZshIntegration = true;
       settings = {
         add_newline = false;
         command_timeout = 200;
         git_status = { disabled = true; };
+        battery = { disabled = true; };
       };
     };
   };

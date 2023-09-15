@@ -821,6 +821,10 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 					(copilot-clear-overlay))
 				(evil-normal-state)
 				)
+  "C-h" 'left-char
+  "C-l" 'right-char
+  "C-j" 'next-line
+  "C-k" 'previous-line
   )
 
 (general-evil-define-key 'insert copilot-mode-map
@@ -945,7 +949,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
  )
 
 
-(setq  display-buffer-alist nil)
+(setq display-buffer-alist nil)
 ;; (add-to-list 'display-buffer-alist
 			 ;; '(
 			 ;;   "\\*helpful *"
@@ -1413,6 +1417,35 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		flycheck-idle-change-delay 0.2
 		)
   (setq flycheck-rust-executable "cargo-clippy")
+
+  ;; flycheck err cycle
+  ;; Optional: ensure flycheck cycles, both when going backward and forward.
+  ;; Tries to handle arguments correctly.
+  ;; Since flycheck-previous-error is written in terms of flycheck-next-error,
+  ;; advising the latter is enough.
+  (defun flycheck-next-error-loop-advice (orig-fun &optional n reset)
+										; (message "flycheck-next-error called with args %S %S" n reset)
+	(condition-case err
+		(apply orig-fun (list n reset))
+      ((user-error)
+       (let ((error-count (length flycheck-current-errors)))
+		 (if (and
+              (> error-count 0)                   ; There are errors so we can cycle.
+              (equal (error-message-string err) "No more Flycheck errors"))
+			 ;; We need to cycle.
+			 (let* ((req-n (if (numberp n) n 1)) ; Requested displacement.
+										; An universal argument is taken as reset, so shouldn't fail.
+					(curr-pos (if (> req-n 0) (- error-count 1) 0)) ; 0-indexed.
+					(next-pos (mod (+ curr-pos req-n) error-count))) ; next-pos must be 1-indexed
+										; (message "error-count %S; req-n %S; curr-pos %S; next-pos %S" error-count req-n curr-pos next-pos)
+										; orig-fun is flycheck-next-error (but without advise)
+										; Argument to flycheck-next-error must be 1-based.
+               (apply orig-fun (list (+ 1 next-pos) 'reset)))
+           (signal (car err) (cdr err)))))))
+
+  (advice-add 'flycheck-next-error :around #'flycheck-next-error-loop-advice)
+
+
   (global-flycheck-mode)
   )
 
@@ -1770,9 +1803,9 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
           "\\*Async Shell Command\\*"
           help-mode
           compilation-mode))
-  ;; (popper-mode +1)
-  ;; (popper-echo-mode +1)
-  )                ; For echo area hints
+  (popper-mode +1)
+  (popper-echo-mode +1)
+  )
 
 
 (use-package orderless
@@ -1835,11 +1868,12 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
    corfu-auto t
    corfu-auto-prefix 1
    corfu-cycle t
-   corfu-preselect-first t
+   corfu-preselect-first nil
    corfu-count 20
    corfu-auto-delay 0.1
    corfu-quit-no-match t
    corfu-quit-at-boundary t
+   corfu-on-exact-match nil
    corfu-max-width 120
    corfu-min-width 60
    corfu-popupinfo-delay '(0.0 . 0.0)
@@ -1854,7 +1888,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (use-package eldoc-box
   :config
-  ;; (eldoc-box-hover-mode)
+  ;; (eldoc-box-hover-mode) 
   ;; (eldoc-box-hover-at-point-mode)
   )
 
@@ -1893,7 +1927,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
   ;; (add-to-list 'completion-at-point-functions #'cape-dict)
   ;; (add-to-list 'completion-at-point-functions #'cape-symbol)
-  ;; (add-to-list 'completion-at-point-functions #'cape-line)
+  ;; (add-to-list 'completion-at-point-functions #'cape-line) 
   (use-package yasnippet-capf
 	:straight (:host github :repo "elken/yasnippet-capf")
 	:config
@@ -2309,6 +2343,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 	:after yasnippet)
   )
 
+
 ;; (use-package lsp-bridge
 ;;   :ensure nil
 ;;   :straight (lsp-bridge :type git
@@ -2335,7 +2370,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 ;; 	)
 
 ;;   (global-lsp-bridge-mode)
-;;   )
+;;   ) 
+
 
 
 (use-package keycast
@@ -2580,7 +2616,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   )
 
 
-;; (use-package tree-sitter-langs)
+(use-package tree-sitter-langs)
 ;; (use-package tree-sitter-indent)
 ;; (use-package tree-sitter)
 
@@ -2784,16 +2820,12 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (use-package telega
+  :straight (:type built-in)
   :config
   (setq telega-animation-play-inline nil)
   (setq telega-chat-show-avatars nil)
   (setq telega-photo-show-details nil)
   (setq telega-translate-to-language-by-default "zh-CN")
-  (setq telega-server-libs-prefix "/nix/store/lbaib784k1dz4jih21x05bcd22ln63xf-tdlib-1.8.14")
-  ;; (setq telega-proxies
-  ;; 		(list
-  ;; 		 '(:server "127.0.0.1" :port 7891 :enable t
-  ;; 				   :type (:@type "proxyTypeSocks5"))))
   )
 
 ;; (use-package plz
@@ -2808,17 +2840,17 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;; )
 
 (use-package mu4e
-  :disabled
+  :straight (:type built-in)
   :config
 
 
-    (setq mu4e-mu-binary (executable-find "mu"))
+  (setq mu4e-mu-binary (executable-find "mu"))
   ;; use mu4e for e-mail in emacs
   (setq mail-user-agent 'mu4e-user-agent)
 
-  ; (setq mu4e-drafts-folder "/[Gmail].Drafts")
-  ; (setq mu4e-sent-folder   "/[Gmail].Sent")
-  ; (setq mu4e-trash-folder  "/[Gmail].Trash")
+										; (setq mu4e-drafts-folder "/[Gmail].Drafts")
+										; (setq mu4e-sent-folder   "/[Gmail].Sent")
+										; (setq mu4e-trash-folder  "/[Gmail].Trash")
 
   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
   ;; (setq mu4e-sent-messages-behavior 'delete)
@@ -2832,17 +2864,17 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;; then, when you want archive some messages, move them to
   ;; the 'All Mail' folder by pressing ``ma''.
 
-  ; (setq mu4e-maildir-shortcuts
-		; '( (:maildir "/INBOX"              :key ?i)
-		;    (:maildir "/[Gmail].Sent"  :key ?s)
-		;    (:maildir "/[Gmail].Trash"      :key ?t)
-		;    ;; (:maildir "/[Gmail].All Mail"   :key ?a)
-		;    ))
+										; (setq mu4e-maildir-shortcuts
+										; '( (:maildir "/INBOX"              :key ?i)
+										;    (:maildir "/[Gmail].Sent"  :key ?s)
+										;    (:maildir "/[Gmail].Trash"      :key ?t)
+										;    ;; (:maildir "/[Gmail].All Mail"   :key ?a)
+										;    ))
 
-  ; (add-to-list 'mu4e-bookmarks
-		; 	   ;; ':favorite t' i.e, use this one for the modeline
-		; 	   '(:query "maildir:/inbox" :name "Inbox" :key ?i :favorite t)
-		; 	   )
+										; (add-to-list 'mu4e-bookmarks
+										; 	   ;; ':favorite t' i.e, use this one for the modeline
+										; 	   '(:query "maildir:/inbox" :name "Inbox" :key ?i :favorite t)
+										; 	   )
 
   ;; allow for updating mail using 'U' in the main view:
   (setq mu4e-get-mail-command "true"
@@ -2903,6 +2935,12 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 	(ement-connect
 	 :user-id "@evil-neo:matrix.org"
 	 :uri-prefix "https://matrix.org"))
+
+  (setq ement-room-message-format-spec 
+		"[%S%L]: %B%r%R%t"
+ement-room-list-column-Name-max-width 40
+ement-room-left-margin-width 24
+		)
   )
 
 (use-package mermaid-mode
@@ -4001,7 +4039,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (add-hook 'prog-mode-hook 'exec/increase-buffer-font)
 
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
 (add-hook 'toml-mode-hook 'display-line-numbers-mode)
 (add-hook 'conf-mode-hook 'display-line-numbers-mode)
@@ -4428,5 +4466,6 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   (set-face-attribute 'hl-line nil :background "#000000")
   ;; :global-minor-mode global-hl-line-mode
   )
+
 
 
