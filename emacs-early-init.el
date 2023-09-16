@@ -36,7 +36,8 @@
 ;; "AnonymicePro Nerd Font Mono"
 					;; "UbuntuMono Nerd Font Mono"
 					"JetBrains Mono"
-					:height 100 :weight 'normal)
+					:height 110
+					:weight 'normal)
 
 (provide 'emacs-early-init)
 

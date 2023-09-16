@@ -181,7 +181,6 @@
             boxes = [ "INBOX" ];
             extraConfig = { wait = 1; };
             onNotify = "${pkgs.isync}/bin/mbsync --pull execvy:INBOX";
-            onNotifyPost = "${pkgs.mu}/bin/mu index";
             onNotifyPost =
               "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index)'";
           };

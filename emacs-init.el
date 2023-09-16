@@ -808,6 +808,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   "C-H-<right>" 'centaur-tabs-forward
   "H-`" 'garbage-collect
   ;; "H-i" 'yas-insert-snippet
+  "H-a" 'org-agenda
   )
 
 
