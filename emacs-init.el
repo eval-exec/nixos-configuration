@@ -156,8 +156,6 @@ i.e. windows tiled side-by-side."
   (global-unset-key (kbd "M-l"))
   (global-unset-key (kbd "M-i"))
   (global-unset-key (kbd "M-o"))
-  (line-number-mode -1)
-  (column-number-mode -1)
 
   (setq switch-to-buffer-obey-display-actions t)
   (setq auto-save-default nil)
@@ -221,6 +219,7 @@ i.e. windows tiled side-by-side."
   (setq window-resize-pixelwise t)
   (setq frame-resize-pixelwise t)
   (setq column-number-mode t)
+  (setq line-number-mode t)
   (setq mode-line-percent-position '(-3 "%o"))
   (setq mode-line-compact 'always)
 
@@ -3350,8 +3349,8 @@ ement-room-left-margin-width 24
 				   )
 		 :render (
 				  ;; gts-buffer-render
-				  gts-posframe-pin-render
-				  ;; gts-posframe-pop-render
+				  ;; gts-posframe-pin-render
+				  gts-posframe-pop-render
 				  )))
   (add-hook 'gts-after-buffer-render-hook ;; use 'gts-after-buffer-multiple-render-hook instead if you have multiple engines
 			(defun your-hook-that-disable-evil-mode-in-go-translate-buffer (&rest _)
@@ -4039,7 +4038,7 @@ ement-room-left-margin-width 24
 
 (add-hook 'prog-mode-hook 'exec/increase-buffer-font)
 
-;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
 (add-hook 'toml-mode-hook 'display-line-numbers-mode)
 (add-hook 'conf-mode-hook 'display-line-numbers-mode)
