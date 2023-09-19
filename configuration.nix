@@ -100,6 +100,13 @@
   };
 
   services = {
+    udev = {
+      extraHwdb = ''
+        evdev:atkbd:dmi:*            
+            KEYBOARD_KEY_3a=leftctrl   # left caps to left control
+            KEYBOARD_KEY_1d=hyper # left ctrl to hyper
+      '';
+    };
     acpid = {
       enable = true;
       logEvents = true;
