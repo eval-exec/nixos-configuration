@@ -74,6 +74,7 @@
     joker
     jq
     kitty
+    browsh
     kitty-themes
     leiningen
     libfaketime
@@ -141,6 +142,7 @@
     yq
     yt-dlp
     zlib
+    zig
     zsh
     zsh-autosuggestions
     zsh-powerlevel10k
@@ -265,9 +267,11 @@
       # package = (pkgs.emacs-git.override { withGTK3 = true; });
       extraPackages = epkgs: [
         pkgs.mu
-        pkgs.emacsPackages.telega
+        # pkgs.emacsPackages.telega
+        pkgs.tdlib
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.vterm
+        pkgs.emacsPackages.w3m
       ];
     };
     offlineimap = {
@@ -376,7 +380,8 @@
         ExecStart =
           "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
         Restart = "always";
-        AfterBy = [ "network-online.target" ];
+        requires = [ "network-online.target" ];
+        After = [ "network-online.target" ];
       };
     };
   };

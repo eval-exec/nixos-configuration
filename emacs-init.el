@@ -2820,12 +2820,13 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (use-package telega
-  :straight (:type built-in)
+  ;; :straight (:type built-in)
   :config
   (setq telega-animation-play-inline nil)
-  (setq telega-chat-show-avatars nil)
+  (setq telega-chat-show-avatars t)
   (setq telega-photo-show-details nil)
   (setq telega-translate-to-language-by-default "zh-CN")
+  (setq telega-server-libs-prefix "/nix/store/cnvn9jsls70idm7cd981s4qr20pry3rv-tdlib-1.8.16")
   )
 
 ;; (use-package plz
@@ -3432,9 +3433,24 @@ ement-room-left-margin-width 24
   :demand t
   :config
   (defengine github
-	"https://github.com/search?ref=simplesearch&q=%s&type=code")
-  (engine-mode t)
-  )
+	"https://github.com/search?ref=simplesearch&q=%s&type=code"
+	:keybinding "c"
+	)
+  (defengine google
+	"https://www.google.com/search?ie=utf-8&oe=utf-8&q=%s"
+	:keybinding "g"
+	)
+  (defengine wikipedia
+	"https://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
+	:keybinding "w"
+	:docstring "Searchin' the wikis.")
+
+  (defengine nixpkgs
+	"https://search.nixos.org/packages?query=%s"
+	:keybinding "n"
+	:docstring "Searchin the nixos pkgs")
+
+  (engine-mode t))
 
 (use-package yeetube)
 
@@ -3881,6 +3897,9 @@ ement-room-left-margin-width 24
   :hook
   (emacs-lisp-mode . highlight-defined-mode))
 
+(use-package w3m
+  :straight (:type built-in)
+  )
 (use-package eww
   :straight (:type built-in)
 ;; https://www.google.com/search?q=%s&pws=0&gl=us&gws_rd=cr
