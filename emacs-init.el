@@ -784,9 +784,9 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 ;;; hyper key bindings
-(global-set-key (kbd "H-h") 'help-command)
+(global-set-key (kbd "C-M-s-h") 'help-command)
 (general-def
-  :prefix "H-h"
+  :prefix "C-M-s-h"
   "k" 'helpful-key
   "v" 'helpful-variable
   "o" 'helpful-symbol
@@ -799,16 +799,16 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (general-def
-  "H-h" 'help-command
-  "H-k" 'kill-current-buffer
-  "H-<left>" 'winner-undo
-  "H-<right>" 'winner-redo
+  "C-M-s-h" 'help-command
+  "C-M-s-k" 'kill-current-buffer
+  "C-M-s-<left>" 'winner-undo
+  "C-M-s-<right>" 'winner-redo
 
   "C-H-<left>" 'centaur-tabs-backward
   "C-H-<right>" 'centaur-tabs-forward
-  "H-`" 'garbage-collect
+  "C-M-s-`" 'garbage-collect
   ;; "H-i" 'yas-insert-snippet
-  "H-a" 'org-agenda
+  "C-M-s-a" 'org-agenda
   )
 
 
@@ -2725,7 +2725,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
    (winner-mode))
 
 (use-package ace-window
-  :bind ("H-o" . ace-window)
+  :bind ("C-M-s-o" . ace-window)
   :custom-face
   (aw-leading-char-face ((t (
 							 :foreground "red"
@@ -2959,13 +2959,13 @@ ement-room-left-margin-width 24
 (use-package vimrc-mode)
 
 (use-package format-all
-  ;; :hook
-  ;; (prog-mode . format-all-mode)
+  :hook
+  (prog-mode . format-all-mode)
 
   ;; (prog-mode . format-all-ensure-formatter)
   ;; (emacs-lisp-mode . format-all-ensure-formatter)
   :config
-  (setq format-all-show-errors 'never)
+  (setq format-all-show-errors 'error)
 
   ;; select yapf as the default formatter for python
   )
@@ -3483,6 +3483,27 @@ ement-room-left-margin-width 24
 			   )
 		   )
   ;; bind consult-projectile-find-file to C-c p f use general
+
+  (defun projectile-compile--double-prefix-means-run-comint (func &optional args)
+    "allow running compilation interactively when multiple prefixes are given.
+with two prefixes (C-u C-u) runs default compilation command in interactive
+compilation buffer. with three prompts for command and then runs it in an
+interactive compilation buffer."
+    (let ((prefix current-prefix-arg))
+      (if (and (consp prefix)
+               (setq prefix (car prefix))
+               (>= prefix 16))
+          (cl-letf* (((symbol-function 'actual-compile)
+                      (symbol-function 'compile))
+                     ((symbol-function 'compile)
+                      (lambda (command &optional comint)
+                        (actual-compile command t))))
+            (funcall func (if (eq prefix 16) nil '(4))))
+        (funcall func prefix))))
+
+  (advice-add 'projectile-run-project     :around #'projectile-compile--double-prefix-means-run-comint)
+  (advice-add 'projectile-compile-project :around #'projectile-compile--double-prefix-means-run-comint)
+  (advice-add 'projectile-test-project    :around #'projectile-compile--double-prefix-means-run-comint)
 
 
   (use-package projectile-ripgrep

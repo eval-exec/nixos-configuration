@@ -143,6 +143,7 @@
     yt-dlp
     zlib
     zig
+    keyd
     zsh
     zsh-autosuggestions
     zsh-powerlevel10k
@@ -269,9 +270,11 @@
         pkgs.mu
         # pkgs.emacsPackages.telega
         pkgs.tdlib
+
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.vterm
         pkgs.emacsPackages.w3m
+        pkgs.emacsPackages.sqlite3
       ];
     };
     offlineimap = {

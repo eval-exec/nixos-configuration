@@ -100,6 +100,17 @@
   };
 
   services = {
+    keyd = {
+      enable = true;
+      keyboards.default.settings = {
+        main = {
+          capslock = "overload(control, esc)";
+          leftcontrol = "overload(hyper, capslock)";
+        };
+        "hyper:C-M-A" = { };
+      };
+    };
+
     acpid = {
       enable = true;
       logEvents = true;
@@ -123,7 +134,6 @@
       layout = "us";
       xkbVariant = "";
 
-      xkbOptions = "ctrl:swapcaps,caps:hyper";
       videoDrivers = [
         # "nvidia"
         "amdgpu"
