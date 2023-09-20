@@ -53,7 +53,7 @@
     # Enable networking
     networkmanager = {
       enable = true;
-      dns = "none";
+      dns = "default";
     };
     firewall = {
       enable = false;
