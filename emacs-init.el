@@ -1133,7 +1133,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		 )
   :config
   (setq
-   vertico-count 10
+   vertico-count 20
    vertico-resize nil
    vertico-count-format '("%-6s " . "%2s/%5s")
    ;; vertico-buffer-display-action
