@@ -12,6 +12,7 @@
     atool
     autoconf
     automake
+    aspell
     babashka
     bat
     bitcoin
@@ -42,6 +43,7 @@
     exercism
     fd
     ffmpeg-full
+    libnotify
     flameshot
     fzf
     g810-led
@@ -265,7 +267,7 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      # package = (pkgs.emacs-git.override { withGTK3 = true; });
+      package = pkgs.emacs-git;
       extraPackages = epkgs: [
         pkgs.mu
         # pkgs.emacsPackages.telega

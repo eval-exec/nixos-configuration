@@ -227,32 +227,36 @@ i.e. windows tiled side-by-side."
   ;; (add-to-list 'default-frame-alist '(background-color . "black"))
   (set-cursor-color "yellow")
 
-  (setq use-default-font-for-symbols t)
+  (setq use-default-font-for-symbols nil)
   ;; ;; 👿
   ;; (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
-  ;; (set-fontset-font t 'ascii "Jetbrains Mono" nil 'prepend)
-  ;; (set-fontset-font t 'unicode (font-spec :family "Noto Sans") nil 'append)
-  ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
-  ;; (set-fontset-font t 'emoji (font-spec :family "Twitter Color Emoji"))
+  (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
+  (set-fontset-font t 'unicode (font-spec :family "Noto Sans"))
+  (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
   (set-fontset-font t 'unicode (font-spec :family
-										  ;; "Hack Nerd Font Mono"
 										  "JetBrainsMonoNL Nerd Font Mono"
-										  ))
+										  ) nil 'append)
   (set-fontset-font t 'emoji (font-spec :family
 										"Noto Color Emoji"
-										;; "Twitter Color Emoji"
 										))
+  (set-fontset-font t 'emoji (font-spec :family
+										"Twitter Color Emoji"
+										) nil 'append)
+  (set-fontset-font t 'emoji (font-spec :family
+										"Symbola"
+										) nil 'append)
+;; Something is coming... 🏆
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
   (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
   ;; (set-fontset-font t 'emoji nil)
 
   (setq face-font-rescale-alist '(
 								  ("Noto Color Emoji" . 0.9)
-								  ("JetBrainsMonoNL Nerd Font Mono" . 0.9)
+								  ("JetBrainsMonoNL Nerd Font Mono" . 1.0)
 								  ;; ("NotoMono Nerd Font Propo" . 0.9)
 								  ;; ("Arimo Nerd Font" . 0.9)
 								  ))
-  ;; (set-fontset-font t 'symbol (font-spec :family "Symbola"))
+  (set-fontset-font t 'symbol (font-spec :family "Noto Sans"))
   (setq revert-without-query '(".*"))
 
 
@@ -307,14 +311,13 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (use-package evil
   :init
-  (setq evil-want-keybinding nil
-		evil-want-integration t
-		evil-respect-visual-line-mode t
-		)
+  (setq 
+    evil-want-keybinding nil
+    evil-want-integration t
+    evil-respect-visual-line-mode t
+    evil-v$-excludes-newline t
+    )
   :demand t
-  :general
-  (general-imap "C-h" 'left-char)
-  (general-imap "C-l" 'right-char)
   :config
   (evil-mode t)
   (general-evil-setup)
@@ -960,13 +963,13 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 			 ;;   )
 			 ;; )
 
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*info\\* *"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 1)
-			   ))
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*info\\* *"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . bottom)
+;; 			   (slot . 1)
+;; 			   ))
 (add-to-list 'display-buffer-alist
 			 '(
 			   "\\*Help\\* *"
@@ -2865,6 +2868,11 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;; then, when you want archive some messages, move them to
   ;; the 'All Mail' folder by pressing ``ma''.
 
+  (setq mu4e-maildir-shortcuts
+		'(
+		  (:maildir "/execvy/inbox" :key ?a)
+		  ))
+
 										; (setq mu4e-maildir-shortcuts
 										; '( (:maildir "/INBOX"              :key ?i)
 										;    (:maildir "/[Gmail].Sent"  :key ?s)
@@ -2879,14 +2887,14 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
   ;; allow for updating mail using 'U' in the main view:
   (setq mu4e-get-mail-command "true"
-		mu4e-index-update-in-background nil
-		mu4e-update-interval nil
+		mu4e-index-update-in-background t
+		mu4e-update-interval 30
 		mu4e-index-cleanup nil
-		mu4e-index-lazy-check nil
+		mu4e-index-lazy-check t
 		)
 
 
-  (setq mu4e-use-fancy-chars nil)
+  (setq mu4e-use-fancy-chars t)
   (setq mu4e-date-format-long "%c"
 		mu4e-headers-date-format "%x %T"
 		mu4e-headers-long-date-format "%c %T"
@@ -3112,6 +3120,7 @@ ement-room-left-margin-width 24
 							 (000 100 200 300 400 500 600 700 800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300 2400)
 							 "......"
 							 "----------------"))
+(setq org-done-keywords-for-agenda nil)
 (setq org-agenda-use-tag-inheritance  t)
 (setq org-agenda-window-setup 'current-window)
 (setq org-agenda-restore-windows-after-quit  t)
@@ -3255,10 +3264,19 @@ ement-room-left-margin-width 24
   (setq org-journal-file-type  'yearly)
   (setq org-journal-enable-agenda-integration  t)
   (setq org-journal-enable-cache  t)
+  (setq org-journal-carryover-items ""
+		org-journal-prefix-key nil
+		)
   )
-(use-package org-alert
+(use-package org-yaap
+  :straight (org-yaap :type git :host gitlab :repo "tygrdev/org-yaap")
   :config
-  )
+  (setq org-yaap-todo-only t
+		org-yaap-alert-before 10
+		org-yaap-daily-alert 6 
+		org-yaap-persistent-clock t
+		)
+  (org-yaap-mode 1))
 )
 
 (defun exec/visual-select-region()
