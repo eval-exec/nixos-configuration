@@ -13,6 +13,8 @@
     autoconf
     automake
     aspell
+    google-cloud-sdk
+    sdcv
     babashka
     bat
     bitcoin
@@ -270,9 +272,8 @@
       package = pkgs.emacs-git;
       extraPackages = epkgs: [
         pkgs.mu
-        # pkgs.emacsPackages.telega
+        pkgs.librime
         pkgs.tdlib
-
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.vterm
         pkgs.emacsPackages.w3m
@@ -302,7 +303,7 @@
         export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
         # CTRL-/ to toggle small preview window to see the full command
         # CTRL-Y to copy the command into clipboard using pbcopy
-        export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard'"
+        export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window up:3:hidden:wrap --bind 'ctrl-/:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --color header:italic --header 'Press CTRL-Y to copy command into clipboard' --layout=reverse"
         # Print tree structure in the preview window
         export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
         NPM_CONFIG_PREFIX=~/.npm-global

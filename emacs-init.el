@@ -164,6 +164,7 @@ i.e. windows tiled side-by-side."
 									   (markdown-mode . nil)
 									   (t . 2)
 									   ))
+ ;; (setq display-buffer-base-action '(nil . ((inhibit-same-window . t))))
 
   (setq vc-follow-symlinks t)
   (setq custom-safe-themes t)
@@ -717,7 +718,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (+general-global-menu! "Org Mode" "o"
   "l" 'org-cliplink
-  "a" 'org-agenda
+  "a" 'exec/org-agenda-transient
   "c" 'org-capture
   "j" 'org-journal-new-entry
   "m" 'org-redisplay-inline-images
@@ -747,7 +748,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 (general-define-key
  :prefix "C-c"
  "o" '(nil :which-key "Org")
- "oa" 'org-agenda
+ "oa" 'exec/org-agenda-transient
  "oc" 'org-capture
  "oj" 'org-journal-new-entry
 
@@ -1311,7 +1312,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   )
 
 (use-package transient-dwim
-  :bind ("M-=" . transient-dwim-dispatch))
+  ;; :bind ("M-=" . transient-dwim-dispatch)
+  )
 
 (use-package man
   :config
@@ -2890,11 +2892,13 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		mu4e-index-update-in-background t
 		mu4e-update-interval 30
 		mu4e-index-cleanup nil
-		mu4e-index-lazy-check t
+		mu4e-index-lazy-check nil
 		)
 
 
-  (setq mu4e-use-fancy-chars t)
+  (setq mu4e-use-fancy-chars nil
+		mu4e-debug t
+		)
   (setq mu4e-date-format-long "%c"
 		mu4e-headers-date-format "%x %T"
 		mu4e-headers-long-date-format "%c %T"
@@ -3124,6 +3128,30 @@ ement-room-left-margin-width 24
 (setq org-agenda-use-tag-inheritance  t)
 (setq org-agenda-window-setup 'current-window)
 (setq org-agenda-restore-windows-after-quit  t)
+
+(transient-define-prefix exec/org-agenda-transient ()
+  "Replace the org-agenda buffer by a transient."
+  [["Built-in agendas"
+	("a" "Agenda for current week or day" (lambda () (interactive) (org-agenda nil "a")))
+	("t" "List of all TODO entries" (lambda () (interactive) (org-agenda nil "t")))
+	("T" "Entries with special TODO kwd" (lambda () (interactive) (org-agenda nil "T")))
+	("m" "Match a TAGS/PROP/TODO query" (lambda () (interactive) (org-agenda nil "m")))
+	("M" "Like m, but only TODO entries" (lambda () (interactive) (org-agenda nil "M")))
+	("e" "Expport agenda views" (lambda () (interactive) (org-agenda nil "e")))
+	("s" "Search for keywords" (lambda () (interactive) (org-agenda nil "s")))
+	("S" "Like s, but only TODO entries" (lambda () (interactive) (org-agenda nil "S")))
+	("/" "Multi-occur" (lambda () (interactive) (org-agenda nil "/")))
+	("<" "Buffer, subtree/region restriciton" (lambda () (interactive) (org-agenda nil "<")))
+	(">" "Remove restriction" (lambda () (interactive) (org-agenda nil ">")))
+	("#" "List stuck projects (!=configure)" (lambda () (interactive) (org-agenda nil "#")))
+	("!" "Define \"stuck\"" (lambda () (interactive) (org-agenda nil "!")))
+	("C" "Configure custom agenda commands" (lambda () (interactive) (org-agenda nil "C")))]
+   ["Custom agendas"
+	("A" "Daily and overview" (lambda () (interactive) (org-agenda nil "A")))
+	("H" "Habits tracker" (lambda () (interactive) (org-agenda nil "H")))]])
+
+
+
 	  ;;;;;;; org-agenda-end
 (setq org-startup-with-inline-images t)
 (setq org-tag-beautify-mode  t)
@@ -3372,6 +3400,20 @@ ement-room-left-margin-width 24
 				  ;; gts-posframe-pin-render
 				  gts-posframe-pop-render
 				  )))
+
+  (defun exec/translate()
+	(interactive)
+	(gts-translate (gts-translator
+					:picker (gts-noprompt-picker)
+					:engines (gts-stardict-engine)
+					:render (gts-posframe-pop-render
+							 :height 100
+							 :width 200
+							 :backcolor "#323d3d"
+							 :forecolor "white"
+							 )
+					)))
+
   (add-hook 'gts-after-buffer-render-hook ;; use 'gts-after-buffer-multiple-render-hook instead if you have multiple engines
 			(defun your-hook-that-disable-evil-mode-in-go-translate-buffer (&rest _)
 			  (evil-emacs-state)
@@ -3569,6 +3611,18 @@ interactive compilation buffer."
 ;; The package is young and doesn't have comprehensive coverage.
 (use-package tempel-collection)
 
+;; based on http://emacsredux.com/blog/2013/04/03/delete-file-and-buffer/
+(defun exec/delete-file-and-buffer ()
+  "Kill the current buffer and deletes the file it is visiting."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if filename
+        (if (y-or-n-p (concat "Do you really want to delete file " filename " ?"))
+            (progn
+              (delete-file filename)
+              (message "Deleted file %s." filename)
+              (kill-buffer)))
+      (message "Not a file visiting buffer!"))))
 
 (use-package treemacs
   :disabled t
@@ -3838,6 +3892,11 @@ interactive compilation buffer."
 ;; (use-package matrix-emacs-theme
 ;;   :straight (matrix-emacs-theme :type git :host github :repo "monkeyjunglejuice/matrix-emacs-theme"))
 
+(use-package diminish
+  :config
+  
+  )
+
 (use-package doom-modeline
   ; :hook
   ;; (after-init . doom-modeline-mode)
@@ -4057,7 +4116,7 @@ interactive compilation buffer."
 (defun exec/prog-mode-fixed()
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
-  (setq-local buffer-face-mode-face '(:family "Jetbrains Mono" :height 100))
+  (setq-local buffer-face-mode-face '(:family "Jetbrains Mono"))
   (buffer-face-mode))
 
 (defun exec/increase-buffer-font()
@@ -4096,6 +4155,7 @@ interactive compilation buffer."
 (add-hook 'org-journal-mode-hook 'exec/non-mono-font)
 
 (add-hook 'prog-mode-hook 'exec/increase-buffer-font)
+(add-hook 'prog-mode-hook 'exec/prog-mode-fixed)
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
@@ -4314,7 +4374,7 @@ interactive compilation buffer."
   :bind
   ;; Don't forget to set keybinds!
   :config
-  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll --layout=reverse"
 		fzf/executable "fzf"
 		fzf/git-grep-args "-i --line-number %s"
 		;; command used for `fzf-grep-*` functions
@@ -4398,7 +4458,7 @@ interactive compilation buffer."
 		(with-temp-buffer
 		  (insert-file-contents "~/.config/openai_api_key/key.private")
 		  (buffer-substring-no-properties (point-min) (line-end-position)))
-		gptel-default-mode 'org-mode
+		gptel-default-mode 'markdown-mode
 		gptel-prompt-prefix-alist
 		'((markdown-mode . "# ") (org-mode . "* ") (text-mode . "# "))
 		)
@@ -4465,18 +4525,17 @@ interactive compilation buffer."
   (fcitx-default-setup))
 
 
-;; (use-package rime
-;;   :disabled t
-;;   :init
-;;   (setq rime-show-candidate 'posframe)
-;;   (setq rime-user-data-dir "~/.local/share/fcitx5/rime")
-;;   :bind ("s-=" . 'toggle-input-method)
-;;   :config
-;;   (setq rime-posframe-properties
-;; 		(list :font "Noto Sans CJK SC"
-;; 			  :internal-border-width 10))
-;;   (setq rime-show-preedit t)
-;;   )
+(use-package rime
+  :init
+  (setq rime-show-candidate 'posframe)
+  (setq rime-user-data-dir "~/.local/share/fcitx5/rime")
+  :bind ("s-=" . 'toggle-input-method)
+  :config
+  (setq rime-posframe-properties
+		(list :font "Noto Sans CJK SC"
+			  :internal-border-width 1))
+  (setq rime-show-preedit t)
+  )
 
 
 

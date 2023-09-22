@@ -137,7 +137,7 @@
       videoDrivers = [
         # "nvidia"
         "amdgpu"
-        # "modesetting"
+        "modesetting"
         # "fbdev"
       ];
       #   config = lib.mkAfter ''
