@@ -143,6 +143,8 @@ i.e. windows tiled side-by-side."
         (with-selected-window window (exec/split-window-sensibly-prefer-horizontal window))
       (with-selected-window window (split-window-sensibly window)))))
 
+
+
 ;; a few more useful configurations...
 (use-package emacs
   :init
@@ -165,6 +167,29 @@ i.e. windows tiled side-by-side."
 									   (t . 2)
 									   ))
  ;; (setq display-buffer-base-action '(nil . ((inhibit-same-window . t))))
+
+  (setq mode-line-compact nil
+		mode-line-in-non-selected-windows nil
+		mode-line-percent-position nil
+		mode-line-position-column-line-format '("[⬇️%l,%c]")
+		)
+  (setq mode-line-format 
+		'("%e"
+		  mode-line-front-space
+		  (:propertize
+		   ("" mode-line-mule-info mode-line-client mode-line-modified
+			mode-line-remote)
+		   display (min-width (5.0)))
+		  mode-line-frame-identification
+		  mode-line-buffer-identification
+		  "   "
+		  mode-line-position
+		  evil-mode-line-tag
+		  (vc-mode vc-mode)
+		  "  "
+		  ;; mode-line-modes
+		  mode-line-misc-info
+		  mode-line-end-spaces))
 
   (setq vc-follow-symlinks t)
   (setq custom-safe-themes t)
@@ -222,7 +247,6 @@ i.e. windows tiled side-by-side."
   (setq column-number-mode t)
   (setq line-number-mode t)
   (setq mode-line-percent-position '(-3 "%o"))
-  (setq mode-line-compact 'always)
 
   ;; (add-to-list 'default-frame-alist '(foreground-color . "white"))
   ;; (add-to-list 'default-frame-alist '(background-color . "black"))
@@ -238,11 +262,8 @@ i.e. windows tiled side-by-side."
 										  "JetBrainsMonoNL Nerd Font Mono"
 										  ) nil 'append)
   (set-fontset-font t 'emoji (font-spec :family
-										"Noto Color Emoji"
-										))
-  (set-fontset-font t 'emoji (font-spec :family
 										"Twitter Color Emoji"
-										) nil 'append)
+										))
   (set-fontset-font t 'emoji (font-spec :family
 										"Symbola"
 										) nil 'append)
@@ -349,13 +370,21 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (evil-add-command-properties #'consult-line :jump t)
   (evil-add-command-properties #'org-agenda-switch-to :jump t)
 
-  (setq evil-normal-state-tag   (propertize "N" 'face '((:background "Green" :foreground "black")))
-		evil-emacs-state-tag    (propertize "E" 'face '((:background "Yellow"       :foreground "black")))
-		evil-insert-state-tag   (propertize "I" 'face '((:background "Red"    :foreground "black")))
-		evil-replace-state-tag  (propertize "R" 'face '((:background "chocolate"      :foreground "black")))
-		evil-motion-state-tag   (propertize "M" 'face '((:background "plum3"          :foreground "black")))
-		evil-visual-state-tag   (propertize "V" 'face '((:background "Purple"           :foreground "white")))
-		evil-operator-state-tag (propertize "O" 'face '((:background "Blue"    :foreground "white"))))
+  ;; (setq evil-normal-state-tag   (propertize "N" 'face '((:background "Green" :foreground "black")))
+  ;; 		evil-emacs-state-tag    (propertize "E" 'face '((:background "Yellow"       :foreground "black")))
+  ;; 		evil-insert-state-tag   (propertize "I" 'face '((:background "Red"    :foreground "black")))
+  ;; 		evil-replace-state-tag  (propertize "R" 'face '((:background "chocolate"      :foreground "black")))
+  ;; 		evil-motion-state-tag   (propertize "M" 'face '((:background "plum3"          :foreground "black")))
+  ;; 		evil-visual-state-tag   (propertize "V" 'face '((:background "Purple"           :foreground "white")))
+  ;; 		evil-operator-state-tag (propertize "O" 'face '((:background "Blue"    :foreground "white"))))
+
+  (setq evil-normal-state-tag   (propertize "N" 'face nil)
+		evil-emacs-state-tag    (propertize "E" 'face nil)
+		evil-insert-state-tag   (propertize "I" 'face nil)
+		evil-replace-state-tag  (propertize "R" 'face nil)
+		evil-motion-state-tag   (propertize "M" 'face nil)
+		evil-visual-state-tag   (propertize "V" 'face nil)
+		evil-operator-state-tag (propertize "O" 'face nil))
 
   )
 
@@ -1087,13 +1116,27 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 											 :weight extra-bold
 											 :family "Noto Sans Mono"))))
  '(mode-line ((t (:box nil))))
- '(mode-line-active ((t (:inherit mode-line
-								  ;; :box (:line-width (1 . 1) :color "red")
-								  :foreground "white"
-								  :background "#880808"))))
 
  '(imenu-list-entry-face ((t (:height 0.8))))
  )
+
+
+(defun exec/mode-line-insert-hook()
+  (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white")
+  (set-face-attribute 'line-number-current-line nil :background "#8b0000" :foreground "white")
+  )
+(defun exec/mode-line-normal-hook()
+  (set-face-attribute 'mode-line-active nil :background "#013220" :foreground "white")
+  (set-face-attribute 'line-number-current-line nil :background "#013220" :foreground "white")
+  )
+(defun exec/mode-line-visual-hook()
+  (set-face-attribute 'mode-line-active nil :background "#purple" :foreground "white")
+  (set-face-attribute 'line-number-current-line nil :background "purple" :foreground "white")
+  )
+
+(add-hook 'evil-insert-state-entry-hook 'exec/mode-line-insert-hook)
+(add-hook 'evil-normal-state-entry-hook 'exec/mode-line-normal-hook)
+(add-hook 'evil-visual-state-entry-hook 'exec/mode-line-visual-hook)
 
 
 (defun disable-all-themes ()
@@ -1846,7 +1889,9 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   (org-mode . copilot-mode)
   (text-mode . copilot-mode)
   :config (setq copilot-node-executable "node"
-				copilot-idle-delay 1)
+				copilot-idle-delay 1
+				copilot-max-char 50000
+				)
   (custom-set-faces '(copilot-overlay-face ((t (:inherit shadow :underline t :weight thin :foreground "white")))))
   )
 
@@ -2888,11 +2933,13 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 										; 	   )
 
   ;; allow for updating mail using 'U' in the main view:
-  (setq mu4e-get-mail-command "true"
-		mu4e-index-update-in-background t
-		mu4e-update-interval 30
-		mu4e-index-cleanup nil
+  (setq mu4e-get-mail-command "mbsync --pull execvy"
+		mu4e-index-update-in-background nil
+		mu4e-update-interval 60
+		mu4e-index-cleanup t
 		mu4e-index-lazy-check nil
+		mu4e-notification-support t
+		mu4e-speedbar-support t
 		)
 
 
@@ -4526,8 +4573,11 @@ interactive compilation buffer."
 
 
 (use-package rime
+  :straight (:type built-in)
   :init
-  (setq rime-show-candidate 'posframe)
+  (setq rime-show-candidate 'posframe
+		default-input-method "rime"
+		)
   (setq rime-user-data-dir "~/.local/share/fcitx5/rime")
   :bind ("s-=" . 'toggle-input-method)
   :config

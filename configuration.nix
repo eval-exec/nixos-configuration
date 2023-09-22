@@ -101,7 +101,7 @@
 
   services = {
     keyd = {
-      enable = true;
+      enable = false;
       keyboards.default.settings = {
         main = {
           capslock = "overload(control, esc)";
@@ -133,6 +133,7 @@
       enable = true;
       layout = "us";
       xkbVariant = "";
+      xkbOptions = "ctrl:hyper_capscontrol";
 
       videoDrivers = [
         # "nvidia"

@@ -189,7 +189,7 @@
             extraConfig = { wait = 1; };
             onNotify = "${pkgs.isync}/bin/mbsync --pull execvy:INBOX";
             onNotifyPost =
-              "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index)'";
+              "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
           };
 
           mbsync = {
@@ -238,7 +238,9 @@
     mbsync = {
       enable = true;
       # frequency = "*-*-* *:*:00,20,40";
-      postExec = "${pkgs.mu}/bin/mu index";
+      postExec =
+        # "${pkgs.mu}/bin/mu index";
+        "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
       verbose = true;
     };
   };
@@ -273,6 +275,7 @@
       extraPackages = epkgs: [
         pkgs.mu
         pkgs.librime
+        pkgs.emacsPackages.rime
         pkgs.tdlib
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.vterm
