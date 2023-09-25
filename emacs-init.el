@@ -173,7 +173,7 @@ i.e. windows tiled side-by-side."
 		mode-line-percent-position nil
 		mode-line-position-column-line-format '("[⬇️%l,%c]")
 		)
-  (setq mode-line-format 
+  (setq-default mode-line-format 
 		'("%e"
 		  mode-line-front-space
 		  (:propertize
@@ -2965,7 +2965,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;; allow for updating mail using 'U' in the main view:
   (setq mu4e-get-mail-command "mbsync --pull execvy"
 		mu4e-index-update-in-background nil
-		mu4e-update-interval 60
+		mu4e-update-interval nil
 		mu4e-index-cleanup t
 		mu4e-index-lazy-check nil
 		mu4e-notification-support t
