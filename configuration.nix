@@ -136,7 +136,7 @@
       xkbOptions = "ctrl:hyper_capscontrol";
 
       videoDrivers = [
-        # "nvidia"
+        "nvidia"
         "amdgpu"
         "modesetting"
         # "fbdev"
