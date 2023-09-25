@@ -132,7 +132,7 @@
     xserver = {
       enable = true;
       layout = "us";
-      xkbVariant = "";
+      # xkbVariant = "";
       xkbOptions = "ctrl:hyper_capscontrol";
 
       videoDrivers = [
@@ -186,6 +186,11 @@
           enableHidpi = true;
 
         };
+        sessionCommands = ''
+          sleep 3;
+          ${pkgs.xorg.xmodmap}/bin/xmodmap -e "remove mod4 = Hyper_L";
+          ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
+        '';
 
         autoLogin = {
           enable = true;

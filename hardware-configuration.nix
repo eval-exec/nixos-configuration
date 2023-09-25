@@ -12,7 +12,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.kernelParams = [
-    "video=eDP-1:3840x2160@60"
+    "video=eDP-1:3456x2160@60"
     "mem_sleep_default=deep"
     # "i915.enable_psr=0"
     "i915.fastboot=1"

@@ -13,8 +13,12 @@
     autoconf
     automake
     aspell
+    aspellDicts.en
+    aspellDicts.en-science
+    aspellDicts.en-computers
     google-cloud-sdk
     sdcv
+    crate2nix
     babashka
     bat
     bitcoin
@@ -276,6 +280,7 @@
         pkgs.mu
         pkgs.librime
         pkgs.emacsPackages.rime
+        pkgs.emacsPackages.jinx
         pkgs.tdlib
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.vterm

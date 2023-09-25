@@ -168,7 +168,7 @@ i.e. windows tiled side-by-side."
 									   ))
  ;; (setq display-buffer-base-action '(nil . ((inhibit-same-window . t))))
 
-  (setq mode-line-compact nil
+  (setq mode-line-compact t
 		mode-line-in-non-selected-windows nil
 		mode-line-percent-position nil
 		mode-line-position-column-line-format '("[⬇️%l,%c]")
@@ -242,8 +242,8 @@ i.e. windows tiled side-by-side."
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t)
-  (setq window-resize-pixelwise t)
-  (setq frame-resize-pixelwise t)
+  (setq window-resize-pixelwise nil)
+  (setq frame-resize-pixelwise nil)
   (setq column-number-mode t)
   (setq line-number-mode t)
   (setq mode-line-percent-position '(-3 "%o"))
@@ -817,9 +817,9 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 ;;; hyper key bindings
-(global-set-key (kbd "C-M-s-h") 'help-command)
+(global-set-key (kbd "H-h") 'help-command)
 (general-def
-  :prefix "C-M-s-h"
+  :prefix "H-h"
   "k" 'helpful-key
   "v" 'helpful-variable
   "o" 'helpful-symbol
@@ -832,16 +832,16 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (general-def
-  "C-M-s-h" 'help-command
-  "C-M-s-k" 'kill-current-buffer
-  "C-M-s-<left>" 'winner-undo
-  "C-M-s-<right>" 'winner-redo
+  "H-h" 'help-command
+  "H-k" 'kill-current-buffer
+  "H-<left>" 'winner-undo
+  "H-<right>" 'winner-redo
 
   "C-H-<left>" 'centaur-tabs-backward
   "C-H-<right>" 'centaur-tabs-forward
-  "C-M-s-`" 'garbage-collect
+  "H-`" 'garbage-collect
   ;; "H-i" 'yas-insert-snippet
-  "C-M-s-a" 'org-agenda
+  "H-a" 'org-agenda
   )
 
 
@@ -1539,12 +1539,12 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   )
 
 (use-package jinx
+  :straight (:type built-in)
   ;; :hook
   ;; (emacs-startup . global-jinx-mode)
   :bind
   ([remap ispell-word] . jinx-correct)
   :config
-  ;; hollo world
   )
 
 ;; (use-package emojify
@@ -1860,11 +1860,12 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   :init
   (setq completion-search-distance 200)
   (setq completion-styles '(
-							orderless
-							;; partial-completion
+							basic
+							partial-completion
 							;; substring
 							;; flex
-							basic
+							orderless
+							;; emacs22
 							))
 
   (setq completion-category-defaults nil
@@ -1875,10 +1876,11 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 									orderless-prefixes
 									orderless-literal
 									orderless-initialism
-									;; orderless-flex
+									orderless-flex
 									orderless-regexp
 									))
   )
+
 
 
 (use-package copilot
@@ -1890,7 +1892,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   (text-mode . copilot-mode)
   :config (setq copilot-node-executable "node"
 				copilot-idle-delay 1
-				copilot-max-char 50000
+				copilot-max-char -1
 				)
   (custom-set-faces '(copilot-overlay-face ((t (:inherit shadow :underline t :weight thin :foreground "white")))))
   )
@@ -1899,10 +1901,25 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   :config
   (setq
    gptai-model "text-davinci-003"
+   gptai-api-key (with-temp-buffer
+		  (insert-file-contents "~/.config/openai_api_key/key.private")
+		  (buffer-substring-no-properties (point-min) (line-end-position)))
+   gptai-max-tokens 1000
    )
   ;; (gptai-list-models)
   )
 ;; (evil-line-move 1)
+
+
+;; (use-package chatgpt
+;;   :config
+;;   (setenv "OPENAI_API_KEY"
+;; 		  (with-temp-buffer
+;; 			(insert-file-contents "~/.config/openai_api_key/key.private")
+;; 			(buffer-substring-no-properties (point-min) (line-end-position)))
+
+;; 		  )
+;;   )
 
 (use-package corfu
   :straight (:files (:defaults "extensions/*"))
@@ -1966,7 +1983,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 (use-package cape
   :config
   ;; Add `completion-at-point-functions', used by `completion-at-point'.
-  ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
   ;; (add-to-list 'completion-at-point-functions #'cape-history)
   ;; (add-to-list 'completion-at-point-functions #'cape-keyword)
@@ -1978,12 +1995,25 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;; (add-to-list 'completion-at-point-functions #'cape-dict)
   ;; (add-to-list 'completion-at-point-functions #'cape-symbol)
   ;; (add-to-list 'completion-at-point-functions #'cape-line) 
+
+  (setq cape-dabbrev-min-length 2
+		cape-dabbrev-check-other-buffers nil)
   (use-package yasnippet-capf
 	:straight (:host github :repo "elken/yasnippet-capf")
 	:config
 	(add-to-list 'completion-at-point-functions #'yasnippet-capf)
 	)
   )
+
+
+;; Use Dabbrev with Corfu!
+(use-package dabbrev
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  ;; Other useful Dabbrev configurations.
+  :custom
+  (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
 (use-package rg
   :hook (rg-mode . (lambda()
@@ -2775,7 +2805,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
    (winner-mode))
 
 (use-package ace-window
-  :bind ("C-M-s-o" . ace-window)
+  :bind ("H-o" . ace-window)
   :custom-face
   (aw-leading-char-face ((t (
 							 :foreground "red"
