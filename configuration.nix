@@ -136,7 +136,7 @@
       xkbOptions = "ctrl:hyper_capscontrol";
 
       videoDrivers = [
-        "nvidia"
+        # "nvidia"
         "amdgpu"
         "modesetting"
         # "fbdev"
@@ -271,59 +271,72 @@
   # };
 
   # Allow unfree packages
-  fonts.packages = with pkgs; [
-    dina-font
-    fira-code
-    fira-code-symbols
-    # ibm-plex
-    jetbrains-mono
-    liberation_ttf
-    mplus-outline-fonts.githubRelease
-    nerdfonts
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    proggyfonts
-    sarasa-gothic
-    sarasa-gothic
-    source-han-sans
-    source-han-serif
-    symbola
-    twitter-color-emoji
-    unifont
-  ];
-  fonts.fontconfig.localConf = ''
-    <?xml version="1.0"?>
-    <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-    <fontconfig>
-      <alias binding="weak">
-        <family>monospace</family>
-        <prefer>
-          <family>emoji</family>
-        </prefer>
-      </alias>
-      <alias binding="weak">
-        <family>sans-serif</family>
-        <prefer>
-          <family>emoji</family>
-        </prefer>
-      </alias>
-      <alias binding="weak">
-        <family>serif</family>
-        <prefer>
-          <family>emoji</family>
-        </prefer>
-      </alias>
-    </fontconfig>
-  '';
+  fonts = {
+    enableDefaultPackages = false;
+    fontDir.enable = true;
+    packages = with pkgs; [
+      dina-font
+      fira-code
+      fira-code-symbols
+      # ibm-plex
+      jetbrains-mono
+      liberation_ttf
+      mplus-outline-fonts.githubRelease
+      nerdfonts
+      noto-fonts
+      noto-fonts-extra
+      noto-fonts-cjk
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-emoji
+      proggyfonts
+      sarasa-gothic
+      sarasa-gothic
+      source-han-sans
+      source-han-serif
+      symbola
+      twitter-color-emoji
+      unifont
+      wqy_zenhei
+      wqy_microhei
 
-  fonts.fontconfig.defaultFonts = {
-    serif = [ "Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
-    sansSerif = [ "Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
-    monospace = [ "Jetbrains Mono" ];
-    emoji = [
-      "Noto Color Emoji"
-    ]; # "Twitter Color Emoji" "JoyPixels" "Unifont" "Unifont Upper" ];
+    ];
+    fontconfig = {
+      localConf = ''
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+        <fontconfig>
+          <alias binding="weak">
+            <family>monospace</family>
+            <prefer>
+              <family>emoji</family>
+            </prefer>
+          </alias>
+          <alias binding="weak">
+            <family>sans-serif</family>
+            <prefer>
+              <family>emoji</family>
+            </prefer>
+          </alias>
+          <alias binding="weak">
+            <family>serif</family>
+            <prefer>
+              <family>emoji</family>
+            </prefer>
+          </alias>
+        </fontconfig>
+      '';
+
+      # defaultFonts = {
+      #   serif = [ "Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
+      #   sansSerif = [ "Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
+      #   monospace = [ "Jetbrains Mono" ];
+      #   emoji = [
+      #     "Noto Color Emoji"
+      #   ]; 
+      # };
+    };
+
   };
 
   environment = {
@@ -444,7 +457,7 @@
   programs.steam = {
     enable = true;
     package = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [ wqy_zenhei ];
+      extraPkgs = pkgs: with pkgs; [ wqy_zenhei wqy_microhei ];
 
       extraProfile = "export STEAM_FORCE_DESKTOPUI_SCALING=2";
     };
