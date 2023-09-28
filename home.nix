@@ -20,6 +20,7 @@
     sdcv
     crate2nix
     yesplaymusic
+    youtube-music
     babashka
     bat
     bitcoin
