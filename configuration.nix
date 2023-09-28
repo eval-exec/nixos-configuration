@@ -242,10 +242,10 @@
   users.defaultUserShell = pkgs.zsh;
   virtualisation = {
     libvirtd.enable = true;
-    virtualbox.host.enable = false;
-    # virtualbox.host.enableExtensionPack = true;
-    # virtualbox.guest.enable = true;
-    # virtualbox.guest.x11 = true;
+    virtualbox.host.enable = true;
+    virtualbox.host.enableExtensionPack = true;
+    virtualbox.guest.enable = true;
+    virtualbox.guest.x11 = true;
     docker.enable = true;
     # docker.rootless = {
     #   enable = false;
