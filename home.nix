@@ -19,6 +19,7 @@
     google-cloud-sdk
     sdcv
     crate2nix
+    yesplaymusic
     babashka
     bat
     bitcoin
