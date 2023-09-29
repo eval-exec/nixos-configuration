@@ -4545,7 +4545,7 @@ interactive compilation buffer."
 		  (buffer-substring-no-properties (point-min) (line-end-position)))
 		gptel-default-mode 'text-mode
 		gptel-prompt-prefix-alist
-		'((markdown-mode . "# ") (org-mode . "* ") (text-mode . "🧬 "))
+		'((markdown-mode . "# ") (org-mode . "* ") (text-mode . "🤖: "))
 		)
   )
 

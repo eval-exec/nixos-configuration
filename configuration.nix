@@ -282,6 +282,7 @@
       dina-font
       fira-code
       fira-code-symbols
+      anonymousPro
       # ibm-plex
       jetbrains-mono
       liberation_ttf
