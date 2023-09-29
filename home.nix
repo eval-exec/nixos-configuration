@@ -21,6 +21,7 @@
     crate2nix
     yesplaymusic
     youtube-music
+    nuclear
     babashka
     bat
     bitcoin
