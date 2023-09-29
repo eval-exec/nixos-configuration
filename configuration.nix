@@ -289,6 +289,8 @@
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-color-emoji
+      julia-mono
+      dejavu_fonts
       noto-fonts-emoji-blob-bin
       proggyfonts
       sarasa-gothic

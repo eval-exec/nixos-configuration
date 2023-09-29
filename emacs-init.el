@@ -259,17 +259,16 @@ i.e. windows tiled side-by-side."
   ;; ;; 👿
   ;; (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
   ;; (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
-  (set-fontset-font t 'unicode (font-spec :family "Noto Sans"))
+  (set-fontset-font t 'unicode "JuliaMono")
   ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
-  ;; (set-fontset-font t 'emoji (font-spec :family
-  ;; 										"Noto Color Emoji"
-  ;; 										))
 
 ;; Something is coming... 🏆
 
-  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
   (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
-  ;; (set-fontset-font t 'emoji nil)
+  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
+  (set-fontset-font t 'emoji "Noto Color Emoji")
+  (set-fontset-font t 'emoji "Twitter Color Emoji" nil 'append)
+  (set-fontset-font t 'symbol "Symbola" nil 'append)
 
   ;; (setq face-font-rescale-alist '(
   ;; 								  ("Noto Color Emoji" . 0.9)
@@ -280,7 +279,7 @@ i.e. windows tiled side-by-side."
   ;; (set-fontset-font t 'symbol (font-spec :family "Noto Sans"))
 
 
-  (set-fontset-font t nil "Symbola" nil 'append)
+  ;; (set-fontset-font t nil "Symbola")
 
 
 
@@ -4200,7 +4199,7 @@ interactive compilation buffer."
 (defun exec/prog-mode-fixed()
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
-  (setq-local buffer-face-mode-face '(:family "Jetbrains Mono"))
+  (setq-local buffer-face-mode-face '(:family "JuliaMono"))
   (buffer-face-mode))
 
 (defun exec/increase-buffer-font()
@@ -4536,6 +4535,8 @@ interactive compilation buffer."
   (gptel-mode . (lambda()
 				  (copilot-mode -1)
 				  ))
+  :general
+  (:keymaps 'gptel-mode-map "C-<return>" 'gptel-send)
   :config
   ;; get first line content of ~/.config/openai_api_key/key.private file to gptel-api-key, without newline
   (setq gptel-api-key

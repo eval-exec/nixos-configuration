@@ -191,16 +191,16 @@
             tls = { enable = true; };
           };
           imapnotify = {
-            enable = true;
+            enable = false;
             boxes = [ "INBOX" ];
             extraConfig = { wait = 1; };
             onNotify = "${pkgs.isync}/bin/mbsync --pull execvy:INBOX";
             onNotifyPost =
-              "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
+              "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
           };
 
           mbsync = {
-            enable = true;
+            enable = false;
             create = "both";
             expunge = "both";
             extraConfig = {
@@ -218,7 +218,7 @@
           };
           msmtp = { enable = true; };
           # smtp = { host = "gmail.com"; };
-          mu = { enable = true; };
+          mu = { enable = false; };
 
         };
 
@@ -247,7 +247,7 @@
       # frequency = "*-*-* *:*:00,20,40";
       postExec =
         # "${pkgs.mu}/bin/mu index";
-        "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
+        "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
       verbose = true;
     };
   };
@@ -278,7 +278,7 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.emacs-git;
+      package = pkgs.emacs;
       extraPackages = epkgs: [
         pkgs.mu
         pkgs.librime

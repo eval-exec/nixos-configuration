@@ -35,7 +35,8 @@
 					;; "Hack Nerd Font Mono"
 ;; "AnonymicePro Nerd Font Mono"
 					;; "UbuntuMono Nerd Font Mono"
-					"JetBrains Mono"
+					;; "JetBrains Mono"
+					"JuliaMono"
 					;; "Noto Sans"
 					:height 110
 					:weight 'normal)
