@@ -162,10 +162,13 @@ i.e. windows tiled side-by-side."
   (setq switch-to-buffer-obey-display-actions t)
   (setq auto-save-default nil)
   (setq next-line-add-newlines t)
-  (setq font-lock-maximum-decoration '(
-									   (markdown-mode . nil)
-									   (t . 2)
-									   ))
+  (setq font-lock-maximum-decoration
+		1
+		;; '(
+		;; 							   (markdown-mode . nil)
+		;; 							   (t . 2)
+		;; 							   )
+		)
  ;; (setq display-buffer-base-action '(nil . ((inhibit-same-window . t))))
 
   (setq mode-line-compact t
@@ -255,30 +258,32 @@ i.e. windows tiled side-by-side."
   (setq use-default-font-for-symbols nil)
   ;; ;; 👿
   ;; (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
-  (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
+  ;; (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
   (set-fontset-font t 'unicode (font-spec :family "Noto Sans"))
-  (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
-  (set-fontset-font t 'unicode (font-spec :family
-										  "JetBrainsMonoNL Nerd Font Mono"
-										  ) nil 'append)
-  (set-fontset-font t 'emoji (font-spec :family
-										"Twitter Color Emoji"
-										))
-  (set-fontset-font t 'emoji (font-spec :family
-										"Symbola"
-										) nil 'append)
+  ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
+  ;; (set-fontset-font t 'emoji (font-spec :family
+  ;; 										"Noto Color Emoji"
+  ;; 										))
+
 ;; Something is coming... 🏆
+
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
   (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
   ;; (set-fontset-font t 'emoji nil)
 
-  (setq face-font-rescale-alist '(
-								  ("Noto Color Emoji" . 0.9)
-								  ("JetBrainsMonoNL Nerd Font Mono" . 1.0)
-								  ;; ("NotoMono Nerd Font Propo" . 0.9)
-								  ;; ("Arimo Nerd Font" . 0.9)
-								  ))
-  (set-fontset-font t 'symbol (font-spec :family "Noto Sans"))
+  ;; (setq face-font-rescale-alist '(
+  ;; 								  ("Noto Color Emoji" . 0.9)
+  ;; 								  ("JetBrainsMonoNL Nerd Font Mono" . 1.0)
+  ;; 								  ;; ("NotoMono Nerd Font Propo" . 0.9)
+  ;; 								  ;; ("Arimo Nerd Font" . 0.9)
+  ;; 								  ))
+  ;; (set-fontset-font t 'symbol (font-spec :family "Noto Sans"))
+
+
+  (set-fontset-font t nil "Symbola" nil 'append)
+
+
+
   (setq revert-without-query '(".*"))
 
 
@@ -626,6 +631,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (general-def 'normal "gd" 'xref-find-definitions)
 (general-def 'normal "gr" 'xref-find-references)
+(general-def 'insert "C-SPC" 'completion-at-point)
 
 (general-define-key :state
 					'normal "C-S-c" 'exec/put-file-name-on-clipboard)
@@ -1122,16 +1128,16 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (defun exec/mode-line-insert-hook()
-  (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white")
-  (set-face-attribute 'line-number-current-line nil :background "#8b0000" :foreground "white")
+  ;; (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white")
+  ;; (set-face-attribute 'line-number-current-line nil :background "#8b0000" :foreground "white")
   )
 (defun exec/mode-line-normal-hook()
-  (set-face-attribute 'mode-line-active nil :background "#013220" :foreground "white")
-  (set-face-attribute 'line-number-current-line nil :background "#013220" :foreground "white")
+  ;; (set-face-attribute 'mode-line-active nil :background "#013220" :foreground "white")
+  ;; (set-face-attribute 'line-number-current-line nil :background "#013220" :foreground "white")
   )
 (defun exec/mode-line-visual-hook()
-  (set-face-attribute 'mode-line-active nil :background "#purple" :foreground "white")
-  (set-face-attribute 'line-number-current-line nil :background "purple" :foreground "white")
+  ;; (set-face-attribute 'mode-line-active nil :background "#purple" :foreground "white")
+  ;; (set-face-attribute 'line-number-current-line nil :background "purple" :foreground "white")
   )
 
 (add-hook 'evil-insert-state-entry-hook 'exec/mode-line-insert-hook)
@@ -2921,6 +2927,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;; )
 
 (use-package mu4e
+  :disabled t
   :straight (:type built-in)
   :config
 
@@ -4235,9 +4242,9 @@ interactive compilation buffer."
 (add-hook 'prog-mode-hook 'exec/prog-mode-fixed)
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-(add-hook 'text-mode-hook 'display-line-numbers-mode)
-(add-hook 'toml-mode-hook 'display-line-numbers-mode)
-(add-hook 'conf-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'text-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'toml-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'conf-mode-hook 'display-line-numbers-mode)
 ;; (add-hook 'consult-preview-at-point-mode-hook 'display-line-numbers-mode)
 ;; (add-hook 'ssh-config-mode-hook 'display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'electric-indent-mode)
@@ -4535,9 +4542,9 @@ interactive compilation buffer."
 		(with-temp-buffer
 		  (insert-file-contents "~/.config/openai_api_key/key.private")
 		  (buffer-substring-no-properties (point-min) (line-end-position)))
-		gptel-default-mode 'markdown-mode
+		gptel-default-mode 'text-mode
 		gptel-prompt-prefix-alist
-		'((markdown-mode . "# ") (org-mode . "* ") (text-mode . "# "))
+		'((markdown-mode . "# ") (org-mode . "* ") (text-mode . "🧬 "))
 		)
   )
 
