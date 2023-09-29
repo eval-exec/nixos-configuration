@@ -38,7 +38,11 @@
       options kvm ignore_msrs=1
     '';
 
-    tmp = { cleanOnBoot = true; };
+    tmp = {
+      useTmpfs = true;
+      tmpfsSize = "50%";
+      cleanOnBoot = true;
+    };
   };
   console.useXkbConfig = true;
 
