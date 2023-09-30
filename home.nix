@@ -192,12 +192,12 @@
             tls = { enable = true; };
           };
           imapnotify = {
-            enable = false;
+            enable = true;
             boxes = [ "INBOX" ];
             extraConfig = { wait = 1; };
             onNotify = "${pkgs.isync}/bin/mbsync --pull execvy:INBOX";
             onNotifyPost =
-              "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
+              "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index)'";
           };
 
           mbsync = {
@@ -387,13 +387,15 @@
 
   systemd.user.services = {
     clash = {
-      Unit = { Description = "clash"; };
+      Unit = {
+        Description = "clash";
+        After = [ "network.target" ];
+      };
+      Install = { WantedBy = [ "default.target" ]; };
       Service = {
         ExecStart =
           "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
-        Restart = "always";
-        requires = [ "network-online.target" ];
-        After = [ "network-online.target" ];
+        Restart = "no";
       };
     };
   };

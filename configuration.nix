@@ -140,8 +140,8 @@
       xkbOptions = "ctrl:hyper_capscontrol";
 
       videoDrivers = [
-        # "nvidia"
         "amdgpu"
+        "nvidia"
         "modesetting"
         # "fbdev"
       ];
@@ -248,8 +248,8 @@
     libvirtd.enable = false;
     virtualbox.host.enable = true;
     virtualbox.host.enableExtensionPack = true;
-    virtualbox.guest.enable = true;
-    virtualbox.guest.x11 = true;
+    virtualbox.guest.enable = false;
+    virtualbox.guest.x11 = false;
     docker.enable = true;
     # docker.rootless = {
     #   enable = false;
