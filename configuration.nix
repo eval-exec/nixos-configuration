@@ -140,9 +140,9 @@
       xkbOptions = "ctrl:hyper_capscontrol";
 
       videoDrivers = [
-        "nvidia"
-        # "amdgpu"
-        # "modesetting"
+        # "nvidia"
+        "amdgpu"
+        "modesetting"
         # "fbdev"
       ];
       #   config = lib.mkAfter ''
@@ -310,39 +310,13 @@
 
     ];
     fontconfig = {
-      localConf = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-        <fontconfig>
-          <alias binding="weak">
-            <family>monospace</family>
-            <prefer>
-              <family>emoji</family>
-            </prefer>
-          </alias>
-          <alias binding="weak">
-            <family>sans-serif</family>
-            <prefer>
-              <family>emoji</family>
-            </prefer>
-          </alias>
-          <alias binding="weak">
-            <family>serif</family>
-            <prefer>
-              <family>emoji</family>
-            </prefer>
-          </alias>
-        </fontconfig>
-      '';
 
-      # defaultFonts = {
-      #   serif = [ "Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
-      #   sansSerif = [ "Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
-      #   monospace = [ "Jetbrains Mono" ];
-      #   emoji = [
-      #     "Noto Color Emoji"
-      #   ]; 
-      # };
+      defaultFonts = {
+        serif = [ "Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
+        sansSerif = [ "Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
+        monospace = [ "JuliaMono" "Jetbrains Mono" ];
+        emoji = [ "Noto Color Emoji" "Twitter Color Emoji" ];
+      };
     };
 
   };

@@ -64,8 +64,8 @@
     libvdpau-va-gl
   ];
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
-    modesetting.enable = true;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+    modesetting.enable = false;
     powerManagement.enable = true;
     prime = {
       sync.enable = true;

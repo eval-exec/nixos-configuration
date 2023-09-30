@@ -263,12 +263,21 @@ i.e. windows tiled side-by-side."
   ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
 
 ;; Something is coming... 🏆
+;; 中文字体
+  ;; 🙋
 
-  (set-fontset-font t 'han "Sarasa Gothic SC") ;; 中文字体
-  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC") ;; 中文字体，。
+
+  (set-fontset-font t 'han "Sarasa Gothic SC")
+  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
   (set-fontset-font t 'emoji "Noto Color Emoji")
   (set-fontset-font t 'emoji "Twitter Color Emoji" nil 'append)
-  (set-fontset-font t 'symbol "Symbola" nil 'append)
+  (set-fontset-font t 'emoji "Symbola" nil 'append)
+
+  (set-fontset-font t 'symbol "Symbola")
+  (set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
+  (set-fontset-font t 'symbol "Twitter Color Emoji" nil 'append)
+(set-fontset-font t '(#x1f300 . #x1fad0) (font-spec :family "Noto Color Emoji"))
+
 
   ;; (setq face-font-rescale-alist '(
   ;; 								  ("Noto Color Emoji" . 0.9)
