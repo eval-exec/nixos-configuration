@@ -245,7 +245,7 @@
   };
   users.defaultUserShell = pkgs.zsh;
   virtualisation = {
-    libvirtd.enable = true;
+    libvirtd.enable = false;
     virtualbox.host.enable = true;
     virtualbox.host.enableExtensionPack = true;
     virtualbox.guest.enable = true;
@@ -378,7 +378,6 @@
     appimage-run
     cachix
     clang
-    clash-meta
     discord
     docker-compose
     dua

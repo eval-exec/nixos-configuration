@@ -100,8 +100,8 @@
 		  (:eval (if (buffer-file-name)
 					 (exec/make-header)
 				   "%b")))))
-;; (add-hook 'buffer-list-update-hook
-		  ;; 'exec/display-header)
+(add-hook 'buffer-list-update-hook
+		  'exec/display-header)
 
 (defun exec/split-window-sensibly-prefer-horizontal (&optional window)
 "Based on split-window-sensibly, but designed to prefer a horizontal split,
@@ -172,9 +172,9 @@ i.e. windows tiled side-by-side."
  ;; (setq display-buffer-base-action '(nil . ((inhibit-same-window . t))))
 
   (setq mode-line-compact t
-		mode-line-in-non-selected-windows nil
+		mode-line-in-non-selected-windows t
 		mode-line-percent-position nil
-		mode-line-position-column-line-format '("[⬇️%l,%c]")
+		mode-line-position-column-line-format '("[📝%l,%c]")
 		)
   (setq-default mode-line-format 
 		'("%e"
@@ -194,9 +194,9 @@ i.e. windows tiled side-by-side."
 		  mode-line-misc-info
 		  mode-line-end-spaces))
 
-  (set-face-attribute 'mode-line nil :background "black" :foreground "white")
-  (set-face-attribute 'mode-line-active nil :background "red" :foreground "white")
-  (set-face-attribute 'mode-line-inactive nil :background "blue" :foreground "white")
+  (set-face-attribute 'mode-line nil)
+  (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white")
+  (set-face-attribute 'mode-line-inactive nil)
 
   (setq vc-follow-symlinks t)
   (setq custom-safe-themes t)
@@ -311,6 +311,17 @@ i.e. windows tiled side-by-side."
 
   )
 
+(defun exec/increase-buffer-font()
+  (interactive)
+  ;; (setq-local buffer-face-mode-face '(:height 100))
+  ;; (buffer-face-mode)
+  )
+(defun exec/decrease-buffer-font()
+  (interactive)
+  (setq-local buffer-face-mode-face '(:height 0.8))
+  (buffer-face-mode)
+  )
+
 (defun exec/prog-mode-fixed()
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
@@ -386,8 +397,15 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
   (setq evil-ex-search-highlight-all nil)
   (setq undo-tree-auto-save-history nil)
-  (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
-  (evil-define-key 'normal org-mode-map (kbd "RET") #'org-return)
+
+  ;; (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+  ;; (evil-define-key 'normal org-mode-map (kbd "RET") #'org-return)
+(with-eval-after-load 'evil-maps
+  ;; (define-key evil-motion-state-map (kbd "SPC") nil)
+  (define-key evil-motion-state-map (kbd "RET") nil)
+  (define-key evil-motion-state-map (kbd "TAB") nil))
+  
+
   (general-define-key [remap evil-quit] 'kill-buffer-and-window)
 
   (evil-add-command-properties #'find-file-at-point :jump t)
@@ -770,6 +788,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   "mK" 'which-key-show-full-minor-mode-keymap
   )
 
+(general-def )
+
 (+general-global-menu! "Org Mode" "o"
   "l" 'org-cliplink
   "a" 'exec/org-agenda-transient
@@ -853,6 +873,11 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   "m" 'helpful-macro
   "c" 'helpful-command
   "C" 'helpful-callable
+  )
+
+(general-def
+  "H-SPC" 'which-key-show-major-mode
+  "C-H-SPC" 'which-key-show-minor-mode-keymap
   )
 
 
@@ -1868,35 +1893,48 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
           "Output\\*$"
           "\\*Async Shell Command\\*"
           help-mode
-          compilation-mode))
+		  helpful-mode
+          compilation-mode)
+		popper-display-control t
+		popper-window-height nil
+		)
   (popper-mode +1)
   (popper-echo-mode +1)
+
+  (add-hook 'compilation-mode-hook 'exec/decrease-buffer-font)
+  (add-hook 'helpful-mode-hook 'exec/decrease-buffer-font)
+  (add-hook 'messages-buffer-mode-hook 'exec/decrease-buffer-font)
   )
+
 
 
 (use-package orderless
   :init
   (setq completion-search-distance 200)
   (setq completion-styles '(
-							basic
-							partial-completion
+							;; partial-completion
 							;; substring
 							;; flex
 							orderless
+							basic
 							;; emacs22
-							))
+							)
+		completion-category-defaults nil)
+  (orderless-define-completion-style orderless+initialism
+	(orderless-matching-styles '(
+								 orderless-initialism
+								 ;; orderless-literal
+								 orderless-regexp
+								 orderless-prefixes
+								 ;; orderless-flex
+								 )))
 
-  (setq completion-category-defaults nil
-		completion-category-overrides '(
-										(file (styles . (partial-completion)))
-										))
-  (setq orderless-matching-styles '(
-									orderless-prefixes
-									orderless-literal
-									orderless-initialism
-									orderless-flex
-									orderless-regexp
-									))
+(setq completion-category-overrides
+      '((command (styles orderless+initialism))
+        (symbol (styles orderless+initialism))
+		(variable (styles orderless+initialism))
+		(file (styles  partial-completion))))
+
   )
 
 
@@ -1982,7 +2020,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 (use-package kind-icon
   :after corfu
   :custom
-  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
+  (kind-icon-default-face nil) ; to compute blended backgrounds correctly
 
   :config
   (setq kind-icon-use-icons t
@@ -2702,6 +2740,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   :config
   (setq rust-playground-cargo-toml-template
 		"[package]\nname = \"rust-playground\"\nversion = \"0.1.0\"\nauthors = [\"Eval EXEC<execvy@gmail.com>\"]\nedition = \"2021\"\n\n[dependencies]"
+		rust-playground-confirm-deletion nil
 		)
   )
 (use-package cargo-mode)
@@ -2774,7 +2813,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (use-package hungry-delete
   :config
-   (global-hungry-delete-mode))
+  (global-hungry-delete-mode -1)
+  )
 
 
 (defun exec/nov-mode-face()
@@ -2940,7 +2980,6 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;; )
 
 (use-package mu4e
-  :disabled t
   :straight (:type built-in)
   :config
 
@@ -2983,7 +3022,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 										; 	   )
 
   ;; allow for updating mail using 'U' in the main view:
-  (setq mu4e-get-mail-command "mbsync --pull execvy"
+  (setq mu4e-get-mail-command "true"
 		mu4e-index-update-in-background nil
 		mu4e-update-interval nil
 		mu4e-index-cleanup t
@@ -3609,14 +3648,25 @@ ement-room-left-margin-width 24
 
   (engine-mode t))
 
-(use-package yeetube)
+(use-package yeetube
+  :config
+  (setq yeetube-mpv-disable-video t
+		yeetube-download-directory "~/Music"
+		yeetube-download-audio-format "m4a"
+		yeetube-results-limit 25)
+
+  (general-define-key
+   :keymaps 'yeetube-mode-map
+   "<return>" 'yeetube-play
+   )
+  )
 
 (use-package empv
   :straight (:host github :repo "isamert/empv.el")
   :config
   (setq empv-invidious-instance "https://vid.puffyan.us/api/v1"
 		empv-youtube-use-tabulated-results t
-		empv-youtube-thumbnail-quality nil
+		empv-youtube-thumbnail-quality "default"
 		)
   )
 
@@ -4225,11 +4275,6 @@ interactive compilation buffer."
 (use-package solarized-theme)
 
 
-(defun exec/increase-buffer-font()
-  (interactive)
-  ;; (setq-local buffer-face-mode-face '(:height 100))
-  ;; (buffer-face-mode)
-  )
 
 (defun exec/org-mode-fixed()
   "Set a fixed width (monospace) font in current buffer."
@@ -4589,9 +4634,11 @@ interactive compilation buffer."
 									   ;; :family "Noto Sans Mono"
 									   ;; "NotoSansMNerdFontMono"
 									   ;; :family "JetBrainsMonoNL Nerd Font"
-									   :height  1.0
+									   :height  100
 									   :background "black"
-									   ))
+									   )
+			   mode-line-format nil
+			   )
   (buffer-face-mode)
   (origami-mode -1)
   (fringe-mode -1)

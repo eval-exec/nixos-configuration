@@ -12,6 +12,7 @@
     atool
     autoconf
     automake
+    spotdl
     aspell
     aspellDicts.en
     aspellDicts.en-science
@@ -200,7 +201,7 @@
           };
 
           mbsync = {
-            enable = false;
+            enable = true;
             create = "both";
             expunge = "both";
             extraConfig = {
@@ -216,9 +217,9 @@
             remove = "both";
             subFolders = "Verbatim";
           };
-          msmtp = { enable = false; };
+          msmtp = { enable = true; };
           # smtp = { host = "gmail.com"; };
-          mu = { enable = false; };
+          mu = { enable = true; };
 
         };
 
@@ -237,23 +238,23 @@
       };
 
     };
-    imapnotify = { enable = false; };
+    imapnotify = { enable = true; };
     kdeconnect = {
       enable = true;
       indicator = true;
     };
     mbsync = {
-      enable = false;
+      enable = true;
       # frequency = "*-*-* *:*:00,20,40";
-      postExec =
-        # "${pkgs.mu}/bin/mu index";
-        "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
+      # postExec =
+      # "${pkgs.mu}/bin/mu index";
+      # "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
       verbose = true;
     };
   };
   programs = {
     home-manager.enable = true;
-    mbsync = { enable = false; };
+    mbsync = { enable = true; };
     msmtp = { enable = true; };
     chromium = { enable = true; };
     nix-index = {
@@ -294,16 +295,6 @@
         pkgs.emacsPackages.w3m
         pkgs.emacsPackages.sqlite3
       ];
-    };
-    offlineimap = {
-      enable = false;
-      # extraConfig = {
-      #   default = {
-      #   };
-      #   general = {
-      #   };
-      # };
-
     };
 
     zsh = {
