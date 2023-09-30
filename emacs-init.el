@@ -257,26 +257,24 @@ i.e. windows tiled side-by-side."
 
   (setq use-default-font-for-symbols nil)
   ;; ;; 👿
-  ;; (set-face-attribute 'fixed-pitch nil :font "Jetbrains Mono")
+  (set-face-attribute 'fixed-pitch nil :font "JuliaMono")
   ;; (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
-  (set-fontset-font t 'unicode "JuliaMono")
   ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
 
-;; Something is coming... 🏆
-;; 中文字体
+
+  ;; Something is coming... 🏆
+  ;; 中文字体
   ;; 🙋
-
-
+  ;; ''‘’
+  (set-fontset-font t 'unicode "JuliaMono")
+  (set-fontset-font t 'unicode "Noto Color emoji" nil 'append)
   (set-fontset-font t 'han "Sarasa Gothic SC")
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
   (set-fontset-font t 'emoji "Noto Color Emoji")
   (set-fontset-font t 'emoji "Twitter Color Emoji" nil 'append)
   (set-fontset-font t 'emoji "Symbola" nil 'append)
 
-  (set-fontset-font t 'symbol "Symbola")
-  (set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
-  (set-fontset-font t 'symbol "Twitter Color Emoji" nil 'append)
-(set-fontset-font t '(#x1f300 . #x1fad0) (font-spec :family "Noto Color Emoji"))
+  (set-fontset-font t 'symbol "Symbola" nil 'append)
 
 
   ;; (setq face-font-rescale-alist '(
@@ -285,8 +283,6 @@ i.e. windows tiled side-by-side."
   ;; 								  ;; ("NotoMono Nerd Font Propo" . 0.9)
   ;; 								  ;; ("Arimo Nerd Font" . 0.9)
   ;; 								  ))
-  ;; (set-fontset-font t 'symbol (font-spec :family "Noto Sans"))
-
 
   ;; (set-fontset-font t nil "Symbola")
 
@@ -1195,7 +1191,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   :config
   (setq
    vertico-count 20
-   vertico-resize nil
+   vertico-resize t
    vertico-count-format '("%-6s " . "%2s/%5s")
    ;; vertico-buffer-display-action
    ;; '(display-buffer-below-selected (window-height . 10))
@@ -1219,10 +1215,10 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (use-package vertico-posframe
   :config
-  (setq vertico-posframe-parameters '((left-fringe . 2)
-									  (right-fringe . 2)
+  (setq vertico-posframe-parameters '((left-fringe . 0)
+									  (right-fringe . 0)
 									  )
-		vertico-posframe-border-width 1
+		vertico-posframe-border-width 0
 		vertico-posframe-poshandler
 		'posframe-poshandler-frame-bottom-center
 		;; 'posframe-poshandler-frame-top-right-corner
@@ -1560,13 +1556,6 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ([remap ispell-word] . jinx-correct)
   :config
   )
-
-;; (use-package emojify
-;;   :hook (after-init . global-emojify-mode) ;; 👿
-;;   :config
-;;   (setq emojify-display-style 'unicode
-;; 		emojify-emoji-styles '(unicode))
-;;   )
 
 (use-package sudo-edit
   :straight (sudo-edit :type git :host github :repo "nflath/sudo-edit")

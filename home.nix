@@ -216,7 +216,7 @@
             remove = "both";
             subFolders = "Verbatim";
           };
-          msmtp = { enable = true; };
+          msmtp = { enable = false; };
           # smtp = { host = "gmail.com"; };
           mu = { enable = false; };
 
@@ -237,13 +237,13 @@
       };
 
     };
-    imapnotify = { enable = true; };
+    imapnotify = { enable = false; };
     kdeconnect = {
       enable = true;
       indicator = true;
     };
     mbsync = {
-      enable = true;
+      enable = false;
       # frequency = "*-*-* *:*:00,20,40";
       postExec =
         # "${pkgs.mu}/bin/mu index";
@@ -253,7 +253,7 @@
   };
   programs = {
     home-manager.enable = true;
-    mbsync = { enable = true; };
+    mbsync = { enable = false; };
     msmtp = { enable = true; };
     chromium = { enable = true; };
     nix-index = {
@@ -278,13 +278,14 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.emacs;
+      package = pkgs.emacs-git;
       extraPackages = epkgs: [
         pkgs.mu
         pkgs.librime
         pkgs.emacsPackages.rime
         pkgs.emacsPackages.jinx
         pkgs.tdlib
+        pkgs.noto-fonts-color-emoji
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.vterm
         pkgs.emacsPackages.w3m
