@@ -36,8 +36,10 @@
 ;; "AnonymicePro Nerd Font Mono"
 					;; "UbuntuMono Nerd Font Mono"
 					;; "JetBrains Mono"
-					"JuliaMono"
-					;; "Noto Sans"
+					;; "JuliaMono"
+					;; "Noto Sans Mono"
+					;; "Dancing Script"
+					"Patrick Hand"
 					:height 110
 					:weight 'normal)
 

@@ -265,20 +265,17 @@ i.e. windows tiled side-by-side."
   ;; (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
   ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
 
-
   ;; Something is coming... 🏆
-  ;; 中文字体
+  ;; 中文字体 
   ;; 🙋
-  ;; ''‘’
-  (set-fontset-font t 'unicode "JuliaMono")
-  (set-fontset-font t 'unicode "Noto Color emoji" nil 'append)
+  ;; ''‘’ 
+  (set-fontset-font t 'unicode "Noto Sans Mono")
   (set-fontset-font t 'han "Sarasa Gothic SC")
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
   (set-fontset-font t 'emoji "Noto Color Emoji")
-  (set-fontset-font t 'emoji "Twitter Color Emoji" nil 'append)
   (set-fontset-font t 'emoji "Symbola" nil 'append)
-
-  (set-fontset-font t 'symbol "Symbola" nil 'append)
+  (set-fontset-font t 'symbol "Symbola")
+  (set-fontset-font t '(#x2018 . #x2019) (font-spec :family "Noto Sans Mono"))
 
 
   ;; (setq face-font-rescale-alist '(
@@ -962,7 +959,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 	;; 	(switch-to-buffer "init.el")
 	(if (get-buffer-window "init.el")
 		(select-window (get-buffer-window "emacs-init.el"))
-	  (find-file "~/my-flake/emacs-init.el"))
+	  (find-file "~/Projects/github.com/eval-exec/nixos-config/emacs-init.el"))
 	)
   )
 
@@ -1916,25 +1913,12 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 							;; substring
 							;; flex
 							orderless
-							basic
+							;; basic
 							;; emacs22
 							)
-		completion-category-defaults nil)
-  (orderless-define-completion-style orderless+initialism
-	(orderless-matching-styles '(
-								 orderless-initialism
-								 ;; orderless-literal
-								 orderless-regexp
-								 orderless-prefixes
-								 ;; orderless-flex
-								 )))
-
-(setq completion-category-overrides
-      '((command (styles orderless+initialism))
-        (symbol (styles orderless+initialism))
-		(variable (styles orderless+initialism))
-		(file (styles  partial-completion))))
-
+		completion-category-defaults nil
+		completion-category-overrides '((file (styles basic partial-completion)))
+		)
   )
 
 
@@ -3049,11 +3033,19 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
    (concat
     ""
     ""))
+  (setq  mu4e-headers-thread-single-orphan-prefix '("─>" . "─▶")
+		 mu4e-headers-thread-orphan-prefix        '("┬>" . "┬▶ ")
+		 mu4e-headers-thread-connection-prefix    '("│ " . "│ ")
+		 mu4e-headers-thread-first-child-prefix   '("├>" . "├▶")
+		 mu4e-headers-thread-child-prefix         '("├>" . "├▶")
+		 mu4e-headers-thread-last-child-prefix    '("└>" . "╰▶"))
+
 
   ;; sending mail -- replace USERNAME with your gmail username
   ;; also, make sure the gnutls command line utils are installed
   ;; package 'gnutls-bin' in Debian/Ubuntu
 
+  (setq send-mail-function 'sendmail-send-it)
   ;; (require 'smtpmail)
   ;; (setq message-send-mail-function 'smtpmail-send-it
   ;;    starttls-use-gnutls t
@@ -3065,15 +3057,25 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   ;;    smtpmail-smtp-service 587)
 
   ;; alternatively, for emacs-24 you can use:
-  ;;(setq message-send-mail-function 'smtpmail-send-it
+  ;; (setq message-send-mail-function 'smtpmail-send-it
   ;;     smtpmail-stream-type 'starttls
   ;;     smtpmail-default-smtp-server "smtp.gmail.com"
   ;;     smtpmail-smtp-server "smtp.gmail.com"
-  ;;     smtpmail-smtp-service 587)
+  ;;     smtpmail-smtp-service 587
+  ;; )
 
   ;; don't keep message buffers around
   (setq message-kill-buffer-on-exit t)
 
+  )
+(use-package mu4e-marker-icons
+  :config
+  (mu4e-marker-icons-mode)
+  )
+(use-package mu4e-views
+  :disabled
+  :config
+ ;; (setq mu4e-views-default-view-method "html")
   )
 
 (use-package ement

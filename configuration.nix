@@ -141,7 +141,7 @@
 
       videoDrivers = [
         "amdgpu"
-        "nvidia"
+        # "nvidia"
         "modesetting"
         # "fbdev"
       ];
@@ -304,6 +304,8 @@
       symbola
       twitter-color-emoji
       unifont
+      vistafonts-chs
+      open-sans
       wqy_zenhei
       wqy_microhei
 

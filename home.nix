@@ -294,6 +294,7 @@
         pkgs.emacsPackages.vterm
         pkgs.emacsPackages.w3m
         pkgs.emacsPackages.sqlite3
+        pkgs.emacsPackages.xwidgets-reuse
       ];
     };
 
