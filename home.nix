@@ -278,11 +278,10 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      pakcage = pkgs.emacs-pgtk;
-      # package = (pkgs.emacs-git.override {
-      #   withXwidgets = true;
-      #   withGTK3 = true;
-      # });
+      package = (pkgs.emacs-git.override {
+        withXwidgets = true;
+        withGTK3 = true;
+      });
       extraPackages = epkgs: [
         pkgs.mu
         pkgs.librime
