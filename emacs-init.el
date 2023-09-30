@@ -194,6 +194,10 @@ i.e. windows tiled side-by-side."
 		  mode-line-misc-info
 		  mode-line-end-spaces))
 
+  (set-face-attribute 'mode-line nil :background "black" :foreground "white")
+  (set-face-attribute 'mode-line-active nil :background "red" :foreground "white")
+  (set-face-attribute 'mode-line-inactive nil :background "blue" :foreground "white")
+
   (setq vc-follow-symlinks t)
   (setq custom-safe-themes t)
   (setq completion-cycle-threshold 3)
@@ -306,6 +310,17 @@ i.e. windows tiled side-by-side."
 		)
 
   )
+
+(defun exec/prog-mode-fixed()
+  "Set a fixed width (monospace) font in current buffer."
+  (interactive)
+  (setq-local buffer-face-mode-face '(:family "JuliaMono"))
+  (buffer-face-mode))
+
+(defun exec/sans-mode()
+  (interactive)
+  (setq-local buffer-face-mode-face '(:family "Noto Sans"))
+  (buffer-face-mode))
 
 
 
@@ -1131,22 +1146,22 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
  )
 
 
-(defun exec/mode-line-insert-hook()
-  ;; (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white")
-  ;; (set-face-attribute 'line-number-current-line nil :background "#8b0000" :foreground "white")
-  )
-(defun exec/mode-line-normal-hook()
-  ;; (set-face-attribute 'mode-line-active nil :background "#013220" :foreground "white")
-  ;; (set-face-attribute 'line-number-current-line nil :background "#013220" :foreground "white")
-  )
-(defun exec/mode-line-visual-hook()
-  ;; (set-face-attribute 'mode-line-active nil :background "#purple" :foreground "white")
-  ;; (set-face-attribute 'line-number-current-line nil :background "purple" :foreground "white")
-  )
+;; (defun exec/mode-line-insert-hook()
+;; (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white")
+;; (set-face-attribute 'line-number-current-line nil :background "#8b0000" :foreground "white")
+;;   )
+;; (defun exec/mode-line-normal-hook()
+;; (set-face-attribute 'mode-line-active nil :background "#013220" :foreground "white")
+;; (set-face-attribute 'line-number-current-line nil :background "#013220" :foreground "white")
+;; )
+;; (defun exec/mode-line-visual-hook()
+;; (set-face-attribute 'mode-line-active nil :background "#purple" :foreground "white")
+;; (set-face-attribute 'line-number-current-line nil :background "purple" :foreground "white")
+;; )
 
-(add-hook 'evil-insert-state-entry-hook 'exec/mode-line-insert-hook)
-(add-hook 'evil-normal-state-entry-hook 'exec/mode-line-normal-hook)
-(add-hook 'evil-visual-state-entry-hook 'exec/mode-line-visual-hook)
+;; (add-hook 'evil-insert-state-entry-hook 'exec/mode-line-insert-hook)
+;; (add-hook 'evil-normal-state-entry-hook 'exec/mode-line-normal-hook)
+;; (add-hook 'evil-visual-state-entry-hook 'exec/mode-line-visual-hook)
 
 
 (defun disable-all-themes ()
@@ -1934,6 +1949,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		("<f9>" . corfu-quit))
 
   :config
+  (set-face-attribute 'corfu-default nil :font "JuliaMono")
   (setq
    corfu-auto t
    corfu-auto-prefix 1
@@ -4078,6 +4094,20 @@ interactive compilation buffer."
 
 (use-package w3m
   :straight (:type built-in)
+  :config
+  (setq w3m-command-environment '(("LC_ALL" . "en_US.UTF-8"))
+		w3m-coding-system 'utf-8
+		w3m-file-coding-system 'utf-8
+		w3m-input-coding-system 'utf-8
+		w3m-terminal-coding-system 'utf-8
+		w3m-default-display-inline-images t
+		w3m-file-name-coding-system 'utf-8
+		w3m-home-page "https://en.wikipedia.org/wiki/Special:Random" 
+		w3m-confirm-leaving-secure-page nil
+		w3m-session-load-crashed-sessions t
+		w3m-session-load-last-sessions t
+		)
+  
   )
 (use-package eww
   :straight (:type built-in)
@@ -4194,11 +4224,6 @@ interactive compilation buffer."
 (use-package vscode-dark-plus-theme)
 (use-package solarized-theme)
 
-(defun exec/prog-mode-fixed()
-  "Set a fixed width (monospace) font in current buffer."
-  (interactive)
-  (setq-local buffer-face-mode-face '(:family "JuliaMono"))
-  (buffer-face-mode))
 
 (defun exec/increase-buffer-font()
   (interactive)
@@ -4532,10 +4557,14 @@ interactive compilation buffer."
   :hook
   (gptel-mode . (lambda()
 				  (copilot-mode -1)
+				  (exec/sans-mode)
 				  ))
-  :general
-  (:keymaps 'gptel-mode-map "C-<return>" 'gptel-send)
   :config
+  (general-define-key
+   :keymaps 'gptel-mode-map
+   "C-<return>" 'gptel-send
+   "C-c C-k" 'gptel-abort
+   )
   ;; get first line content of ~/.config/openai_api_key/key.private file to gptel-api-key, without newline
   (setq gptel-api-key
 		(with-temp-buffer
