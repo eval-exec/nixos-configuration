@@ -64,7 +64,7 @@
     libvdpau-va-gl
   ];
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = false;
     powerManagement.enable = true;
     prime = {
