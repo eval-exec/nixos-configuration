@@ -255,7 +255,7 @@
     };
   };
   xsession = {
-    enable = true;
+    enable = false;
     initExtra = ''
       ${pkgs.xorg.xmodmap}/bin/xmodmap -e "remove mod4 = Hyper_L";
       ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";

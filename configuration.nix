@@ -143,7 +143,7 @@
 
       videoDrivers = [
         "amdgpu"
-        # "nvidia"
+        "nvidia"
         "modesetting"
         # "fbdev"
       ];

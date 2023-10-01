@@ -4664,9 +4664,9 @@ interactive compilation buffer."
 		(with-temp-buffer
 		  (insert-file-contents "~/.config/openai_api_key/key.private")
 		  (buffer-substring-no-properties (point-min) (line-end-position)))
-		gptel-default-mode 'text-mode
+		gptel-default-mode 'markdown-mode
 		gptel-prompt-prefix-alist
-		'((markdown-mode . "# ") (org-mode . "* ") (text-mode . "🤖: "))
+		'((markdown-mode . "🤖: ") (org-mode . "* ") (text-mode . "🤖: "))
 		)
   )
 
