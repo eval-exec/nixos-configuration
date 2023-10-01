@@ -100,8 +100,8 @@
 		  (:eval (if (buffer-file-name)
 					 (exec/make-header)
 				   "%b")))))
-(add-hook 'buffer-list-update-hook
-		  'exec/display-header)
+;; (add-hook 'buffer-list-update-hook
+;; 		  'exec/display-header)
 
 (defun exec/split-window-sensibly-prefer-horizontal (&optional window)
 "Based on split-window-sensibly, but designed to prefer a horizontal split,
@@ -162,6 +162,9 @@ i.e. windows tiled side-by-side."
   (setq switch-to-buffer-obey-display-actions t)
   (setq auto-save-default nil)
   (setq next-line-add-newlines t)
+  (setq mouse-wheel-flip-direction t
+		mouse-wheel-tilt-scroll t
+		)
   (setq font-lock-maximum-decoration
 		1
 		;; '(
@@ -259,34 +262,10 @@ i.e. windows tiled side-by-side."
   ;; (add-to-list 'default-frame-alist '(background-color . "black"))
   (set-cursor-color "yellow")
 
-  (setq use-default-font-for-symbols nil)
-  ;; ;; 👿
-  (set-face-attribute 'fixed-pitch nil :font "JuliaMono")
-  ;; (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
-  ;; (set-fontset-font t 'latin (font-spec :family "Noto Sans"))
 
-  ;; Something is coming... 🏆
-  ;; 中文字体 
-  ;; 🙋
-  ;; ''‘’ 
-  (set-fontset-font t 'unicode "Noto Sans Mono")
-  (set-fontset-font t 'han "Sarasa Gothic SC")
-  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
-  (set-fontset-font t 'emoji "Noto Color Emoji")
-  (set-fontset-font t 'emoji "Symbola" nil 'append)
-  (set-fontset-font t 'symbol "Symbola")
-  (set-fontset-font t '(#x2018 . #x2019) (font-spec :family "Noto Sans Mono"))
-
-
-  ;; (setq face-font-rescale-alist '(
-  ;; 								  ("Noto Color Emoji" . 0.9)
-  ;; 								  ("JetBrainsMonoNL Nerd Font Mono" . 1.0)
-  ;; 								  ;; ("NotoMono Nerd Font Propo" . 0.9)
-  ;; 								  ;; ("Arimo Nerd Font" . 0.9)
-  ;; 								  ))
-
-  ;; (set-fontset-font t nil "Symbola")
-
+;; 🧬 
+(set-fontset-font nil 'han "Sarasa Gothic SC")
+(set-fontset-font nil 'emoji "Noto Color Emoji")
 
 
   (setq revert-without-query '(".*"))
@@ -322,12 +301,13 @@ i.e. windows tiled side-by-side."
 (defun exec/prog-mode-fixed()
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
-  (setq-local buffer-face-mode-face '(:family "JuliaMono"))
-  (buffer-face-mode))
+  (setq-local buffer-face-mode-face '(:family "Unifont"))
+  ;; (buffer-face-mode)
+  )
 
 (defun exec/sans-mode()
   (interactive)
-  (setq-local buffer-face-mode-face '(:family "Noto Sans"))
+  ;; (setq-local buffer-face-mode-face '(:family "Noto Sans"))
   (buffer-face-mode))
 
 
@@ -672,7 +652,6 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (general-evil-define-key '(normal visual) 'global
-  "<f8>" 'exec/set-mono-buffer
   "gr" 'xref-find-references
   "gd" 'xref-find-definitions
   "ga" 'xref-find-apropos
@@ -1002,8 +981,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   )
 
 (general-define-key
- "M-0" 'dirvish-side
- ;; 'dired-sidebar-show-sidebar
+  "M-0" 
+ 'dired-sidebar-show-sidebar
  )
 
 
@@ -1243,7 +1222,10 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
   (general-evil-define-key '(normal insert) vertico-map
 	"C-j" 'vertico-next
-	"C-k" 'vertico-previous)
+	"C-k" 'vertico-previous
+	"C-d" 'vertico-scroll-up
+	"C-u" 'vertico-scroll-down
+	)
 
   (vertico-mode)
   ;; (vertico-buffer-mode)
@@ -1473,6 +1455,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   )
 
 (add-hook 'prog-mode-hook 'electric-pair-local-mode)
+(add-hook 'minibuffer-mode-hook 'electric-pair-local-mode)
 (add-hook 'prog-mode-hook 'electric-indent-mode)
 (add-hook 'cider-repl-mode-hook 'electric-pair-local-mode)
 
@@ -1853,12 +1836,10 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (use-package embark
-  :disabled nil
   :config
-  (use-package embark-consult
-	:after consult
-	:disabled nil)
-  ;; Enable richer annotations using the Marginalia package
+  )
+(use-package embark-consult
+  :after consult
   )
 
 (use-package marginalia
@@ -1934,7 +1915,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 				copilot-idle-delay 1
 				copilot-max-char -1
 				)
-  (custom-set-faces '(copilot-overlay-face ((t (:inherit shadow :underline t :weight thin :foreground "white")))))
+  (custom-set-faces '(copilot-overlay-face ((t (:inherit shadow :underline t :weight thin :slant italic :foreground "white")))))
+;; lfjewio how to 
   )
 
 (use-package gptai
@@ -1990,6 +1972,24 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
    )
    (global-corfu-mode)
    (corfu-popupinfo-mode -1)
+   (defun exec/corfu-move-to-minibuffer ()
+	 (interactive)
+	 (when completion-in-region--data
+	   (let ((completion-extra-properties corfu--extra)
+			 completion-cycle-threshold completion-cycling)
+		 (apply #'consult-completion-in-region completion-in-region--data))))
+   (keymap-set corfu-map "M-m" #'exec/corfu-move-to-minibuffer)
+   (add-to-list 'corfu-continue-commands #'exec/corfu-move-to-minibuffer)
+
+(defun exec/corfu-enable-in-minibuffer ()
+  "Enable Corfu in the minibuffer if `completion-at-point' is bound."
+  (when (where-is-internal #'completion-at-point (list (current-local-map)))
+    ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
+    (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
+                corfu-popupinfo-delay nil)
+    (corfu-mode 1)))
+(add-hook 'minibuffer-setup-hook #'exec/corfu-enable-in-minibuffer)
+
   )
 
 (use-package corfu-terminal)
@@ -2540,6 +2540,10 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
    )
   )
 
+(use-package rainbow-delimiters
+  :hook ((prog-mode emacs-lisp-mode minibuffer-mode) .  rainbow-delimiters-mode)
+  )
+
 (use-package exercism
   ;; :straight (exercism.el :type git :host github
   ;; 				   :repo "anonimitoraf/exercism.el"
@@ -2551,15 +2555,16 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (use-package beacon
-  ;; :hook (after-init . beacon-mode)
+  :disabled t
+  :hook (after-init . beacon-mode)
   :config
-  ;; (setq beacon-blink-when-focused t)
-  ;; (setq beacon-blink-when-buffer-changes t)
-  ;; (setq beacon-blink-when-window-scrolls t)
-  ;; (setq beacon-blink-when-window-changes t)
-  ;; (setq beacon-blink-when-point-moves-vertically t)
-  ;; (setq beacon-blink-when-point-moves-horizontally t)
-  ;; (setq beacon-color "purple")
+  (setq beacon-blink-when-focused t
+		beacon-blink-when-buffer-changes t
+		beacon-blink-when-window-scrolls t
+		beacon-blink-when-window-changes t
+		beacon-blink-when-point-moves-vertically t
+		beacon-blink-when-point-moves-horizontally t
+		beacon-color "purple")
   )
 
 (use-package all-the-icons
@@ -2749,9 +2754,6 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (use-package git-commit)
 
-(use-package rainbow-delimiters
-  :hook ((prog-mode emacs-lisp-mode) .  rainbow-delimiters-mode)
-  )
 (use-package solidity-mode)
 
 (use-package calendar
@@ -2931,15 +2933,15 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   (display-line-numbers-mode on)
   )
 
-(global-set-key (kbd "<f6>")
-				(lambda ()
-				  (interactive)
-				  (toggle-display-line-numbers)))
+;; (global-set-key (kbd "<f6>")
+;; 				(lambda ()
+;; 				  (interactive)
+;; 				  (toggle-display-line-numbers)))
 
-(global-set-key (kbd "C-c <f6>")
-				(lambda ()
-				  (interactive)
-				  (toggle-display-global-line-numbers)))
+;; (global-set-key (kbd "C-c <f6>")
+;; 				(lambda ()
+;; 				  (interactive)
+;; 				  (toggle-display-global-line-numbers)))
 
 
 (use-package telega
@@ -3677,7 +3679,7 @@ ement-room-left-margin-width 24
   :config
   (setq projectile-auto-discover nil)
   (setq projectile-current-project-on-switch 'keep)
-  (setq projectile-indexing-method 'alien)
+  (setq projectile-indexing-method 'hybrid)
   (setq projectile-enable-caching nil)
   (setq projectile-project-enable-cmd-caching nil)
   (setq projectile-per-project-compilation-buffer t)
@@ -3719,6 +3721,9 @@ interactive compilation buffer."
 	:config
 	)
    (projectile-mode)
+  )
+(use-package cus-dir
+  :straight (cus-dir :type git :host gitlab :repo "mauroaranda/cus-dir")
   )
 
 
@@ -3774,7 +3779,7 @@ interactive compilation buffer."
       (message "Not a file visiting buffer!"))))
 
 (use-package treemacs
-  :disabled t
+  ;; :disabled t
   ;; :init (with-eval-after-load 'winum (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   ;; :init (with-eval-after-load 'winum (evil-leader/set-key "n" 'treemacs-select-window))
   :config
@@ -3785,7 +3790,7 @@ interactive compilation buffer."
 	(set-face-attribute 'treemacs-git-modified-face nil :family "Iosevka" )
 	(set-face-attribute 'treemacs-git-untracked-face nil :family "Iosevka")
 	)
-  (add-hook 'treemacs-mode-hook 'exec/treemacs-set-narrow-font)
+  ;; (add-hook 'treemacs-mode-hook 'exec/treemacs-set-narrow-font)
 
   ;; delay related stuff
   (setq
@@ -3806,8 +3811,8 @@ interactive compilation buffer."
 		  treemacs-expand-after-init             t
 		  treemacs-git-command-pipe ""
 		  treemacs-goto-tag-strategy             'refetch-index
-		  treemacs-indentation 1
-		  treemacs-indentation-string            " "
+		  treemacs-indentation 0
+		  treemacs-indentation-string            ""
 		  treemacs-is-never-other-window nil
 		  treemacs-max-git-entries               5000
 		  treemacs-missing-project-action 'ask
@@ -3820,7 +3825,7 @@ interactive compilation buffer."
 		  treemacs-position                      'left
 		  treemacs-read-string-input 'from-child-frame
 		  treemacs-recenter-distance  0.1
-		  treemacs-recenter-after-file-follow    nil
+		  treemacs-recenter-after-file-follow    'on-distance
 		  treemacs-recenter-after-tag-follow nil
 		  treemacs-recenter-after-project-jump   'always
 		  treemacs-recenter-after-project-expand 'on-distance
@@ -3863,6 +3868,12 @@ interactive compilation buffer."
 
   )
 
+(use-package treemacs-all-the-icons
+  :after treemacs
+  :config
+  (treemacs-load-theme 'all-the-icons)
+  )
+
 (use-package treemacs-tab-bar
   :disabled t
   )
@@ -3895,6 +3906,7 @@ interactive compilation buffer."
 
 
 (use-package centaur-tabs
+  :demand t
   ;; :hook
   ;; (vertico-buffer-mode . centaur-tabs-local-mode)
   :bind
@@ -3919,7 +3931,7 @@ interactive compilation buffer."
 
   (centaur-tabs-mode)
   (centaur-tabs-headline-match)
-  (centaur-tabs-change-fonts "Noto Sans" 1.2)
+  ;; (centaur-tabs-change-fonts "JuliaMono" 1.0)
   )
 
 
@@ -3999,7 +4011,9 @@ interactive compilation buffer."
   :config
   (set-face-attribute 'show-paren-match nil :box '(:line-width (-1 . -1) :color "red"))
 
-  (setq show-paren-context-when-offscreen 'overlay)
+  (setq show-paren-context-when-offscreen 'overlay
+		show-paren-style 'parenthesis
+		)
   (show-paren-mode))
 
 
@@ -4169,6 +4183,14 @@ interactive compilation buffer."
   (setq eww-search-prefix "https://www.google.com/search?pws=0&gl=us&gws_rd=cr&q="
 		eww-retrieve-command nil
 		)
+(defun exec/eww-render-current-buffer ()
+  "Render HTML in the current buffer with EWW"
+  (interactive)
+  (beginning-of-buffer)
+  (eww-display-html 'utf8 (buffer-name)))
+
+;; (global-set-key (kbd "<C-c C-e C-w C-w>") 'eww-render-current-buffer)
+
   )
 
 (use-package dired
@@ -4191,29 +4213,30 @@ interactive compilation buffer."
 	:hook
 	((dired-mode . diredfl-mode)
 	 ;; highlight parent and directory preview as well
-	 (dirvish-directory-view-mode . diredfl-mode))
+	 ;; (dirvish-directory-view-mode . diredfl-mode)
+	 )
 	:config
 	(set-face-attribute 'diredfl-dir-name nil :bold t))
   )
 
-(use-package dirvish
-  :init
-  (dirvish-override-dired-mode)
-  (dirvish-side-follow-mode)
-  :config
-  (setq dirvish-hide-details t)
-  (setq dirvish-attributes 
-		'(vc-state subtree-state
-				   all-the-icons
-				   collapse
-				   git-msg
-				   file-time
-				   file-size
-				   )
-		)
-  (setq dirvish-mode-line-height 20)
+;; (use-package dirvish
+;;   :init
+;;   (dirvish-override-dired-mode)
+;;   (dirvish-side-follow-mode)
+;;   :config
+;;   (setq dirvish-hide-details t)
+;;   (setq dirvish-attributes 
+;; 		'(vc-state subtree-state
+;; 				   all-the-icons
+;; 				   ;; collapse
+;; 				   ;; git-msg
+;; 				   ;; file-time
+;; 				   ;; file-size
+;; 				   )
+;; 		)
+;;   (setq dirvish-mode-line-height 20)
 
-  )
+;;   )
 (use-package dired-x
   :straight (:type built-in)
   :config
@@ -4374,9 +4397,13 @@ interactive compilation buffer."
   :straight (color-rg :type git :host github :repo "manateelazycat/color-rg")
   )
 
-(add-to-list 'load-path "~/.emacs.d/elisp/blink-search")
-(require 'blink-search)
+;; (add-to-list 'load-path "~/.emacs.d/elisp/blink-search")
+;; (require 'blink-search)
 
+(use-package awesome-tray
+  :disabled t
+  :straight (:host github :repo "manateelazycat/awesome-tray")
+  )
 
 ;; (use-package holo-layer
 ;;   :ensure nil
@@ -4548,12 +4575,22 @@ interactive compilation buffer."
 ;; (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
 
 
+(use-package display-wttr
+  :config
+  (setq display-wttr-format "2&m"
+		display-wttr-locations '("Beijing")
+		display-wttr-interval (* 60 60)
+		)
+  )
+
+(use-package explain-pause-mode)
 
 (use-package wakatime-mode
   :config
   (setq wakatime-cli-path "/run/current-system/sw/bin/wakatime-cli")
   (global-wakatime-mode)
   )
+
 (use-package wordreference
   :config
   (setq wordreference-source-lang "en")
@@ -4602,15 +4639,25 @@ interactive compilation buffer."
 
 (use-package gptel
   :hook
+  (
   (gptel-mode . (lambda()
 				  (copilot-mode -1)
 				  (exec/sans-mode)
 				  ))
+   )
   :config
+  (defun exec/gptel-send()
+	(interactive)
+	;; insert a space
+	(insert " ")
+	(evil-normal-state)
+	(gptel-send)
+	)
   (general-define-key
    :keymaps 'gptel-mode-map
-   "C-<return>" 'gptel-send
+   "C-<return>" 'exec/gptel-send
    "C-c C-k" 'gptel-abort
+   "C-x C-s" nil
    )
   ;; get first line content of ~/.config/openai_api_key/key.private file to gptel-api-key, without newline
   (setq gptel-api-key
@@ -4747,6 +4794,1746 @@ interactive compilation buffer."
   (set-face-attribute 'hl-line nil :background "#000000")
   ;; :global-minor-mode global-hl-line-mode
   )
+
+(use-package hl-line+
+  :hook
+  (window-scroll-functions . hl-line-flash)
+  (focus-in . hl-line-flash)
+  ;; (post-command . hl-line-flash)
+
+  :custom
+  (global-hl-line-mode nil)
+  (hl-line-flash-show-period 0.5)
+  (hl-line-inhibit-highlighting-for-modes '(dired-mode))
+  (hl-line-overlay-priority -100) ;; sadly, seems not observed by diredfl
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

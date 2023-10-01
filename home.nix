@@ -151,6 +151,8 @@
     xorg.xdpyinfo
     xorg.xmodmap
     xorg.xwininfo
+    xorg.xev
+    evtest
     yq
     yt-dlp
     zlib

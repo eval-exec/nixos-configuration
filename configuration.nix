@@ -188,10 +188,11 @@
         sddm = {
           enable = true;
           enableHidpi = true;
-
         };
+        setupCommands = "";
+        # sessionCommands run before setupCommands
         sessionCommands = ''
-          sleep 3;
+
           ${pkgs.xorg.xmodmap}/bin/xmodmap -e "remove mod4 = Hyper_L";
           ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
         '';

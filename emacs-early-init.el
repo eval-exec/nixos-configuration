@@ -36,12 +36,13 @@
 ;; "AnonymicePro Nerd Font Mono"
 					;; "UbuntuMono Nerd Font Mono"
 					;; "JetBrains Mono"
-					;; "JuliaMono"
+					"JuliaMono"
 					;; "Noto Sans Mono"
 					;; "Dancing Script"
-					"Patrick Hand"
-					:height 110
+					;; "Patrick Hand"
+					:height 120
 					:weight 'normal)
+
 
 (provide 'emacs-early-init)
 
