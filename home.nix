@@ -254,6 +254,14 @@
       verbose = true;
     };
   };
+  xsession = {
+    enable = true;
+    initExtra = ''
+      ${pkgs.xorg.xmodmap}/bin/xmodmap -e "remove mod4 = Hyper_L";
+      ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
+    '';
+  };
+
   programs = {
     home-manager.enable = true;
     mbsync = { enable = true; };

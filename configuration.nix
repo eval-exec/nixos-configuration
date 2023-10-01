@@ -132,6 +132,8 @@
     #   # secretKeyFile = "/var/cache-priv-key.pem";
     # };
 
+    # udev = { extraRules = "\n"; };
+
     # Configure keymap in X11
     xserver = {
       enable = true;
@@ -191,11 +193,7 @@
         };
         setupCommands = "";
         # sessionCommands run before setupCommands
-        sessionCommands = ''
-
-          ${pkgs.xorg.xmodmap}/bin/xmodmap -e "remove mod4 = Hyper_L";
-          ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
-        '';
+        sessionCommands = "";
 
         autoLogin = {
           enable = true;
