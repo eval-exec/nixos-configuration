@@ -23,7 +23,7 @@
 (setq gc-cons-threshold 10000000000
       gc-cons-percentage 0.9)
 
-(add-to-list 'initial-frame-alist '(maximized . maximized))
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 (setq initial-major-mode 'fundamental-mode)
 

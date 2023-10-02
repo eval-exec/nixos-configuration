@@ -253,7 +253,7 @@ i.e. windows tiled side-by-side."
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t)
   (setq window-resize-pixelwise t)
-  (setq frame-resize-pixelwise nil)
+  (setq frame-resize-pixelwise t)
   (setq column-number-mode t)
   (setq line-number-mode t)
   (setq mode-line-percent-position '(-3 "%o"))
@@ -264,8 +264,14 @@ i.e. windows tiled side-by-side."
 
 
 ;; 🧬 
-(set-fontset-font nil 'han "Sarasa Gothic SC")
-(set-fontset-font nil 'emoji "Noto Color Emoji")
+;; it’s 中文测试《》，。
+  (setq use-default-font-for-symbols nil)
+  (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
+  (set-fontset-font t 'han "Sarasa Gothic SC")
+  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
+  (set-fontset-font t 'emoji "Noto Color Emoji")
+  (set-fontset-font t 'symbol "JuliaMono")
+  (set-fontset-font t 'symbol "Symbola" nil 'prepend)
 
 
   (setq revert-without-query '(".*"))
@@ -377,10 +383,12 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
   ;; (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
   ;; (evil-define-key 'normal org-mode-map (kbd "RET") #'org-return)
-(with-eval-after-load 'evil-maps
-  ;; (define-key evil-motion-state-map (kbd "SPC") nil)
-  (define-key evil-motion-state-map (kbd "RET") nil)
-  (define-key evil-motion-state-map (kbd "TAB") nil))
+  (with-eval-after-load 'evil-maps
+	;; (define-key evil-motion-state-map (kbd "SPC") nil)
+	(define-key evil-motion-state-map (kbd "RET") nil)
+	(define-key evil-motion-state-map (kbd "TAB") nil)
+	)
+  
   
 
   (general-define-key [remap evil-quit] 'kill-buffer-and-window)
@@ -389,21 +397,21 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (evil-add-command-properties #'consult-line :jump t)
   (evil-add-command-properties #'org-agenda-switch-to :jump t)
 
-  ;; (setq evil-normal-state-tag   (propertize "N" 'face '((:background "Green" :foreground "black")))
-  ;; 		evil-emacs-state-tag    (propertize "E" 'face '((:background "Yellow"       :foreground "black")))
-  ;; 		evil-insert-state-tag   (propertize "I" 'face '((:background "Red"    :foreground "black")))
-  ;; 		evil-replace-state-tag  (propertize "R" 'face '((:background "chocolate"      :foreground "black")))
-  ;; 		evil-motion-state-tag   (propertize "M" 'face '((:background "plum3"          :foreground "black")))
-  ;; 		evil-visual-state-tag   (propertize "V" 'face '((:background "Purple"           :foreground "white")))
-  ;; 		evil-operator-state-tag (propertize "O" 'face '((:background "Blue"    :foreground "white"))))
+  (setq evil-normal-state-tag   (propertize "<N>" 'face '((:background "#013220"   :foreground "white")))
+		evil-emacs-state-tag    (propertize "<E>" 'face '((:background "Yellow"    :foreground "black")))
+		evil-insert-state-tag   (propertize "<I>" 'face '((:background "Red"       :foreground "yellow")))
+		evil-replace-state-tag  (propertize "<R>" 'face '((:background "chocolate" :foreground "black")))
+		evil-motion-state-tag   (propertize "<M>" 'face '((:background "plum3"     :foreground "black")))
+		evil-visual-state-tag   (propertize "<V>" 'face '((:background "Purple"    :foreground "white")))
+		evil-operator-state-tag (propertize "<O>" 'face '((:background "Blue"      :foreground "white"))))
 
-  (setq evil-normal-state-tag   (propertize "N" 'face nil)
-		evil-emacs-state-tag    (propertize "E" 'face nil)
-		evil-insert-state-tag   (propertize "I" 'face nil)
-		evil-replace-state-tag  (propertize "R" 'face nil)
-		evil-motion-state-tag   (propertize "M" 'face nil)
-		evil-visual-state-tag   (propertize "V" 'face nil)
-		evil-operator-state-tag (propertize "O" 'face nil))
+  ;; (setq evil-normal-state-tag   (propertize "N" 'face nil)
+  ;; 		evil-emacs-state-tag    (propertize "E" 'face nil)
+  ;; 		evil-insert-state-tag   (propertize "I" 'face nil)
+  ;; 		evil-replace-state-tag  (propertize "R" 'face nil)
+  ;; 		evil-motion-state-tag   (propertize "M" 'face nil)
+  ;; 		evil-visual-state-tag   (propertize "V" 'face nil)
+  ;; 		evil-operator-state-tag (propertize "O" 'face nil))
 
   )
 
@@ -461,12 +469,13 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	  warning-suppress-types '((comp)))
 
 (toggle-scroll-bar -1)
-(setq scroll-conservatively 100000
-	  scroll-margin 7
-	  scroll-step 3
-	  scroll-preserve-screen-position t
-	  scroll-up-aggressively 0.01
-	  scroll-down-aggressively 0.01
+(setq scroll-conservatively 101
+	  scroll-margin 0
+	  scroll-step 0
+	  scroll-preserve-screen-position nil
+	  scroll-up-aggressively 0
+	  scroll-down-aggressively 0
+	  fast-but-imprecise-scrolling t
 	  )
 
 (setq make-pointer-invisible nil)
@@ -661,8 +670,16 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 ;; (with-eval-after-load 'evil-mode
 ;; )
 
+(defun exec/consult-imenu-or-outline()
+  "First run `consult-imenu'.
+if it encounter an error, then we execute `consult-outline'."
+  (interactive)
+  (condition-case nil
+	  (consult-imenu)
+	(error (consult-outline))))
+
 (global-definer
-  "i" 'consult-imenu
+  "i" 'exec/consult-imenu-or-outline
   "!"   'shell-command
   ":"   'eval-expression)
 
@@ -853,7 +870,10 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (general-def
   "H-SPC" 'which-key-show-major-mode
+  "H-M-SPC" 'exec/which-key-show-top-level
   "C-H-SPC" 'which-key-show-minor-mode-keymap
+
+  "H-z" 'repeat
   )
 
 
@@ -863,8 +883,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   "H-<left>" 'winner-undo
   "H-<right>" 'winner-redo
 
-  "C-H-<left>" 'centaur-tabs-backward
-  "C-H-<right>" 'centaur-tabs-forward
+  "C-H-<left>" 'tab-bar-switch-to-prev-tab
+  "C-H-<right>" 'tab-bar-switch-to-next-tab
   "H-`" 'garbage-collect
   ;; "H-i" 'yas-insert-snippet
   "H-a" 'org-agenda
@@ -977,7 +997,11 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   "H-p 1" '(lambda()
 			 (interactive)
 			 (profiler-start 'cpu+mem))
-  "H-p 2" 'profiler-stop
+  "H-p 2" '(lambda()
+			 (interactive)
+			 (profiler-stop)
+			 (profiler-report)
+			 )
   )
 
 (general-define-key
@@ -1147,22 +1171,31 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
  )
 
 
-;; (defun exec/mode-line-insert-hook()
-;; (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white")
-;; (set-face-attribute 'line-number-current-line nil :background "#8b0000" :foreground "white")
-;;   )
-;; (defun exec/mode-line-normal-hook()
-;; (set-face-attribute 'mode-line-active nil :background "#013220" :foreground "white")
-;; (set-face-attribute 'line-number-current-line nil :background "#013220" :foreground "white")
-;; )
-;; (defun exec/mode-line-visual-hook()
-;; (set-face-attribute 'mode-line-active nil :background "#purple" :foreground "white")
-;; (set-face-attribute 'line-number-current-line nil :background "purple" :foreground "white")
-;; )
+(defun exec/mode-line-insert-hook()
+  (interactive)
+  (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white" :inherit nil)
+  ;; (set-face-attribute 'line-number-current-line nil :background "#8b0000" :foreground "white")
+  )
+(defun exec/mode-line-normal-hook()
+  (interactive)
+  (set-face-attribute 'mode-line-active nil :background "#013220" :foreground "white" :inherit nil)
+  ;; (set-face-attribute 'line-number-current-line nil :background "#013220" :foreground "white")
+  )
+(defun exec/mode-line-visual-hook()
+  (interactive)
+  ;; (set-face-attribute 'mode-line-active nil :background "orange" :foreground "white" :inherit nil)
+  ;; (set-face-attribute 'line-number-current-line nil :background "purple" :foreground "white")
+  )
+
+(defun exec/mode-line-emacs-hook()
+  (interactive)
+  (set-face-attribute 'mode-line-active nil :background "purple" :foreground "white" :inherit nil)
+  )
 
 ;; (add-hook 'evil-insert-state-entry-hook 'exec/mode-line-insert-hook)
 ;; (add-hook 'evil-normal-state-entry-hook 'exec/mode-line-normal-hook)
 ;; (add-hook 'evil-visual-state-entry-hook 'exec/mode-line-visual-hook)
+(add-hook 'evil-emacs-state-entry-hook 'exec/mode-line-emacs-hook)
 
 
 (defun disable-all-themes ()
@@ -1185,6 +1218,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 							   ;; 'almost-mono-black
 							   'sanityinc-tomorrow-bright
 							   )
+
+							  (org-agenda-list) ;; consider set initial-buffer-choice to "*Org Agenda*" buffer
 							  ))
 
 
@@ -1239,12 +1274,14 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 									  )
 		vertico-posframe-border-width 0
 		vertico-posframe-poshandler
+		;; 'posframe-poshandler-window-bottom-center
 		'posframe-poshandler-frame-bottom-center
 		;; 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width 230
+		vertico-posframe-width 200
 		vertico-posframe-font nil
 		;; "Noto Sans Mono"
 		vertico-posframe-min-height nil
+		vertico-flat-max-lines 3
 		)
 
   ;; (custom-set-faces
@@ -1493,6 +1530,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   :config
   (setq flycheck-display-errors-delay 0
 		flycheck-idle-change-delay 0.2
+		flycheck-checker-error-threshold 800
 		)
   (setq flycheck-rust-executable "cargo-clippy")
 
@@ -1836,10 +1874,34 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (use-package embark
+  ;; :bind
+  ;; (("C-." . embark-act)         ;; pick some comfortable binding
+  ;;  ("C-;" . embark-dwim)        ;; good alternative: M-.
+  ;;  ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  ;; :init
+  ;; (general-evil-define-key 'normal 'global "C-." 'embark-act)
+  ;; (global-set-key (kbd "C-h B") 'embark-bindings)
+
+  ;; Optionally replace the key help with a completing-read interface
+  ;; (setq prefix-help-command #'embark-prefix-help-command)
+
+  ;; Show the Embark target at point via Eldoc.  You may adjust the Eldoc
+  ;; strategy, if you want to see the documentation from multiple providers.
+  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
   :config
-  )
+  ;; Hide the mode line of the Embark live/completions buffers
+  ;; (add-to-list 'display-buffer-alist
+  ;;              '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+  ;;                nil
+;;                (window-parameters (mode-line-format . none))))
+)
+
 (use-package embark-consult
-  :after consult
+  ;; :after consult
+  ;; :hook
+  ;; (embark-collect-mode . consult-preview-at-point-mode)
   )
 
 (use-package marginalia
@@ -1893,8 +1955,8 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 							;; partial-completion
 							;; substring
 							;; flex
+							basic
 							orderless
-							;; basic
 							;; emacs22
 							)
 		completion-category-defaults nil
@@ -1953,7 +2015,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 		("<f9>" . corfu-quit))
 
   :config
-  (set-face-attribute 'corfu-default nil :font "JuliaMono")
+  (set-face-attribute 'corfu-default nil :font "JuliaMono" :background "black")
   (setq
    corfu-auto t
    corfu-auto-prefix 1
@@ -2496,7 +2558,7 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 
 (use-package keycast
-  ;; :hook (after-init . keycast-mode-line-mode)
+  :hook (after-init . keycast-tab-bar-mode)
   )
 
 (use-package powerthesaurus)
@@ -2840,6 +2902,24 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
   (setq olivetti-body-width 0.8)
   )
 
+(use-package scrollkeeper
+  :config
+  )
+(use-package better-scroll
+  :after evil
+  :config
+  (better-scroll-setup)
+
+  (define-key global-map (kbd "<prior>") #'better-scroll-down)
+  (define-key global-map (kbd "<next>") #'better-scroll-up)
+  (define-key global-map (kbd "S-<prior>") #'better-scroll-down-other-window)
+  (define-key global-map (kbd "S-<next>") #'better-scroll-up-other-window)
+
+
+  (general-evil-define-key 'motion 'global
+	"C-f" 'better-scroll-up
+	"C-b" 'better-scroll-down)
+  )
 
 (use-package winner
   ;; :bind(
@@ -3224,7 +3304,10 @@ ement-room-left-margin-width 24
 		 (title (exec/get-url-title url)))
 	(insert (format "[%s](%s)" title url))))
 
-(use-package markdown-mode)
+(use-package markdown-mode
+  :config
+  (setq markdown-fontify-code-blocks-natively t)
+  )
 
 (use-package hackernews
   :config
@@ -3255,11 +3338,18 @@ ement-room-left-margin-width 24
 
   (setq org-startup-truncated   nil)
 	  ;;;;;;; org-agenda-begin
-(setq org-log-done  'time)
-(setq org-agenda-files
-	  (directory-files-recursively "~/org/" "\.org$")
-	  )
-										;(org-agenda-include-diary . t)
+  (setq org-log-done  'time)
+  ;; (setq org-agenda-files
+  ;; 	  (directory-files-recursively "~/org/" "\.org$")
+  ;; 	  )
+  (setq org-agenda-files
+		(append (directory-files-recursively "~/org/GTD/" "\.org$")
+		 (directory-files-recursively "~/org/personal/" "\.org$")
+		 (directory-files-recursively "~/org/work/" "\.org$")
+		 (directory-files-recursively "~/org/notes/" "\.org$")
+		 (directory-files-recursively "~/org/journal/" "\.org$")))
+
+;; (org-agenda-include-diary . t)
 (setq org-agenda-time-grid '((daily today require-timed)
 							 (000 100 200 300 400 500 600 700 800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300 2400)
 							 "......"
@@ -3905,8 +3995,29 @@ interactive compilation buffer."
   )
 
 
+(use-package tab-bar
+  :hook
+  (after-init . tab-bar-mode)
+  (after-init . tab-bar-history-mode)
+  :config
+  (setq tab-bar-close-button-show nil
+		tab-bar-separator " "
+		tab-bar-border 0
+		tab-bar-button-margin 0
+		tab-bar-auto-width nil
+		tab-bar-format '(tab-bar-format-history
+						 tab-bar-format-tabs
+						 tab-bar-separator
+						 tab-bar-format-add-tab
+						 tab-bar-format-align-right
+						 keycast-tab-bar)
+		)
+  (set-face-attribute 'tab-bar nil :weight 'thin :height 1.0)
+  )
+
 (use-package centaur-tabs
-  :demand t
+  :disabled t
+  ;; :demand t
   ;; :hook
   ;; (vertico-buffer-mode . centaur-tabs-local-mode)
   :bind
@@ -4134,14 +4245,22 @@ interactive compilation buffer."
 		;; 'which-key-prefix-then-key-order-reverse
 		'which-key-description-order
 		)
-   (which-key-mode))
+  ;; I should bind which-key-show-top-level
+  (which-key-mode)
+
+  (defun exec/which-key-show-top-level()
+	(interactive)
+	(setq-local which-key-sort-order 'which-key-prefix-then-key-order)
+	(which-key-show-top-level)
+	)
+  )
 
 
 (use-package which-key-posframe
   :init
   :config
-  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-center
-		which-key-posframe-border-width 1
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-left-corner
+		which-key-posframe-border-width 0
 		which-key-posframe-font nil
 		)
   (which-key-posframe-mode)
@@ -4304,10 +4423,12 @@ interactive compilation buffer."
 (defun exec/org-mode-fixed()
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
-  (custom-set-faces '(org-modern-symbol ((t (:inherit org-modern-symbol :height 1.0))))
-					'(org-verbatim ((t (:inherit org-verbatim :height 1.0))))
-					'(org-block ((t (:inherit org-block :height 1.0))))
-					)
+  (custom-set-faces
+   '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "JuliaMono"  :height  1.0))))
+   '(org-verbatim       ((t  (:inherit  org-verbatim      :family "JuliaMono"  :height  1.0))))
+   '(org-block          ((t  (:inherit  org-block         :family "JuliaMono"  :height  1.0))))
+   '(org-table          ((t  (:inherit  org-block         :family "JuliaMono"  :height  1.0))))
+   )
   (setq-local buffer-face-mode-face '(:height 1.0))
   (buffer-face-mode))
 
@@ -4651,13 +4772,13 @@ interactive compilation buffer."
 	;; insert a space
 	(insert " ")
 	(evil-normal-state)
-	(gptel-send)
+	(gptel-send )
 	)
   (general-define-key
    :keymaps 'gptel-mode-map
    "C-<return>" 'exec/gptel-send
    "C-c C-k" 'gptel-abort
-   "C-x C-s" nil
+   "H-m" 'gptel-menu
    )
   ;; get first line content of ~/.config/openai_api_key/key.private file to gptel-api-key, without newline
   (setq gptel-api-key
@@ -4666,7 +4787,21 @@ interactive compilation buffer."
 		  (buffer-substring-no-properties (point-min) (line-end-position)))
 		gptel-default-mode 'markdown-mode
 		gptel-prompt-prefix-alist
-		'((markdown-mode . "🤖: ") (org-mode . "* ") (text-mode . "🤖: "))
+		'((markdown-mode . "👿: ") (org-mode . "* ") (text-mode . "🤖: "))
+		gptel-pre-response-hook '(lambda()
+								   (interactive)
+								   (recenter 0)
+								   )
+		gptel-post-response-hook 'end-of-buffer
+		gptel-directives '((default .
+									"You are a large language model living in Emacs and a helpful assistant. Respond concisely. Your reponse paragram should prefixed with `🤖:: ` please")
+						   (programming .
+										"You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note.")
+						   (writing .
+									"You are a large language model and a writing assistant. Respond concisely.")
+						   (chat .
+								 "You are a large language model and a conversation partner. Respond concisely."))
+
 		)
   )
 
@@ -4760,7 +4895,10 @@ interactive compilation buffer."
 ;; 			      (interactive)
 ;; 			      (shell-command "/usr/bin/fcitx-remote -t")
 ;; 			      ))
-(server-start)
+
+(unless (server-running-p)
+  (server-start)
+  )
 ;;; init.el ends here
 
 
