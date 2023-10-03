@@ -893,8 +893,8 @@ if it encounter an error, then we execute `consult-outline'."
   "H-<left>" 'winner-undo
   "H-<right>" 'winner-redo
 
-  "C-H-<left>" 'tab-bar-switch-to-prev-tab
-  "C-H-<right>" 'tab-bar-switch-to-next-tab
+  "C-H-<left>" 'tab-line-switch-to-prev-tab
+  "C-H-<right>" 'tab-line-switch-to-next-tab
   "H-`" 'garbage-collect
   ;; "H-i" 'yas-insert-snippet
   "H-a" 'org-agenda
@@ -4003,15 +4003,23 @@ interactive compilation buffer."
 	(interactive)
 	(setq 
 	 tab-bar-format '(tab-bar-format-history
+					  tab-bar-format-tabs-groups
 					  tab-bar-format-tabs
 					  tab-bar-separator
 					  tab-bar-format-add-tab
 					  tab-bar-format-align-right
-					  keycast-tab-bar
 					  ))
 
 	(setq tab-bar-format (delete-dups tab-bar-format))
 	(set-face-attribute 'tab-bar nil :weight 'thin :height 1.0))
+(defun exec/name-tab-by-project-or-default ()
+  "Return project name if in a project, or default tab-bar name if not.
+The default tab-bar name uses the buffer name."
+  (let ((project-name (projectile-project-name)))
+    (if (string= "-" project-name)
+        (tab-bar-tab-name-current)
+      (projectile-project-name))))
+
   :hook
   (after-init . tab-bar-mode)
   (after-init . tab-bar-history-mode)
@@ -4022,9 +4030,17 @@ interactive compilation buffer."
 		tab-bar-border 0
 		tab-bar-button-margin 0
 		tab-bar-auto-width nil
+		tab-bar-tab-name-function 'tab-bar-tab-name-current
 		)
   (setq tab-bar-format (delete-dups tab-bar-format))
   )
+
+(use-package tab-line-mode
+  :straight (:type built-in)
+  (setopt tab-line-close-button-show nil)
+  )
+
+(use-package tabspaces)
 
 (use-package centaur-tabs
   :disabled t
