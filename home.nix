@@ -10,6 +10,7 @@
     alejandra
     amdgpu_top
     atool
+    mpc-cli
     autoconf
     automake
     spotdl
@@ -196,7 +197,7 @@
           imapnotify = {
             enable = true;
             boxes = [ "INBOX" ];
-            extraConfig = { wait = 1; };
+            extraConfig = { wait = 0; };
             onNotify = "${pkgs.isync}/bin/mbsync --pull execvy:INBOX";
             onNotifyPost =
               "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index)'";
@@ -231,6 +232,19 @@
   };
 
   services = {
+    mpd = {
+      enable = true;
+      extraArgs = [ "--verbose" ];
+      musicDirectory = "~/Music";
+      extraConfig = ''
+          log_level "verbose"
+        audio_output {
+          type "pipewire"
+          name "My PipeWire Output"
+        }
+      '';
+
+    };
     sxhkd = {
       enable = true;
       extraConfig = "";
@@ -248,9 +262,8 @@
     mbsync = {
       enable = true;
       # frequency = "*-*-* *:*:00,20,40";
-      # postExec =
-      # "${pkgs.mu}/bin/mu index";
-      # "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
+      preExec = "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index)'";
+      postExec = "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index)'";
       verbose = true;
     };
   };

@@ -256,7 +256,7 @@ i.e. windows tiled side-by-side."
   (setq frame-resize-pixelwise t)
   (setq column-number-mode t)
   (setq line-number-mode t)
-  (setq mode-line-percent-position '(-3 "%o"))
+  ;; (setq mode-line-percent-position '(-3 "%o"))
 
   ;; (add-to-list 'default-frame-alist '(foreground-color . "white"))
   ;; (add-to-list 'default-frame-alist '(background-color . "black"))
@@ -267,9 +267,11 @@ i.e. windows tiled side-by-side."
 ;; it’s 中文测试`''`'《》，。
   ;;- [X] sub task two
   ;;- [ ] sub task three
+  ;; **
   (setq use-default-font-for-symbols nil)
   (set-fontset-font t 'unicode "JuliaMono")
-  (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
+  (set-fontset-font t 'ascii "JuliaMono")
+  (set-fontset-font t 'latin "JuliaMono")
   (set-fontset-font t 'han "Sarasa Gothic SC")
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
   (set-fontset-font t 'emoji "Noto Color Emoji")
@@ -876,6 +878,7 @@ if it encounter an error, then we execute `consult-outline'."
   "m" 'helpful-macro
   "c" 'helpful-command
   "C" 'helpful-callable
+  "a" 'info-apropos
   )
 
 (general-def
@@ -968,7 +971,7 @@ if it encounter an error, then we execute `consult-outline'."
 	;; 	(switch-to-buffer "init.el")
 	(if (get-buffer-window "init.el")
 		(select-window (get-buffer-window "emacs-init.el"))
-	  (find-file "~/Projects/github.com/eval-exec/nixos-config/emacs-init.el"))
+	  (find-file "~/Projects/github.com/eval-exec/nixos-configuration/emacs-init.el"))
 	)
   )
 
@@ -1231,7 +1234,7 @@ if it encounter an error, then we execute `consult-outline'."
 							   )
 
 							  (org-agenda-list) ;; consider set initial-buffer-choice to "*Org Agenda*" buffer
-							  ))
+						  ))
 
 
 
@@ -1275,6 +1278,19 @@ if it encounter an error, then we execute `consult-outline'."
 
   (vertico-mode)
   ;; (vertico-buffer-mode)
+  (use-package vertico-prescient
+	:config
+	(vertico-prescient-mode 1)
+	;; Configure `prescient.el' filtering to your liking.
+	(setq prescient-filter-method '(literal initialism prefix regexp)
+		  prescient-use-char-folding t
+		  prescient-use-case-folding 'smart
+		  prescient-sort-full-matches-first t ; Works well with `initialism'.
+		  prescient-sort-length-enable t)
+
+	;; Save recency and frequency rankings to disk, which let them become better
+	;; over time.
+	(prescient-persist-mode 1))
   )
 
 
@@ -1300,7 +1316,8 @@ if it encounter an error, then we execute `consult-outline'."
   ;; 	 ((t (:inherit default :background "pink"))))
   ;;  )
 
-  (vertico-posframe-mode)
+  (if (display-graphic-p)
+	  (vertico-posframe-mode))
   )
 
 ;;;; ============================================================
@@ -1745,9 +1762,11 @@ if it encounter an error, then we execute `consult-outline'."
   (:keymaps 'bongo-playlist-mode-map "RET" 'bongo-play-line)
   :config
   (setq
-   bongo-enabled-backends '(mpv)
+   bongo-enabled-backends '(mpv vlc)
+   bongo-default-directory "~/Music"
    )
   )
+(use-package mpdel)
 
 (use-package disable-mouse
   :config
@@ -1928,14 +1947,14 @@ if it encounter an error, then we execute `consult-outline'."
   ;; Must be in the :init section of use-package such that the mode gets
   ;; enabled right away. Note that this forces loading the package.
   :init
-  (marginalia-mode)
+  (marginalia-mode )
   )
 
 (use-package ctrlf)
 
 (use-package popper
   :ensure t ; or :straight t
-  :bind (("C-`"   . popper-toggle-latest)
+  :bind (("C-`"   . popper-toggle)
          ("M-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
   :init
@@ -1960,14 +1979,15 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 (use-package orderless
+  :disabled t
   :init
   (setq completion-search-distance 200)
   (setq completion-styles '(
 							;; partial-completion
 							;; substring
 							;; flex
-							basic
-							orderless
+							;; basic
+							;; orderless
 							;; emacs22
 							)
 		completion-category-defaults nil
@@ -2064,6 +2084,10 @@ if it encounter an error, then we execute `consult-outline'."
 (add-hook 'minibuffer-setup-hook #'exec/corfu-enable-in-minibuffer)
 
   )
+(use-package corfu-prescient
+  :config
+  (corfu-prescient-mode)
+  )
 
 (use-package corfu-terminal)
 
@@ -2127,7 +2151,10 @@ if it encounter an error, then we execute `consult-outline'."
          ("C-M-/" . dabbrev-expand))
   ;; Other useful Dabbrev configurations.
   :custom
-  (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
+  (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'"))
+  :config
+  (setq dabbrev-upcase-means-case-search t)
+  )
 
 (use-package rg
   :hook (rg-mode . (lambda()
@@ -2179,7 +2206,7 @@ if it encounter an error, then we execute `consult-outline'."
 		 ("C-M-#" . consult-register)
 		 ;; Other custom bindings
 		 ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-		 ("<help> a" . consult-apropos)            ;; orig. apropos-command
+		 ;; ("<help> a" . consult-apropos)            ;; orig. apropos-command
 		 ;; M-g bindings (goto-map)
 		 ("M-g e" . consult-compile-error)
 		 ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
@@ -2599,8 +2626,8 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 (add-hook 'org-mode-hook '(lambda()
-							(set-face-attribute 'org-block nil :font "Noto Sans Mono")
-							(set-face-attribute 'org-verbatim nil :font "Noto Sans Mono" :foreground "orange")
+							(set-face-attribute 'org-block nil :font "JuliaMono")
+							(set-face-attribute 'org-verbatim nil :font "JuliaMono" :foreground "orange")
 
 							))
 
@@ -2878,16 +2905,16 @@ if it encounter an error, then we execute `consult-outline'."
 
 (defun exec/nov-mode-face()
   (interactive)
-
   (setq buffer-face-mode-face '(
-								;; :family "Noto Sans"
-								:height 1.5
+								:family "Noto Serif"
+								:height 1.2
 								;; :background "white"
 								;; :foreground "black"
 								))
   (make-local-variable 'buffer-face-mode-face)
   (buffer-face-mode)
   (blink-cursor-mode -1)
+  (tab-bar-mode -1)
   )
 
 (use-package nov
@@ -3057,12 +3084,34 @@ if it encounter an error, then we execute `consult-outline'."
   ;; )
 
 (use-package mu4e
+  :init
+  (defun exec/clip-to-PNG ()
+    (interactive)
+    (when (string-match-p (regexp-quote "image/png") (shell-command-to-string "xclip -selection clipboard -o -t TARGETS"))
+      (let
+          ((image-file (concat "/tmp/" (format-time-string "tmp_%Y%m%d_%H%M%S.png"))))
+        (shell-command-to-string (concat "xclip -o -selection clipboard -t image/png > " image-file))
+        image-file)))
+
+  (defun exec/mu4e-attach-image-from-clipboard ()
+    (interactive)
+    (let ((image-file (exec/clip-to-PNG)) ;; paste clipboard to temp file
+          (pos (point-marker)))
+      (when image-file
+        (goto-char (point-max))
+        (mail-add-attachment image-file)
+        (goto-char pos))))
+
+  
   :straight (:type built-in)
   :config
 
 
   (setq mu4e-mu-binary (executable-find "mu"))
   ;; use mu4e for e-mail in emacs
+  (setq read-mail-command 'mu4e
+		mu4e-eldoc-support t
+		)
   (setq mail-user-agent 'mu4e-user-agent)
 
 										; (setq mu4e-drafts-folder "/[Gmail].Drafts")
@@ -3109,8 +3158,8 @@ if it encounter an error, then we execute `consult-outline'."
 		)
 
 
-  (setq mu4e-use-fancy-chars nil
-		mu4e-debug t
+  (setq mu4e-use-fancy-chars t
+		mu4e-debug nil
 		)
   (setq mu4e-date-format-long "%c"
 		mu4e-headers-date-format "%x %T"
@@ -3471,6 +3520,9 @@ ement-room-left-margin-width 24
   (set-face-font 'org-modern-symbol "Symbola")
   (global-org-modern-mode)
   )
+(use-package svg-tag-mode)
+
+
 (use-package org-fancy-priorities
   :after org
   ;; :hook
@@ -3536,7 +3588,8 @@ ement-room-left-margin-width 24
 		org-yaap-daily-alert 6 
 		org-yaap-persistent-clock t
 		)
-  (org-yaap-mode 1))
+  ;; (org-yaap-mode 1)
+  )
 )
 
 (defun exec/visual-select-region()
@@ -4002,16 +4055,17 @@ interactive compilation buffer."
   (defun exec/tab-bar-mode-hook()
 	(interactive)
 	(setq 
-	 tab-bar-format '(tab-bar-format-history
+	 tab-bar-format '(
+					  tab-bar-format-history
 					  tab-bar-format-tabs-groups
-					  tab-bar-format-tabs
+					  ;; tab-bar-format-tabs
 					  tab-bar-separator
 					  tab-bar-format-add-tab
 					  tab-bar-format-align-right
 					  ))
 
 	(setq tab-bar-format (delete-dups tab-bar-format))
-	(set-face-attribute 'tab-bar nil :weight 'thin :height 1.0))
+	(set-face-attribute 'tab-bar nil :height 1.0 :font "Noto Sans CJK SC"))
 (defun exec/name-tab-by-project-or-default ()
   "Return project name if in a project, or default tab-bar name if not.
 The default tab-bar name uses the buffer name."
@@ -4019,6 +4073,9 @@ The default tab-bar name uses the buffer name."
     (if (string= "-" project-name)
         (tab-bar-tab-name-current)
       (projectile-project-name))))
+(defun exec/tab-bar-project-name(tab_name &optional)
+  (projectile-project-name)
+  )
 
   :hook
   (after-init . tab-bar-mode)
@@ -4031,16 +4088,31 @@ The default tab-bar name uses the buffer name."
 		tab-bar-button-margin 0
 		tab-bar-auto-width nil
 		tab-bar-tab-name-function 'tab-bar-tab-name-current
+		tab-bar-tab-group-function 'exec/tab-bar-project-name
 		)
   (setq tab-bar-format (delete-dups tab-bar-format))
   )
 
-(use-package tab-line-mode
-  :straight (:type built-in)
-  (setopt tab-line-close-button-show nil)
-  )
+;; (use-package tab-line-mode
+;;   :straight (:type built-in)
+;;   (setq tab-line-close-button-show nil)
+;;   )
 
-(use-package tabspaces)
+;; (use-package tabspaces
+;;   :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup. 
+;;   :commands (tabspaces-switch-or-create-workspace
+;;              tabspaces-open-or-create-project-and-workspace)
+;;   :custom
+;;   (tabspaces-use-filtered-buffers-as-default t)
+;;   (tabspaces-default-tab "Default")
+;;   (tabspaces-remove-to-default t)
+;;   (tabspaces-include-buffers '("*scratch*"))
+;;   (tabspaces-initialize-project-with-todo t)
+;;   (tabspaces-todo-file-name "project-todo.org")
+;;   ;; sessions
+;;   (tabspaces-session t)
+;;   (tabspaces-session-auto-restore t)
+;;   )
 
 (use-package centaur-tabs
   :disabled t
@@ -4290,7 +4362,8 @@ The default tab-bar name uses the buffer name."
 		which-key-posframe-border-width 0
 		which-key-posframe-font nil
 		)
-  (which-key-posframe-mode)
+  (if (display-graphic-p)
+	  (which-key-posframe-mode))
   )
 
 
@@ -4318,6 +4391,7 @@ The default tab-bar name uses the buffer name."
 		w3m-confirm-leaving-secure-page nil
 		w3m-session-load-crashed-sessions t
 		w3m-session-load-last-sessions t
+		w3m-unsafe-url-warning ""
 		)
   
   )
@@ -4658,6 +4732,7 @@ The default tab-bar name uses the buffer name."
 
 (use-package standard-themes)
 (use-package blackboard-theme)
+(use-package modus-themes)
 
 ;;;;;; why? up
 
@@ -4731,7 +4806,10 @@ The default tab-bar name uses the buffer name."
 		)
   )
 
-(use-package explain-pause-mode)
+(use-package explain-pause-mode
+  :config
+  (setq explain-pause-top-auto-refresh-interval 1)
+  )
 
 (use-package wakatime-mode
   :config
@@ -4786,6 +4864,7 @@ The default tab-bar name uses the buffer name."
 
 
 (use-package gptel
+  :straight (:local-repo "~/Projects/github.com/karthink/gptel")
   :hook
   (
   (gptel-mode . (lambda()
@@ -4799,12 +4878,14 @@ The default tab-bar name uses the buffer name."
 	;; insert a space
 	(insert " ")
 	(evil-normal-state)
-	(gptel-send )
+	(gptel-send)
 	)
   (general-define-key
    :keymaps 'gptel-mode-map
    "C-<return>" 'exec/gptel-send
    "C-c C-k" 'gptel-abort
+   )
+  (general-define-key
    "H-m" 'gptel-menu
    )
   ;; get first line content of ~/.config/openai_api_key/key.private file to gptel-api-key, without newline
@@ -4821,17 +4902,24 @@ The default tab-bar name uses the buffer name."
 								   )
 		gptel-post-response-hook 'end-of-buffer
 		gptel-directives '((default .
-									"You are a large language model living in Emacs and a helpful assistant. Respond concisely. Your reponse paragram should prefixed with `🤖:: ` please")
+									"You are a large language model living in Emacs and a helpful assistant. Respond concisely. Your reponse paragraph should start with `🤖:: ` please")
 						   (programming .
 										"You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note.")
 						   (writing .
 									"You are a large language model and a writing assistant. Respond concisely.")
 						   (chat .
-								 "You are a large language model and a conversation partner. Respond concisely."))
+								 "You are a large language model and a conversation partner. Respond concisely.")
+						   (translator .
+								 "You are a translator, I send you text, you translate it to Chinese")
+						   )
 
-		)
-  )
-
+		gptel-posframe-width 50
+		gptel-posframe-height 7
+		))
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;debug and what the duck
+;;
+;;
 (use-package chatgpt
   :straight (:host github :repo "joshcho/ChatGPT.el" :files ("dist" "*.el"))
   :init

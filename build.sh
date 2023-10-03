@@ -4,4 +4,4 @@ nixfmt *.nix
 
 git diff --exit-code
 
-sudo nixos-rebuild switch --flake /home/exec/Projects/github.com/eval-exec/nixos-config/.#Mufasa --verbose
+sudo nixos-rebuild switch --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose

@@ -57,7 +57,7 @@
     # Enable networking
     networkmanager = {
       enable = true;
-      dns = "default";
+      dns = "none";
     };
     firewall = {
       enable = false;
@@ -141,6 +141,11 @@
     # };
 
     # udev = { extraRules = "\n"; };
+
+    resolved = {
+      enable = false;
+      fallbackDns = [ "1.1.1.1" "8.8.8.8" ];
+    };
 
     # Configure keymap in X11
     xserver = {
