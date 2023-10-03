@@ -114,9 +114,13 @@
         "hyper:C-M-A" = { };
       };
     };
-    input-remapper = {
+    # input-remapper = {
+    #   enable = false;
+    #   enableUdevRules = false;
+    # };
+    touchegg = {
       enable = true;
-      enableUdevRules = true;
+
     };
 
     acpid = {
