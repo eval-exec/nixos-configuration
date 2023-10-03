@@ -114,6 +114,10 @@
         "hyper:C-M-A" = { };
       };
     };
+    input-remapper = {
+      enable = true;
+      enableUdevRules = true;
+    };
 
     acpid = {
       enable = true;
@@ -143,7 +147,7 @@
 
       videoDrivers = [
         "amdgpu"
-        "nvidia"
+        # "nvidia"
         "modesetting"
         # "fbdev"
       ];

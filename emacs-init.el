@@ -264,14 +264,17 @@ i.e. windows tiled side-by-side."
 
 
 ;; 🧬 
-;; it’s 中文测试《》，。
+;; it’s 中文测试`''`'《》，。
+  ;;- [X] sub task two
+  ;;- [ ] sub task three
   (setq use-default-font-for-symbols nil)
+  (set-fontset-font t 'unicode "JuliaMono")
   (set-fontset-font t 'ascii "Noto Sans" nil 'prepend)
   (set-fontset-font t 'han "Sarasa Gothic SC")
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
   (set-fontset-font t 'emoji "Noto Color Emoji")
-  (set-fontset-font t 'symbol "JuliaMono")
-  (set-fontset-font t 'symbol "Symbola" nil 'prepend)
+  (set-fontset-font t 'symbol "Symbola")
+  (set-fontset-font t 'symbol "JuliaMono" nil 'prepend)
 
 
   (setq revert-without-query '(".*"))
@@ -362,9 +365,10 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (evil-mode t)
   (general-evil-setup)
 
-  (setq evil-disable-insert-state-bindings nil)
-  (setq evil-search-module 'evil-search)
-  (setq evil-symbol-word-search t)
+  (setopt evil-disable-insert-state-bindings nil
+		  evil-search-module 'evil-search
+		  evil-symbol-word-search t
+		  evil-move-beyond-eol nil)
 
   ;; (defalias #'forward-evil-word #'forward-evil-symbol)
 
@@ -423,6 +427,12 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   :init
   (evil-collection-init))
 
+(use-package evil-cleverparens
+  ;; :hook
+  ;; (emacs-lisp-mode .
+  ;; 				   evil-cleverparens-mode)
+  :config
+  )
 
 
 ;; (use-package unicode-fonts
@@ -1193,9 +1203,10 @@ if it encounter an error, then we execute `consult-outline'."
   )
 
 ;; (add-hook 'evil-insert-state-entry-hook 'exec/mode-line-insert-hook)
-;; (add-hook 'evil-normal-state-entry-hook 'exec/mode-line-normal-hook)
+(add-hook 'evil-normal-state-entry-hook 'exec/mode-line-normal-hook)
 ;; (add-hook 'evil-visual-state-entry-hook 'exec/mode-line-visual-hook)
 (add-hook 'evil-emacs-state-entry-hook 'exec/mode-line-emacs-hook)
+(add-hook 'evil-emacs-state-exit-hook 'exec/mode-line-normal-hook)
 
 
 (defun disable-all-themes ()
@@ -3401,23 +3412,14 @@ ement-room-left-margin-width 24
 (setq org-default-notes-file  "~/org/notes/")
 (setq org-capture-templates '(
 							  ("w" "work" entry
-							   (file+headline  "~/org/work/work.org" "WORK" )
+							   (file+headline  "~/org/GTD/work.org" "WORK" )
 							   "** TODO [#B] %i %?
 		 %T
 		 ")
 							  ("p" "personal stuff" entry (file+headline "~/org/personal/personal.org" "Personl")
 							   "* TODO %i %?")
-							  ("e" "EXEC" plain (file+headline "~/org/personal/exec.org" "EXEC") "** %i %?")
+							  ("e" "EXEC" plain (file+headline "~/org/GTD/personal.org" "EXEC") "** %i %?")
 
-							  ("c" "Code Stuff")
-							  ("cl" "LeetCode"
-							   plain
-							   (file+headline "~/org/personal/leetocde.org" "Daily Challenge")
-							   "** %T %i %?
-		  #+BEGIN_SRC c
-
-		  #+END_SRC
-		  ")
 							  ))
 (setq org-todo-keywords
 	  '((sequence "TODO(t)" "STARTED" "|" "SKIP(s)" "CANCEL(c)" "DONE(d)")
@@ -3996,23 +3998,32 @@ interactive compilation buffer."
 
 
 (use-package tab-bar
+  :init
+  (defun exec/tab-bar-mode-hook()
+	(interactive)
+	(setq 
+	 tab-bar-format '(tab-bar-format-history
+					  tab-bar-format-tabs
+					  tab-bar-separator
+					  tab-bar-format-add-tab
+					  tab-bar-format-align-right
+					  keycast-tab-bar
+					  ))
+
+	(setq tab-bar-format (delete-dups tab-bar-format))
+	(set-face-attribute 'tab-bar nil :weight 'thin :height 1.0))
   :hook
   (after-init . tab-bar-mode)
   (after-init . tab-bar-history-mode)
+  (tab-bar-mode . exec/tab-bar-mode-hook)
   :config
   (setq tab-bar-close-button-show nil
 		tab-bar-separator " "
 		tab-bar-border 0
 		tab-bar-button-margin 0
 		tab-bar-auto-width nil
-		tab-bar-format '(tab-bar-format-history
-						 tab-bar-format-tabs
-						 tab-bar-separator
-						 tab-bar-format-add-tab
-						 tab-bar-format-align-right
-						 keycast-tab-bar)
 		)
-  (set-face-attribute 'tab-bar nil :weight 'thin :height 1.0)
+  (setq tab-bar-format (delete-dups tab-bar-format))
   )
 
 (use-package centaur-tabs
@@ -4427,7 +4438,7 @@ interactive compilation buffer."
    '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "JuliaMono"  :height  1.0))))
    '(org-verbatim       ((t  (:inherit  org-verbatim      :family "JuliaMono"  :height  1.0))))
    '(org-block          ((t  (:inherit  org-block         :family "JuliaMono"  :height  1.0))))
-   '(org-table          ((t  (:inherit  org-block         :family "JuliaMono"  :height  1.0))))
+   '(org-table          ((t  (:inherit  org-table :family "JuliaMono"  :height  1.0))))
    )
   (setq-local buffer-face-mode-face '(:height 1.0))
   (buffer-face-mode))
