@@ -259,7 +259,7 @@
   virtualisation = {
     libvirtd.enable = false;
     virtualbox.host.enable = true;
-    virtualbox.host.enableExtensionPack = true;
+    virtualbox.host.enableExtensionPack = false;
     virtualbox.guest.enable = false;
     virtualbox.guest.x11 = false;
     docker.enable = true;

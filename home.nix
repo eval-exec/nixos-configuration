@@ -302,7 +302,7 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      pakcage = pkgs.emacs-git;
+      package = pkgs.emacs-git;
       # package = (pkgs.emacs-git.override {
       #   withXwidgets = true;
       #   withGTK3 = true;
