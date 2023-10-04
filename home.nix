@@ -37,8 +37,8 @@
     clojure-lsp
     cloudflared
     cmake
-    jetbrains-toolbox
     gptcommit
+    imagemagick
     cool-retro-term
     copyq
     cpupower-gui
@@ -81,9 +81,9 @@
     inetutils
     intel-gpu-tools
     isync
-    jetbrains.clion
-    jetbrains.goland
-    jetbrains.idea-ultimate
+    # jetbrains.clion
+    # jetbrains.goland
+    # jetbrains.idea-ultimate
     joker
     jq
     kitty

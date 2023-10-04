@@ -271,12 +271,12 @@ i.e. windows tiled side-by-side."
   (setq use-default-font-for-symbols nil)
   (set-fontset-font t 'unicode "JuliaMono")
   (set-fontset-font t 'ascii "JuliaMono")
-  (set-fontset-font t 'latin "JuliaMono")
+  (set-fontset-font t 'latin "Noto Sans")
   (set-fontset-font t 'han "Sarasa Gothic SC")
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
+  (set-fontset-font t 'symbol "JuliaMono")
+  (set-fontset-font t 'symbol "Symbola" nil 'append)
   (set-fontset-font t 'emoji "Noto Color Emoji")
-  (set-fontset-font t 'symbol "Symbola")
-  (set-fontset-font t 'symbol "JuliaMono" nil 'prepend)
 
 
   (setq revert-without-query '(".*"))
@@ -532,8 +532,11 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (setq word-wrap t)
 (global-visual-line-mode t)
-(fringe-mode 0)
-(setf left-margin 16)
+(fringe-mode)
+(set-fringe-style '(10 . 10))
+
+;; (set-left-margin 20)
+;; (set-right-margin 20)
 
 (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
@@ -1169,15 +1172,14 @@ if it encounter an error, then we execute `consult-outline'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(line-number ((t (:family "Noto Sans Mono"
-							:width ultra-condensed
+ '(line-number ((t (:family "Iosevka"
 							:foreground "grey"))))
 
- '(line-number-current-line ((t (:background "#880000"
-											 :foreground "#ffffff"
-											 :width ultra-condensed
-											 :weight extra-bold
-											 :family "Noto Sans Mono"))))
+ '(line-number-current-line ((t (
+								 :inherit line-number
+								 :background "#880000"
+								 :foreground "#ffffff"
+								 ))))
  '(mode-line ((t (:box nil))))
 
  '(imenu-list-entry-face ((t (:height 0.8))))
@@ -2644,6 +2646,20 @@ if it encounter an error, then we execute `consult-outline'."
   :hook ((prog-mode emacs-lisp-mode minibuffer-mode) .  rainbow-delimiters-mode)
   )
 
+(use-package indent-bars
+  :straight (indent-bars :type git :host github :repo "jdtsmith/indent-bars")
+  ;; :hook (prog-mode  . indent-bars-mode)
+  :custom
+  (indent-bars-treesit-support t)
+  (indent-bars-no-descend-string t)
+  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  (indent-bars-treesit-wrap '((python argument_list parameters ; for python, as an example
+				      list list_comprehension
+				      dictionary dictionary_comprehension
+				      parenthesized_expression subscript)))
+  
+  )
+
 (use-package exercism
   ;; :straight (exercism.el :type git :host github
   ;; 				   :repo "anonimitoraf/exercism.el"
@@ -2905,16 +2921,16 @@ if it encounter an error, then we execute `consult-outline'."
 
 (defun exec/nov-mode-face()
   (interactive)
-  (setq buffer-face-mode-face '(
+  (setq-local buffer-face-mode-face '(
 								:family "Noto Serif"
-								:height 1.2
+								:height 1.5
 								;; :background "white"
 								;; :foreground "black"
 								))
   (make-local-variable 'buffer-face-mode-face)
-  (buffer-face-mode)
   (blink-cursor-mode -1)
   (tab-bar-mode -1)
+  (buffer-face-mode)
   )
 
 (use-package nov
@@ -2925,6 +2941,7 @@ if it encounter an error, then we execute `consult-outline'."
   (setq nov-unzip-program "unzip"
 		nov-text-width t
 		visual-fill-column-center-text nil
+		nov-variable-pitch nil
 		)
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   )
@@ -4065,7 +4082,8 @@ interactive compilation buffer."
 					  ))
 
 	(setq tab-bar-format (delete-dups tab-bar-format))
-	(set-face-attribute 'tab-bar nil :height 1.0 :font "Noto Sans CJK SC"))
+	(set-face-attribute 'tab-bar nil :height 1.0 :font "Noto Sans CJK SC")
+	)
 (defun exec/name-tab-by-project-or-default ()
   "Return project name if in a project, or default tab-bar name if not.
 The default tab-bar name uses the buffer name."
@@ -4359,7 +4377,7 @@ The default tab-bar name uses the buffer name."
   :init
   :config
   (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-left-corner
-		which-key-posframe-border-width 0
+		which-key-posframe-border-width 1
 		which-key-posframe-font nil
 		)
   (if (display-graphic-p)
@@ -4804,6 +4822,11 @@ The default tab-bar name uses the buffer name."
 		display-wttr-locations '("Beijing")
 		display-wttr-interval (* 60 60)
 		)
+  )
+(use-package weather-metno
+  :config
+  (setq weather-metno-get-image-props '(:width 16 :height 16 :ascent center))
+
   )
 
 (use-package explain-pause-mode
