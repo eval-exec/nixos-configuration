@@ -219,7 +219,7 @@ i.e. windows tiled side-by-side."
   (setq package-native-compile t)
   (setq buffer-save-without-query t)
   (setq byte-compile-warnings '(unresolved))
-  (setq max-lisp-eval-depth 1600)
+  (setq max-lisp-eval-depth 3200)
 
   (setq frame-title-format "Eval EXEC - GNU Emacs at Mufasa")
   (setq header-line-format '(:eval (if (buffer-file-name) (abbreviate-file-name (buffer-file-name)) "%b")))
@@ -1049,6 +1049,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 (setq display-buffer-alist nil)
+
 ;; (add-to-list 'display-buffer-alist
 			 ;; '(
 			 ;;   "\\*helpful *"
@@ -1066,99 +1067,99 @@ if it encounter an error, then we execute `consult-outline'."
 ;; 			   (side . bottom)
 ;; 			   (slot . 1)
 ;; 			   ))
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Help\\* *"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 2)
-			   ))
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*Help\\* *"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . bottom)
+;; 			   (slot . 2)
+;; 			   ))
 
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Outline *pdf\\*"
-			   (display-buffer-in-side-window)
-			   (side . right)
-			   (slot . 1)
-			   ))
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*Outline *pdf\\*"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . right)
+;; 			   (slot . 1)
+;; 			   ))
 
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Flycheck errors\\* *"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.3)
-			   )
-			 )
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*Flycheck errors\\* *"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . bottom)
+;; 			   (slot . 0)
+;; 			   (window-height . 0.3)
+;; 			   )
+;; 			 )
 
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Warnings\\* *"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.3)
-			   )
-			 )
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*Warnings\\* *"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . bottom)
+;; 			   (slot . 0)
+;; 			   (window-height . 0.3)
+;; 			   )
+;; 			 )
 
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Process List\\*"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.2)
-			   )
-			 )
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*Process List\\*"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . bottom)
+;; 			   (slot . 0)
+;; 			   (window-height . 0.2)
+;; 			   )
+;; 			 )
 
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Messages\\*"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.2)
-			   )
-			 )
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*color-rg\\*"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 0)
-			   (window-height . 0.25)
-			   )
-			 )
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*Messages\\*"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . bottom)
+;; 			   (slot . 0)
+;; 			   (window-height . 0.2)
+;; 			   )
+;; 			 )
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*color-rg\\*"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . bottom)
+;; 			   (slot . 0)
+;; 			   (window-height . 0.25)
+;; 			   )
+;; 			 )
 
 
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Ilist\\*"
-			   (display-buffer-in-side-window)
-			   (side . left)
-			   (slot . 2)
-			   (window-height . 0.3)
-			   )
-			 )
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*Ilist\\*"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . left)
+;; 			   (slot . 2)
+;; 			   (window-height . 0.3)
+;; 			   )
+;; 			 )
 
-(add-to-list 'display-buffer-alist
-			 '("\\*org-roam\\*"
-			   (display-buffer-in-side-window)
-			   (side . right)
-			   (slot . 1)
-			   (window-parameters . ((no-other-window . t)
-									 (no-delete-other-windows . t)))))
+;; (add-to-list 'display-buffer-alist
+;; 			 '("\\*org-roam\\*"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . right)
+;; 			   (slot . 1)
+;; 			   (window-parameters . ((no-other-window . t)
+;; 									 (no-delete-other-windows . t)))))
 
-(add-to-list 'display-buffer-alist
-			 '(
-			   "\\*Go-Translate\\*"
-			   (display-buffer-in-side-window)
-			   (side . bottom)
-			   (slot . 4)
-			   (window-height . 0.5)
-			   )
-			 )
+;; (add-to-list 'display-buffer-alist
+;; 			 '(
+;; 			   "\\*Go-Translate\\*"
+;; 			   (display-buffer-in-side-window)
+;; 			   (side . bottom)
+;; 			   (slot . 4)
+;; 			   (window-height . 0.5)
+;; 			   )
+;; 			 )
 
 
 
@@ -1301,7 +1302,7 @@ if it encounter an error, then we execute `consult-outline'."
   (setq vertico-posframe-parameters '((left-fringe . 0)
 									  (right-fringe . 0)
 									  )
-		vertico-posframe-border-width 0
+		vertico-posframe-border-width 1
 		vertico-posframe-poshandler
 		;; 'posframe-poshandler-window-bottom-center
 		'posframe-poshandler-frame-bottom-center
@@ -2804,11 +2805,11 @@ if it encounter an error, then we execute `consult-outline'."
 								:height 1.0) " ")))
 
 
-(use-package perspective
-  :bind
-  ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
-  :init
-  ;;  (persp-mode)
+(use-package persp-mode
+  :custom
+  (persp-keymap-prefix (kbd "C-c w"))
+  :config
+  ;; (persp-mode t)
   )
 
 
@@ -3169,14 +3170,14 @@ if it encounter an error, then we execute `consult-outline'."
 		mu4e-index-update-in-background nil
 		mu4e-update-interval nil
 		mu4e-index-cleanup t
-		mu4e-index-lazy-check nil
+		mu4e-index-lazy-check t
 		mu4e-notification-support t
 		mu4e-speedbar-support t
 		)
 
 
   (setq mu4e-use-fancy-chars t
-		mu4e-debug nil
+		mu4e-debug t
 		)
   (setq mu4e-date-format-long "%c"
 		mu4e-headers-date-format "%x %T"
@@ -3511,8 +3512,8 @@ ement-room-left-margin-width 24
  "file"
  :face 'org-link-file)
 
-;; (use-package org-super-agenda
-;;   )
+(use-package org-super-agenda
+  )
 
 (use-package ob-mermaid
   :config
@@ -3839,7 +3840,7 @@ ement-room-left-margin-width 24
 (use-package projectile
   :bind("C-c p" . projectile-command-map)
   :config
-  (setq projectile-auto-discover nil)
+  (setq projectile-auto-discover t)
   (setq projectile-current-project-on-switch 'keep)
   (setq projectile-indexing-method 'hybrid)
   (setq projectile-enable-caching nil)
@@ -3847,7 +3848,20 @@ ement-room-left-margin-width 24
   (setq projectile-per-project-compilation-buffer t)
   (setq projectile-ignored-projects '(
 									  "~/.emacs.d/"
-									  ))
+									  )
+		projectile-auto-discover t
+		projectile-auto-update-cache t)
+  (defun projectile-project-current (dir)
+	"Retrieve the root directory of the project at DIR using `project-current'."
+	(cdr (project-current nil dir)))
+  (setq
+   projectile-project-root-functions '(
+									   ;; projectile-project-current
+									   projectile-root-local
+									   projectile-root-marked
+									   projectile-root-bottom-up
+									   projectile-root-top-down
+									   projectile-root-top-down-recurring))
   (defun projectile-ignored-project-function(project-root)
 		   (or (string-prefix-p "~/.emacs.d/" project-root)
 			   (string-prefix-p "~/.cargo/" project-root)
@@ -3877,7 +3891,16 @@ interactive compilation buffer."
   (advice-add 'projectile-run-project     :around #'projectile-compile--double-prefix-means-run-comint)
   (advice-add 'projectile-compile-project :around #'projectile-compile--double-prefix-means-run-comint)
   (advice-add 'projectile-test-project    :around #'projectile-compile--double-prefix-means-run-comint)
+  (projectile-update-project-type
+   'rust-cargo
+   :related-files-fn
+   (list
+	(projectile-related-files-fn-test-with-suffix "toml" "Toml")
+	(projectile-related-files-fn-test-with-suffix "lock" "Lock"))
+   :test-prefix nil
+   :precedence 'high)
 
+  (use-package persp-projectile)
 
   (use-package projectile-ripgrep
 	:config
@@ -4073,16 +4096,17 @@ interactive compilation buffer."
 	(interactive)
 	(setq 
 	 tab-bar-format '(
+					  tab-bar-format-menu-bar
 					  tab-bar-format-history
 					  tab-bar-format-tabs-groups
 					  ;; tab-bar-format-tabs
 					  tab-bar-separator
 					  tab-bar-format-add-tab
 					  tab-bar-format-align-right
+					  tab-bar-format-global
 					  ))
 
 	(setq tab-bar-format (delete-dups tab-bar-format))
-	(set-face-attribute 'tab-bar nil :height 1.0 :font "Noto Sans CJK SC")
 	)
 (defun exec/name-tab-by-project-or-default ()
   "Return project name if in a project, or default tab-bar name if not.
@@ -4099,6 +4123,8 @@ The default tab-bar name uses the buffer name."
   (after-init . tab-bar-mode)
   (after-init . tab-bar-history-mode)
   (tab-bar-mode . exec/tab-bar-mode-hook)
+  :custom-face
+  (tab-bar ((t (:height 1.0 :font "Noto sAns CJK SC"))))
   :config
   (setq tab-bar-close-button-show nil
 		tab-bar-separator " "
@@ -4107,14 +4133,21 @@ The default tab-bar name uses the buffer name."
 		tab-bar-auto-width nil
 		tab-bar-tab-name-function 'tab-bar-tab-name-current
 		tab-bar-tab-group-function 'exec/tab-bar-project-name
+		tab-bar-new-tab-choice "*scratch*"
+		tab-bar-new-tab-group  'projectile-project-name
 		)
   (setq tab-bar-format (delete-dups tab-bar-format))
   )
 
-;; (use-package tab-line-mode
-;;   :straight (:type built-in)
-;;   (setq tab-line-close-button-show nil)
-;;   )
+(use-package tab-line
+  :straight (:type built-in)
+  :config
+  (setq tab-line-close-button-show nil
+		tab-line-close-tab-function 'kill-buffer
+
+		)
+  (global-tab-line-mode)
+  )
 
 ;; (use-package tabspaces
 ;;   :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup. 
@@ -4546,7 +4579,7 @@ The default tab-bar name uses the buffer name."
    '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "JuliaMono"  :height  1.0))))
    '(org-verbatim       ((t  (:inherit  org-verbatim      :family "JuliaMono"  :height  1.0))))
    '(org-block          ((t  (:inherit  org-block         :family "JuliaMono"  :height  1.0))))
-   '(org-table          ((t  (:inherit  org-table :family "JuliaMono"  :height  1.0))))
+   '(org-table          ((t  (:inherit  org-table         :family "JuliaMono"  :height  1.0))))
    )
   (setq-local buffer-face-mode-face '(:height 1.0))
   (buffer-face-mode))
@@ -5074,7 +5107,7 @@ The default tab-bar name uses the buffer name."
 (use-package hl-line+
   :hook
   (window-scroll-functions . hl-line-flash)
-  (focus-in . hl-line-flash)
+  ;; (focus-in . hl-line-flash)
   ;; (post-command . hl-line-flash)
 
   :custom

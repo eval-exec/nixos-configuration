@@ -18,6 +18,7 @@
     aspellDicts.en
     aspellDicts.en-science
     aspellDicts.en-computers
+    bitcoin
     google-cloud-sdk
     sdcv
     crate2nix
@@ -356,7 +357,7 @@
 
       shellAliases = {
         cat = "bat -p";
-        vim = "lvim";
+        vim = "nvim";
         update = "sudo nixos-rebuild switch";
         emacs = "emacsclient -nw";
       };
