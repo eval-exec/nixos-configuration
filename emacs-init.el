@@ -271,7 +271,7 @@ i.e. windows tiled side-by-side."
   (setq use-default-font-for-symbols nil)
   (set-fontset-font t 'unicode "JuliaMono")
   (set-fontset-font t 'ascii "JuliaMono")
-  (set-fontset-font t 'latin "Noto Sans")
+  (set-fontset-font t 'latin "JuliaMono")
   (set-fontset-font t 'han "Sarasa Gothic SC")
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
   (set-fontset-font t 'symbol "JuliaMono")
@@ -1258,7 +1258,7 @@ if it encounter an error, then we execute `consult-outline'."
 		 )
   :config
   (setq
-   vertico-count 20
+   vertico-count 7
    vertico-resize t
    vertico-count-format '("%-6s " . "%2s/%5s")
    ;; vertico-buffer-display-action
@@ -2545,7 +2545,8 @@ if it encounter an error, then we execute `consult-outline'."
 			   (interactive)
 			   (setq buffer-face-mode-face '(
 											 :family "Iosevka"
-											 :height 100))
+													 ;; :height 100
+													 ))
 			   (buffer-face-mode)
 			   ))
   )
@@ -3536,6 +3537,7 @@ ement-room-left-margin-width 24
   :after org
   :config
   (set-face-font 'org-modern-symbol "Symbola")
+	(set-face-attribute 'org-modern-symbol nil :height 1.0)
   (global-org-modern-mode)
   )
 (use-package svg-tag-mode)

@@ -40,7 +40,7 @@
 					;; "Noto Sans Mono"
 					;; "Dancing Script"
 					;; "Patrick Hand"
-					:height 120
+					:height 80
 					:weight 'normal)
 
 
