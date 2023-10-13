@@ -34,8 +34,13 @@
     fsType = "vfat";
   };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/5dd32dc4-e574-41b8-b0e0-3a6385924b79"; }];
+  swapDevices = [
+    # { device = "/dev/disk/by-uuid/5dd32dc4-e574-41b8-b0e0-3a6385924b79"; }
+    {
+      device = "/var/lib/swapfile";
+      size = 96 * 1024;
+    }
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -58,19 +63,19 @@
   #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
   # };
   hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
-  # hardware.nvidia = {
-  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-  #   modesetting.enable = false;
-  #   powerManagement.enable = true;
-  #   prime = {
-  #     sync.enable = true;
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    prime = {
+      sync.enable = true;
 
-  #     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-  #     nvidiaBusId = "PCI:1:0:0";
+      # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+      nvidiaBusId = "PCI:1:0:0";
 
-  #     # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-  #     intelBusId = "PCI:0:2:0";
-  #   };
-  # };
+      # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+      intelBusId = "PCI:0:2:0";
+    };
+  };
   hardware.i2c.enable = true;
 }

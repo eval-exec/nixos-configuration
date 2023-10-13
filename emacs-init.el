@@ -270,12 +270,22 @@ i.e. windows tiled side-by-side."
   ;; **
   (setq use-default-font-for-symbols nil)
   (set-fontset-font t 'unicode "JuliaMono")
+  (set-fontset-font t 'unicode "unifont" nil 'append)
+
+  (set-fontset-font t nil "unifont" nil 'append)
+
   (set-fontset-font t 'ascii "JuliaMono")
+
   (set-fontset-font t 'latin "JuliaMono")
+  (set-fontset-font t 'latin "unifont" nil 'append)
+
   (set-fontset-font t 'han "Sarasa Gothic SC")
+
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
+
   (set-fontset-font t 'symbol "JuliaMono")
   (set-fontset-font t 'symbol "Symbola" nil 'append)
+
   (set-fontset-font t 'emoji "Noto Color Emoji")
 
 
@@ -903,7 +913,7 @@ if it encounter an error, then we execute `consult-outline'."
   "C-H-<right>" 'tab-line-switch-to-next-tab
   "H-`" 'garbage-collect
   ;; "H-i" 'yas-insert-snippet
-  "H-a" 'org-agenda
+  "H-a" 'exec/org-agenda-transient
   )
 
 
@@ -1258,7 +1268,7 @@ if it encounter an error, then we execute `consult-outline'."
 		 )
   :config
   (setq
-   vertico-count 7
+   vertico-count 17
    vertico-resize t
    vertico-count-format '("%-6s " . "%2s/%5s")
    ;; vertico-buffer-display-action
@@ -1307,7 +1317,7 @@ if it encounter an error, then we execute `consult-outline'."
 		;; 'posframe-poshandler-window-bottom-center
 		'posframe-poshandler-frame-bottom-center
 		;; 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width 200
+		vertico-posframe-width 1200 
 		vertico-posframe-font nil
 		;; "Noto Sans Mono"
 		vertico-posframe-min-height nil
@@ -1344,15 +1354,15 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package gcmh
   :hook (
 		 (emacs-startup . gcmh-mode)
-		 (focus-out . garbage-collect)
+		 ;; (focus-out . garbage-collect)
 		 )
   :config
   (setq
-   gc-cons-percentage 1.0
+   ;; gc-cons-percentage 1.0
    garbage-collection-messages nil
    gcmh-verbose nil
    gcmh-idle-delay 'auto
-   gcmh-high-cons-threshold (* 32 1024 1024)
+   ;; gcmh-high-cons-threshold (* 32 1024 1024)
    )
   )
 
@@ -2807,6 +2817,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 (use-package persp-mode
+  :disabled t
   :custom
   (persp-keymap-prefix (kbd "C-c w"))
   :config
@@ -3692,6 +3703,7 @@ ement-room-left-margin-width 24
 (use-package go-translate
   :config
   (setq gts-translate-list '(("en" "zh")))
+  (set-face-attribute gts-pin-posframe-bdcolor "red")
   (setq gts-default-translator
 		(gts-translator
 		 :picker (gts-prompt-picker)
@@ -4148,6 +4160,7 @@ The default tab-bar name uses the buffer name."
 		tab-line-close-tab-function 'kill-buffer
 
 		)
+  (set-face-attribute 'tab-line-tab-current nil :inherit 'tab-line-tab)
   (global-tab-line-mode)
   )
 

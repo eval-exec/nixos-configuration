@@ -9,7 +9,7 @@
 (scroll-bar-mode -1)
 
 (setq
-  native-comp-async-jobs-number 10
+  native-comp-async-jobs-number 20
   redisplay-skip-fontification-on-input t
   fast-but-imprecise-scrolling t
  )
@@ -35,12 +35,13 @@
 					;; "Hack Nerd Font Mono"
 ;; "AnonymicePro Nerd Font Mono"
 					;; "UbuntuMono Nerd Font Mono"
+					"Sarasa Mono SC"
 					;; "JetBrains Mono"
-					"JuliaMono"
+					;; "unifont"
 					;; "Noto Sans Mono"
 					;; "Dancing Script"
 					;; "Patrick Hand"
-					:height 80
+					;; :height 1.0
 					:weight 'normal)
 
 

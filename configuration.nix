@@ -39,8 +39,8 @@
     '';
 
     tmp = {
-      useTmpfs = true;
-      tmpfsSize = "50%";
+      useTmpfs = false;
+      # tmpfsSize = "50%";
       cleanOnBoot = true;
     };
   };
@@ -154,7 +154,7 @@
       # xkbVariant = "";
       xkbOptions = "ctrl:hyper_capscontrol";
 
-      videoDrivers = [ "amdgpu" "modesetting" ];
+      videoDrivers = [ "amdgpu" "nvidia" "modesetting" ];
       #   config = lib.mkAfter ''
       #     Section "Module"
       #         Load           "modesetting"
