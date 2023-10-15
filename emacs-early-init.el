@@ -35,10 +35,10 @@
 					;; "Hack Nerd Font Mono"
 ;; "AnonymicePro Nerd Font Mono"
 					;; "UbuntuMono Nerd Font Mono"
-					"Sarasa Mono SC"
+					;; "Sarasa Mono SC"
 					;; "JetBrains Mono"
 					;; "unifont"
-					;; "Noto Sans Mono"
+					"Noto Sans Mono"
 					;; "Dancing Script"
 					;; "Patrick Hand"
 					;; :height 1.0

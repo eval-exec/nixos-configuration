@@ -154,7 +154,7 @@
       # xkbVariant = "";
       xkbOptions = "ctrl:hyper_capscontrol";
 
-      videoDrivers = [ "amdgpu" "nvidia" "modesetting" ];
+      videoDrivers = [ "amdgpu" "modesetting" ];
       #   config = lib.mkAfter ''
       #     Section "Module"
       #         Load           "modesetting"

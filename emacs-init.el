@@ -1175,7 +1175,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 ; (load "/home/exec/Projects/github.com/eval-exec/crazy-theme.el/crazy-theme.el")
 ; (setq crazy-theme-prefer-dark nil)
-; (load-theme 'crazy)
+										; (load-theme 'crazy)
 
 
 (custom-set-faces
@@ -2822,6 +2822,10 @@ if it encounter an error, then we execute `consult-outline'."
   (persp-keymap-prefix (kbd "C-c w"))
   :config
   ;; (persp-mode t)
+
+  (use-package persp-projectile
+	:disabled t
+	)
   )
 
 
@@ -2936,7 +2940,7 @@ if it encounter an error, then we execute `consult-outline'."
   (interactive)
   (setq-local buffer-face-mode-face '(
 								:family "Noto Serif"
-								:height 1.5
+								:height 2.0
 								;; :background "white"
 								;; :foreground "black"
 								))
@@ -2957,6 +2961,17 @@ if it encounter an error, then we execute `consult-outline'."
 		nov-variable-pitch nil
 		)
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+  ;; create a timer: every 1 second, call (next-line), if (next-line) report error, call (nov-next-document)
+
+  (defun exec/nov-next-line()
+	(interactive)
+	(when (eq major-mode 'nov-mode)
+	  (condition-case err
+		  (progn
+			(next-line))
+		(error
+		 (nov-next-document)))))
   )
 ;; (use-package nov-xwidget
 ;;   :demand t
@@ -3182,15 +3197,18 @@ if it encounter an error, then we execute `consult-outline'."
 		mu4e-index-update-in-background nil
 		mu4e-update-interval nil
 		mu4e-index-cleanup t
-		mu4e-index-lazy-check t
+		mu4e-index-lazy-check nil
 		mu4e-notification-support t
 		mu4e-speedbar-support t
 		)
 
 
   (setq mu4e-use-fancy-chars t
-		mu4e-debug t
-		)
+		mu4e-debug nil
+		mu4e-hide-index-messages t
+		mu4e-headers-fields '((:human-date . 20) (:flags . 8) (:mailing-list . 12) (:from . 24)
+		  (:subject)))
+
   (setq mu4e-date-format-long "%c"
 		mu4e-headers-date-format "%x %T"
 		mu4e-headers-long-date-format "%c %T"
@@ -3914,7 +3932,6 @@ interactive compilation buffer."
    :test-prefix nil
    :precedence 'high)
 
-  (use-package persp-projectile)
 
   (use-package projectile-ripgrep
 	:config
@@ -4621,7 +4638,7 @@ The default tab-bar name uses the buffer name."
 (add-hook 'prog-mode-hook 'exec/increase-buffer-font)
 (add-hook 'prog-mode-hook 'exec/prog-mode-fixed)
 
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'prog-mode-hook 'hdisplay-line-numbers-mode)
 ;; (add-hook 'text-mode-hook 'display-line-numbers-mode)
 ;; (add-hook 'toml-mode-hook 'display-line-numbers-mode)
 ;; (add-hook 'conf-mode-hook 'display-line-numbers-mode)

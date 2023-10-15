@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     alacritty
     alejandra
+    picard
     amdgpu_top
     atool
     mpc-cli
@@ -199,9 +200,11 @@
             enable = true;
             boxes = [ "INBOX" ];
             extraConfig = { wait = 0; };
-            onNotify = "${pkgs.isync}/bin/mbsync --pull execvy:INBOX";
+            onNotify = ''
+              ${pkgs.isync}/bin/mbsync --pull "execvy:[Gmail]/All Mail"
+            '';
             onNotifyPost =
-              "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index)'";
+              "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
           };
 
           mbsync = {
@@ -263,8 +266,10 @@
     mbsync = {
       enable = true;
       # frequency = "*-*-* *:*:00,20,40";
-      preExec = "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index)'";
-      postExec = "${pkgs.emacs}/bin/emacsclient -e '(mu4e-update-index)'";
+      # preExec =
+      #   "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
+      postExec =
+        "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
       verbose = true;
     };
   };
