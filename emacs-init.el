@@ -158,6 +158,8 @@ i.e. windows tiled side-by-side."
   (global-unset-key (kbd "M-l"))
   (global-unset-key (kbd "M-i"))
   (global-unset-key (kbd "M-o"))
+  (setq-default line-spacing 0)
+
 
   (setq switch-to-buffer-obey-display-actions t)
   (setq auto-save-default nil)
@@ -263,30 +265,42 @@ i.e. windows tiled side-by-side."
   (set-cursor-color "yellow")
 
 
-;; 🧬 
-;; it’s 中文测试`''`'《》，。
+  ;; 🧬 
+  ;; it’s 中文测试`''`'《》，。
   ;;- [X] sub task two
   ;;- [ ] sub task three
-  ;; **
+  ;; '🂩
   (setq use-default-font-for-symbols nil)
-  (set-fontset-font t 'unicode "JuliaMono")
-  (set-fontset-font t 'unicode "unifont" nil 'append)
 
-  (set-fontset-font t nil "unifont" nil 'append)
+  ;; (set-fontset-font t 'unicode "unifont")
+  ;; (set-face-attribute 'default nil  :family "Roboto")
 
-  (set-fontset-font t 'ascii "JuliaMono")
+  (set-fontset-font t 'unicode "Sarasa Fixed CL")
+  (set-fontset-font t 'unicode "Symbols Nerd Font Mono" nil 'append)
 
-  (set-fontset-font t 'latin "JuliaMono")
-  (set-fontset-font t 'latin "unifont" nil 'append)
+  ;; (set-fontset-font t 'ascii "JuliaMono")
+  ;; (set-fontset-font t 'ascii "unifont")
+  ;; (set-fontset-font t 'ascii "Sarasa Mono SC")
 
-  (set-fontset-font t 'han "Sarasa Gothic SC")
 
+  ;; (set-fontset-font t 'latin "Sarasa Mono SC")
+  ;; (set-fontset-font t 'latin "unifont")
+  ;; (set-fontset-font t 'latin "JuliaMono")
+  ;; (set-fontset-font t 'latin "unifont" nil 'append)
+  (set-fontset-font t 'playing-cards (font-spec :script 'playing-cards))
+
+
+  (set-fontset-font t 'cyrillic "Sarasa Fixed CL")
+  (set-fontset-font t 'han "Sarasa Gothic SC") ;; 关门，直接
   (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
-
-  (set-fontset-font t 'symbol "JuliaMono")
+  (set-fontset-font t 'symbol "Sarasa Fixed CL")
   (set-fontset-font t 'symbol "Symbola" nil 'append)
+  (set-fontset-font t 'symbol "Nerd Font Mono" nil 'append)
+  (set-fontset-font t 'playing-cards "Noto Sans Symbols" nil 'append)
+  (set-fontset-font t 'playing-cards "Noto Sans Symbols 2" nil 'append)
 
   (set-fontset-font t 'emoji "Noto Color Emoji")
+  (set-fontset-font t 'emoji "Symbola" nil 'append)
 
 
   (setq revert-without-query '(".*"))
@@ -1528,7 +1542,12 @@ if it encounter an error, then we execute `consult-outline'."
   ;; Somewhere in your .emacs file
   (setq elfeed-feeds
 		'("http://nullprogram.com/feed/"
-		  "https://planet.emacslife.com/atom.xml"))
+		  "https://planet.emacslife.com/atom.xml"
+		  "https://www.reddit.com/.rss"
+		  "https://hnrss.org/bestcomments"
+		  "https://hnrss.org/newest?points=300"
+		  "https://hnrss.org/newest?comments=250"
+		  ))
   (use-package elfeed-dashboard)
   )
 
@@ -1779,7 +1798,33 @@ if it encounter an error, then we execute `consult-outline'."
    bongo-default-directory "~/Music"
    )
   )
-(use-package mpdel)
+(use-package mpdel
+  :hook
+  (mpc-songs-mode . (lambda() (interactive) (tab-line-mode -1)))
+  (mpc-status-mode . (lambda() (interactive) (tab-line-mode -1)))
+  (mpc-tagbrowser-mode . (lambda() (interactive) (tab-line-mode -1)))
+  :config
+  ;; (setq mpc-song-format)
+  )
+
+(use-package mingus
+  :config
+  (evil-set-initial-state 'mingus-playlist-mode 'emacs)
+  (evil-set-initial-state 'mingus-browse-mode 'emacs)
+  (evil-set-initial-state 'mingus-help-mode 'emacs)
+  )
+
+(defun exec/ncmpcpp()
+  (interactive)
+  ;; open vterm, and execute `ncmpcpp' command, rename the buffer to "*ncmpcpp*", if we have "*ncmpcpp*" buffer already, open the buffer.
+
+  (if (get-buffer "*🎵ncmpcpp🎵*")
+	  (switch-to-buffer "*🎵ncmpcpp🎵*")
+  (vterm "*🎵ncmpcpp🎵*")
+  (vterm-send-string "ncmpcpp")
+  (vterm-send-return))
+  (delete-other-windows)
+  )
 
 (use-package disable-mouse
   :config
@@ -2059,7 +2104,7 @@ if it encounter an error, then we execute `consult-outline'."
 		("<f9>" . corfu-quit))
 
   :config
-  (set-face-attribute 'corfu-default nil :font "JuliaMono" :background "black")
+  (set-face-attribute 'corfu-default nil :font "Sarasa Fixed CL" :background "black")
   (setq
    corfu-auto t
    corfu-auto-prefix 1
@@ -2639,12 +2684,6 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 
-(add-hook 'org-mode-hook '(lambda()
-							(set-face-attribute 'org-block nil :font "JuliaMono")
-							(set-face-attribute 'org-verbatim nil :font "JuliaMono" :foreground "orange")
-
-							))
-
 (use-package rainbow-mode
   :hook
   (
@@ -3036,7 +3075,7 @@ if it encounter an error, then we execute `consult-outline'."
   (pangu-spacing-real-insert-separtor  t)
   (pangu-spacing-inhibit-mode-alist  '(eshell-mode shell-mode term-mode))
   :config
-   (global-pangu-spacing-mode)
+   ;; (global-pangu-spacing-mode)
   )
 
 (use-package eglot
@@ -3159,9 +3198,6 @@ if it encounter an error, then we execute `consult-outline'."
 		)
   (setq mail-user-agent 'mu4e-user-agent)
 
-										; (setq mu4e-drafts-folder "/[Gmail].Drafts")
-										; (setq mu4e-sent-folder   "/[Gmail].Sent")
-										; (setq mu4e-trash-folder  "/[Gmail].Trash")
 
   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
   ;; (setq mu4e-sent-messages-behavior 'delete)
@@ -3177,7 +3213,7 @@ if it encounter an error, then we execute `consult-outline'."
 
   (setq mu4e-maildir-shortcuts
 		'(
-		  (:maildir "/execvy/inbox" :key ?a)
+		  (:maildir "/execvy/[Gmail]/All Mail" :key ?a)
 		  ))
 
 										; (setq mu4e-maildir-shortcuts
@@ -3206,7 +3242,7 @@ if it encounter an error, then we execute `consult-outline'."
   (setq mu4e-use-fancy-chars t
 		mu4e-debug nil
 		mu4e-hide-index-messages t
-		mu4e-headers-fields '((:human-date . 20) (:flags . 8) (:mailing-list . 12) (:from . 24)
+		mu4e-headers-fields '((:human-date . 21) (:flags . 8) (:mailing-list . 12) (:from . 24)
 		  (:subject)))
 
   (setq mu4e-date-format-long "%c"
@@ -4460,8 +4496,20 @@ The default tab-bar name uses the buffer name."
   :hook
   (emacs-lisp-mode . highlight-defined-mode))
 
+
+(defun exec/white-bg-face()
+  (interactive)
+  (setq-local buffer-face-mode-face '(
+								:background "white"
+								:foreground "black"
+								))
+  (make-local-variable 'buffer-face-mode-face)
+  (buffer-face-mode)
+  )
 (use-package w3m
   :straight (:type built-in)
+  ;; :hook
+  ;; (w3m-mode . exec/white-bg-face)
   :config
   (setq w3m-command-environment '(("LC_ALL" . "en_US.UTF-8"))
 		w3m-coding-system 'utf-8
@@ -4480,6 +4528,8 @@ The default tab-bar name uses the buffer name."
   )
 (use-package eww
   :straight (:type built-in)
+  ;; :hook
+  ;; (eww-mode . exec/white-bg-face)
 ;; https://www.google.com/search?q=%s&pws=0&gl=us&gws_rd=cr
 
   :config
@@ -4608,10 +4658,11 @@ The default tab-bar name uses the buffer name."
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
   (custom-set-faces
-   '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "JuliaMono"  :height  1.0))))
-   '(org-verbatim       ((t  (:inherit  org-verbatim      :family "JuliaMono"  :height  1.0))))
-   '(org-block          ((t  (:inherit  org-block         :family "JuliaMono"  :height  1.0))))
-   '(org-table          ((t  (:inherit  org-table         :family "JuliaMono"  :height  1.0))))
+   '(org-verbatim       ((t  (:inherit  org-verbatim      :family "Sarasa Fixed CL"  :height  1.0))))
+   '(org-formula        ((t  (:inherit  org-table         :family "Sarasa Fixed CL"  :height  1.0))))
+   '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "Sarasa Fixed CL"  :height  1.0))))
+   '(org-block          ((t  (:inherit  org-block         :family "Sarasa Fixed CL"  :height  1.0))))
+   '(org-table          ((t  (:inherit  org-table         :family "Sarasa Fixed CL"  :height  1.0))))
    )
   (setq-local buffer-face-mode-face '(:height 1.0))
   (buffer-face-mode))
@@ -4629,10 +4680,11 @@ The default tab-bar name uses the buffer name."
 
 (defun exec/non-mono-font()
   (interactive)
-  (setq-local buffer-face-mode-face '(:family "Noto Sans"))
+  (setq-local buffer-face-mode-face '(:family "Sarasa Gothic CL"))
   (buffer-face-mode))
 
 (add-hook 'org-mode-hook 'exec/non-mono-font)
+(add-hook 'org-mode-hook 'exec/org-mode-fixed)
 (add-hook 'org-journal-mode-hook 'exec/non-mono-font)
 
 (add-hook 'prog-mode-hook 'exec/increase-buffer-font)
@@ -5017,18 +5069,17 @@ The default tab-bar name uses the buffer name."
 
 (defun exec/vterm-buffer-face()
   (interactive)
-  (setq-local  buffer-face-mode-face '(
-									   ;; :family "Noto Sans Mono"
-									   ;; "NotoSansMNerdFontMono"
-									   ;; :family "JetBrainsMonoNL Nerd Font"
-									   :height  100
-									   :background "black"
-									   )
-			   mode-line-format nil
-			   )
-  (buffer-face-mode)
-  (origami-mode -1)
-  (fringe-mode -1)
+  ;; (setq-local  buffer-face-mode-face '(
+  ;; 									   ;; "NotoSansMNerdFontMono"
+  ;; 									   ;; :family "JetBrainsMonoNL Nerd Font"
+  ;; 									   ;; :height  100
+  ;; 									   :background "black"
+  ;; 									   )
+  ;; 			   mode-line-format nil
+  ;; 			   )
+  ;; (buffer-face-mode)
+  ;; (origami-mode -1)
+  ;; (fringe-mode -1)
   ;; (set-left-margin 0)
   ;; (set-right-margin 0)
   )

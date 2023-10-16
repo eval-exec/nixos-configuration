@@ -7,7 +7,15 @@
 
   home.packages = with pkgs; [
     alacritty
+    chromaprint
+    fftw
+    retry
+    osdlyrics
+    w3m
+    lynx
+    ncmpcpp
     alejandra
+    beets
     picard
     amdgpu_top
     atool
@@ -184,8 +192,8 @@
           userName = "execvy@gmail.com";
           flavor = "gmail.com";
           folders = {
-            drafts = "Drafts";
             inbox = "Inbox";
+            drafts = "Drafts";
             sent = "Sent";
             trash = "Trash";
           };
@@ -197,14 +205,14 @@
             tls = { enable = true; };
           };
           imapnotify = {
-            enable = true;
+            enable = false;
             boxes = [ "INBOX" ];
             extraConfig = { wait = 0; };
             onNotify = ''
-              ${pkgs.isync}/bin/mbsync --pull "execvy:[Gmail]/All Mail"
+              ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --pull "execvy"
             '';
             onNotifyPost =
-              "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
+              "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
           };
 
           mbsync = {
@@ -219,6 +227,35 @@
               local = { };
               remote = { };
 
+            };
+            groups = {
+              execvy = {
+                channels = {
+                  inbox = {
+                    farPattern = "INBOX";
+                    nearPattern = "inbox";
+                    extraConfig = {
+                      Create = "Both";
+                      MaxMessages = 200;
+                    };
+                  };
+                  sent = {
+                    farPattern = "[Gmail]/Sent Mail";
+                    nearPattern = "sent";
+                    extraConfig = { Create = "Both"; };
+                  };
+                  trash = {
+                    farPattern = "[Gmail]/Trash";
+                    nearPattern = "trash";
+                    extraConfig = { Create = "Both"; };
+                  };
+                  spam = {
+                    farPattern = "[Gmail]/Spam";
+                    nearPattern = "spam";
+                    extraConfig = { Create = "Both"; };
+                  };
+                };
+              };
             };
             patterns = [ "*" ];
             remove = "both";
@@ -264,12 +301,12 @@
       indicator = true;
     };
     mbsync = {
-      enable = true;
+      enable = false;
       # frequency = "*-*-* *:*:00,20,40";
       # preExec =
-      #   "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
+      #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       postExec =
-        "${pkgs.emacs-git}/bin/emacsclient -e '(mu4e-update-index-nonlazy)'";
+        "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       verbose = true;
     };
   };
@@ -283,7 +320,10 @@
 
   programs = {
     home-manager.enable = true;
-    mbsync = { enable = true; };
+    mbsync = {
+      enable = true;
+      extraConfig = "";
+    };
     msmtp = { enable = true; };
     chromium = { enable = true; };
     nix-index = {

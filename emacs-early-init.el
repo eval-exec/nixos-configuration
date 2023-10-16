@@ -35,14 +35,14 @@
 					;; "Hack Nerd Font Mono"
 ;; "AnonymicePro Nerd Font Mono"
 					;; "UbuntuMono Nerd Font Mono"
-					;; "Sarasa Mono SC"
+					"Sarasa Fixed CL"
 					;; "JetBrains Mono"
 					;; "unifont"
-					"Noto Sans Mono"
+					;; "Noto Sans Mono"
 					;; "Dancing Script"
 					;; "Patrick Hand"
-					;; :height 1.0
-					:weight 'normal)
+					:weight 'normal
+					:height 120)
 
 
 (provide 'emacs-early-init)
