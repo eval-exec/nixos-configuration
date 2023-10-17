@@ -205,11 +205,11 @@
             tls = { enable = true; };
           };
           imapnotify = {
-            enable = false;
+            enable = true;
             boxes = [ "INBOX" ];
             extraConfig = { wait = 0; };
             onNotify = ''
-              ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --pull "execvy"
+              ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --pull "execvy-inbox"
             '';
             onNotifyPost =
               "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
@@ -301,7 +301,7 @@
       indicator = true;
     };
     mbsync = {
-      enable = false;
+      enable = true;
       # frequency = "*-*-* *:*:00,20,40";
       # preExec =
       #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
@@ -348,11 +348,8 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.emacs-git;
-      # package = (pkgs.emacs-git.override {
-      #   withXwidgets = true;
-      #   withGTK3 = true;
-      # });
+      package = pkgs.emacs-pgtk;
+      # package = (pkgs.emacs-git.override { withPgtk = true; });
       extraPackages = epkgs: [
         pkgs.mu
         pkgs.librime

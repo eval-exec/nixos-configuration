@@ -167,6 +167,7 @@ i.e. windows tiled side-by-side."
   (setq mouse-wheel-flip-direction t
 		mouse-wheel-tilt-scroll t
 		)
+  (setq-default indicate-empty-lines t)
   (setq font-lock-maximum-decoration
 		1
 		;; '(
@@ -181,7 +182,7 @@ i.e. windows tiled side-by-side."
 		mode-line-percent-position nil
 		mode-line-position-column-line-format '("[📝%l,%c]")
 		)
-  (setq-default mode-line-format 
+  (setq-default mode-line-format
 		'("%e"
 		  mode-line-front-space
 		  (:propertize
@@ -254,8 +255,6 @@ i.e. windows tiled side-by-side."
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t)
-  (setq window-resize-pixelwise t)
-  (setq frame-resize-pixelwise t)
   (setq column-number-mode t)
   (setq line-number-mode t)
   ;; (setq mode-line-percent-position '(-3 "%o"))
@@ -263,19 +262,34 @@ i.e. windows tiled side-by-side."
   ;; (add-to-list 'default-frame-alist '(foreground-color . "white"))
   ;; (add-to-list 'default-frame-alist '(background-color . "black"))
   (set-cursor-color "yellow")
+    
+  (pixel-scroll-mode t)
+  (pixel-scroll-precision-mode t)
+
+  (setq pixel-scroll-precision-large-scroll-height nil)
 
 
-  ;; 🧬 
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+  
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  
+  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+  
+  (setq scroll-step 1) ;; keyboard scroll one line at a time
+
+
+  ;; 🧬
   ;; it’s 中文测试`''`'《》，。
   ;;- [X] sub task two
   ;;- [ ] sub task three
   ;; '🂩
+  ;; ->
   (setq use-default-font-for-symbols nil)
 
   ;; (set-fontset-font t 'unicode "unifont")
   ;; (set-face-attribute 'default nil  :family "Roboto")
 
-  (set-fontset-font t 'unicode "Sarasa Fixed CL")
+  (set-fontset-font t 'unicode "Sarasa Term CL")
   (set-fontset-font t 'unicode "Symbols Nerd Font Mono" nil 'append)
 
   ;; (set-fontset-font t 'ascii "JuliaMono")
@@ -291,8 +305,8 @@ i.e. windows tiled side-by-side."
 
 
   (set-fontset-font t 'cyrillic "Sarasa Fixed CL")
-  (set-fontset-font t 'han "Sarasa Gothic SC") ;; 关门，直接
-  (set-fontset-font t 'cjk-misc "Sarasa Gothic SC")
+  (set-fontset-font t 'han "Sarasa Fixed SC") ;; 关门，直接
+  (set-fontset-font t 'cjk-misc "Sarasa Fixed SC")
   (set-fontset-font t 'symbol "Sarasa Fixed CL")
   (set-fontset-font t 'symbol "Symbola" nil 'append)
   (set-fontset-font t 'symbol "Nerd Font Mono" nil 'append)
@@ -380,7 +394,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (use-package evil
   :init
-  (setq 
+  (setq
     evil-want-keybinding nil
     evil-want-integration t
     evil-respect-visual-line-mode t
@@ -406,7 +420,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setq evil-want-fine-undo t)
 
   (evil-set-undo-system  'undo-redo)
-  
+
 
   (setq evil-ex-search-highlight-all nil)
   (setq undo-tree-auto-save-history nil)
@@ -418,8 +432,8 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	(define-key evil-motion-state-map (kbd "RET") nil)
 	(define-key evil-motion-state-map (kbd "TAB") nil)
 	)
-  
-  
+
+
 
   (general-define-key [remap evil-quit] 'kill-buffer-and-window)
 
@@ -549,20 +563,16 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 
 
-;; (setq window-resize-pixelwise nil)
-;; (setq frame-resize-pixelwise nil)
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
 
 (setq word-wrap t)
 (global-visual-line-mode t)
-(fringe-mode)
-(set-fringe-style '(10 . 10))
+(fringe-mode 20)
 
 ;; (set-left-margin 20)
 ;; (set-right-margin 20)
 
-(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
 
 (setq display-line-numbers-width-start t)
@@ -807,7 +817,7 @@ if it encounter an error, then we execute `consult-outline'."
 		   (consult-ripgrep))
 		 )
   )
-		 
+
 
 (+general-global-menu! "Keybinding" "k"
 
@@ -842,7 +852,7 @@ if it encounter an error, then we execute `consult-outline'."
   ;; "t" 'fanyi-dwim2
   ;; "t" 'exec/look-up-dict-at-point
   "t" 'gts-do-translate
-  "T" 'exec/prompt-dict	
+  "T" 'exec/prompt-dict
   ;; "T" nil :which-key "Toggle"
   ;; "=" 'cnfonts-increase-fontsize
   ;; "-" 'cnfonts-decrease-fontsize
@@ -1025,7 +1035,7 @@ if it encounter an error, then we execute `consult-outline'."
 		  ;; if vterm-buffer-name variable is not set, eval (vterm) and return
 		  (if (not (bound-and-true-p vterm-buffer-name))
 			  (vterm)
-			(if 
+			(if
 				(equal (buffer-name) vterm-buffer-name)
 				(switch-to-buffer (other-buffer))
 			  (vterm)))
@@ -1045,7 +1055,7 @@ if it encounter an error, then we execute `consult-outline'."
   )
 
 (general-define-key
-  "M-0" 
+  "M-0"
  'dired-sidebar-show-sidebar
  )
 
@@ -1331,7 +1341,7 @@ if it encounter an error, then we execute `consult-outline'."
 		;; 'posframe-poshandler-window-bottom-center
 		'posframe-poshandler-frame-bottom-center
 		;; 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width 1200 
+		vertico-posframe-width 1200
 		vertico-posframe-font nil
 		;; "Noto Sans Mono"
 		vertico-posframe-min-height nil
@@ -1828,7 +1838,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package disable-mouse
   :config
-  ;; (mapc #'disable-mouse-in-keymap  
+  ;; (mapc #'disable-mouse-in-keymap
   ;; 		(list evil-motion-state-map
   ;; 			  evil-normal-state-map
   ;; 			  evil-visual-state-map
@@ -1838,7 +1848,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 (use-package helm
-  :disabled 
+  :disabled
   :bind (
 		 ("C-c h" . helm-command-prefix)
 		 ("M-x" . helm-M-x)
@@ -2067,7 +2077,7 @@ if it encounter an error, then we execute `consult-outline'."
 				copilot-max-char -1
 				)
   (custom-set-faces '(copilot-overlay-face ((t (:inherit shadow :underline t :weight thin :slant italic :foreground "white")))))
-;; lfjewio how to 
+;; lfjewio how to
   )
 
 (use-package gptai
@@ -2151,7 +2161,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package eldoc-box
   :config
-  ;; (eldoc-box-hover-mode) 
+  ;; (eldoc-box-hover-mode)
   ;; (eldoc-box-hover-at-point-mode)
   )
 
@@ -2190,7 +2200,7 @@ if it encounter an error, then we execute `consult-outline'."
   ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
   ;; (add-to-list 'completion-at-point-functions #'cape-dict)
   ;; (add-to-list 'completion-at-point-functions #'cape-symbol)
-  ;; (add-to-list 'completion-at-point-functions #'cape-line) 
+  ;; (add-to-list 'completion-at-point-functions #'cape-line)
 
   (setq cape-dabbrev-min-length 2
 		cape-dabbrev-check-other-buffers nil)
@@ -2590,7 +2600,7 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package lsp-ui
   :config
   (setq lsp-imenu-sort-methods nil)
-  ;; (custom-set-faces 
+  ;; (custom-set-faces
   ;;  '(lsp-ui-menu ((t (:inherit default :background "#282c34"))))
   ;;  '(lsp-ui-sideline-global ((t (:family "Iosevka" :height 1.0 :width ultra-condensed))))
   ;;  )
@@ -2631,7 +2641,7 @@ if it encounter an error, then we execute `consult-outline'."
 ;; 			  :repo "manateelazycat/lsp-bridge"
 ;; 			  :files ("*"))
 ;;   :config
-;;   (general-evil-define-key 'normal 'lsp-bridge-ref-mode-map 
+;;   (general-evil-define-key 'normal 'lsp-bridge-ref-mode-map
 ;; 	"q" 'lsp-bridge-ref-quit
 ;; 	"C-j" 'lsp-bridge-ref-jump-next-file
 ;; 	"C-k" 'lsp-bridge-ref-jump-prev-file
@@ -2639,7 +2649,7 @@ if it encounter an error, then we execute `consult-outline'."
 ;; 	"SPC" 'lsp-bridge-ref-open-file
 ;; 	)
 
-;;   (general-evil-define-key 'normal 'lsp-bridge-mode-map 
+;;   (general-evil-define-key 'normal 'lsp-bridge-mode-map
 ;; 	"C-j" 'next-line
 ;; 	"C-k" 'previous
 ;; 	"gd" 'lsp-bridge-find-def
@@ -2650,7 +2660,7 @@ if it encounter an error, then we execute `consult-outline'."
 ;; 	)
 
 ;;   (global-lsp-bridge-mode)
-;;   ) 
+;;   )
 
 
 
@@ -2708,7 +2718,7 @@ if it encounter an error, then we execute `consult-outline'."
 				      list list_comprehension
 				      dictionary dictionary_comprehension
 				      parenthesized_expression subscript)))
-  
+
   )
 
 (use-package exercism
@@ -3186,7 +3196,7 @@ if it encounter an error, then we execute `consult-outline'."
         (mail-add-attachment image-file)
         (goto-char pos))))
 
-  
+
   :straight (:type built-in)
   :config
 
@@ -3213,7 +3223,10 @@ if it encounter an error, then we execute `consult-outline'."
 
   (setq mu4e-maildir-shortcuts
 		'(
-		  (:maildir "/execvy/[Gmail]/All Mail" :key ?a)
+		  (:maildir "/execvy/inbox" :key ?a)
+		  (:maildir "/execvy/sent" :key ?s)
+		  (:maildir "/execvy/spam" :key ?S)
+		  (:maildir "/execvy/trash" :key ?t)
 		  ))
 
 										; (setq mu4e-maildir-shortcuts
@@ -3313,7 +3326,7 @@ if it encounter an error, then we execute `consult-outline'."
 	 :user-id "@evil-neo:matrix.org"
 	 :uri-prefix "https://matrix.org"))
 
-  (setq ement-room-message-format-spec 
+  (setq ement-room-message-format-spec
 		"[%S%L]: %B%r%R%t"
 ement-room-list-column-Name-max-width 40
 ement-room-left-margin-width 24
@@ -3321,7 +3334,7 @@ ement-room-left-margin-width 24
   )
 
 (use-package mermaid-mode
-  :config 
+  :config
   (setq mermaid-output-format "png")
   (setq mermaid-flags "-s 3")
   )
@@ -3601,8 +3614,7 @@ ement-room-left-margin-width 24
 (use-package org-modern
   :after org
   :config
-  (set-face-font 'org-modern-symbol "Symbola")
-	(set-face-attribute 'org-modern-symbol nil :height 1.0)
+  (set-face-attribute 'org-modern-symbol nil :height 1.0)
   (global-org-modern-mode)
   )
 (use-package svg-tag-mode)
@@ -3670,7 +3682,7 @@ ement-room-left-margin-width 24
   :config
   (setq org-yaap-todo-only t
 		org-yaap-alert-before 10
-		org-yaap-daily-alert 6 
+		org-yaap-daily-alert 6
 		org-yaap-persistent-clock t
 		)
   ;; (org-yaap-mode 1)
@@ -3686,7 +3698,7 @@ ement-room-left-margin-width 24
 	(let ((encrypt_string (buffer-substring-no-properties start end)))
 	  (with-output-to-temp-buffer "*Temp*"
 		(set-buffer standard-output)
-		(insert 
+		(insert
 		 (epg-decrypt-string (epg-make-context 'OpenPGP) encrypt_string)
 		 )
 		(epa-info-mode))
@@ -4161,7 +4173,7 @@ interactive compilation buffer."
   :init
   (defun exec/tab-bar-mode-hook()
 	(interactive)
-	(setq 
+	(setq
 	 tab-bar-format '(
 					  tab-bar-format-menu-bar
 					  tab-bar-format-history
@@ -4191,7 +4203,7 @@ The default tab-bar name uses the buffer name."
   (after-init . tab-bar-history-mode)
   (tab-bar-mode . exec/tab-bar-mode-hook)
   :custom-face
-  (tab-bar ((t (:height 1.0 :font "Noto sAns CJK SC"))))
+  (tab-bar ((t (:height 1.0 :font "Noto Sans CJK SC"))))
   :config
   (setq tab-bar-close-button-show nil
 		tab-bar-separator " "
@@ -4203,22 +4215,21 @@ The default tab-bar name uses the buffer name."
 		tab-bar-new-tab-choice "*scratch*"
 		tab-bar-new-tab-group  'projectile-project-name
 		)
-  (setq tab-bar-format (delete-dups tab-bar-format))
-  )
+  (setq tab-bar-format (delete-dups tab-bar-format)))
 
 (use-package tab-line
   :straight (:type built-in)
+  :custom-face
+  (tab-line ((t (:background "black"))))
+  (tab-line-tab-inactive ((t (:inherit tab-line))))
+  (tab-line-tab-current ((t (:inherit tab-line :weight bold :overline t :background "black" :foreground "yellow"))))
   :config
   (setq tab-line-close-button-show nil
-		tab-line-close-tab-function 'kill-buffer
-
-		)
-  (set-face-attribute 'tab-line-tab-current nil :inherit 'tab-line-tab)
-  (global-tab-line-mode)
-  )
+		tab-line-close-tab-function 'kill-buffer)
+  (global-tab-line-mode))
 
 ;; (use-package tabspaces
-;;   :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup. 
+;;   :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup.
 ;;   :commands (tabspaces-switch-or-create-workspace
 ;;              tabspaces-open-or-create-project-and-workspace)
 ;;   :custom
@@ -4386,7 +4397,7 @@ The default tab-bar name uses the buffer name."
 
 (use-package diminish
   :config
-  
+
   )
 
 (use-package doom-modeline
@@ -4518,13 +4529,13 @@ The default tab-bar name uses the buffer name."
 		w3m-terminal-coding-system 'utf-8
 		w3m-default-display-inline-images t
 		w3m-file-name-coding-system 'utf-8
-		w3m-home-page "https://en.wikipedia.org/wiki/Special:Random" 
+		w3m-home-page "https://en.wikipedia.org/wiki/Special:Random"
 		w3m-confirm-leaving-secure-page nil
 		w3m-session-load-crashed-sessions t
 		w3m-session-load-last-sessions t
 		w3m-unsafe-url-warning ""
 		)
-  
+
   )
 (use-package eww
   :straight (:type built-in)
@@ -4578,7 +4589,7 @@ The default tab-bar name uses the buffer name."
 ;;   (dirvish-side-follow-mode)
 ;;   :config
 ;;   (setq dirvish-hide-details t)
-;;   (setq dirvish-attributes 
+;;   (setq dirvish-attributes
 ;; 		'(vc-state subtree-state
 ;; 				   all-the-icons
 ;; 				   ;; collapse
@@ -4657,13 +4668,13 @@ The default tab-bar name uses the buffer name."
 (defun exec/org-mode-fixed()
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
-  (custom-set-faces
-   '(org-verbatim       ((t  (:inherit  org-verbatim      :family "Sarasa Fixed CL"  :height  1.0))))
-   '(org-formula        ((t  (:inherit  org-table         :family "Sarasa Fixed CL"  :height  1.0))))
-   '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "Sarasa Fixed CL"  :height  1.0))))
-   '(org-block          ((t  (:inherit  org-block         :family "Sarasa Fixed CL"  :height  1.0))))
-   '(org-table          ((t  (:inherit  org-table         :family "Sarasa Fixed CL"  :height  1.0))))
-   )
+  ;; (custom-set-faces
+  ;;  '(org-verbatim       ((t  (:inherit  org-verbatim      :family "Sarasa Fixed CL"  :height  1.0))))
+  ;;  '(org-formula        ((t  (:inherit  org-table         :family "Sarasa Fixed CL"  :height  1.0))))
+  ;;  '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "Sarasa Fixed CL"  :height  1.0))))
+  ;;  '(org-block          ((t  (:inherit  org-block         :family "Sarasa Fixed CL"  :height  1.0))))
+  ;;  '(org-table          ((t  (:inherit  org-table         :family "Sarasa Fixed CL"  :height  1.0))))
+  ;;  )
   (setq-local buffer-face-mode-face '(:height 1.0))
   (buffer-face-mode))
 
@@ -4683,9 +4694,9 @@ The default tab-bar name uses the buffer name."
   (setq-local buffer-face-mode-face '(:family "Sarasa Gothic CL"))
   (buffer-face-mode))
 
-(add-hook 'org-mode-hook 'exec/non-mono-font)
-(add-hook 'org-mode-hook 'exec/org-mode-fixed)
-(add-hook 'org-journal-mode-hook 'exec/non-mono-font)
+;; (add-hook 'org-mode-hook 'exec/non-mono-font)
+;; (add-hook 'org-mode-hook 'exec/org-mode-fixed)
+;; (add-hook 'org-journal-mode-hook 'exec/non-mono-font)
 
 (add-hook 'prog-mode-hook 'exec/increase-buffer-font)
 (add-hook 'prog-mode-hook 'exec/prog-mode-fixed)
@@ -5199,3 +5210,85 @@ The default tab-bar name uses the buffer name."
   (hl-line-inhibit-highlighting-for-modes '(dired-mode))
   (hl-line-overlay-priority -100) ;; sadly, seems not observed by diredfl
   )
+
+
+;; (setq builtin-bitmaps
+;; 	  ' ((question-mark [#x3c #x7e #xc3 #xc3 #x0c #x18 #x18 #x00 #x18 #x18])
+;; 		 (exclamation-mark [#x18 #x18 #x18 #x18 #x18 #x18 #x18 #x00 #x18 #x18])
+;; 		 (left-arraw [#x18 #x30 #x60 #xfc #xfc #x60 #x30 #x18])
+;; 		 (right-arrow [#x18 #x0c #x06 #x3f #x3f #x06 #x0c #x18])
+;; 		 (up-arrow [#x18 #x3c #x7e #xff #x18 #x18 #x18 #x18])
+;; 		 (down-arrow [#x18 #x18 #x18 #x18 #xff #x7e #x3c #x18])
+;; 		 (left-curly-arrow [#x3c #x7c #xc0 #xe4 #xfc #x7c #x3c #x7c])
+;; 		 (right-curly-arrow [#x3c #x3e #x03 #x27 #x3f #x3e #x3c #x3e])
+;; 		 (left-triangle [#x03 #x0f #x1f #x3f #x3f #x1f #x0f #x03])
+;; 		 (right-triangle [#xc0 #xf0 #xf8 #xfc #xfc #xf8 #xf0 #xc0])
+;; 		 (top-left-angle [#xfc #xfc #xc0 #xc0 #xc0 #xc0 #xc0 #x00])
+;; 		 (top-right-angle [#x3f #x3f #x03 #x03 #x03 #x03 #x03 #x00])
+;; 		 (bottom-left-angle [#x00 #xc0 #xc0 #xc0 #xc0 #xc0 #xfc #xfc])
+;; 		 (bottom-right-angle [#x00 #x03 #x03 #x03 #x03 #x03 #x3f #x3f])
+;; 		 (left-bracket [#xfc #xfc #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xfc #xfc])
+;; 		 (right-bracket [#x3f #x3f #x03 #x03 #x03 #x03 #x03 #x03 #x3f #x3f])
+;; 		 (filled-rectangle [#xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe])
+;; 		 (hollow-rectangle [#xfe #x82 #x82 #x82 #x82 #x82 #x82 #x82 #x82 #x82 #x82 #x82 #xfe])
+;; 		 (hollow-square [#x7e #x42 #x42 #x42 #x42 #x7e])
+;; 		 (filled-square [#x7e #x7e #x7e #x7e #x7e #x7e])
+;; 		 (vertical-bar [#xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0])
+;; 		 (horizontal-bar [#xfe #xfe])))
+
+;; (dolist (bitmap builtin-bitmaps)
+;;   (define-fringe-bitmap (car bitmap) (cadr bitmap)))
+
+;; (fringe-mode 16)
+
+
+;; (use-package fringe-scale
+;;  :straight (emacs-fringe-scale :type git :host github :repo "blahgeek/emacs-fringe-scale")
+;;  :config
+;;  (progn
+;;    (set-fringe-mode 16)
+;;    (setq fringe-scale-width 16)
+;;    (fringe-scale-setup))
+;;   )
+(define-fringe-bitmap 'left-curly-arrow
+  (vector #b0011111110000000
+          #b0011111110000000
+          #b0011111110000000
+          #b0011100000000000
+          #b0011100000000000
+          #b0011100000000000
+          #b0011100000000000
+          #b0011100001000000
+          #b0011100001100000
+          #b0011100001110000
+          #b0011111111111000
+          #b0011111111111100
+          #b0011111111111000
+          #b0000000001110000
+          #b0000000001100000
+          #b0000000001000000
+          )
+  16 16)
+
+(define-fringe-bitmap 'right-curly-arrow
+  [
+   #b0000000000000001
+   #b0000000000000011
+   #b0000000000000111
+   #b0000000000001111
+   #b0000000000011111
+   #b0000000000111111
+   #b0000000001111111
+   #b0000000011111111
+   #b0000000111111111
+   #b0000001111111111
+   #b0000011111111111
+   #b0000111111111111
+   #b0001111111111111
+   #b0011111111111111
+   #b0111111111111111
+   #b1111111111111111
+   ] 16 16 'center)
+
+(setq visual-line-fringe-indicators '(nil right-curly-arrow))
+
