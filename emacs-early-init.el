@@ -9,9 +9,9 @@
 (scroll-bar-mode -1)
 
 (setq
-  native-comp-async-jobs-number 20
-  redisplay-skip-fontification-on-input t
-  fast-but-imprecise-scrolling t
+ native-comp-async-jobs-number 20
+ redisplay-skip-fontification-on-input t
+ fast-but-imprecise-scrolling t
  )
 ;; Disable package.el in favor of straight.el
 (setq package-enable-at-startup nil)
@@ -36,7 +36,7 @@
 
 (set-face-attribute 'default nil  :family
 					;; "Hack Nerd Font Mono"
-;; "AnonymicePro Nerd Font Mono"
+					;; "AnonymicePro Nerd Font Mono"
 					;; "UbuntuMono Nerd Font Mono"
 					"Sarasa Fixed CL"
 					;; "JetBrains Mono"

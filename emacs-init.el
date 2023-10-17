@@ -104,18 +104,18 @@
 ;; 		  'exec/display-header)
 
 (defun exec/split-window-sensibly-prefer-horizontal (&optional window)
-"Based on split-window-sensibly, but designed to prefer a horizontal split,
+  "Based on split-window-sensibly, but designed to prefer a horizontal split,
 i.e. windows tiled side-by-side."
   (let ((window (or window (selected-window))))
     (or (and (window-splittable-p window t)
-         ;; Split window horizontally
-         (with-selected-window window
-           (split-window-right)))
-    (and (window-splittable-p window)
-         ;; Split window vertically
-         (with-selected-window window
-           (split-window-below)))
-    (and
+			 ;; Split window horizontally
+			 (with-selected-window window
+			   (split-window-right)))
+		(and (window-splittable-p window)
+			 ;; Split window vertically
+			 (with-selected-window window
+			   (split-window-below)))
+		(and
          ;; If WINDOW is the only usable window on its frame (it is
          ;; the only one or, not being the only one, all the other
          ;; ones are dedicated) and is not the minibuffer window, try
@@ -131,10 +131,10 @@ i.e. windows tiled side-by-side."
                                     (throw 'done nil)))
                                 frame)
               t)))
-     (not (window-minibuffer-p window))
-     (let ((split-width-threshold 0))
-       (when (window-splittable-p window t)
-         (with-selected-window window
+		 (not (window-minibuffer-p window))
+		 (let ((split-width-threshold 0))
+		   (when (window-splittable-p window t)
+			 (with-selected-window window
                (split-window-right))))))))
 
 (defun exec/split-window-really-sensibly (&optional window)
@@ -175,7 +175,7 @@ i.e. windows tiled side-by-side."
 		;; 							   (t . 2)
 		;; 							   )
 		)
- ;; (setq display-buffer-base-action '(nil . ((inhibit-same-window . t))))
+  ;; (setq display-buffer-base-action '(nil . ((inhibit-same-window . t))))
 
   (setq mode-line-compact t
 		mode-line-in-non-selected-windows t
@@ -183,22 +183,22 @@ i.e. windows tiled side-by-side."
 		mode-line-position-column-line-format '("[📝%l,%c]")
 		)
   (setq-default mode-line-format
-		'("%e"
-		  mode-line-front-space
-		  (:propertize
-		   ("" mode-line-mule-info mode-line-client mode-line-modified
-			mode-line-remote)
-		   display (min-width (5.0)))
-		  mode-line-frame-identification
-		  mode-line-buffer-identification
-		  "   "
-		  mode-line-position
-		  evil-mode-line-tag
-		  (vc-mode vc-mode)
-		  "  "
-		  ;; mode-line-modes
-		  mode-line-misc-info
-		  mode-line-end-spaces))
+				'("%e"
+				  mode-line-front-space
+				  (:propertize
+				   ("" mode-line-mule-info mode-line-client mode-line-modified
+					mode-line-remote)
+				   display (min-width (5.0)))
+				  mode-line-frame-identification
+				  mode-line-buffer-identification
+				  "   "
+				  mode-line-position
+				  evil-mode-line-tag
+				  (vc-mode vc-mode)
+				  "  "
+				  ;; mode-line-modes
+				  mode-line-misc-info
+				  mode-line-end-spaces))
 
   (set-face-attribute 'mode-line nil)
   (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white")
@@ -262,7 +262,7 @@ i.e. windows tiled side-by-side."
   ;; (add-to-list 'default-frame-alist '(foreground-color . "white"))
   ;; (add-to-list 'default-frame-alist '(background-color . "black"))
   (set-cursor-color "yellow")
-    
+
   (pixel-scroll-mode t)
   (pixel-scroll-precision-mode t)
 
@@ -270,11 +270,11 @@ i.e. windows tiled side-by-side."
 
 
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-  
+
   (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-  
+
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-  
+
   (setq scroll-step 1) ;; keyboard scroll one line at a time
 
 
@@ -395,11 +395,11 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (use-package evil
   :init
   (setq
-    evil-want-keybinding nil
-    evil-want-integration t
-    evil-respect-visual-line-mode t
-    evil-v$-excludes-newline t
-    )
+   evil-want-keybinding nil
+   evil-want-integration t
+   evil-respect-visual-line-mode t
+   evil-v$-excludes-newline t
+   )
   :demand t
   :config
   (evil-mode t)
@@ -568,14 +568,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (setq word-wrap t)
 (global-visual-line-mode t)
-(fringe-mode 20)
-
-;; (set-left-margin 20)
-;; (set-right-margin 20)
+(fringe-mode 16)
 
 
-
-(setq display-line-numbers-width-start t)
 (setq native-comp-async-report-warnings-errors nil)
 (setq imenu-auto-rescan t)
 
@@ -1043,19 +1038,19 @@ if it encounter an error, then we execute `consult-outline'."
 
  "H-d" 'describe-char
 
-  "H-p" '(nil :which-key "package? profiler?")
-  "H-p 1" '(lambda()
-			 (interactive)
-			 (profiler-start 'cpu+mem))
-  "H-p 2" '(lambda()
-			 (interactive)
-			 (profiler-stop)
-			 (profiler-report)
-			 )
-  )
+ "H-p" '(nil :which-key "package? profiler?")
+ "H-p 1" '(lambda()
+			(interactive)
+			(profiler-start 'cpu+mem))
+ "H-p 2" '(lambda()
+			(interactive)
+			(profiler-stop)
+			(profiler-report)
+			)
+ )
 
 (general-define-key
-  "M-0"
+ "M-0"
  'dired-sidebar-show-sidebar
  )
 
@@ -1085,14 +1080,14 @@ if it encounter an error, then we execute `consult-outline'."
 (setq display-buffer-alist nil)
 
 ;; (add-to-list 'display-buffer-alist
-			 ;; '(
-			 ;;   "\\*helpful *"
-			 ;;   (display-buffer-in-side-window)
-			 ;;   (side . bottom)
-			 ;;   (slot . 0)
-			 ;;   (dedicated)
-			 ;;   )
-			 ;; )
+;; '(
+;;   "\\*helpful *"
+;;   (display-buffer-in-side-window)
+;;   (side . bottom)
+;;   (slot . 0)
+;;   (dedicated)
+;;   )
+;; )
 
 ;; (add-to-list 'display-buffer-alist
 ;; 			 '(
@@ -1197,8 +1192,8 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 
-; (load "/home/exec/Projects/github.com/eval-exec/crazy-theme.el/crazy-theme.el")
-; (setq crazy-theme-prefer-dark nil)
+										; (load "/home/exec/Projects/github.com/eval-exec/crazy-theme.el/crazy-theme.el")
+										; (setq crazy-theme-prefer-dark nil)
 										; (load-theme 'crazy)
 
 
@@ -1271,7 +1266,7 @@ if it encounter an error, then we execute `consult-outline'."
 							   )
 
 							  (org-agenda-list) ;; consider set initial-buffer-choice to "*Org Agenda*" buffer
-						  ))
+							  ))
 
 
 
@@ -1288,7 +1283,7 @@ if it encounter an error, then we execute `consult-outline'."
 			   ("M-TAB" . minibuffer-complete)
 			   ("M-j" . vertico-next-group)
 			   ("M-k" . vertico-previous-group)
-		  )
+			   )
 		 )
   :config
   (setq
@@ -1357,7 +1352,7 @@ if it encounter an error, then we execute `consult-outline'."
 	  (vertico-posframe-mode))
   )
 
-;;;; ============================================================
+					;;;; ============================================================
 
 
 (use-package xref
@@ -1596,6 +1591,7 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package flycheck
   :custom
   (flycheck-disabled-checkers '(rust rust-cargo))
+  (flycheck-set-indication-mode 'left-fringe)
 
   :config
   (setq flycheck-display-errors-delay 0
@@ -1613,11 +1609,11 @@ if it encounter an error, then we execute `consult-outline'."
 										; (message "flycheck-next-error called with args %S %S" n reset)
 	(condition-case err
 		(apply orig-fun (list n reset))
-      ((user-error)
-       (let ((error-count (length flycheck-current-errors)))
+	  ((user-error)
+	   (let ((error-count (length flycheck-current-errors)))
 		 (if (and
-              (> error-count 0)                   ; There are errors so we can cycle.
-              (equal (error-message-string err) "No more Flycheck errors"))
+			  (> error-count 0)                   ; There are errors so we can cycle.
+			  (equal (error-message-string err) "No more Flycheck errors"))
 			 ;; We need to cycle.
 			 (let* ((req-n (if (numberp n) n 1)) ; Requested displacement.
 										; An universal argument is taken as reset, so shouldn't fail.
@@ -1626,8 +1622,8 @@ if it encounter an error, then we execute `consult-outline'."
 										; (message "error-count %S; req-n %S; curr-pos %S; next-pos %S" error-count req-n curr-pos next-pos)
 										; orig-fun is flycheck-next-error (but without advise)
 										; Argument to flycheck-next-error must be 1-based.
-               (apply orig-fun (list (+ 1 next-pos) 'reset)))
-           (signal (car err) (cdr err)))))))
+			   (apply orig-fun (list (+ 1 next-pos) 'reset)))
+		   (signal (car err) (cdr err)))))))
 
   (advice-add 'flycheck-next-error :around #'flycheck-next-error-loop-advice)
 
@@ -1716,17 +1712,23 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package diff-hl
   :config
-  (setq diff-hl-flydiff-delay 1
-		diff-hl-ask-before-revert-hunk nil
-		)
+  (setq diff-hl-flydiff-delay 0.2
+		diff-hl-ask-before-revert-hunk nil)
   (custom-set-faces
    '(diff-hl-insert ((t (:background "dark green" :foreground "dark green"))))
    '(diff-hl-change ((t (:background "orange" :foreground "orange"))))
    '(diff-hl-delete ((t (:background "red" :foreground "red"))))
    )
+  ;; test
+  ;; test
+  ;; test
+  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
-  (global-diff-hl-mode)
+  (diff-hl-margin-mode)
   (diff-hl-flydiff-mode)
+  (global-diff-hl-mode)
+  (global-diff-hl-show-hunk-mouse-mode)
   )
 (use-package highlight-numbers
   :hook (prog-mode . highlight-numbers-mode))
@@ -1782,7 +1784,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package prescient
   :config
-   (prescient-persist-mode))
+  (prescient-persist-mode))
 
 (use-package esup
   :config
@@ -1830,9 +1832,9 @@ if it encounter an error, then we execute `consult-outline'."
 
   (if (get-buffer "*🎵ncmpcpp🎵*")
 	  (switch-to-buffer "*🎵ncmpcpp🎵*")
-  (vterm "*🎵ncmpcpp🎵*")
-  (vterm-send-string "ncmpcpp")
-  (vterm-send-return))
+	(vterm "*🎵ncmpcpp🎵*")
+	(vterm-send-string "ncmpcpp")
+	(vterm-send-return))
   (delete-other-windows)
   )
 
@@ -1891,7 +1893,7 @@ if it encounter an error, then we execute `consult-outline'."
 	:config
 	(setq helm-flx-for-helm-find-files t ;; t by default
 		  helm-flx-for-helm-locate t) ;; nil by default
-	 (helm-flx-mode)
+	(helm-flx-mode)
 	)
 
   (use-package helm-describe-modes)
@@ -1965,9 +1967,9 @@ if it encounter an error, then we execute `consult-outline'."
 		)
 
   (custom-set-faces '(child-frame-border
-					 ((t (:background "green")))))
+					  ((t (:background "green")))))
 
-  ; (mini-frame-mode)
+										; (mini-frame-mode)
   )
 
 
@@ -1993,8 +1995,8 @@ if it encounter an error, then we execute `consult-outline'."
   ;; (add-to-list 'display-buffer-alist
   ;;              '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
   ;;                nil
-;;                (window-parameters (mode-line-format . none))))
-)
+  ;;                (window-parameters (mode-line-format . none))))
+  )
 
 (use-package embark-consult
   ;; :after consult
@@ -2077,7 +2079,7 @@ if it encounter an error, then we execute `consult-outline'."
 				copilot-max-char -1
 				)
   (custom-set-faces '(copilot-overlay-face ((t (:inherit shadow :underline t :weight thin :slant italic :foreground "white")))))
-;; lfjewio how to
+  ;; lfjewio how to
   )
 
 (use-package gptai
@@ -2085,8 +2087,8 @@ if it encounter an error, then we execute `consult-outline'."
   (setq
    gptai-model "text-davinci-003"
    gptai-api-key (with-temp-buffer
-		  (insert-file-contents "~/.config/openai_api_key/key.private")
-		  (buffer-substring-no-properties (point-min) (line-end-position)))
+				   (insert-file-contents "~/.config/openai_api_key/key.private")
+				   (buffer-substring-no-properties (point-min) (line-end-position)))
    gptai-max-tokens 1000
    )
   ;; (gptai-list-models)
@@ -2131,25 +2133,25 @@ if it encounter an error, then we execute `consult-outline'."
    corfu-popupinfo-max-height 100
    corfu-preview-current nil
    )
-   (global-corfu-mode)
-   (corfu-popupinfo-mode -1)
-   (defun exec/corfu-move-to-minibuffer ()
-	 (interactive)
-	 (when completion-in-region--data
-	   (let ((completion-extra-properties corfu--extra)
-			 completion-cycle-threshold completion-cycling)
-		 (apply #'consult-completion-in-region completion-in-region--data))))
-   (keymap-set corfu-map "M-m" #'exec/corfu-move-to-minibuffer)
-   (add-to-list 'corfu-continue-commands #'exec/corfu-move-to-minibuffer)
+  (global-corfu-mode)
+  (corfu-popupinfo-mode -1)
+  (defun exec/corfu-move-to-minibuffer ()
+	(interactive)
+	(when completion-in-region--data
+	  (let ((completion-extra-properties corfu--extra)
+			completion-cycle-threshold completion-cycling)
+		(apply #'consult-completion-in-region completion-in-region--data))))
+  (keymap-set corfu-map "M-m" #'exec/corfu-move-to-minibuffer)
+  (add-to-list 'corfu-continue-commands #'exec/corfu-move-to-minibuffer)
 
-(defun exec/corfu-enable-in-minibuffer ()
-  "Enable Corfu in the minibuffer if `completion-at-point' is bound."
-  (when (where-is-internal #'completion-at-point (list (current-local-map)))
-    ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
-    (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
-                corfu-popupinfo-delay nil)
-    (corfu-mode 1)))
-(add-hook 'minibuffer-setup-hook #'exec/corfu-enable-in-minibuffer)
+  (defun exec/corfu-enable-in-minibuffer ()
+	"Enable Corfu in the minibuffer if `completion-at-point' is bound."
+	(when (where-is-internal #'completion-at-point (list (current-local-map)))
+      ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
+      (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
+                  corfu-popupinfo-delay nil)
+      (corfu-mode 1)))
+  (add-hook 'minibuffer-setup-hook #'exec/corfu-enable-in-minibuffer)
 
   )
 (use-package corfu-prescient
@@ -2184,7 +2186,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package all-the-icons-completion
   :config
-   (all-the-icons-completion-mode))
+  (all-the-icons-completion-mode))
 
 (use-package cape
   :config
@@ -2226,8 +2228,8 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package rg
   :hook (rg-mode . (lambda()
-					  (switch-to-buffer-other-window (current-buffer))
-					  ))
+					 (switch-to-buffer-other-window (current-buffer))
+					 ))
   :config
   (setq rg-executable "rg")
   (setq rg-keymap-prefix (kbd "H-r"))
@@ -2408,7 +2410,7 @@ if it encounter an error, then we execute `consult-outline'."
 	:config
 	)
 
-   (consult-preview-at-point-mode)
+  (consult-preview-at-point-mode)
   )
 
 
@@ -2510,11 +2512,11 @@ if it encounter an error, then we execute `consult-outline'."
   :config
 
   (add-hook 'lsp-completion-mode-hook (lambda()
-							(setq completion-category-defaults nil)))
+										(setq completion-category-defaults nil)))
   (add-hook 'lsp-mode-hook (lambda()
-				 (let ((lsp-keymap-prefix "C-c l"))
-				   (lsp-enable-which-key-integration))
-							  ))
+							 (let ((lsp-keymap-prefix "C-c l"))
+							   (lsp-enable-which-key-integration))
+							 ))
 
 
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
@@ -2563,7 +2565,7 @@ if it encounter an error, then we execute `consult-outline'."
 		lsp-pylsp-plugins-flake8-enabled t
 		lsp-pylsp-plugins-pylint-enabled t)
 
- ;; (setq assignVariableTypes "assignVariableTypes")
+  ;; (setq assignVariableTypes "assignVariableTypes")
   (lsp-register-custom-settings '(
 								  ("gopls.allExperiments" t t)
 								  ("gopls.completeUnimported" t t)
@@ -2610,8 +2612,8 @@ if it encounter an error, then we execute `consult-outline'."
 			   (interactive)
 			   (setq buffer-face-mode-face '(
 											 :family "Iosevka"
-													 ;; :height 100
-													 ))
+											 ;; :height 100
+											 ))
 			   (buffer-face-mode)
 			   ))
   )
@@ -2715,9 +2717,9 @@ if it encounter an error, then we execute `consult-outline'."
   (indent-bars-no-descend-string t)
   (indent-bars-treesit-ignore-blank-lines-types '("module"))
   (indent-bars-treesit-wrap '((python argument_list parameters ; for python, as an example
-				      list list_comprehension
-				      dictionary dictionary_comprehension
-				      parenthesized_expression subscript)))
+									  list list_comprehension
+									  dictionary dictionary_comprehension
+									  parenthesized_expression subscript)))
 
   )
 
@@ -2851,10 +2853,10 @@ if it encounter an error, then we execute `consult-outline'."
   ;;:functions all-the-icons-octicon ibuffer-do-sort-by-alphabetic
   :hook
   ((ibuffer-mode . (lambda ()
-						  (message "ibuffer projectile groups")
-						  (ibuffer-projectile-set-filter-groups)
-						  (unless (eq ibuffer-sorting-mode 'alphabetic)
-							(ibuffer-do-sort-by-alphabetic)))))
+					 (message "ibuffer projectile groups")
+					 (ibuffer-projectile-set-filter-groups)
+					 (unless (eq ibuffer-sorting-mode 'alphabetic)
+					   (ibuffer-do-sort-by-alphabetic)))))
   :config
   (setq ibuffer-projectile-prefix
 		(concat
@@ -2931,7 +2933,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package magit
   :config
- (use-package forge)
+  (use-package forge)
   )
 
 (use-package git-commit)
@@ -2953,21 +2955,21 @@ if it encounter an error, then we execute `consult-outline'."
   ;; and macros. `helpful-function' is functions only, so we provide
   ;; `helpful-callable' as a drop-in replacement.
   ;; (
-   ;; ("H-h f" . helpful-callable)
-   ;; ("H-h v" . helpful-variable)
-   ;; ("H-h k" . helpful-key)
-   ;; ("H-h F" . helpful-function)
-   ;; ("H-c P" . helpful-at-point)
+  ;; ("H-h f" . helpful-callable)
+  ;; ("H-h v" . helpful-variable)
+  ;; ("H-h k" . helpful-key)
+  ;; ("H-h F" . helpful-function)
+  ;; ("H-c P" . helpful-at-point)
 
-   ;; Look up *C*ommands.
-   ;;
-   ;; By default, C-h C is bound to describe `describe-coding-system'. I
-   ;; don't find this very useful, but it's frequently useful to only
-   ;; look at interactive functions.
-   ;; ("H-h C" . helpful-command))
+  ;; Look up *C*ommands.
+  ;;
+  ;; By default, C-h C is bound to describe `describe-coding-system'. I
+  ;; don't find this very useful, but it's frequently useful to only
+  ;; look at interactive functions.
+  ;; ("H-h C" . helpful-command))
   :config
   (setq help-window-select t)
-   )
+  )
 
 (use-package 2048-game)
 
@@ -2988,11 +2990,11 @@ if it encounter an error, then we execute `consult-outline'."
 (defun exec/nov-mode-face()
   (interactive)
   (setq-local buffer-face-mode-face '(
-								:family "Noto Serif"
-								:height 2.0
-								;; :background "white"
-								;; :foreground "black"
-								))
+									  :family "Noto Serif"
+									  :height 2.0
+									  ;; :background "white"
+									  ;; :foreground "black"
+									  ))
   (make-local-variable 'buffer-face-mode-face)
   (blink-cursor-mode -1)
   (tab-bar-mode -1)
@@ -3059,7 +3061,7 @@ if it encounter an error, then we execute `consult-outline'."
   ;; 		("H-<right>" . winner-redo)
   ;; 		)
   :config
-   (winner-mode))
+  (winner-mode))
 
 (use-package ace-window
   :bind ("H-o" . ace-window)
@@ -3085,7 +3087,7 @@ if it encounter an error, then we execute `consult-outline'."
   (pangu-spacing-real-insert-separtor  t)
   (pangu-spacing-inhibit-mode-alist  '(eshell-mode shell-mode term-mode))
   :config
-   ;; (global-pangu-spacing-mode)
+  ;; (global-pangu-spacing-mode)
   )
 
 (use-package eglot
@@ -3109,7 +3111,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package saveplace
   :config
-   (save-place-mode))
+  (save-place-mode))
 
 (use-package restore-point
   :ensure nil
@@ -3175,7 +3177,7 @@ if it encounter an error, then we execute `consult-outline'."
 ;; 								"--proxy"
 ;; 								"http://127.0.0.1:7890"
 ;; 								))
-  ;; )
+;; )
 
 (use-package mu4e
   :init
@@ -3256,7 +3258,7 @@ if it encounter an error, then we execute `consult-outline'."
 		mu4e-debug nil
 		mu4e-hide-index-messages t
 		mu4e-headers-fields '((:human-date . 21) (:flags . 8) (:mailing-list . 12) (:from . 24)
-		  (:subject)))
+							  (:subject)))
 
   (setq mu4e-date-format-long "%c"
 		mu4e-headers-date-format "%x %T"
@@ -3314,7 +3316,7 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package mu4e-views
   :disabled
   :config
- ;; (setq mu4e-views-default-view-method "html")
+  ;; (setq mu4e-views-default-view-method "html")
   )
 
 (use-package ement
@@ -3328,8 +3330,8 @@ if it encounter an error, then we execute `consult-outline'."
 
   (setq ement-room-message-format-spec
 		"[%S%L]: %B%r%R%t"
-ement-room-list-column-Name-max-width 40
-ement-room-left-margin-width 24
+		ement-room-list-column-Name-max-width 40
+		ement-room-left-margin-width 24
 		)
   )
 
@@ -3476,15 +3478,15 @@ ement-room-left-margin-width 24
 (epa-file-enable)
 
 (use-package org
-;;   :hook (
-;; 		 (before-save . skx-org-mode-before-save-hook)
-;; 		 (org-trigger . save-buffer)
-;; 		 )
+  ;;   :hook (
+  ;; 		 (before-save . skx-org-mode-before-save-hook)
+  ;; 		 (org-trigger . save-buffer)
+  ;; 		 )
   :config
 
-;; (org-crypt-use-before-save-magic)
-;; (setq org-crypt-key "0F0272C0D3AC91F7")
-;; (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+  ;; (org-crypt-use-before-save-magic)
+  ;; (setq org-crypt-key "0F0272C0D3AC91F7")
+  ;; (setq org-tags-exclude-from-inheritance (quote ("crypt")))
 
 
   (setq org-startup-folded
@@ -3501,193 +3503,193 @@ ement-room-left-margin-width 24
   ;; 	  )
   (setq org-agenda-files
 		(append (directory-files-recursively "~/org/GTD/" "\.org$")
-		 (directory-files-recursively "~/org/personal/" "\.org$")
-		 (directory-files-recursively "~/org/work/" "\.org$")
-		 (directory-files-recursively "~/org/notes/" "\.org$")
-		 (directory-files-recursively "~/org/journal/" "\.org$")))
+				(directory-files-recursively "~/org/personal/" "\.org$")
+				(directory-files-recursively "~/org/work/" "\.org$")
+				(directory-files-recursively "~/org/notes/" "\.org$")
+				(directory-files-recursively "~/org/journal/" "\.org$")))
 
-;; (org-agenda-include-diary . t)
-(setq org-agenda-time-grid '((daily today require-timed)
-							 (000 100 200 300 400 500 600 700 800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300 2400)
-							 "......"
-							 "----------------"))
-(setq org-done-keywords-for-agenda nil)
-(setq org-agenda-use-tag-inheritance  t)
-(setq org-agenda-window-setup 'current-window)
-(setq org-agenda-restore-windows-after-quit  t)
+  ;; (org-agenda-include-diary . t)
+  (setq org-agenda-time-grid '((daily today require-timed)
+							   (000 100 200 300 400 500 600 700 800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300 2400)
+							   "......"
+							   "----------------"))
+  (setq org-done-keywords-for-agenda nil)
+  (setq org-agenda-use-tag-inheritance  t)
+  (setq org-agenda-window-setup 'current-window)
+  (setq org-agenda-restore-windows-after-quit  t)
 
-(transient-define-prefix exec/org-agenda-transient ()
-  "Replace the org-agenda buffer by a transient."
-  [["Built-in agendas"
-	("a" "Agenda for current week or day" (lambda () (interactive) (org-agenda nil "a")))
-	("t" "List of all TODO entries" (lambda () (interactive) (org-agenda nil "t")))
-	("T" "Entries with special TODO kwd" (lambda () (interactive) (org-agenda nil "T")))
-	("m" "Match a TAGS/PROP/TODO query" (lambda () (interactive) (org-agenda nil "m")))
-	("M" "Like m, but only TODO entries" (lambda () (interactive) (org-agenda nil "M")))
-	("e" "Expport agenda views" (lambda () (interactive) (org-agenda nil "e")))
-	("s" "Search for keywords" (lambda () (interactive) (org-agenda nil "s")))
-	("S" "Like s, but only TODO entries" (lambda () (interactive) (org-agenda nil "S")))
-	("/" "Multi-occur" (lambda () (interactive) (org-agenda nil "/")))
-	("<" "Buffer, subtree/region restriciton" (lambda () (interactive) (org-agenda nil "<")))
-	(">" "Remove restriction" (lambda () (interactive) (org-agenda nil ">")))
-	("#" "List stuck projects (!=configure)" (lambda () (interactive) (org-agenda nil "#")))
-	("!" "Define \"stuck\"" (lambda () (interactive) (org-agenda nil "!")))
-	("C" "Configure custom agenda commands" (lambda () (interactive) (org-agenda nil "C")))]
-   ["Custom agendas"
-	("A" "Daily and overview" (lambda () (interactive) (org-agenda nil "A")))
-	("H" "Habits tracker" (lambda () (interactive) (org-agenda nil "H")))]])
+  (transient-define-prefix exec/org-agenda-transient ()
+	"Replace the org-agenda buffer by a transient."
+	[["Built-in agendas"
+	  ("a" "Agenda for current week or day" (lambda () (interactive) (org-agenda nil "a")))
+	  ("t" "List of all TODO entries" (lambda () (interactive) (org-agenda nil "t")))
+	  ("T" "Entries with special TODO kwd" (lambda () (interactive) (org-agenda nil "T")))
+	  ("m" "Match a TAGS/PROP/TODO query" (lambda () (interactive) (org-agenda nil "m")))
+	  ("M" "Like m, but only TODO entries" (lambda () (interactive) (org-agenda nil "M")))
+	  ("e" "Expport agenda views" (lambda () (interactive) (org-agenda nil "e")))
+	  ("s" "Search for keywords" (lambda () (interactive) (org-agenda nil "s")))
+	  ("S" "Like s, but only TODO entries" (lambda () (interactive) (org-agenda nil "S")))
+	  ("/" "Multi-occur" (lambda () (interactive) (org-agenda nil "/")))
+	  ("<" "Buffer, subtree/region restriciton" (lambda () (interactive) (org-agenda nil "<")))
+	  (">" "Remove restriction" (lambda () (interactive) (org-agenda nil ">")))
+	  ("#" "List stuck projects (!=configure)" (lambda () (interactive) (org-agenda nil "#")))
+	  ("!" "Define \"stuck\"" (lambda () (interactive) (org-agenda nil "!")))
+	  ("C" "Configure custom agenda commands" (lambda () (interactive) (org-agenda nil "C")))]
+	 ["Custom agendas"
+	  ("A" "Daily and overview" (lambda () (interactive) (org-agenda nil "A")))
+	  ("H" "Habits tracker" (lambda () (interactive) (org-agenda nil "H")))]])
 
 
 
 	  ;;;;;;; org-agenda-end
-(setq org-startup-with-inline-images t)
-(setq org-tag-beautify-mode  t)
-(setq org-confirm-babel-evaluate  t)
-(setq org-return-follows-link   t)
-(setq org-enforce-todo-dependencies  t)
-(setq org-enforce-todo-checkbox-dependencies  t)
-(setq org-startup-with-inline-images t)
-(setq org-display-inline-images t)
-(setq org-redisplay-inline-images t)
-(setq org-startup-with-inline-images "inlineimages")
-(setq org-confirm-babel-evaluate nil)
-(setq org-ellipsis
-	  ;; "⭍"
-	  "⤵"
-	  )
-(setq org-default-notes-file  "~/org/notes/")
-(setq org-capture-templates '(
-							  ("w" "work" entry
-							   (file+headline  "~/org/GTD/work.org" "WORK" )
-							   "** TODO [#B] %i %?
+  (setq org-startup-with-inline-images t)
+  (setq org-tag-beautify-mode  t)
+  (setq org-confirm-babel-evaluate  t)
+  (setq org-return-follows-link   t)
+  (setq org-enforce-todo-dependencies  t)
+  (setq org-enforce-todo-checkbox-dependencies  t)
+  (setq org-startup-with-inline-images t)
+  (setq org-display-inline-images t)
+  (setq org-redisplay-inline-images t)
+  (setq org-startup-with-inline-images "inlineimages")
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-ellipsis
+		;; "⭍"
+		"⤵"
+		)
+  (setq org-default-notes-file  "~/org/notes/")
+  (setq org-capture-templates '(
+								("w" "work" entry
+								 (file+headline  "~/org/GTD/work.org" "WORK" )
+								 "** TODO [#B] %i %?
 		 %T
 		 ")
-							  ("p" "personal stuff" entry (file+headline "~/org/personal/personal.org" "Personl")
-							   "* TODO %i %?")
-							  ("e" "EXEC" plain (file+headline "~/org/GTD/personal.org" "EXEC") "** %i %?")
+								("p" "personal stuff" entry (file+headline "~/org/personal/personal.org" "Personl")
+								 "* TODO %i %?")
+								("e" "EXEC" plain (file+headline "~/org/GTD/personal.org" "EXEC") "** %i %?")
 
-							  ))
-(setq org-todo-keywords
-	  '((sequence "TODO(t)" "STARTED" "|" "SKIP(s)" "CANCEL(c)" "DONE(d)")
-		(sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-		))
+								))
+  (setq org-todo-keywords
+		'((sequence "TODO(t)" "STARTED" "|" "SKIP(s)" "CANCEL(c)" "DONE(d)")
+		  (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+		  ))
 
-(defface org-link-id
-  '((t :foreground "#50fa7b"
-	   :weight bold
-	   :underline t))
-  "Face for Org-Mode links starting with id:."
-  :group 'org-faces)
-(defface org-link-file
-  '((t :foreground "#ff5555"
-	   :weight bold
-	   :underline t))
-  "Face for Org-Mode links starting with file:."
-  :group 'org-faces)
-(org-link-set-parameters
- "id"
- :face 'org-link-id)
-(org-link-set-parameters
- "file"
- :face 'org-link-file)
+  (defface org-link-id
+	'((t :foreground "#50fa7b"
+		 :weight bold
+		 :underline t))
+	"Face for Org-Mode links starting with id:."
+	:group 'org-faces)
+  (defface org-link-file
+	'((t :foreground "#ff5555"
+		 :weight bold
+		 :underline t))
+	"Face for Org-Mode links starting with file:."
+	:group 'org-faces)
+  (org-link-set-parameters
+   "id"
+   :face 'org-link-id)
+  (org-link-set-parameters
+   "file"
+   :face 'org-link-file)
 
-(use-package org-super-agenda
-  )
+  (use-package org-super-agenda
+	)
 
-(use-package ob-mermaid
-  :config
-  (setq ob-mermaid-cli-path "/usr/bin/mmdc"))
+  (use-package ob-mermaid
+	:config
+	(setq ob-mermaid-cli-path "/usr/bin/mmdc"))
 
-;; (use-package org-templ)
+  ;; (use-package org-templ)
 
-(use-package ftable)
-(use-package org-preview-html)
-(use-package org-superstar
-  ;; :hook (org-mode . org-superstar-mode)
-  :config (setq org-hide-leading-stars nil)
-  (setq org-superstar-leading-bullet ?\s)
-  (setq org-indent-mode-turns-on-hiding-stars nil)
-  (setq org-superstar-special-todo-items t))
-(use-package org-cliplink
-  :after org)
+  (use-package ftable)
+  (use-package org-preview-html)
+  (use-package org-superstar
+	;; :hook (org-mode . org-superstar-mode)
+	:config (setq org-hide-leading-stars nil)
+	(setq org-superstar-leading-bullet ?\s)
+	(setq org-indent-mode-turns-on-hiding-stars nil)
+	(setq org-superstar-special-todo-items t))
+  (use-package org-cliplink
+	:after org)
 
-(use-package org-modern
-  :after org
-  :config
-  (set-face-attribute 'org-modern-symbol nil :height 1.0)
-  (global-org-modern-mode)
-  )
-(use-package svg-tag-mode)
+  (use-package org-modern
+	:after org
+	:config
+	(set-face-attribute 'org-modern-symbol nil :height 1.0)
+	(global-org-modern-mode)
+	)
+  (use-package svg-tag-mode)
 
 
-(use-package org-fancy-priorities
-  :after org
-  ;; :hook
-  ;; org-fanci-priority looks not good, I don't like it
-  ;; (org-mode . org-fancy-priorities-mode)
-  :config
-  (setq org-lowest-priority  69)
-  (setq org-fancy-priorities-list '("🅰" "🅱" "🅲" "🅳" "🅴"))
-  )
+  (use-package org-fancy-priorities
+	:after org
+	;; :hook
+	;; org-fanci-priority looks not good, I don't like it
+	;; (org-mode . org-fancy-priorities-mode)
+	:config
+	(setq org-lowest-priority  69)
+	(setq org-fancy-priorities-list '("🅰" "🅱" "🅲" "🅳" "🅴"))
+	)
 
-(setq org-babel-hash-show-time t)
-(use-package ob-go)
-(use-package ob-rust)
+  (setq org-babel-hash-show-time t)
+  (use-package ob-go)
+  (use-package ob-rust)
 
-;; active Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (C . t)
-   (gnuplot . t)
-   (mermaid . t)
-   (shell . t)
-   (rust . t)
+  ;; active Babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+	 (C . t)
+	 (gnuplot . t)
+	 (mermaid . t)
+	 (shell . t)
+	 (rust . t)
+	 )
    )
- )
 
 
-(use-package org-download
-  :config
+  (use-package org-download
+	:config
 
-  (setq org-download-method
-		;; 'attach
-		'directory
-		org-download-screenshot-method "flameshot gui -d 1000 --raw > %s"
-		)
+	(setq org-download-method
+		  ;; 'attach
+		  'directory
+		  org-download-screenshot-method "flameshot gui -d 1000 --raw > %s"
+		  )
+	)
+  (use-package org-present)
+  ;; (use-package org-ref)
+
+  (use-package org-noter
+	:config
+	)
+
+
+  (use-package org-journal
+	:config
+	(setq org-journal-dir  "~/org/journal/")
+	(setq org-journal-date-format   "%F, %A")
+	(setq org-journal-time-format  "%T ")
+	(setq org-journal-file-format  "%Y.org")  ; their file names
+	(setq org-journal-file-type  'yearly)
+	(setq org-journal-enable-agenda-integration  t)
+	(setq org-journal-enable-cache  t)
+	(setq org-journal-carryover-items ""
+		  org-journal-prefix-key nil
+		  )
+	)
+  (use-package org-yaap
+	:straight (org-yaap :type git :host gitlab :repo "tygrdev/org-yaap")
+	:config
+	(setq org-yaap-todo-only t
+		  org-yaap-alert-before 10
+		  org-yaap-daily-alert 6
+		  org-yaap-persistent-clock t
+		  )
+	;; (org-yaap-mode 1)
+	)
   )
-(use-package org-present)
-;; (use-package org-ref)
-
-(use-package org-noter
-  :config
-  )
-
-
-(use-package org-journal
-  :config
-  (setq org-journal-dir  "~/org/journal/")
-  (setq org-journal-date-format   "%F, %A")
-  (setq org-journal-time-format  "%T ")
-  (setq org-journal-file-format  "%Y.org")  ; their file names
-  (setq org-journal-file-type  'yearly)
-  (setq org-journal-enable-agenda-integration  t)
-  (setq org-journal-enable-cache  t)
-  (setq org-journal-carryover-items ""
-		org-journal-prefix-key nil
-		)
-  )
-(use-package org-yaap
-  :straight (org-yaap :type git :host gitlab :repo "tygrdev/org-yaap")
-  :config
-  (setq org-yaap-todo-only t
-		org-yaap-alert-before 10
-		org-yaap-daily-alert 6
-		org-yaap-persistent-clock t
-		)
-  ;; (org-yaap-mode 1)
-  )
-)
 
 (defun exec/visual-select-region()
   "Get the whole string,  and current cursor position is in the string, which start by '-----BEGIN PGP MESSAGE-----'  and end with '-----END PGP MESSAGE-----', get the string to a variable"
@@ -3752,12 +3754,12 @@ ement-room-left-margin-width 24
 (use-package fanyi
   :custom
   (fanyi-providers   '(
-						fanyi-haici-provider
-						fanyi-etymon-provider
-						fanyi-youdao-thesaurus-provider
-						fanyi-longman-provider
-						;; fanyi-libre-provider
-						))
+					   fanyi-haici-provider
+					   fanyi-etymon-provider
+					   fanyi-youdao-thesaurus-provider
+					   fanyi-longman-provider
+					   ;; fanyi-libre-provider
+					   ))
   :config
   )
 
@@ -3835,7 +3837,7 @@ ement-room-left-margin-width 24
 #+LAST_MODIFIED: <>
 ") :unnarrowed t)))
 
-   (org-roam-db-autosync-mode))
+  (org-roam-db-autosync-mode))
 
 (use-package org-attach-screenshot)
 
@@ -3943,12 +3945,12 @@ ement-room-left-margin-width 24
 									   projectile-root-top-down
 									   projectile-root-top-down-recurring))
   (defun projectile-ignored-project-function(project-root)
-		   (or (string-prefix-p "~/.emacs.d/" project-root)
-			   (string-prefix-p "~/.cargo/" project-root)
-			   (string-prefix-p "~/.rustup/" project-root)
-			   (string-prefix-p "/nix/store/" project-root)
-			   )
-		   )
+	(or (string-prefix-p "~/.emacs.d/" project-root)
+		(string-prefix-p "~/.cargo/" project-root)
+		(string-prefix-p "~/.rustup/" project-root)
+		(string-prefix-p "/nix/store/" project-root)
+		)
+	)
   ;; bind consult-projectile-find-file to C-c p f use general
 
   (defun projectile-compile--double-prefix-means-run-comint (func &optional args)
@@ -3984,7 +3986,7 @@ interactive compilation buffer."
   (use-package projectile-ripgrep
 	:config
 	)
-   (projectile-mode)
+  (projectile-mode)
   )
 (use-package cus-dir
   :straight (cus-dir :type git :host gitlab :repo "mauroaranda/cus-dir")
@@ -4023,7 +4025,7 @@ interactive compilation buffer."
   ;; either locally or globally. `expand-abbrev' is bound to C-x '.
   ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
   ;; (global-tempel-abbrev-mode)
-)
+  )
 
 ;; Optional: Add tempel-collection.
 ;; The package is young and doesn't have comprehensive coverage.
@@ -4187,16 +4189,16 @@ interactive compilation buffer."
 
 	(setq tab-bar-format (delete-dups tab-bar-format))
 	)
-(defun exec/name-tab-by-project-or-default ()
-  "Return project name if in a project, or default tab-bar name if not.
+  (defun exec/name-tab-by-project-or-default ()
+	"Return project name if in a project, or default tab-bar name if not.
 The default tab-bar name uses the buffer name."
-  (let ((project-name (projectile-project-name)))
-    (if (string= "-" project-name)
-        (tab-bar-tab-name-current)
-      (projectile-project-name))))
-(defun exec/tab-bar-project-name(tab_name &optional)
-  (projectile-project-name)
-  )
+	(let ((project-name (projectile-project-name)))
+      (if (string= "-" project-name)
+          (tab-bar-tab-name-current)
+		(projectile-project-name))))
+  (defun exec/tab-bar-project-name(tab_name &optional)
+	(projectile-project-name)
+	)
 
   :hook
   (after-init . tab-bar-mode)
@@ -4319,7 +4321,7 @@ The default tab-bar name uses the buffer name."
 
 (use-package minions
   :config
-   (minions-mode))
+  (minions-mode))
 
 (use-package transpose-frame)
 
@@ -4366,9 +4368,9 @@ The default tab-bar name uses the buffer name."
 
 (use-package writeroom-mode
   :bind (:map writeroom-mode-map ("C-M-<" .  writeroom-decrease-width)
-							 ("C-M->" .  writeroom-increase-width)
-							 ("C-M-=" .  writeroom-adjust-width)
-							 )
+			  ("C-M->" .  writeroom-increase-width)
+			  ("C-M-=" .  writeroom-adjust-width)
+			  )
   :custom (writeroom-width  148))
 
 (use-package parchment-theme)
@@ -4401,7 +4403,7 @@ The default tab-bar name uses the buffer name."
   )
 
 (use-package doom-modeline
-  ; :hook
+										; :hook
   ;; (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-battery nil
@@ -4511,9 +4513,9 @@ The default tab-bar name uses the buffer name."
 (defun exec/white-bg-face()
   (interactive)
   (setq-local buffer-face-mode-face '(
-								:background "white"
-								:foreground "black"
-								))
+									  :background "white"
+									  :foreground "black"
+									  ))
   (make-local-variable 'buffer-face-mode-face)
   (buffer-face-mode)
   )
@@ -4541,19 +4543,19 @@ The default tab-bar name uses the buffer name."
   :straight (:type built-in)
   ;; :hook
   ;; (eww-mode . exec/white-bg-face)
-;; https://www.google.com/search?q=%s&pws=0&gl=us&gws_rd=cr
+  ;; https://www.google.com/search?q=%s&pws=0&gl=us&gws_rd=cr
 
   :config
   (setq eww-search-prefix "https://www.google.com/search?pws=0&gl=us&gws_rd=cr&q="
 		eww-retrieve-command nil
 		)
-(defun exec/eww-render-current-buffer ()
-  "Render HTML in the current buffer with EWW"
-  (interactive)
-  (beginning-of-buffer)
-  (eww-display-html 'utf8 (buffer-name)))
+  (defun exec/eww-render-current-buffer ()
+	"Render HTML in the current buffer with EWW"
+	(interactive)
+	(beginning-of-buffer)
+	(eww-display-html 'utf8 (buffer-name)))
 
-;; (global-set-key (kbd "<C-c C-e C-w C-w>") 'eww-render-current-buffer)
+  ;; (global-set-key (kbd "<C-c C-e C-w C-w>") 'eww-render-current-buffer)
 
   )
 
@@ -4633,7 +4635,7 @@ The default tab-bar name uses the buffer name."
 
 (use-package origami
   ;; :hook
-   ;; (prog-mode . origami-mode)
+  ;; (prog-mode . origami-mode)
 
   :config
   (setq origami-show-fold-header nil)
@@ -4859,7 +4861,7 @@ The default tab-bar name uses the buffer name."
 
 (use-package iscroll
   :config
-   (iscroll-mode))
+  (iscroll-mode))
 
 ;;;;;;; why? down
 
@@ -5018,10 +5020,10 @@ The default tab-bar name uses the buffer name."
   :straight (:local-repo "~/Projects/github.com/karthink/gptel")
   :hook
   (
-  (gptel-mode . (lambda()
-				  (copilot-mode -1)
-				  (exec/sans-mode)
-				  ))
+   (gptel-mode . (lambda()
+				   (copilot-mode -1)
+				   (exec/sans-mode)
+				   ))
    )
   :config
   (defun exec/gptel-send()
@@ -5061,7 +5063,7 @@ The default tab-bar name uses the buffer name."
 						   (chat .
 								 "You are a large language model and a conversation partner. Respond concisely.")
 						   (translator .
-								 "You are a translator, I send you text, you translate it to Chinese")
+									   "You are a translator, I send you text, you translate it to Chinese")
 						   )
 
 		gptel-posframe-width 50
@@ -5291,4 +5293,3 @@ The default tab-bar name uses the buffer name."
    ] 16 16 'center)
 
 (setq visual-line-fringe-indicators '(nil right-curly-arrow))
-
