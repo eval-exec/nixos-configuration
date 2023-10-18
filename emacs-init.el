@@ -278,43 +278,6 @@ i.e. windows tiled side-by-side."
   (setq scroll-step 1) ;; keyboard scroll one line at a time
 
 
-  ;; 🧬
-  ;; it’s 中文测试`''`'《》，。
-  ;;- [X] sub task two
-  ;;- [ ] sub task three
-  ;; '🂩
-  ;; ->
-  (setq use-default-font-for-symbols nil)
-
-  ;; (set-fontset-font t 'unicode "unifont")
-  ;; (set-face-attribute 'default nil  :family "Roboto")
-
-  (set-fontset-font t 'unicode "Sarasa Term CL")
-  (set-fontset-font t 'unicode "Symbols Nerd Font Mono" nil 'append)
-
-  ;; (set-fontset-font t 'ascii "JuliaMono")
-  ;; (set-fontset-font t 'ascii "unifont")
-  ;; (set-fontset-font t 'ascii "Sarasa Mono SC")
-
-
-  ;; (set-fontset-font t 'latin "Sarasa Mono SC")
-  ;; (set-fontset-font t 'latin "unifont")
-  ;; (set-fontset-font t 'latin "JuliaMono")
-  ;; (set-fontset-font t 'latin "unifont" nil 'append)
-  (set-fontset-font t 'playing-cards (font-spec :script 'playing-cards))
-
-
-  (set-fontset-font t 'cyrillic "Sarasa Fixed CL")
-  (set-fontset-font t 'han "Sarasa Fixed SC") ;; 关门，直接
-  (set-fontset-font t 'cjk-misc "Sarasa Fixed SC")
-  (set-fontset-font t 'symbol "Sarasa Fixed CL")
-  (set-fontset-font t 'symbol "Symbola" nil 'append)
-  (set-fontset-font t 'symbol "Nerd Font Mono" nil 'append)
-  (set-fontset-font t 'playing-cards "Noto Sans Symbols" nil 'append)
-  (set-fontset-font t 'playing-cards "Noto Sans Symbols 2" nil 'append)
-
-  (set-fontset-font t 'emoji "Noto Color Emoji")
-  (set-fontset-font t 'emoji "Symbola" nil 'append)
 
 
   (setq revert-without-query '(".*"))
@@ -338,25 +301,24 @@ i.e. windows tiled side-by-side."
 
 (defun exec/increase-buffer-font()
   (interactive)
-  ;; (setq-local buffer-face-mode-face '(:height 100))
-  ;; (buffer-face-mode)
-  )
+  (setq-local buffer-face-mode-face '(:height 1.2))
+  (buffer-face-mode))
+
 (defun exec/decrease-buffer-font()
   (interactive)
   (setq-local buffer-face-mode-face '(:height 0.8))
-  (buffer-face-mode)
-  )
+  (buffer-face-mode))
 
-(defun exec/prog-mode-fixed()
+(defun exec/variable-pitch-mode()
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
-  (setq-local buffer-face-mode-face '(:family "Unifont"))
-  ;; (buffer-face-mode)
-  )
+  (setq-local buffer-face-mode-face 'variable-pitch)
+  (buffer-face-mode))
 
-(defun exec/sans-mode()
+(defun exec/fixed-pitch-mode()
+  "Set a fixed width (monospace) font in current buffer."
   (interactive)
-  ;; (setq-local buffer-face-mode-face '(:family "Noto Sans"))
+  (setq-local buffer-face-mode-face 'fixed-pitch)
   (buffer-face-mode))
 
 
@@ -568,7 +530,6 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (setq word-wrap t)
 (global-visual-line-mode t)
-(fringe-mode 16)
 
 
 (setq native-comp-async-report-warnings-errors nil)
@@ -602,7 +563,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (setenv "QT_IM_MODULE" "fcitx")
 (setenv "SDL_IM_MODULE" "fcitx")
 (setenv "XMODIFIERS" "@im=fcitx")
-(setenv "PATH" "/nix/store/k2j9x9kzss7jhqvwsaas9ikyiq8031q5-xwininfo-1.1.6/bin:/nix/store/ycvfy4cg0ky81gp0566dpdl6apxjzrjx-xdotool-3.20211022.1/bin:/nix/store/5fa4i3i5dgqk49lxbz952jnph01im948-xprop-1.2.6/bin:/nix/store/3mpa96b8hi3gfx17099xwgfnp6kbz4ga-gawk-5.2.2/bin:/nix/store/8fdd0nqajq5sk1m6p4qnn0z0j9d7n3q5-coreutils-9.3/bin:/nix/store/2hz0i9y0xck9y4pq1rabi0cwk4kylgrw-gnugrep-3.11/bin:/nix/store/sxk30xba5nyvw8p10pfpgq5p9skhhi0a-procps-3.3.17/bin:/home/exec/.cargo/bin:/home/exec/.local/bin:/run/wrappers/bin:/home/exec/.nix-profile/bin:/etc/profiles/per-user/exec/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/exec/.oh-my-zsh/custom/plugins/warhol/bin:/home/exec/.oh-my-zsh/custom/plugins/warhol/bin")
+;; (setenv "PATH" "/nix/store/k2j9x9kzss7jhqvwsaas9ikyiq8031q5-xwininfo-1.1.6/bin:/nix/store/ycvfy4cg0ky81gp0566dpdl6apxjzrjx-xdotool-3.20211022.1/bin:/nix/store/5fa4i3i5dgqk49lxbz952jnph01im948-xprop-1.2.6/bin:/nix/store/3mpa96b8hi3gfx17099xwgfnp6kbz4ga-gawk-5.2.2/bin:/nix/store/8fdd0nqajq5sk1m6p4qnn0z0j9d7n3q5-coreutils-9.3/bin:/nix/store/2hz0i9y0xck9y4pq1rabi0cwk4kylgrw-gnugrep-3.11/bin:/nix/store/sxk30xba5nyvw8p10pfpgq5p9skhhi0a-procps-3.3.17/bin:/home/exec/.cargo/bin:/home/exec/.local/bin:/run/wrappers/bin:/home/exec/.nix-profile/bin:/etc/profiles/per-user/exec/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/exec/.oh-my-zsh/custom/plugins/warhol/bin:/home/exec/.oh-my-zsh/custom/plugins/warhol/bin")
 
 ;; (add-to-list 'exec-path "/home/exec/.local/bin")
 										; (add-to-list 'exec-path "/home/exec/.cargo/bin")
@@ -1329,19 +1290,13 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package vertico-posframe
   :config
   (setq vertico-posframe-parameters '((left-fringe . 0)
-									  (right-fringe . 0)
-									  )
+									  (right-fringe . 0))
 		vertico-posframe-border-width 1
-		vertico-posframe-poshandler
-		;; 'posframe-poshandler-window-bottom-center
-		'posframe-poshandler-frame-bottom-center
-		;; 'posframe-poshandler-frame-top-right-corner
-		vertico-posframe-width 1200
-		vertico-posframe-font nil
-		;; "Noto Sans Mono"
+		vertico-posframe-poshandler 'posframe-poshandler-frame-bottom-center
+		vertico-posframe-width (- (frame-width) 22)
+		vertico-posframe-font (face-attribute 'fixed-pitch :family)
 		vertico-posframe-min-height nil
-		vertico-flat-max-lines 3
-		)
+		vertico-flat-max-lines 3)
 
   ;; (custom-set-faces
   ;;  '(vertico-posframe-border
@@ -1387,7 +1342,6 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 (setq native-comp-always-compile t)
-(setq native-comp-async-jobs-number  12)
 (setq native-comp-speed 3)
 
 (use-package autorevert
@@ -1468,6 +1422,7 @@ if it encounter an error, then we execute `consult-outline'."
   ;; (evil-goggles-mode)
   )
 (use-package better-jumper
+  :disabled t
   :after evil
   :config
   ;; (define-key evil-motion-state-map (kbd "C-o") 'better-jumper-jump-backward)
@@ -1484,11 +1439,20 @@ if it encounter an error, then we execute `consult-outline'."
   ;; :bind ("M-=" . transient-dwim-dispatch)
   )
 
+(use-package transient-posframe
+  :config
+  (setq transient-posframe-min-width 80
+		transient-posframe-min-height 30)
+  (transient-posframe-mode ))
+
 (use-package man
+  :hook (Man-mode . exec/fixed-pitch-mode)
   :config
   (setq Man-width nil)
-  (setq Man-width-max nil)
+  (setq Man-width-max 80)
   (setq Man-notify-method 'pushy)
+  (set-face-attribute 'Man-overstrike nil :inherit 'bold :foreground "orange red")
+  (set-face-attribute 'Man-underline nil :inherit 'underline :foreground "forest green")
   )
 
 (use-package zig-mode
@@ -1816,7 +1780,8 @@ if it encounter an error, then we execute `consult-outline'."
   (mpc-status-mode . (lambda() (interactive) (tab-line-mode -1)))
   (mpc-tagbrowser-mode . (lambda() (interactive) (tab-line-mode -1)))
   :config
-  ;; (setq mpc-song-format)
+  (setq-default mpc-songs-format
+				"%2{Disc--}%3{Track} %-5{Time} %65{Title} %20{Album} %20{Artist} %-5{Date}")
   )
 
 (use-package mingus
@@ -2077,6 +2042,7 @@ if it encounter an error, then we execute `consult-outline'."
   :config (setq copilot-node-executable "node"
 				copilot-idle-delay 1
 				copilot-max-char -1
+				copilot-indent-warning-suppress t
 				)
   (custom-set-faces '(copilot-overlay-face ((t (:inherit shadow :underline t :weight thin :slant italic :foreground "white")))))
   ;; lfjewio how to
@@ -2116,7 +2082,7 @@ if it encounter an error, then we execute `consult-outline'."
 		("<f9>" . corfu-quit))
 
   :config
-  (set-face-attribute 'corfu-default nil :font "Sarasa Fixed CL" :background "black")
+  (set-face-attribute 'corfu-default nil :font "Sarasa Term CL" :background "black")
   (setq
    corfu-auto t
    corfu-auto-prefix 1
@@ -2667,7 +2633,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 (use-package keycast
-  :hook (after-init . keycast-tab-bar-mode)
+  ;; :hook (after-init . keycast-tab-bar-mode)
   )
 
 (use-package powerthesaurus)
@@ -2990,10 +2956,10 @@ if it encounter an error, then we execute `consult-outline'."
 (defun exec/nov-mode-face()
   (interactive)
   (setq-local buffer-face-mode-face '(
-									  :family "Noto Serif"
+									  :family "Sarasa Gothic SC"
 									  :height 2.0
-									  ;; :background "white"
-									  ;; :foreground "black"
+									  :background "white"
+									  :foreground "black"
 									  ))
   (make-local-variable 'buffer-face-mode-face)
   (blink-cursor-mode -1)
@@ -3040,6 +3006,7 @@ if it encounter an error, then we execute `consult-outline'."
   :config
   )
 (use-package better-scroll
+  :disabled
   :after evil
   :config
   (better-scroll-setup)
@@ -3091,7 +3058,7 @@ if it encounter an error, then we execute `consult-outline'."
   )
 
 (use-package eglot
-  :disabled t
+  :disabled
   :config
   (setq eglot-autoshutdown t)
   (setq eglot-extend-to-xref t)
@@ -3243,6 +3210,19 @@ if it encounter an error, then we execute `consult-outline'."
 										; 	   '(:query "maildir:/inbox" :name "Inbox" :key ?i :favorite t)
 										; 	   )
 
+  (setq mu4e-bookmarks '(
+						 ("flag:unread"                       "Unread messages"                  ?u)
+						 (""                  "All messages"                     ?a)
+						 ("date:today..now"                   "Today's messages"                 ?t)
+						 ("date:1d..now"                      "Last 1 days"                      ?y)
+						 ("date:7d..now"                      "Last 7 days"                      ?w)
+						 ("flag:f"                            "starred"                          ?m)
+						 ("maildir:/sent"                     "sent"                             ?s)
+						 ("maildir:/drafts"                   "drafts"                           ?d)
+						 ("mime:image/*"                      "Messages with images"             ?p)
+						 ("maildir:/trash"                    "Trash"                            ?g)
+						 ))
+
   ;; allow for updating mail using 'U' in the main view:
   (setq mu4e-get-mail-command "true"
 		mu4e-index-update-in-background nil
@@ -3255,6 +3235,7 @@ if it encounter an error, then we execute `consult-outline'."
 
 
   (setq mu4e-use-fancy-chars t
+		mu4e-marker-icons-use-unicode t
 		mu4e-debug nil
 		mu4e-hide-index-messages t
 		mu4e-headers-fields '((:human-date . 21) (:flags . 8) (:mailing-list . 12) (:from . 24)
@@ -3352,13 +3333,19 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package format-all
   :hook
   (prog-mode . format-all-mode)
+  (emacs-lisp-mode . format-all-mode)
+  (nix-mode . format-all-mode)
 
-  ;; (prog-mode . format-all-ensure-formatter)
-  ;; (emacs-lisp-mode . format-all-ensure-formatter)
   :config
-  (setq format-all-show-errors 'error)
-
-  ;; select yapf as the default formatter for python
+  (setq-default format-all-show-errors 'error)
+  (setq-default format-all-formatters   '(
+										  ("Emacs Lisp" emacs-lisp)
+										  ("Nix" nixfmt)
+										  ("Rust" rustfmt)
+										  ("Shell" shfmt)
+										  ("C" clang-format)
+										  ("C++" clang-format)
+										  ))
   )
 
 (use-package clang-format)
@@ -3517,7 +3504,11 @@ if it encounter an error, then we execute `consult-outline'."
   (setq org-agenda-use-tag-inheritance  t)
   (setq org-agenda-window-setup 'current-window)
   (setq org-agenda-restore-windows-after-quit  t)
+  (setq org-agenda-start-on-weekday nil
+		org-agenda-time-leading-zero t
+		)
 
+  (setq-local transient-force-fixed-pitch t)
   (transient-define-prefix exec/org-agenda-transient ()
 	"Replace the org-agenda buffer by a transient."
 	[["Built-in agendas"
@@ -4317,6 +4308,7 @@ The default tab-bar name uses the buffer name."
 
 ;; (add-hook 'after-change-major-mode-hook 'clean-mode-line)
 (use-package dockerfile-mode)
+(use-package docker)
 (use-package gameoflife)
 
 (use-package minions
@@ -4492,11 +4484,9 @@ The default tab-bar name uses the buffer name."
   :config
   (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-left-corner
 		which-key-posframe-border-width 1
-		which-key-posframe-font nil
-		)
+		which-key-posframe-font (face-attribute 'fixed-pitch :family))
   (if (display-graphic-p)
-	  (which-key-posframe-mode))
-  )
+	  (which-key-posframe-mode)))
 
 
 
@@ -4671,11 +4661,11 @@ The default tab-bar name uses the buffer name."
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
   ;; (custom-set-faces
-  ;;  '(org-verbatim       ((t  (:inherit  org-verbatim      :family "Sarasa Fixed CL"  :height  1.0))))
-  ;;  '(org-formula        ((t  (:inherit  org-table         :family "Sarasa Fixed CL"  :height  1.0))))
-  ;;  '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "Sarasa Fixed CL"  :height  1.0))))
-  ;;  '(org-block          ((t  (:inherit  org-block         :family "Sarasa Fixed CL"  :height  1.0))))
-  ;;  '(org-table          ((t  (:inherit  org-table         :family "Sarasa Fixed CL"  :height  1.0))))
+  ;;  '(org-verbatim       ((t  (:inherit  org-verbatim      :family "Sarasa Term CL"  :height  1.0))))
+  ;;  '(org-formula        ((t  (:inherit  org-table         :family "Sarasa Term CL"  :height  1.0))))
+  ;;  '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "Sarasa Term CL"  :height  1.0))))
+  ;;  '(org-block          ((t  (:inherit  org-block         :family "Sarasa Term CL"  :height  1.0))))
+  ;;  '(org-table          ((t  (:inherit  org-table         :family "Sarasa Term CL"  :height  1.0))))
   ;;  )
   (setq-local buffer-face-mode-face '(:height 1.0))
   (buffer-face-mode))
@@ -4688,8 +4678,8 @@ The default tab-bar name uses the buffer name."
   )
 
 
-(add-hook 'org-mode-hook 'exec/increase-buffer-font)
-(add-hook 'org-journal-mode-hook 'exec/increase-buffer-font)
+;; (add-hook 'org-mode-hook 'exec/increase-buffer-font)
+;; (add-hook 'org-journal-mode-hook 'exec/increase-buffer-font)
 
 (defun exec/non-mono-font()
   (interactive)
@@ -4700,8 +4690,13 @@ The default tab-bar name uses the buffer name."
 ;; (add-hook 'org-mode-hook 'exec/org-mode-fixed)
 ;; (add-hook 'org-journal-mode-hook 'exec/non-mono-font)
 
+(dolist (hook '(prog-mode-hook emacs-lisp-mode-hook mu4e-main-mode-hook vterm-mode-hook calendar-mode-hook org-agenda-mode-hook help-mode-hook))
+  (add-hook hook 'exec/fixed-pitch-mode))
+
 (add-hook 'prog-mode-hook 'exec/increase-buffer-font)
-(add-hook 'prog-mode-hook 'exec/prog-mode-fixed)
+(with-current-buffer (get-buffer " *Echo Area 0*")                             ; the leading space character is correct
+  (setq-local face-remapping-alist '((default (:height 0.9) variable-pitch)))) ; etc.
+
 
 ;; (add-hook 'prog-mode-hook 'hdisplay-line-numbers-mode)
 ;; (add-hook 'text-mode-hook 'display-line-numbers-mode)
@@ -5022,7 +5017,6 @@ The default tab-bar name uses the buffer name."
   (
    (gptel-mode . (lambda()
 				   (copilot-mode -1)
-				   (exec/sans-mode)
 				   ))
    )
   :config
@@ -5080,8 +5074,11 @@ The default tab-bar name uses the buffer name."
   (setq chatgpt-repo-path "~/.emacs.d/straight/repos/ChatGPT.el/")
   :bind ("C-c q" . chatgpt-query))
 
-(defun exec/vterm-buffer-face()
+(defun exec/vterm-post-hook()
   (interactive)
+  ;; (setq-local buffer-face-mode-face '(:family "JuliaMono"))
+  ;; (buffer-face-mode t)
+
   ;; (setq-local  buffer-face-mode-face '(
   ;; 									   ;; "NotoSansMNerdFontMono"
   ;; 									   ;; :family "JetBrainsMonoNL Nerd Font"
@@ -5090,6 +5087,8 @@ The default tab-bar name uses the buffer name."
   ;; 									   )
   ;; 			   mode-line-format nil
   ;; 			   )
+  (setq-local mode-line-format nil)
+  (tab-line-mode -1)
   ;; (buffer-face-mode)
   ;; (origami-mode -1)
   ;; (fringe-mode -1)
@@ -5099,7 +5098,7 @@ The default tab-bar name uses the buffer name."
 
 (use-package vterm
   ;; :bind ("C-<return>" . vterm-send-return)
-  :hook (vterm-mode  . exec/vterm-buffer-face)
+  :hook (vterm-mode  . exec/vterm-post-hook)
   :config
   (general-evil-define-key 'insert 'vterm-mode-map
 	"C-r" 'vterm--self-insert
@@ -5121,11 +5120,24 @@ The default tab-bar name uses the buffer name."
 	"<escape>" 'vterm--self-insert
 	)
 
-  (setq vterm-always-compile-module t
-		vterm-set-bold-hightbright t)
+  (setq-default vterm-always-compile-module t
+				vterm-set-bold-hightbright t
+				)
   (set-face-attribute 'vterm-color-blue nil :foreground "#268bd2" :background "#268bd2")
   (set-face-attribute 'vterm-color-black nil :foreground "gray"    :background "dim gray")
   )
+
+(use-package eat
+  :disabled
+  :straight (:type git :host codeberg :repo "akib/emacs-eat"
+				   :files ("*.el" ("term" "term/*.el") "*.texi"
+						   "*.ti" ("terminfo/e" "terminfo/e/*")
+						   ("terminfo/65" "terminfo/65/*")
+						   ("integration" "integration/*")
+						   (:exclude ".dir-locals.el" "*-tests.el"))
+				   )
+  :config
+  (add-hook 'eshell-load-hook #'eat-eshell-mode))
 
 (use-package fcitx
   :after evil

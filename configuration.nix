@@ -286,25 +286,29 @@
     enableDefaultPackages = true;
     fontDir.enable = true;
     packages = with pkgs; [
+      anonymousPro
+      dejavu_fonts
       dina-font
       fira-code
       fira-code-symbols
-      anonymousPro
+      iosevka
       jetbrains-mono
+      julia-mono
       liberation_ttf
+      maple-mono
+      maple-mono-NF
+      maple-mono-SC-NF
       mplus-outline-fonts.githubRelease
       nerdfonts
       noto-fonts
-      noto-fonts-extra
       noto-fonts-cjk
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-color-emoji
-      julia-mono
-      dejavu_fonts
       noto-fonts-emoji-blob-bin
+      noto-fonts-extra
+      open-sans
       proggyfonts
-      sarasa-gothic
       sarasa-gothic
       source-han-sans
       source-han-serif
@@ -312,10 +316,8 @@
       twitter-color-emoji
       unifont
       vistafonts-chs
-      open-sans
-      wqy_zenhei
       wqy_microhei
-
+      wqy_zenhei
     ];
     fontconfig = {
       localConf = ''

@@ -8,7 +8,12 @@
   home.packages = with pkgs; [
     alacritty
     chromaprint
+    epubcheck
+    nacelle
+    aileron
+    pandoc
     fftw
+    deno
     retry
     osdlyrics
     w3m
@@ -174,8 +179,8 @@
     zsh-powerlevel10k
     zulip
   ];
-  home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
-  home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
+  # home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
+  # home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
 
   home.sessionPath = [
 
@@ -275,10 +280,9 @@
   services = {
     mpd = {
       enable = true;
-      extraArgs = [ "--verbose" ];
+      # extraArgs = [ "" ];
       musicDirectory = "~/Music";
       extraConfig = ''
-          log_level "verbose"
         audio_output {
           type "pipewire"
           name "My PipeWire Output"
@@ -348,8 +352,12 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.emacs-pgtk;
-      # package = (pkgs.emacs-git.override { withPgtk = true; });
+      # package = pkgs.emacs-pgtk;
+      package = (pkgs.emacs-git.override {
+        withGTK3 = true;
+        withWebP = true;
+        withXwidgets = true;
+      });
       extraPackages = epkgs: [
         pkgs.mu
         pkgs.librime
