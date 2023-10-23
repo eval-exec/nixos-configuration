@@ -11,6 +11,7 @@
     epubcheck
     nacelle
     aileron
+    sbcl
     pandoc
     fftw
     deno
@@ -352,12 +353,12 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      # package = pkgs.emacs-pgtk;
-      package = (pkgs.emacs-git.override {
-        withGTK3 = true;
-        withWebP = true;
-        withXwidgets = true;
-      });
+      package = pkgs.emacs-git;
+      # package = (pkgs.emacs-git.override {
+      #   withGTK3 = false;
+      #   withWebP = true;
+      #   withXwidgets = true;
+      # });
       extraPackages = epkgs: [
         pkgs.mu
         pkgs.librime
