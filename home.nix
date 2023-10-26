@@ -28,14 +28,14 @@
     lynx
     ncmpcpp
     alejandra
-    beets
+    # beets
     picard
     amdgpu_top
     atool
     mpc-cli
     autoconf
     automake
-    spotdl
+    # spotdl
     aspell
     aspellDicts.en
     aspellDicts.en-science
