@@ -48,6 +48,9 @@
 
   networking = {
     hostName = "Mufasa"; # Define your hostname.
+    extraHosts = ''
+      127.0.0.1 localhost
+    '';
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
@@ -422,8 +425,6 @@
     v2ray
     v2ray-geoip
     vim
-    vscode
-    vscode.fhs
     wakatime
     wget
     zlib
@@ -486,13 +487,6 @@
       extraProfile = "export STEAM_FORCE_DESKTOPUI_SCALING=2";
     };
   };
-
-  # programs.vscode = {
-  # 	enable = true;
-  # 	package = pkgs.vscode.fhs;
-  #
-  # };
-  # programs.vscode.package = pkgs.vscode.fhsWithPackages (ps: with ps; [ rustup zlib openssl.dev pkg-config ]);
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

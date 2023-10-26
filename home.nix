@@ -7,8 +7,15 @@
 
   home.packages = with pkgs; [
     alacritty
+    libressl
     chromaprint
     epubcheck
+    coreutils-full
+    shell_gpt
+    graphviz
+    semgrep
+    semgrep-core
+    xfsprogs
     nacelle
     aileron
     sbcl
@@ -325,6 +332,13 @@
 
   programs = {
     home-manager.enable = true;
+
+    vscode = {
+      enable = true;
+      package = pkgs.vscode.fhsWithPackages
+        (ps: with ps; [ rustup zlib openssl.dev pkg-config ]);
+    };
+
     mbsync = {
       enable = true;
       extraConfig = "";
@@ -411,6 +425,7 @@
         vim = "nvim";
         update = "sudo nixos-rebuild switch";
         emacs = "emacsclient -nw";
+        gpt = "sgpt";
       };
       history = {
         size = 10000000;
