@@ -382,7 +382,7 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      permittedInsecurePackages = [ "openssl-1.1.1w" ];
+      permittedInsecurePackages = [ "openssl-1.1.1w" "electron-24.8.6" ];
     };
 
     # overlays = [ emacs-overlay.overlay ];
