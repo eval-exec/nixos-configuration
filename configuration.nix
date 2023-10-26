@@ -422,8 +422,6 @@
     tdesktop
     tdrop
     tree
-    v2ray
-    v2ray-geoip
     vim
     wakatime
     wget
