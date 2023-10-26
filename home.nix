@@ -58,7 +58,6 @@
 
     clojure
     clojure-lsp
-    cloudflared
     cmake
     gptcommit
     imagemagick
