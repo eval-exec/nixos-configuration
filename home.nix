@@ -8,7 +8,6 @@
   home.packages = with pkgs; [
     alacritty
     libressl
-    rga
     mermaid-cli
     chromaprint
     epubcheck
