@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     alacritty
     libressl
+    rga
     mermaid-cli
     chromaprint
     epubcheck
@@ -147,6 +148,7 @@
     qbittorrent
     qrcp
     ripgrep
+    ripgrep-all
     sccache
     silver-searcher
     sioyek
