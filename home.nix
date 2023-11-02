@@ -11,6 +11,7 @@
     mermaid-cli
     chromaprint
     epubcheck
+    simplescreenrecorder
     coreutils-full
     shell_gpt
     graphviz
@@ -367,27 +368,21 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.symlinkJoin {
-        name = "emacs-wrapped";
-        paths = [ pkgs.emacs-git ];
-        nativeBuildInputs = [ pkgs.makeBinaryWrapper python311Packages.epc ];
-        postBuild = ''
-          wrapProgram "$out/bin/dictd"
-        '';
-      };
+      package = pkgs.emacs-git;
 
       extraPackages = epkgs: [
-        pkgs.mu
-        pkgs.librime
-        pkgs.emacsPackages.rime
         pkgs.emacsPackages.jinx
-        pkgs.tdlib
-        pkgs.noto-fonts-color-emoji
+        pkgs.emacsPackages.lsp-bridge
         pkgs.emacsPackages.mu4e
+        pkgs.emacsPackages.rime
+        pkgs.emacsPackages.sqlite3
         pkgs.emacsPackages.vterm
         pkgs.emacsPackages.w3m
-        pkgs.emacsPackages.sqlite3
         pkgs.emacsPackages.xwidgets-reuse
+        pkgs.librime
+        pkgs.mu
+        pkgs.noto-fonts-color-emoji
+        pkgs.tdlib
       ];
     };
 
