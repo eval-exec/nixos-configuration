@@ -147,7 +147,6 @@
     qbittorrent
     qrcp
     ripgrep
-    ripgrep-all
     sccache
     silver-searcher
     sioyek
@@ -368,12 +367,15 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.emacs-git;
-      # package = (pkgs.emacs-git.override {
-      #   withGTK3 = false;
-      #   withWebP = true;
-      #   withXwidgets = true;
-      # });
+      package = pkgs.symlinkJoin {
+        name = "emacs-wrapped";
+        paths = [ pkgs.emacs-git ];
+        nativeBuildInputs = [ pkgs.makeBinaryWrapper python311Packages.epc ];
+        postBuild = ''
+          wrapProgram "$out/bin/dictd"
+        '';
+      };
+
       extraPackages = epkgs: [
         pkgs.mu
         pkgs.librime
