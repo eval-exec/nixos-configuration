@@ -94,7 +94,6 @@
     github-desktop
     go-ethereum
     goimapnotify
-    google-chrome-dev
     google-chrome
     grc
     gst_all_1.gst-plugins-good
