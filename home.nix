@@ -8,8 +8,11 @@
   home.packages = with pkgs; [
     alacritty
     libressl
+    fuse
+    fuse3
     mermaid-cli
     chromaprint
+    nodePackages_latest.pyright
     epubcheck
     simplescreenrecorder
     coreutils-full
