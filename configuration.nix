@@ -524,11 +524,11 @@
       libGL
       libappindicator-gtk3
       libdrm
+      libkrb5
       libnotify
       libpulseaudio
       libuuid
       libusb1
-      xorg.libxcb
       libxkbcommon
       mesa
       nspr
@@ -539,19 +539,28 @@
       icu
       openssl
       openssl_1_1
+      xcb-util-cursor
       xorg.libX11
-      xorg.libXScrnSaver
+      xorg.libxcb
       xorg.libXcomposite
       xorg.libXcursor
       xorg.libXdamage
       xorg.libXext
       xorg.libXfixes
       xorg.libXi
+      xorg.libxkbfile
       xorg.libXrandr
       xorg.libXrender
-      xorg.libXtst
-      xorg.libxkbfile
+      xorg.libXScrnSaver
       xorg.libxshmfence
+      xorg.libXtst
+      xorg.xcbutilwm
+      xorg.xcbutilimage
+      xorg.xcbutilrenderutil
+      xorg.xcbutilkeysyms
+      xorg.xcbutilerrors
+      xorg.xcbutil
+
       zlib
     ];
   };

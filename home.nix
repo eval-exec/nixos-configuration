@@ -368,7 +368,7 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.emacs-git;
+      package = pkgs.emacs-git.override { withGTK3 = true; };
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
@@ -424,6 +424,7 @@
         update = "sudo nixos-rebuild switch";
         emacs = "emacsclient -nw";
         gpt = "sgpt";
+        psgrep = "ps -eF | head -n1 && ps -eF | grep";
       };
       history = {
         size = 10000000;
