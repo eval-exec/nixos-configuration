@@ -17,8 +17,8 @@
     "video=eDP-1:3456x2160@60"
     "mem_sleep_default=deep"
     # "i915.enable_psr=0"
-    "i915.fastboot=1"
-    "i915.enable_guc=3"
+    # "i915.fastboot=1"
+    # "i915.enable_guc=3"
     "intel_idle.max_cstate=1"
     # "amdgpu.ppfeaturemask=0xffffffff"
     # "amdgpu.aspm=0"
@@ -65,20 +65,20 @@
   #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
   # };
   hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    prime = {
-      sync.enable = true;
-
-      # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-      nvidiaBusId = "PCI:1:0:0";
-
-      # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-      intelBusId = "PCI:0:2:0";
-    };
-  };
+  # hardware.nvidia = {
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #   modesetting.enable = true;
+  #   powerManagement.enable = false;
+  #   powerManagement.finegrained = false;
+  #   prime = {
+  #     sync.enable = true;
+  #
+  #     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+  #     nvidiaBusId = "PCI:1:0:0";
+  #
+  #     # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+  #     intelBusId = "PCI:0:2:0";
+  #   };
+  # };
   hardware.i2c.enable = true;
 }
