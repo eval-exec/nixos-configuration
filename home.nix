@@ -9,6 +9,7 @@
     alacritty
     libressl
     fuse
+    nil
     fuse3
     mermaid-cli
     chromaprint
