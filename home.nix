@@ -240,7 +240,7 @@
               account = {
 
               };
-              channel = { MaxMessages = 200; };
+              channel = { MaxMessages = 20000; };
               local = { };
               remote = { };
 
@@ -253,7 +253,7 @@
                     nearPattern = "inbox";
                     extraConfig = {
                       Create = "Both";
-                      MaxMessages = 200;
+                      MaxMessages = 20000;
                     };
                   };
                   sent = {
