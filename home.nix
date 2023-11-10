@@ -7,6 +7,7 @@
 
   home.packages = with pkgs; [
     alacritty
+    semgrep
     libressl
     fuse
     nil
