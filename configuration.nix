@@ -209,14 +209,8 @@
         };
         setupCommands = "";
         # sessionCommands run before setupCommands
-        sessionCommands = ''
-          ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'remove mod4 = Hyper_L';
-          ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 37 = Hyper_L';
-          ${pkgs.xorg/xmodmap}/bin/xmodmap -e 'add mod3 = Hyper_L';
-        '';
-
         autoLogin = {
-          enable = true;
+          enable = false;
           user = "exec";
         };
       };

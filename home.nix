@@ -192,6 +192,7 @@
     zsh-powerlevel10k
     zulip
   ];
+  home.file.".Xmodmap" = { source = ./Xmodmap; };
   # home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
   # home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
 
@@ -480,17 +481,44 @@
   # systemd.users.services.mbsync.serviceConfig.SupplementaryGroups =
   #   [ config.users.groups.keys.name ];
 
-  systemd.user.services = {
-    clash = {
-      Unit = {
-        Description = "clash";
-        After = [ "network.target" ];
+  systemd.user = {
+
+    timers = {
+      use_hyper_key = {
+        Unit = { Description = "use_hyper_key"; };
+        Install = { WantedBy = [ "timers.target" ]; };
+        Timer = {
+          OnBootSec = "3s";
+          OnUnitActiveSec = "3s";
+          Unit = "use_hyper_key.service";
+        };
       };
-      Install = { WantedBy = [ "default.target" ]; };
-      Service = {
-        ExecStart =
-          "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
-        Restart = "no";
+    };
+
+    services = {
+      use_hyper_key = {
+        Unit = { Description = "use_hyper_key"; };
+        Install = { WantedBy = [ "default.rarget" ]; };
+        Service = {
+          Type = "oneshot";
+          ExecStart = ''
+            ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'remove mod4 = Hyper_L'
+            ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 37 = Hyper_L'
+            ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'add mod3 = Hyper_L'
+          '';
+        };
+      };
+      clash = {
+        Unit = {
+          Description = "clash";
+          After = [ "network.target" ];
+        };
+        Install = { WantedBy = [ "default.target" ]; };
+        Service = {
+          ExecStart =
+            "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
+          Restart = "no";
+        };
       };
     };
   };
