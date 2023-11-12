@@ -110,6 +110,9 @@
     };
 
   };
+  specialisation = {
+    external_amdgpu = { services.xserver.videoDrivers = [ "amdgpu" ]; };
+  };
 
   services = {
     keyd = {
