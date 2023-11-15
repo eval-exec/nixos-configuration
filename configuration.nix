@@ -110,11 +110,11 @@
     };
 
   };
-  specialisation = {
-    internal_nvidia = {
-      configuration = { services.xserver.videoDrivers = [ "nvidia" ]; };
-    };
-  };
+  # specialisation = {
+  #   internal_nvidia = {
+  #     configuration = { services.xserver.videoDrivers = [ "nvidia" ]; };
+  #   };
+  # };
 
   services = {
     keyd = {
@@ -167,7 +167,7 @@
       # xkbVariant = "";
       xkbOptions = "ctrl:hyper_capscontrol";
 
-      videoDrivers = [ "amdgpu" ];
+      videoDrivers = [ "nvidia" ];
       #   config = lib.mkAfter ''
       #     Section "Module"
       #         Load           "modesetting"
@@ -215,7 +215,7 @@
         setupCommands = "";
         # sessionCommands run before setupCommands
         autoLogin = {
-          enable = true;
+          enable = false;
           user = "exec";
         };
       };
