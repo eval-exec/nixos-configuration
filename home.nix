@@ -14,7 +14,8 @@
     fuse3
     mermaid-cli
     chromaprint
-    nodePackages_latest.pyright
+    nodePackages.pyright
+    nodePackages.typescript-language-server
     epubcheck
     simplescreenrecorder
     coreutils-full
