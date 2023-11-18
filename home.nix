@@ -21,6 +21,7 @@
     coreutils-full
     shell_gpt
     graphviz
+    difftastic
     semgrep
     semgrep-core
     xfsprogs
