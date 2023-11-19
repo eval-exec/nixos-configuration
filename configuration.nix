@@ -400,6 +400,15 @@
     appimage-run
     cachix
     clang
+    linux-manual
+    man-pages-posix
+    glibcInfo
+    man-pages-posix
+    scheme-manpages
+
+    stdman
+    stdmanpages
+
     discord
     docker-compose
     dua

@@ -6,12 +6,19 @@
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
+    bear
     alacritty
     semgrep
+    tree-sitter
+    tree-sitter-grammars.tree-sitter-markdown
     libressl
     fuse
+    tor
+    tor-browser
+    onionshare
     nil
     fuse3
+    ncurses
     mermaid-cli
     chromaprint
     nodePackages.pyright
@@ -132,6 +139,8 @@
     mercurial
     meson
     microsoft-edge-dev
+    roswell
+    sbclPackages.qlot
     mlocate
     mold
     moreutils
@@ -433,8 +442,10 @@
         cat = "bat -p";
         vim = "nvim";
         update = "sudo nixos-rebuild switch";
-        emacs = "emacsclient -nw";
-        magit = "emacs -Q -nw -l ~/.emacs.d/init-nw.el -e '(magit)'";
+        emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
+        magit = ''
+          \emacs -Q -nw -l ~/.emacs.d/init-nw.el --funcall magit
+        '';
         gpt = "sgpt";
         psgrep = "ps -eF | head -n1 && ps -eF | grep";
       };
@@ -516,7 +527,7 @@
       clash = {
         Unit = {
           Description = "clash";
-          After = [ "network.target" ];
+          After = [ "network-online.target" ];
         };
         Install = { WantedBy = [ "default.target" ]; };
         Service = {

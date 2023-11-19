@@ -4,6 +4,20 @@
 
 (setq debug-on-error t)
 (setq debug-on-signal nil)
+(setq disabled-command-function nil)
+
+(setq evil-want-keybinding nil
+	  forge-add-default-bindings nil
+	  )
+
+(setq-default
+ safe-local-variable-directories '(
+								   "/home/exec/Projects/github.com/"
+								   )
+ safe-local-variable-values
+ '((eval setenv "PKG_CONFIG_PATH_FOR_TARGET"
+		 "/nix/store/nkywiick4sqkdcbk99n9mv6y30q8a2m0-openssl-3.0.10-dev/lib/pkgconfig"))
+ )
 
 
 
@@ -18,7 +32,9 @@
 
 
 
-(setq straight-repository-branch "develop")
+(setq-default straight-repository-branch "develop")
+
+(setq-default straight-check-for-modifications nil)
 
 
 (defvar bootstrap-version)
@@ -53,6 +69,12 @@
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
+
+(setq custom-safe-themes t)
+
+(use-package color-theme-sanityinc-tomorrow)
+(load-theme 'sanityinc-tomorrow-bright)
+
 
 
 (defun exec/with-face (str &rest face-plist)
@@ -160,6 +182,14 @@ i.e. windows tiled side-by-side."
   (global-unset-key (kbd "M-o"))
   (setq-default line-spacing 0)
 
+  (setq max-mini-window-height 0.5)
+
+  (setq-default bidi-display-reordering nil)
+  (setq bidi-inhibit-bpa t
+		large-hscroll-threshold 1000
+		long-line-threshold 1000
+		syntax-wholeline-max 1000)
+
 
   (setq switch-to-buffer-obey-display-actions t)
   (setq auto-save-default nil)
@@ -167,7 +197,7 @@ i.e. windows tiled side-by-side."
   (setq mouse-wheel-flip-direction t
 		mouse-wheel-tilt-scroll t
 		)
-  (setq-default indicate-empty-lines t)
+  (setq-default indicate-empty-lines nil)
   (setq font-lock-maximum-decoration
 		1
 		;; '(
@@ -177,35 +207,55 @@ i.e. windows tiled side-by-side."
 		)
   ;; (setq display-buffer-base-action '(nil . ((inhibit-same-window . t))))
 
-  (setq mode-line-compact t
+  (setq mode-line-compact nil
 		mode-line-in-non-selected-windows t
 		mode-line-percent-position nil
-		mode-line-position-column-line-format '("[📝%l,%c]")
+		mode-line-position-column-line-format '("[%l,%c]")
 		)
-  (setq-default mode-line-format
-				'("%e"
-				  mode-line-front-space
-				  (:propertize
-				   ("" mode-line-mule-info mode-line-client mode-line-modified
-					mode-line-remote)
-				   display (min-width (5.0)))
-				  mode-line-frame-identification
-				  mode-line-buffer-identification
-				  "   "
-				  mode-line-position
-				  evil-mode-line-tag
-				  (vc-mode vc-mode)
-				  "  "
-				  ;; mode-line-modes
-				  mode-line-misc-info
-				  mode-line-end-spaces))
+  ;; (setq mode-line-format nil)
+  ;; (setq mode-line-format
+  ;; 		'("%e"
+  ;; 		  mode-line-front-space
+  ;; 		  ;; (:propertize
+  ;; 		  ;;  ("" mode-line-mule-info mode-line-client mode-line-modified
+  ;; 		  ;; 	mode-line-remote)
+  ;; 		  ;;  display (min-width (5.0)))
+  ;; 		  mode-line-frame-identification
+  ;; 		  mode-line-buffer-identification
 
-  (set-face-attribute 'mode-line nil)
-  (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white")
-  (set-face-attribute 'mode-line-inactive nil)
+  ;; 		  mode-line-format-right-align
+
+  ;; 		  minions-mode-line-modes
+  ;; 		  mode-line-position
+  ;; 		  evil-mode-line-tag
+  ;; 		  (vc-mode vc-mode)
+  ;; 		  "  "
+  ;; 		  ;; mode-line-misc-info
+  ;; 		  mode-line-end-spaces
+  ;; 		  )
+  ;; 		)
+
+  (setopt mode-line-format
+          '("%e"
+			mode-line-front-space
+            (:propertize
+			 ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
+			 display
+			 (min-width (5.0)))
+            mode-line-frame-identification
+            mode-line-buffer-identification
+
+            mode-line-format-right-align
+
+            mode-line-position
+			(vc-mode vc-mode)
+            mode-line-modes
+            mode-line-misc-info
+            mode-line-end-spaces))
+
+  (set-face-attribute 'mode-line nil :height 0.8)
 
   (setq vc-follow-symlinks t)
-  (setq custom-safe-themes t)
   (setq completion-cycle-threshold 3)
   (setq tab-always-indent 'complete)
   (setq visible-bell t)
@@ -222,9 +272,9 @@ i.e. windows tiled side-by-side."
   (setq package-native-compile t)
   (setq buffer-save-without-query t)
   (setq byte-compile-warnings '(unresolved))
-  (setq max-lisp-eval-depth 3200)
+  (setq max-lisp-eval-depth 1100)
 
-  (setq frame-title-format "Eval EXEC - GNU Emacs at Mufasa")
+  ;; (setq frame-title-format "Eval EXEC - GNU Emacs at Mufasa")
   (setq header-line-format '(:eval (if (buffer-file-name) (abbreviate-file-name (buffer-file-name)) "%b")))
 
 
@@ -261,12 +311,40 @@ i.e. windows tiled side-by-side."
 
   ;; (add-to-list 'default-frame-alist '(foreground-color . "white"))
   ;; (add-to-list 'default-frame-alist '(background-color . "black"))
-  (set-cursor-color "yellow")
+  (set-cursor-color "green")
 
-  (pixel-scroll-mode t)
-  (pixel-scroll-precision-mode t)
+  (pixel-scroll-precision-mode 1)
 
-  (setq pixel-scroll-precision-large-scroll-height nil)
+  (setq
+   ;; pixel-scroll-precision-large-scroll-height nil
+   ;; pixel-scroll-precision-interpolation-total-time 0.2
+   ;; pixel-scroll-precision-momentum-min-velocity 0
+   ;; pixel-scroll-precision-interpolation-factor 1.0
+   ;; pixel-scroll-precision-interpolate-page t
+   )
+
+  (defun exec/scroll-up (&optional lines)
+	(interactive)
+	(if lines
+		(pixel-scroll-precision-interpolate (- (* lines (pixel-line-height))))
+	  (pixel-scroll-interpolate-up)))
+
+  (defun exec/scroll-down (&optional lines)
+	(interactive)
+	(if lines
+		(pixel-scroll-precision-interpolate (* lines (pixel-line-height))))
+	(pixel-scroll-interpolate-down))
+
+
+  (defun exec/scroll-half-up()
+	(interactive)
+	(exec/scroll-up (floor (/ (frame-height) 2)))
+	)
+
+  (defun exec/scroll-half-down()
+	(interactive)
+	(exec/scroll-down (floor (/ (frame-height) 2))))
+
 
 
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -291,13 +369,27 @@ i.e. windows tiled side-by-side."
    ;; (after-init . size-indication-mode)
    (after-init . global-auto-revert-mode)
    )
+  ;; (frame-width)
+  ;; (frame-height)
   :config
-  (setq split-height-threshold 60
-		split-width-threshold 180
+  (setq split-height-threshold 40
+		split-width-threshold 160
 		split-window-preferred-function 'exec/split-window-really-sensibly
 		)
 
   )
+(use-package display-line-numbers
+  :hook
+  (prog-mode . display-line-numbers-mode)
+  :config
+  (setq display-line-numbers-type t
+		display-line-numbers-grow-only t
+		display-line-numbers-width 2
+		display-line-numbers-widen t
+		)
+  )
+
+
 
 (defun exec/increase-buffer-font()
   (interactive)
@@ -308,19 +400,6 @@ i.e. windows tiled side-by-side."
   (interactive)
   (setq-local buffer-face-mode-face '(:height 0.8))
   (buffer-face-mode))
-
-(defun exec/variable-pitch-mode()
-  "Set a fixed width (monospace) font in current buffer."
-  (interactive)
-  (setq-local buffer-face-mode-face 'variable-pitch)
-  (buffer-face-mode))
-
-(defun exec/fixed-pitch-mode()
-  "Set a fixed width (monospace) font in current buffer."
-  (interactive)
-  (setq-local buffer-face-mode-face 'fixed-pitch)
-  (buffer-face-mode))
-
 
 
 (use-package general
@@ -353,15 +432,17 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   )
 
 
-
 (use-package evil
+  :straight (:type built-in)
   :init
-  (setq
-   evil-want-keybinding nil
-   evil-want-integration t
-   evil-respect-visual-line-mode t
-   evil-v$-excludes-newline t
-   )
+  (setq evil-want-integration t
+		evil-respect-visual-line-mode t
+		evil-v$-excludes-newline t
+		evil-want-C-u-scroll t
+		evil-want-C-i-jump t
+		evil-want-C-u-delete t
+		evil-want-fine-undo t)
+
   :demand t
   :config
   (evil-mode t)
@@ -370,16 +451,16 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
   (setopt evil-disable-insert-state-bindings nil
 		  evil-search-module 'evil-search
 		  evil-symbol-word-search t
-		  evil-move-beyond-eol nil)
+		  evil-move-beyond-eol nil
+		  evil-split-window-below t
+		  evil-vsplit-window-right t
+		  )
 
   ;; (defalias #'forward-evil-word #'forward-evil-symbol)
 
   (setq evil-want-minibuffer t)
-  (setq evil-want-C-i-jump t)
   (setq evil-jumps-cross-buffers t)
   (setq evil-search-wrap-ring-bell t) ;;
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-fine-undo t)
 
   (evil-set-undo-system  'undo-redo)
 
@@ -393,40 +474,84 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	;; (define-key evil-motion-state-map (kbd "SPC") nil)
 	(define-key evil-motion-state-map (kbd "RET") nil)
 	(define-key evil-motion-state-map (kbd "TAB") nil)
+	(define-key evil-motion-state-map (kbd "C-o") 'evil-jump-backward)
+	(define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward)
 	)
-
-
 
   (general-define-key [remap evil-quit] 'kill-buffer-and-window)
 
   (evil-add-command-properties #'find-file-at-point :jump t)
   (evil-add-command-properties #'consult-line :jump t)
   (evil-add-command-properties #'org-agenda-switch-to :jump t)
+  (evil-add-command-properties #'org-return :jump t)
+  (evil-add-command-properties #'evil-scroll-page-up :jump t)
+  (evil-add-command-properties #'evil-scroll-page-down :jump t)
+  (evil-add-command-properties #'backward-up-list :jump t)
 
-  (setq evil-normal-state-tag   (propertize "<N>" 'face '((:background "#013220"   :foreground "white")))
-		evil-emacs-state-tag    (propertize "<E>" 'face '((:background "Yellow"    :foreground "black")))
-		evil-insert-state-tag   (propertize "<I>" 'face '((:background "Red"       :foreground "yellow")))
-		evil-replace-state-tag  (propertize "<R>" 'face '((:background "chocolate" :foreground "black")))
+  (setq evil-normal-state-tag   (propertize "<N>" 'face '((:background "darkgreen"   :foreground "white")))
+		evil-emacs-state-tag    (propertize "<E>" 'face '((:background "yellow"    :foreground "black")))
+		evil-insert-state-tag   (propertize "<I>" 'face '((:background "red"       :foreground "yellow")))
+		evil-replace-state-tag  (propertize "<R>" 'face '((:background "orange" :foreground "black")))
 		evil-motion-state-tag   (propertize "<M>" 'face '((:background "plum3"     :foreground "black")))
-		evil-visual-state-tag   (propertize "<V>" 'face '((:background "Purple"    :foreground "white")))
-		evil-operator-state-tag (propertize "<O>" 'face '((:background "Blue"      :foreground "white"))))
+		evil-visual-state-tag   (propertize "<V>" 'face '((:background "purple"    :foreground "white")))
+		evil-operator-state-tag (propertize "<O>" 'face '((:background "blue"      :foreground "white"))))
 
-  ;; (setq evil-normal-state-tag   (propertize "N" 'face nil)
-  ;; 		evil-emacs-state-tag    (propertize "E" 'face nil)
-  ;; 		evil-insert-state-tag   (propertize "I" 'face nil)
-  ;; 		evil-replace-state-tag  (propertize "R" 'face nil)
-  ;; 		evil-motion-state-tag   (propertize "M" 'face nil)
-  ;; 		evil-visual-state-tag   (propertize "V" 'face nil)
-  ;; 		evil-operator-state-tag (propertize "O" 'face nil))
+  ;; (defalias 'evil-scroll-page-up 'exec/scroll-up)
+  ;; (defalias 'evil-scroll-page-down 'exec/scroll-down)
+  ;; (defalias 'evil-scroll-up 'exec/scroll-half-down)
+  ;; (defalias 'evil-scroll-down 'exec/scroll-half-up)
 
   )
 
+(general-nmap
+  "C-i" 'evil-jump-forward
+  )
+(defun exec/disable-y-or-n-p (orig-fun &rest args)
+  (cl-letf (((symbol-function 'y-or-n-p) (lambda (prompt) t)))
+    (apply orig-fun args)))
+
+
+(use-package ediff
+  :straight (:type built-in)
+  :hook
+  (ediff-after-setup-control-frame . (lambda()
+									   (interactive)
+									   (tab-line-mode -1)
+									   (tab-bar-mode -1)
+									   ))
+  :config
+  (setopt ediff-split-window-function 'split-window-horizontally)
+
+  (advice-add 'ediff-quit :around #'exec/disable-y-or-n-p)
+
+  (general-nmap :keymaps 'ediff-meta-mode-map
+	"C-j" 'ediff-next-meta-item
+	"C-k" 'ediff-previous-meta-item
+	)
+  )
+
+
+(use-package magit
+  :straight (:type built-in)
+  :config
+  (setq magit-revision-show-gravatars t)
+
+  (use-package forge
+    :straight (:type built-in)
+    :after magit
+    )
+  (use-package magit-delta
+    ;; :hook (magit-mode . magit-delta-mode))
+    )
+  )
+
 (use-package evil-collection
+  :straight (:type built-in)
   :after evil
   :custom
   (evil-collection-setup-minibuffer t)
   (evil-collection-want-find-usages-bindings t)
-  :init
+  :config
   (evil-collection-init))
 
 (use-package evil-cleverparens
@@ -481,23 +606,25 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 	  warning-suppress-types '((comp)))
 
 (toggle-scroll-bar -1)
-(setq scroll-conservatively 101
+(setq scroll-conservatively 1000
 	  scroll-margin 0
-	  scroll-step 0
-	  scroll-preserve-screen-position nil
-	  scroll-up-aggressively 0
-	  scroll-down-aggressively 0
-	  fast-but-imprecise-scrolling t
+	  ;; 	  scroll-step 0
+	  ;; 	  scroll-preserve-screen-position nil
+	  ;; 	  scroll-up-aggressively nil
+	  ;; 	  scroll-down-aggressively nil
+	  ;; 	  fast-but-imprecise-scrolling t
 	  )
 
 (setq make-pointer-invisible nil)
 (setq mouse-highlight t)
 (setq-default tab-width 4)
 
+(setq-default cursor-in-non-selected-windows nil)
+
 (setq blink-cursor-blinks -1
 	  blink-cursor-delay 0
-	  blink-cursor-interval 0.2)
-(blink-cursor-mode t)
+	  blink-cursor-interval 0.01)
+(blink-cursor-mode -1)
 
 (setq word-wrap-by-category t)
 (setq echo-keystrokes nil)
@@ -516,12 +643,6 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (setq display-buffer-base-action nil)
 (setq create-lock-file nil)
 
-(setq display-line-numbers-type 'visual
-	  display-line-numbers-grow-only t
-	  display-line-numbers-width 4
-	  display-line-numbers-widen t
-	  )
-
 
 
 
@@ -529,7 +650,7 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 (setq-default c-basic-offset 4)
 
 (setq word-wrap t)
-(global-visual-line-mode t)
+(global-visual-line-mode -1)
 
 
 (setq native-comp-async-report-warnings-errors nil)
@@ -550,7 +671,9 @@ Create prefix map: +general-global-NAME. Prefix bindings in BODY with INFIX-KEY.
 
 (set-default-coding-systems 'utf-8)
 
-(setenv "PKG_CONFIG_PATH" "/nix/store/80rbkkz1jh3ybsc5r4dz2bmn02vljn1c-openssl-3.0.8-dev/lib/pkgconfig")
+(setenv "LSP_USE_PLISTS" "true")
+(setenv "SHELL" "zsh")
+;; (setenv "PKG_CONFIG_PATH" "/nix/store/80rbkkz1jh3ybsc5r4dz2bmn02vljn1c-openssl-3.0.8-dev/lib/pkgconfig")
 (setenv "LD_LIBRARY_PATH" "/run/current-system/sw/share/nix-ld/lib")
 
 (setenv "LANG" "en_US.UTF-8")
@@ -639,41 +762,19 @@ https://github.com/typester/emacs/blob/master/lisp/progmodes/which-func.el"
 
 (defun exec/imenu-goto-next ()
   (interactive)
+  (sit-for 0)
   (unless (exec/imenu-goto--closest-dir 1)
-    (goto-char (point-max))))
+    (goto-char (point-max)))
+  (recenter)
+  )
 
 (defun exec/imenu-goto-prev ()
   (interactive)
+  (sit-for 0)
   (unless (exec/imenu-goto--closest-dir -1)
-    (goto-char (point-min))))
-
-
-
-(general-define-key
- :states '(normal visual)
- :keymaps 'override
- "M-j" 'exec/imenu-goto-next
- "M-k" 'exec/imenu-goto-prev
- )
-
-
-(general-def 'normal "gd" 'xref-find-definitions)
-(general-def 'normal "gr" 'xref-find-references)
-(general-def 'insert "C-SPC" 'completion-at-point)
-
-(general-define-key :state
-					'normal "C-S-c" 'exec/put-file-name-on-clipboard)
-
-
-(general-evil-define-key '(normal visual) 'global
-  "gr" 'xref-find-references
-  "gd" 'xref-find-definitions
-  "ga" 'xref-find-apropos
+    (goto-char (point-min)))
+  (recenter)
   )
-
-
-;; (with-eval-after-load 'evil-mode
-;; )
 
 (defun exec/consult-imenu-or-outline()
   "First run `consult-imenu'.
@@ -681,14 +782,51 @@ if it encounter an error, then we execute `consult-outline'."
   (interactive)
   (condition-case nil
 	  (consult-imenu)
-	(error (consult-outline))))
+	(error (consult-outline)))
+  )
 
-(global-definer
+
+
+;;;;;;;;;;;;;;;;;;;;;; general ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(general-define-key :states '(normal visual) :keymaps 'override
+					"M-j" 'exec/imenu-goto-next
+					"M-k" 'exec/imenu-goto-prev
+					)
+
+
+(general-def :keymaps '(insert motion emacs)
+  "C-S-v" 'yank
+  )
+
+
+(general-nmap ;; "C-S-" prefix
+  "C-S-c" 'exec/put-file-name-on-clipboard)
+
+
+(global-definer ;; Default Space prefix
   "i" 'exec/consult-imenu-or-outline
+  "I" 'consult-imenu-multi
   "!"   'shell-command
-  ":"   'eval-expression)
+  ":"   'eval-expression
 
-(+general-global-menu! "buffer" "b"
+  "f" 'consult-projectile-find-file
+  "F" 'consult-projectile-find-file-other-window
+  "r" 'consult-projectile-recentf
+  "b" 'consult-projectile-switch-to-buffer
+  "B" 'consult-projectile-switch-to-buffer-other-window
+  "s" 'lsp-ui-find-workspace-symbol
+  )
+
+(+general-global-menu! "Git" "v"
+  "g" 'git-timemachine
+  "v" 'magit-status
+  "l" 'magit-log-buffer-file
+  )
+
+(+general-global-menu! "Double Space" "SPC"
+  "SPC" 'execute-extended-command
+
   "d"  'kill-current-buffer
   "o" '((lambda () (interactive) (switch-to-buffer nil))
 		:which-key "other-buffer")
@@ -743,17 +881,6 @@ if it encounter an error, then we execute `consult-outline'."
   "c" 'customize-group
   "h" '(nil :which-key "Emacs Hook")
   "hr" 'remove-hook
-  ;; "f" '(lambda()
-  ;; 		 (interactive)
-  ;; 		 (rg-define-search exec/search-init
-  ;; 				  :query ask
-  ;; 				  :format literal
-  ;; 				  :files "init.el"
-  ;; 				  :dir user-emacs-directory
-  ;; 				  )
-  ;; 		 ;; interactive call exec/search-init
-  ;; 		 (call-interactively 'exec/search-init)
-  ;; 		 )
   "f" '(lambda()
 		 (interactive)
 		 (let ((consult-project-root-function (lambda nil nil))
@@ -786,8 +913,6 @@ if it encounter an error, then we execute `consult-outline'."
   "mK" 'which-key-show-full-minor-mode-keymap
   )
 
-(general-def )
-
 (+general-global-menu! "Org Mode" "o"
   "l" 'org-cliplink
   "a" 'exec/org-agenda-transient
@@ -817,52 +942,51 @@ if it encounter an error, then we execute `consult-outline'."
   "c" 'calendar
   )
 
-(general-define-key
- :prefix "C-c"
- "o" '(nil :which-key "Org")
- "oa" 'exec/org-agenda-transient
- "oc" 'org-capture
- "oj" 'org-journal-new-entry
+(general-define-key :prefix "C-c"
+					"o" '(nil :which-key "Org")
+					"oa" 'exec/org-agenda-transient
+					"oc" 'org-capture
+					"oj" 'org-journal-new-entry
 
- "s" 'deadgrep
+					"s" 'deadgrep
 
- "n" '(nil :which-key "Org Roam")
- "nl" 'org-roam-buffer-toggle
- "nf" 'org-roam-node-find
- "ns" 'consult-org-roam-search
- "nF" 'org-roam-ref-find
- "ng" 'org-roam-graph
- "ni" 'org-roam-node-insert
- "nI" 'org-id-get-create
- "nc" 'org-roam-capture
- "nr" 'org-roam-refile
+					"n" '(nil :which-key "Org Roam")
+					"nl" 'org-roam-buffer-toggle
+					"nf" 'org-roam-node-find
+					"ns" 'consult-org-roam-search
+					"nF" 'org-roam-ref-find
+					"ng" 'org-roam-graph
+					"ni" 'org-roam-node-insert
+					"nI" 'org-id-get-create
+					"nc" 'org-roam-capture
+					"nr" 'org-roam-refile
 
- ;; org roam properties
- "no" '(nil :which-key "Org Roam Properties")
- "noa"  'org-roam-alias-add
- "noA"  'org-roam-alias-remove
- "not"  'org-roam-tag-add
- "noT"  'org-roam-tag-remove
- "nor"  'org-roam-ref-add
- "noR"  'org-roam-ref-remove
- "nd" '(nil :which-key "Org Roam Dailies")
- "ndcd" 'org-roam-dailies-capture-date
- "ndcc" 'org-roam-dailies-capture-today
- "ndcm" 'org-roam-dailies-capture-tomorrow
- "ndcy" 'org-roam-dailies-capture-yesterday
- "ndd"  'org-roam-dailies-goto-date
- "ndm"  'org-roam-dailies-goto-tomorrow
- "ndt"  'org-roam-dailies-goto-today
- "ndy"  'org-roam-dailies-goto-yesterday
- "nd-"  'org-roam-dailies-find-directory
- )
+					;; org roam properties
+					"no" '(nil :which-key "Org Roam Properties")
+					"noa"  'org-roam-alias-add
+					"noA"  'org-roam-alias-remove
+					"not"  'org-roam-tag-add
+					"noT"  'org-roam-tag-remove
+					"nor"  'org-roam-ref-add
+					"noR"  'org-roam-ref-remove
+					"nd" '(nil :which-key "Org Roam Dailies")
+					"ndcd" 'org-roam-dailies-capture-date
+					"ndcc" 'org-roam-dailies-capture-today
+					"ndcm" 'org-roam-dailies-capture-tomorrow
+					"ndcy" 'org-roam-dailies-capture-yesterday
+					"ndd"  'org-roam-dailies-goto-date
+					"ndm"  'org-roam-dailies-goto-tomorrow
+					"ndt"  'org-roam-dailies-goto-today
+					"ndy"  'org-roam-dailies-goto-yesterday
+					"nd-"  'org-roam-dailies-find-directory
+					)
 
 
 
 ;;; hyper key bindings
 (global-set-key (kbd "H-h") 'help-command)
-(general-def
-  :prefix "H-h"
+
+(general-def :prefix "H-h"
   "k" 'helpful-key
   "v" 'helpful-variable
   "o" 'helpful-symbol
@@ -871,82 +995,115 @@ if it encounter an error, then we execute `consult-outline'."
   "m" 'helpful-macro
   "c" 'helpful-command
   "C" 'helpful-callable
+
   "a" 'info-apropos
+  "i" 'consult-info
   )
 
-(general-def
-  "H-SPC" 'which-key-show-major-mode
-  "H-M-SPC" 'exec/which-key-show-top-level
+(general-def :keymaps 'prog-mode-map
+  "M-q" 'format-all-buffer
+  )
+
+(general-def :keymaps 'universal-argument-map
+  "H-u" 'universal-argument-more
+  )
+
+(general-def ;; C-H prefix
+  "C-H-<left>" 'tab-bar-switch-to-prev-tab
+  "C-H-<right>" 'tab-bar-switch-to-next-tab
+  "C-H-<up>" 'tab-bar-rename-tab
   "C-H-SPC" 'which-key-show-minor-mode-keymap
-
-  "H-z" 'repeat
   )
 
-
-(general-def
+(general-def ;; Hyper prefix
+  "H-u" 'universal-argument
+  "H-a" 'exec/org-agenda-transient
+  "H-`" 'garbage-collect
   "H-h" 'help-command
   "H-k" 'kill-current-buffer
   "H-<left>" 'winner-undo
   "H-<right>" 'winner-redo
-
-  "C-H-<left>" 'tab-line-switch-to-prev-tab
-  "C-H-<right>" 'tab-line-switch-to-next-tab
-  "H-`" 'garbage-collect
-  ;; "H-i" 'yas-insert-snippet
-  "H-a" 'exec/org-agenda-transient
+  "H-M-SPC" 'exec/which-key-show-top-level
+  "H-SPC" 'which-key-show-major-mode
+  "H-z" 'repeat
   )
 
+(general-def ;; Super prefix
+  "s-h" 'tab-line-switch-to-prev-tab
+  "s-l" 'tab-line-switch-to-next-tab
+  "s-H" 'intuitive-tab-line-shift-tab-left
+  "s-L" 'intuitive-tab-line-shift-tab-right
+  "s-o" 'other-window
+  ;; "s-n" 'exec/toggle-dired
+  "s-n" 'treemacs-select-window
+  "M-m" 'projectile-commander
+  )
 
-(general-evil-define-key 'insert 'global
+(defun exec/toggle-dired()
+  (interactive)
+  (if (bound-and-true-p diredfl-mode) (quit-window)
+	(exec/dired-current-directory)))
+
+
+(general-imap 'global
   "<escape>" '(lambda()
 				(interactive)
 				(if (bound-and-true-p corfu-mode)
 					(corfu-quit))
 				(if (bound-and-true-p copilot-mode)
 					(copilot-clear-overlay))
-				(evil-normal-state)
+				(evil-force-normal-state)
 				)
   "C-h" 'left-char
   "C-l" 'right-char
   "C-j" 'next-line
   "C-k" 'previous-line
+  "C-SPC" 'completion-at-point
   )
 
-(general-evil-define-key 'insert copilot-mode-map
-  "<tab>" '(lambda()
-			 (interactive)
-			 (if (copilot--overlay-visible)
-				 (copilot-accept-completion)
-			   (tab-to-tab-stop))
-			 )
-  "C-/" 'copilot-next-completion
-  "C-f" 'copilot-accept-completion-by-line
-  "M-f" 'copilot-accept-completion-by-word
-  "C-<escape>" 'copilot-clear-overlay
+(general-imap :keymaps 'minibuffer-mode-map
+  "C-k" 'previous-line-or-history-element
+  "C-j" 'next-line-or-history-element
+  "C-v" 'yank
   )
+
+(defun exec/tab-in-insert-mode-command()
+  (interactive)
+  (if (copilot--overlay-visible)
+	  (copilot-accept-completion)
+	))
 
 
 (general-define-key
  :keymaps 'projectile-command-map
  "f" 'consult-projectile-find-file
  "b" 'consult-projectile-switch-to-buffer
+ "B" 'consult-projectile-switch-to-buffer-other-window
+ "p" 'consult-projectile-switch-project
+ "P" 'tab-bar-new-tab
  )
 
-(general-define-key
- :keymaps 'origami-mode-map
- "<tab>" 'origami-recursively-toggle-node
- "<backtab>" 'origami-toggle-all-nodes
- )
+(general-define-key :keymaps 'flycheck-mode-map
+					"<f2>" 'flycheck-next-error
+					)
 
-(general-define-key
- :keymaps 'diff-hl-mode-map
- "C-M-z" 'diff-hl-revert-hunk
- )
+(general-define-key :keymaps 'origami-mode-map
+					"<tab>" 'origami-recursively-toggle-node
+					"<backtab>" 'origami-toggle-all-nodes
+					)
 
-(general-define-key
- :keymaps 'flycheck-mode-map
- "M-g n" 'flycheck-next-error
- )
+(general-define-key :keymaps 'diff-hl-mode-map
+					"C-M-z" 'diff-hl-revert-hunk
+					)
+
+(general-define-key :keymaps 'flycheck-mode-map
+					"M-g n" 'flycheck-next-error
+					)
+
+(general-nmap :keymaps 'treemacs-mode-map
+  "p" 'treemacs-goto-parent-node
+  )
+
 
 (general-evil-define-key 'normal 'global
   "M-f" 'consult-line
@@ -957,14 +1114,14 @@ if it encounter an error, then we execute `consult-outline'."
   "Open config file."
   (interactive)
   ;; if "init.el" buffer has already opened in current frame, then focus to that window
-  (if (equal (buffer-name) "emacs-init.el")
+  (if (equal (buffer-name) "init.el")
 	  (switch-to-buffer (other-buffer))
 	;; open user-init-file buffer of open this file
 	;; (if (get-buffer "init.el")
 	;; 	(switch-to-buffer "init.el")
 	(if (get-buffer-window "init.el")
-		(select-window (get-buffer-window "emacs-init.el"))
-	  (find-file "~/Projects/github.com/eval-exec/nixos-configuration/emacs-init.el"))
+		(select-window (get-buffer-window "init.el"))
+	  (find-file "~/.emacs.d/init.el"))
 	)
   )
 
@@ -981,21 +1138,46 @@ if it encounter an error, then we execute `consult-outline'."
   "C-x C-e" 'eval-region
   )
 
+(defun exec/dired-current-directory()
+  (interactive)
+  (projectile-dired)
+  ;; (dired default-directory)
+  )
+
+;; (defun exec/consult-ripgrep()
+;;   (interactive)
+;;   (consult-ripgrep nil (exec/thing-at-point)))
+
+;; (defun exec/consult-line()
+;;   (interactive)
+;;   (consult-line (exec/thing-at-point) 0))
+
+(defun exec/thing-at-point()
+  (interactive)
+  (if (region-active-p)
+	  (buffer-substring-no-properties (region-beginning) (region-end))
+    (let ((bounds (bounds-of-thing-at-point 'symbol)))
+	  (if bounds
+		  (buffer-substring-no-properties (car bounds) (cdr bounds))
+        nil))))
+
 ;; define C-x f to consult-recent-file
 (general-define-key
  "C-x C-r" 'consult-recent-file
  "C-x C-f" 'find-file
- "C-S-f" 'deadgrep
+ "C-x C-d" 'exec/dired-current-directory
+ "C-x d" 'list-directory
+ "C-S-f" ;; 'exec/color-rg-search-project
+ 'consult-ripgrep
+
  "H-f" '(lambda()
 		  (interactive)
 		  ;; if vterm-buffer-name variable is not set, eval (vterm) and return
 		  (if (not (bound-and-true-p vterm-buffer-name))
 			  (vterm)
-			(if
-				(equal (buffer-name) vterm-buffer-name)
+			(if (equal (buffer-name) vterm-buffer-name)
 				(switch-to-buffer (other-buffer))
-			  (vterm)))
-		  )
+			  (vterm))))
 
  "H-d" 'describe-char
 
@@ -1008,16 +1190,28 @@ if it encounter an error, then we execute `consult-outline'."
 			(profiler-stop)
 			(profiler-report)
 			)
+ "H-p m" 'mu4e-search-bookmark
+ "H-p n" 'exec/ncmpcpp
+ "H-p l" 'clm/toggle-command-log-buffer
+
+ "H-b H-b" 'blink-search
+
+ "H-s" 'color-rg-search-symbol-in-current-file
+
+ "H-]" 'persp-next
+ "H-[" 'persp-prev
+
+ "H-g H-g" 'magit-status
+ "H-g H-l" 'magit-log-all
+
+ "H-<return>" 'eval-last-sexp
+
+ "C-S-<mouse-1>" nil
  )
 
-(general-define-key
- "M-0"
- 'dired-sidebar-show-sidebar
- )
 
 
 
-(setq debug-on-error nil)
 
 
 
@@ -1153,13 +1347,9 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 
-										; (load "/home/exec/Projects/github.com/eval-exec/crazy-theme.el/crazy-theme.el")
-										; (setq crazy-theme-prefer-dark nil)
-										; (load-theme 'crazy)
 
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
+(custom-set-faces ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
@@ -1171,38 +1361,52 @@ if it encounter an error, then we execute `consult-outline'."
 								 :background "#880000"
 								 :foreground "#ffffff"
 								 ))))
- '(mode-line ((t (:box nil))))
-
  '(imenu-list-entry-face ((t (:height 0.8))))
+
+ '(mode-line          ((t (:box nil :background "black" :height 0.9))))
+ '(mode-line-inactive ((t (:inherit mode-line))))
+ '(mode-line-active   ((t (:inherit mode-line :background "#013220"))))
+
+ '(header-line ((t (:height 0.9 :background "black"))))
+ '(minibuffer-prompt-face ((t (:background "red" :foreground "yellow"))))
+
+ '(hl-line-face ((t (
+					 :inherit nil
+					 :background "gray20"
+					 )))
+				)
+
  )
 
+;; change mode-line color based on evil-state variable
+(defun exec/reset-evil-state(&rest r)
+  (interactive)
+  (unless (minibufferp)
+	(cond
+	 ((equal evil-state 'insert)
+	  (set-face-attribute 'mode-line-active nil :background "red" :foreground "white" ))
+	 ((equal evil-state 'normal)
+	  (set-face-attribute 'mode-line-active nil :background "darkgreen" :foreground "white" ))
+	 ((equal evil-state 'visual)
+	  (set-face-attribute 'mode-line-active nil :background "purple" :foreground "white" )
+	  )
+	 ((equal evil-state 'motion)
+	  (set-face-attribute 'mode-line-active nil :background "plum3" :foreground "white" ))
+	 ((equal evil-state 'replace)
+	  (set-face-attribute 'mode-line-active nil :background "orange" :foreground "white" ))
+	 ((equal evil-state 'operator)
+	  (set-face-attribute 'mode-line-active nil :background "blue" :foreground "white" ))
+	 ((equal evil-state 'emacs)
+	  (set-face-attribute 'mode-line-active nil :background "yellow" :foreground "black" )))))
 
-(defun exec/mode-line-insert-hook()
-  (interactive)
-  (set-face-attribute 'mode-line-active nil :background "#8b0000" :foreground "white" :inherit nil)
-  ;; (set-face-attribute 'line-number-current-line nil :background "#8b0000" :foreground "white")
-  )
-(defun exec/mode-line-normal-hook()
-  (interactive)
-  (set-face-attribute 'mode-line-active nil :background "#013220" :foreground "white" :inherit nil)
-  ;; (set-face-attribute 'line-number-current-line nil :background "#013220" :foreground "white")
-  )
-(defun exec/mode-line-visual-hook()
-  (interactive)
-  ;; (set-face-attribute 'mode-line-active nil :background "orange" :foreground "white" :inherit nil)
-  ;; (set-face-attribute 'line-number-current-line nil :background "purple" :foreground "white")
-  )
-
-(defun exec/mode-line-emacs-hook()
-  (interactive)
-  (set-face-attribute 'mode-line-active nil :background "purple" :foreground "white" :inherit nil)
-  )
-
-;; (add-hook 'evil-insert-state-entry-hook 'exec/mode-line-insert-hook)
-(add-hook 'evil-normal-state-entry-hook 'exec/mode-line-normal-hook)
-;; (add-hook 'evil-visual-state-entry-hook 'exec/mode-line-visual-hook)
-(add-hook 'evil-emacs-state-entry-hook 'exec/mode-line-emacs-hook)
-(add-hook 'evil-emacs-state-exit-hook 'exec/mode-line-normal-hook)
+(add-hook 'evil-insert-state-entry-hook 'exec/reset-evil-state)
+(add-hook 'evil-normal-state-entry-hook 'exec/reset-evil-state)
+(add-hook 'evil-visual-state-entry-hook 'exec/reset-evil-state)
+(add-hook 'evil-motion-state-entry-hook 'exec/reset-evil-state)
+(add-hook 'evil-replace-state-entry-hook 'exec/reset-evil-state)
+(add-hook 'evil-operator-state-entry-hook 'exec/reset-evil-state)
+(add-hook 'evil-emacs-state-entry-hook 'exec/reset-evil-state)
+(add-hook 'evil-emacs-state-exit-hook 'exec/reset-evil-state)
 
 
 (defun disable-all-themes ()
@@ -1215,24 +1419,9 @@ if it encounter an error, then we execute `consult-outline'."
   (disable-all-themes))
 
 
-(add-hook 'after-init-hook '(lambda()
-							  (load-theme
-							   ;; 'nasy
-							   ;; 'doom-vibrant
-							   ;; 'atom-one-dark
-							   ;; 'professional
-							   ;; 'modus-vivendi
-							   ;; 'almost-mono-black
-							   'sanityinc-tomorrow-bright
-							   )
-
-							  (org-agenda-list) ;; consider set initial-buffer-choice to "*Org Agenda*" buffer
-							  ))
-
 
 
 (use-package vertico
-  :demand t
   :straight (:files (:defaults "extensions/*"))
   ;; :hook (vertico-buffer-mode . 'exec/vertico-buffer-mode-hook-func)
   :custom-face
@@ -1248,8 +1437,9 @@ if it encounter an error, then we execute `consult-outline'."
 		 )
   :config
   (setq
-   vertico-count 17
+   vertico-count 10
    vertico-resize t
+   vertico-scroll-margin 7
    vertico-count-format '("%-6s " . "%2s/%5s")
    ;; vertico-buffer-display-action
    ;; '(display-buffer-below-selected (window-height . 10))
@@ -1270,12 +1460,12 @@ if it encounter an error, then we execute `consult-outline'."
 	)
 
   (vertico-mode)
-  ;; (vertico-buffer-mode)
+
   (use-package vertico-prescient
 	:config
 	(vertico-prescient-mode 1)
 	;; Configure `prescient.el' filtering to your liking.
-	(setq prescient-filter-method '(literal initialism prefix regexp)
+	(setq prescient-filter-method '(prefix literal-prefix regexp literal initialism)
 		  prescient-use-char-folding t
 		  prescient-use-case-folding 'smart
 		  prescient-sort-full-matches-first t ; Works well with `initialism'.
@@ -1284,30 +1474,77 @@ if it encounter an error, then we execute `consult-outline'."
 	;; Save recency and frequency rankings to disk, which let them become better
 	;; over time.
 	(prescient-persist-mode 1))
+
+  ;; Prefix the current candidate with “» ”. From
+  ;; https://github.com/minad/vertico/wiki#prefix-current-candidate-with-arrow
+  (defun exec/vertico-finger(orig cand prefix suffix index _start)
+	(setq cand (funcall orig cand prefix suffix index _start))
+	(concat
+	 (if (= vertico--index index)
+		 (propertize "» " 'face 'vertico-current)
+	   "  ")
+	 cand))
+
+  (advice-add #'vertico--format-candidate :around 'exec/vertico-finger)
   )
 
 
 (use-package vertico-posframe
   :config
-  (setq vertico-posframe-parameters '((left-fringe . 0)
-									  (right-fringe . 0))
-		vertico-posframe-border-width 1
-		vertico-posframe-poshandler 'posframe-poshandler-frame-bottom-center
-		vertico-posframe-width (- (frame-width) 22)
-		vertico-posframe-font (face-attribute 'fixed-pitch :family)
-		vertico-posframe-min-height nil
-		vertico-flat-max-lines 3)
+  (defun exec/vertico-posframe-get-size (buffer)
+	"Set the vertico-posframe size according to the current frame."
+	(let* (
+		   ;; (height (min vertico-posframe-height (buffer-local-value 'vertico--total vertico-posframe--buffer)))
+		   (height (+ 1  (min vertico-posframe-height (buffer-local-value 'vertico--total vertico-posframe--buffer))))
+		   ;; (min-height (+ 3 (min vertico-posframe-height (buffer-local-value 'vertico--total vertico-posframe--buffer))))
+		   (min-height (length vertico--candidates))
+		   (width (- (frame-width) 1))
+		   )
 
-  ;; (custom-set-faces
-  ;;  '(vertico-posframe-border
-  ;; 	 ((t (:inherit default :background "pink"))))
-  ;;  )
+	  (list
+	   :height height
+	   :width width
+	   :min-height min-height
+	   :min-width width)))
+
+  (defun exec/posframe-poshandler-frame-top-center (info)
+	"Posframe's position handler.
+
+This poshandler function let top edge center of posframe align
+to top edge center of frame.
+
+The structure of INFO can be found in docstring of
+`posframe-show'."
+	(cons (/ (- (plist-get info :parent-frame-width)
+				(plist-get info :posframe-width))
+			 2)
+
+		  90))
+
+  (setq
+   vertico-posframe-parameters
+   '((left-fringe . 0)
+	 (right-fringe . 0)
+	 (accept-focus . t)
+	 (refresh . 1)
+	 (alpha . 0.1)
+	 )
+   vertico-posframe-border-width 1
+   vertico-posframe-poshandler 'exec/posframe-poshandler-frame-top-center
+   vertico-posframe-width  (- (frame-width) 7)
+   vertico-posframe-height (+ 1 vertico-count)
+   vertico-posframe-size-function 'vertico-posframe-get-size
+   vertico-posframe-font nil
+   vertico-posframe-min-height 0
+   vertico-flat-max-lines 3)
+  (setq vertico-count 10)
+
 
   (if (display-graphic-p)
-	  (vertico-posframe-mode))
+	  (vertico-posframe-mode)
+	)
   )
 
-					;;;; ============================================================
 
 
 (use-package xref
@@ -1324,11 +1561,16 @@ if it encounter an error, then we execute `consult-outline'."
 		calendar-right-margin 1)
   )
 
+;; (setq jit-lock-defer-time 0.25
+;; 	  jit-lock-stealth-time 0
+;; 	  jit-lock-chunk-size 4096
+;; 	  )
 
 (use-package gcmh
+  :disabled
   :hook (
 		 (emacs-startup . gcmh-mode)
-		 ;; (focus-out . garbage-collect)
+		 (focus-out . garbage-collect)
 		 )
   :config
   (setq
@@ -1336,7 +1578,8 @@ if it encounter an error, then we execute `consult-outline'."
    garbage-collection-messages nil
    gcmh-verbose nil
    gcmh-idle-delay 'auto
-   ;; gcmh-high-cons-threshold (* 32 1024 1024)
+   gcmh-low-cons-threshold (* 200  1024 1024 1024)
+   gcmh-high-cons-threshold (* 400  1024 1024 1024)
    )
   )
 
@@ -1422,7 +1665,7 @@ if it encounter an error, then we execute `consult-outline'."
   ;; (evil-goggles-mode)
   )
 (use-package better-jumper
-  :disabled t
+  :disabled
   :after evil
   :config
   ;; (define-key evil-motion-state-map (kbd "C-o") 'better-jumper-jump-backward)
@@ -1446,10 +1689,9 @@ if it encounter an error, then we execute `consult-outline'."
   (transient-posframe-mode ))
 
 (use-package man
-  :hook (Man-mode . exec/fixed-pitch-mode)
   :config
   (setq Man-width nil)
-  (setq Man-width-max 80)
+  (setq Man-width-max nil)
   (setq Man-notify-method 'pushy)
   (set-face-attribute 'Man-overstrike nil :inherit 'bold :foreground "orange red")
   (set-face-attribute 'Man-underline nil :inherit 'underline :foreground "forest green")
@@ -1516,13 +1758,16 @@ if it encounter an error, then we execute `consult-outline'."
 		  "https://hnrss.org/bestcomments"
 		  "https://hnrss.org/newest?points=300"
 		  "https://hnrss.org/newest?comments=250"
+		  "https://goodnews.eu/en/feed/"
+		  "https://www.btcstudy.org/atom.xml"
+		  "https://hwv430.blogspot.com/feeds/posts/default"
 		  ))
   (use-package elfeed-dashboard)
   )
 
 (add-hook 'prog-mode-hook 'electric-pair-local-mode)
-(add-hook 'minibuffer-mode-hook 'electric-pair-local-mode)
 (add-hook 'prog-mode-hook 'electric-indent-mode)
+(add-hook 'minibuffer-mode-hook 'electric-pair-local-mode)
 (add-hook 'cider-repl-mode-hook 'electric-pair-local-mode)
 
 (defun read-file (filename)
@@ -1558,11 +1803,10 @@ if it encounter an error, then we execute `consult-outline'."
   (flycheck-set-indication-mode 'left-fringe)
 
   :config
-  (setq flycheck-display-errors-delay 0
-		flycheck-idle-change-delay 0.2
-		flycheck-checker-error-threshold 800
-		)
-  (setq flycheck-rust-executable "cargo-clippy")
+  (setq-default flycheck-display-errors-delay 0
+				flycheck-idle-change-delay 0.2
+				flycheck-checker-error-threshold 800
+				flycheck-rust-executable "cargo-clippy")
 
   ;; flycheck err cycle
   ;; Optional: ensure flycheck cycles, both when going backward and forward.
@@ -1593,40 +1837,38 @@ if it encounter an error, then we execute `consult-outline'."
 
 
   (global-flycheck-mode)
-  )
-
-(use-package flycheck-posframe
-  :hook
-  (flycheck-mode . flycheck-posframe-mode)
-  :custom-face
-  (flycheck-posframe-face ((t (:height 1.0))))
-  :config
-  (setq
-   flycheck-posframe-position 'window-top-right-corner
-   flycheck-posframe-border-use-error-face t
-   flycheck-posframe-border-width 1
-   flycheck-posframe-info-prefix "💬 "
-   flycheck-posframe-warning-prefix "⚠️ "
-   flycheck-posframe-error-prefix "❌ "
-   )
-  )
-
-(use-package flycheck-status-emoji
-  :config
-  (flycheck-status-emoji-mode))
-
-(use-package flycheck-aspell
-  :after (flycheck ispell)
-  :custom
-  (ispell-dictionary  "en_US")
-  (ispell-program-name  "aspell")
-  (ispell-silently-savep  t)
-  (ispell-extra-args  '("--sug-mode=ultra" "--lang=en_US")))
 
 
-(use-package flycheck-color-mode-line
-  :config
-  (flycheck-color-mode-line-mode))
+  (use-package flycheck-posframe
+	:hook
+	(flycheck-mode . flycheck-posframe-mode)
+	:custom-face
+	(flycheck-posframe-face ((t (:height 0.8))))
+	(flycheck-posframe-background-face ((t (:height 0.8))))
+	:config
+	(setq-default
+	 flycheck-posframe-position 'window-top-left-corner
+	 flycheck-posframe-border-use-error-face nil
+	 flycheck-posframe-border-width 1
+	 flycheck-posframe-info-prefix "💬 "
+	 flycheck-posframe-warning-prefix "⚠️ "
+	 flycheck-posframe-error-prefix "❌ "))
+
+  (use-package flycheck-status-emoji
+	:hook
+	(flycheck-mode . flycheck-status-emoji-mode))
+
+  (use-package flycheck-aspell
+	:after (flycheck ispell)
+	:custom
+	(ispell-dictionary  "en_US")
+	(ispell-program-name  "aspell")
+	(ispell-silently-savep  t)
+	(ispell-extra-args  '("--sug-mode=ultra" "--lang=en_US")))
+
+
+  (use-package flycheck-color-mode-line
+	:hook (flycheck-mode . flycheck-color-mode-line-mode)))
 
 (use-package attrap
   :bind ("C-x /" . attrap-attrap))
@@ -1688,6 +1930,7 @@ if it encounter an error, then we execute `consult-outline'."
   ;; test
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (add-hook 'focus-in-hook 'diff-hl-update)
 
   (diff-hl-margin-mode)
   (diff-hl-flydiff-mode)
@@ -1696,6 +1939,8 @@ if it encounter an error, then we execute `consult-outline'."
   )
 (use-package highlight-numbers
   :hook (prog-mode . highlight-numbers-mode))
+
+(use-package highlight)
 
 (use-package highlight-escape-sequences
   :hook (prog-mode . hes-mode))
@@ -1706,6 +1951,10 @@ if it encounter an error, then we execute `consult-outline'."
   ;; (org-mode . valign-mode)
   )
 
+(use-package symbol-overlay
+  :config
+  (symbol-overlay-mode)
+  )
 
 
 
@@ -1790,6 +2039,8 @@ if it encounter an error, then we execute `consult-outline'."
   (evil-set-initial-state 'mingus-browse-mode 'emacs)
   (evil-set-initial-state 'mingus-help-mode 'emacs)
   )
+
+(evil-set-initial-state 'xwidget-webkit-mode 'emacs)
 
 (defun exec/ncmpcpp()
   (interactive)
@@ -1919,9 +2170,9 @@ if it encounter an error, then we execute `consult-outline'."
 		  evil-ex
 		  evil-ex-search-forward
 		  )
-		mini-frame-resize nil
-		mini-frame-resize-min-height 20
-		mini-frame-resize-max-height 20
+		mini-frame-resize t
+		mini-frame-resize-min-height 2
+		mini-frame-resize-max-height 10
 		mini-frame-ignore-functions '(exec/set-top-priority)
 		mini-frame-show-parameters '(
 									 (left . 0.5)
@@ -1939,16 +2190,18 @@ if it encounter an error, then we execute `consult-outline'."
 
 
 (use-package embark
-  ;; :bind
-  ;; (("C-." . embark-act)         ;; pick some comfortable binding
-  ;;  ("C-;" . embark-dwim)        ;; good alternative: M-.
-  ;;  ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-  ;; :init
+  :bind
+  (("H-." . embark-act)         ;; pick some comfortable binding
+   ("H-;" . embark-dwim)        ;; good alternative: M-.
+   ("H-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  :hook
+  (embark-collect . exec/decrease-buffer-font)
+  :init
   ;; (general-evil-define-key 'normal 'global "C-." 'embark-act)
   ;; (global-set-key (kbd "C-h B") 'embark-bindings)
 
   ;; Optionally replace the key help with a completing-read interface
-  ;; (setq prefix-help-command #'embark-prefix-help-command)
+  (setq prefix-help-command #'embark-prefix-help-command)
 
   ;; Show the Embark target at point via Eldoc.  You may adjust the Eldoc
   ;; strategy, if you want to see the documentation from multiple providers.
@@ -1957,17 +2210,21 @@ if it encounter an error, then we execute `consult-outline'."
 
   :config
   ;; Hide the mode line of the Embark live/completions buffers
-  ;; (add-to-list 'display-buffer-alist
-  ;;              '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-  ;;                nil
-  ;;                (window-parameters (mode-line-format . none))))
+  ;; (setq embark-indicators nil)
+  (setq embark-mixed-indicator-delay 0)
+
+  (add-to-list 'display-buffer-alist
+			   '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none))))
   )
 
 (use-package embark-consult
-  ;; :after consult
-  ;; :hook
-  ;; (embark-collect-mode . consult-preview-at-point-mode)
+  :after consult
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode)
   )
+
 
 (use-package marginalia
   :after vertico
@@ -1982,8 +2239,30 @@ if it encounter an error, then we execute `consult-outline'."
   ;; Must be in the :init section of use-package such that the mode gets
   ;; enabled right away. Note that this forces loading the package.
   :init
-  (marginalia-mode )
+  (marginalia-mode 1)
+  :config
+  (setopt marginalia-align 'right
+		  marginalia-separator "|")
+  (add-to-list 'marginalia-annotator-registry '(project-buffer marginalia-annotate-project-buffer))
+  (add-to-list 'marginalia-annotator-registry '(consult-projectile-switch-to-buffer marginalia-annotate-project-buffer))
+  (add-to-list 'marginalia-annotator-registry '(consult-projectile-find-file marginalia-annotate-file))
+
   )
+
+(use-package nerd-icons-completion
+  :init
+  (setq-default
+   nerd-icons--cache-limit 12048
+   nerd-icons-font-family "Symbols Nerd Font Mono"
+   )
+  :config
+  (nerd-icons-completion-mode)
+
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+(use-package nerd-icons-dired
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
 
 (use-package ctrlf)
 
@@ -1995,20 +2274,20 @@ if it encounter an error, then we execute `consult-outline'."
   :init
   (setq popper-reference-buffers
         '("\\*Messages\\*"
-          "Output\\*$"
-          "\\*Async Shell Command\\*"
-          help-mode
+		  "Output\\*$"
+		  "\\*Async Shell Command\\*"
+		  help-mode
 		  helpful-mode
-          compilation-mode)
-		popper-display-control t
-		popper-window-height nil
-		)
+		  compilation-mode)
+		popper-display-control nil
+		popper-window-height nil)
+
   (popper-mode +1)
   (popper-echo-mode +1)
 
-  (add-hook 'compilation-mode-hook 'exec/decrease-buffer-font)
-  (add-hook 'helpful-mode-hook 'exec/decrease-buffer-font)
-  (add-hook 'messages-buffer-mode-hook 'exec/decrease-buffer-font)
+  ;; (add-hook 'compilation-mode-hook 'exec/decrease-buffer-font)
+  ;; (add-hook 'helpful-mode-hook 'exec/decrease-buffer-font)
+  ;; (add-hook 'messages-buffer-mode-hook 'exec/decrease-buffer-font)
   )
 
 
@@ -2031,21 +2310,35 @@ if it encounter an error, then we execute `consult-outline'."
   )
 
 
-
 (use-package copilot
   :ensure nil
   :straight (copilot :type git :host github :repo "zerolfx/copilot.el" :files ("*.el" "dist"))
-  :hook
-  (prog-mode . copilot-mode)
-  (org-mode . copilot-mode)
-  (text-mode . copilot-mode)
+  ;; :bind (:map copilot-completion-map
+  ;; 			  ("<tab>" . 'copilot-accept-completion)
+  ;; 			  ("TAB" . 'copilot-accept-completion)
+  ;; 			  ("C-TAB" . 'copilot-accept-completion-by-word)
+  ;; 			  ("C-<tab>" . 'copilot-accept-completion-by-word))
   :config (setq copilot-node-executable "node"
 				copilot-idle-delay 1
 				copilot-max-char -1
 				copilot-indent-warning-suppress t
 				)
   (custom-set-faces '(copilot-overlay-face ((t (:inherit shadow :underline t :weight thin :slant italic :foreground "white")))))
-  ;; lfjewio how to
+  (defun exec/add-copilot-hook()
+	(add-hook 'prog-mode-hook  'copilot-mode)
+	(add-hook 'org-mode  'copilot-mode)
+	(add-hook 'text-mode 'copilot-mode)
+	)
+
+  (add-hook 'after-init-hook 'exec/add-copilot-hook)
+
+  (general-def copilot-completion-map
+	"<tab>"       'copilot-accept-completion
+	"C-/"         'copilot-next-completion
+	"C-f"         'copilot-accept-completion-by-line
+	"M-f"         'copilot-accept-completion-by-word
+	"C-<escape>" 'copilot-clear-overlay
+	)
   )
 
 (use-package gptai
@@ -2078,28 +2371,34 @@ if it encounter an error, then we execute `consult-outline'."
   (:map corfu-map
 		("C-j" . corfu-next)
 		("C-k" . corfu-previous)
-		([tab] . corfu-complete)
-		("<f9>" . corfu-quit))
+		("C-f" . corfu-scroll-up)
+		("C-b" . corfu-scroll-down)
+		([tab] . exec/tab-in-insert-mode-command)
+		("<f9>" . corfu-quit)
+		)
 
   :config
-  (set-face-attribute 'corfu-default nil :font "Sarasa Term CL" :background "black")
   (setq
    corfu-auto t
    corfu-auto-prefix 1
    corfu-cycle t
    corfu-preselect-first nil
    corfu-count 20
-   corfu-auto-delay 0.1
+   corfu-auto-delay 0.2
    corfu-quit-no-match t
    corfu-quit-at-boundary t
    corfu-on-exact-match nil
    corfu-max-width 120
-   corfu-min-width 60
+   corfu-min-width 10
+   corfu-bar-width 2
+   corfu-popupinfo-hide nil
    corfu-popupinfo-delay '(0.0 . 0.0)
    corfu-popupinfo-max-height 100
-   corfu-preview-current nil
-   )
+   corfu-preview-current nil)
+
+
   (global-corfu-mode)
+  (corfu-popupinfo-mode)
   (corfu-popupinfo-mode -1)
   (defun exec/corfu-move-to-minibuffer ()
 	(interactive)
@@ -2113,24 +2412,30 @@ if it encounter an error, then we execute `consult-outline'."
   (defun exec/corfu-enable-in-minibuffer ()
 	"Enable Corfu in the minibuffer if `completion-at-point' is bound."
 	(when (where-is-internal #'completion-at-point (list (current-local-map)))
-      ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
-      (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
-                  corfu-popupinfo-delay nil)
-      (corfu-mode 1)))
+	  ;; (setq-local corfu-auto nil) ;; Enable/disable auto completion
+	  (setq-local corfu-echo-delay nil ;; Disable automatic echo and popup
+				  corfu-popupinfo-delay nil)
+	  (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook #'exec/corfu-enable-in-minibuffer)
-
   )
+
 (use-package corfu-prescient
   :config
+  (setq corfu-prescient-completion-styles '(basic prescient))
   (corfu-prescient-mode)
   )
 
-(use-package corfu-terminal)
+(use-package corfu-terminal
+  :config
+
+  (unless (display-graphic-p)
+	(corfu-terminal-mode))
+  )
 
 (use-package eldoc-box
   :config
-  ;; (eldoc-box-hover-mode)
-  ;; (eldoc-box-hover-at-point-mode)
+  (eldoc-box-hover-mode 1)
+  (eldoc-box-hover-at-point-mode 1)
   )
 
 
@@ -2140,19 +2445,56 @@ if it encounter an error, then we execute `consult-outline'."
   (kind-icon-default-face nil) ; to compute blended backgrounds correctly
 
   :config
-  (setq kind-icon-use-icons t
-		kind-icon-blend-frac 0
-		kind-icon-default-style '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 0.5 :scale 1.0)
-		kind-icon-extra-space nil
-		)
+  (setq kind-icon-use-icons nil)
+  (setq kind-icon-mapping
+		`(
+		  (array ,(nerd-icons-codicon "nf-cod-symbol_array") :face font-lock-type-face)
+		  (boolean ,(nerd-icons-codicon "nf-cod-symbol_boolean") :face font-lock-builtin-face)
+		  (class ,(nerd-icons-codicon "nf-cod-symbol_class") :face font-lock-type-face)
+		  (color ,(nerd-icons-codicon "nf-cod-symbol_color") :face success)
+		  (command ,(nerd-icons-codicon "nf-cod-terminal") :face default)
+		  (constant ,(nerd-icons-codicon "nf-cod-symbol_constant") :face font-lock-constant-face)
+		  (constructor ,(nerd-icons-codicon "nf-cod-triangle_right") :face font-lock-function-name-face)
+		  (enummember ,(nerd-icons-codicon "nf-cod-symbol_enum_member") :face font-lock-builtin-face)
+		  (enum-member ,(nerd-icons-codicon "nf-cod-symbol_enum_member") :face font-lock-builtin-face)
+		  (enum ,(nerd-icons-codicon "nf-cod-symbol_enum") :face font-lock-builtin-face)
+		  (event ,(nerd-icons-codicon "nf-cod-symbol_event") :face font-lock-warning-face)
+		  (field ,(nerd-icons-codicon "nf-cod-symbol_field") :face font-lock-variable-name-face)
+		  (file ,(nerd-icons-codicon "nf-cod-symbol_file") :face font-lock-string-face)
+		  (folder ,(nerd-icons-codicon "nf-cod-folder") :face font-lock-doc-face)
+		  (interface ,(nerd-icons-codicon "nf-cod-symbol_interface") :face font-lock-type-face)
+		  (keyword ,(nerd-icons-codicon "nf-cod-symbol_keyword") :face font-lock-keyword-face)
+		  (macro ,(nerd-icons-codicon "nf-cod-symbol_misc") :face font-lock-keyword-face)
+		  (magic ,(nerd-icons-codicon "nf-cod-wand") :face font-lock-builtin-face)
+		  (method ,(nerd-icons-codicon "nf-cod-symbol_method") :face font-lock-function-name-face)
+		  (function ,(nerd-icons-codicon "nf-cod-symbol_method") :face font-lock-function-name-face)
+		  (module ,(nerd-icons-codicon "nf-cod-file_submodule") :face font-lock-preprocessor-face)
+		  (numeric ,(nerd-icons-codicon "nf-cod-symbol_numeric") :face font-lock-builtin-face)
+		  (operator ,(nerd-icons-codicon "nf-cod-symbol_operator") :face font-lock-comment-delimiter-face)
+		  (param ,(nerd-icons-codicon "nf-cod-symbol_parameter") :face default)
+		  (property ,(nerd-icons-codicon "nf-cod-symbol_property") :face font-lock-variable-name-face)
+		  (reference ,(nerd-icons-codicon "nf-cod-references") :face font-lock-variable-name-face)
+		  (snippet ,(nerd-icons-codicon "nf-cod-symbol_snippet") :face font-lock-string-face)
+		  (string ,(nerd-icons-codicon "nf-cod-symbol_string") :face font-lock-string-face)
+		  (struct ,(nerd-icons-codicon "nf-cod-symbol_structure") :face font-lock-variable-name-face)
+		  (text ,(nerd-icons-codicon "nf-cod-text_size") :face font-lock-doc-face)
+		  (typeparameter ,(nerd-icons-codicon "nf-cod-list_unordered") :face font-lock-type-face)
+		  (type-parameter ,(nerd-icons-codicon "nf-cod-list_unordered") :face font-lock-type-face)
+		  (unit ,(nerd-icons-codicon "nf-cod-symbol_ruler") :face font-lock-constant-face)
+		  (value ,(nerd-icons-codicon "nf-cod-symbol_field") :face font-lock-builtin-face)
+		  (variable ,(nerd-icons-codicon "nf-cod-symbol_variable") :face font-lock-variable-name-face)
+		  (t ,(nerd-icons-codicon "nf-cod-code") :face font-lock-warning-face)))
+
+
+
 
   ;; (setq kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
   )
 
-(use-package all-the-icons-completion
-  :config
-  (all-the-icons-completion-mode))
+;; (use-package all-the-icons-completion
+;;   :config
+;;   (all-the-icons-completion-mode))
 
 (use-package cape
   :config
@@ -2170,7 +2512,7 @@ if it encounter an error, then we execute `consult-outline'."
   ;; (add-to-list 'completion-at-point-functions #'cape-symbol)
   ;; (add-to-list 'completion-at-point-functions #'cape-line)
 
-  (setq cape-dabbrev-min-length 2
+  (setq cape-dabbrev-min-length 0
 		cape-dabbrev-check-other-buffers nil)
   (use-package yasnippet-capf
 	:straight (:host github :repo "elken/yasnippet-capf")
@@ -2197,17 +2539,18 @@ if it encounter an error, then we execute `consult-outline'."
 					 (switch-to-buffer-other-window (current-buffer))
 					 ))
   :config
+  (general-nmap :keymaps 'rg-mode-map
+	"j" 'compilation-next-error
+	"k" 'compilation-previous-error
+	)
+
   (setq rg-executable "rg")
   (setq rg-keymap-prefix (kbd "H-r"))
   (setq rg-show-columns nil)
+  (setq rg-show-header t
+		rg-hide-command nil)
   (rg-enable-default-bindings)
   (rg-enable-menu)
-
-  (advice-add
-   'rg-dwim-current-file
-   :after '(lambda (&rest args) (call-interactively 'other-window))
-   )
-
 
   (rg-define-search rg-search-current-file
 	"Run ripgrep on current file searching"
@@ -2217,6 +2560,8 @@ if it encounter an error, then we execute `consult-outline'."
 	:files (rg-get-buffer-file-name)
 	:dir current)
   )
+
+(use-package wgrep)
 
 (use-package ripgrep)
 
@@ -2245,7 +2590,7 @@ if it encounter an error, then we execute `consult-outline'."
 		 ;; ("<help> a" . consult-apropos)            ;; orig. apropos-command
 		 ;; M-g bindings (goto-map)
 		 ("M-g e" . consult-compile-error)
-		 ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+		 ("M-g f" . consult-grep)               ;; Alternative: consult-flycheck
 		 ("M-g g" . consult-goto-line)             ;; orig. goto-line
 		 ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
 		 ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
@@ -2301,6 +2646,9 @@ if it encounter an error, then we execute `consult-outline'."
   ;; after lazily loading the package.
   :config
 
+  (evil-add-command-properties #'consult--jump :jump t)
+  (evil-add-command-properties #'consult-imenu--jump :jump t)
+
   ;; Optionally configure preview. The default value
   ;; is 'any, such that any key triggers the preview.
   ;; (setq consult-preview-key 'any)
@@ -2310,22 +2658,25 @@ if it encounter an error, then we execute `consult-outline'."
   ;; :preview-key on a per-command basis using the `consult-customize' macro.
 
   (setq consult-preview-key
-		'(:debounce 0.3 any)
+		"M-."
+		;; nil
+		;; '(:debounce 0.5 any)
 		;; 'any
 		)
-  (consult-customize
-   consult-theme
-   consult-ripgrep
-   consult-git-grep
-   consult-grep
-   consult-bookmark
-   consult-recent-file
-   consult-xref
-   consult--source-bookmark consult--source-recent-file
-   consult--source-project-recent-file
-   )
+  (consult-customize consult-ripgrep
+					 consult-git-grep
+					 consult-grep
+					 consult-xref
+					 consult-line
+					 consult--source-bookmark
+					 consult--source-recent-file
+					 consult--source-project-recent-file
+					 :preview-key 'any
+					 :sort nil
+					 :initial (exec/thing-at-point)
+					 )
   (setq consult-async-min-input 1)
-  (setq consult-async-refresh-delay 1.0)
+  (setq consult-async-refresh-delay 0.2)
   (setq consult-buffer-sources '(
 								 consult--source-hidden-buffer
 								 consult--source-modified-buffer
@@ -2359,7 +2710,9 @@ if it encounter an error, then we execute `consult-outline'."
   ;;;; 4. locate-dominating-file
   ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
   (setq consult-ripgrep-args
-		"rg --null --line-buffered --color=never --max-columns=1000 --path-separator /   --smart-case --no-heading --line-number .")
+		"rg --null --line-buffered --color=never --max-columns=1000 --path-separator /   --smart-case --no-heading --with-filename --line-number --search-zip"
+		;; "rg --null --line-buffered --color=never --max-columns=100 --path-separator / --smart-case --no-heading --line-number . "
+		)
 
   (use-package consult-org-roam
 	:after org-roam
@@ -2375,6 +2728,7 @@ if it encounter an error, then we execute `consult-outline'."
   (use-package consult-flycheck
 	:config
 	)
+  (use-package consult-gh)
 
   (consult-preview-at-point-mode)
   )
@@ -2383,35 +2737,42 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package lsp-mode
   :after evil
   :init
-  (setq lsp-completion-provider :none)
-  (setq lsp-diagnostics-provider :none)
+  (setq-default lsp-keymap-prefix "C-c l"
+				lsp-completion-provider :none
+				lsp-diagnostics-provider :flycheck
+				lsp-modeline-diagnostics-scope :file
+				lsp-use-plists t
+				lsp-rust-unstable-features t
+				lsp-rust-analyzer-diagnostics-enable-experimental t
+				lsp-rust-analyzer-display-chaining-hints t
+				lsp-rust-analyzer-display-closure-return-type-hints t
+				lsp-rust-analyzer-display-lifetime-elision-hints-enable nil
+				lsp-rust-analyzer-display-parameter-hints t
+				lsp-rust-analyzer-rustfmt-rangeformatting-enable t
+				lsp-rust-analyzer-lens-enable t
+				lsp-rust-analyzer-lens-references-adt-enable t
+				lsp-rust-analyzer-lens-implementations-enable t
+				lsp-rust-analyzer-lens-references-adt-enable t
+				lsp-rust-analyzer-lens-references-enum-variant-enable t
+				lsp-rust-analyzer-lens-references-method-enable t
+				lsp-rust-analyzer-lens-references-trait-enable t
+				lsp-rust-analyzer-lens-run-enable t
+				lsp-rust-analyzer-lens-debug-enable t
+				lsp-rust-analyzer-binding-mode-hints t
+				lsp-use-workspace-root-for-server-default-directory t
+				lsp-modeline-code-actions-segments '(count icon name)
+				lsp-signature-auto-activate
+				'(:on-trigger-char :on-server-request :after-completion)
+				lsp-xref-force-references t
+				)
 
-  (defun exec/rust-mode-lsp-hook()
-	(setq
-	 lsp-rust-analyzer-diagnostics-enable-experimental t
-	 lsp-rust-analyzer-display-chaining-hints t
-	 lsp-rust-analyzer-display-closure-return-type-hints t
-	 lsp-rust-analyzer-display-lifetime-elision-hints-enable nil
-	 lsp-rust-analyzer-display-parameter-hints t
-	 lsp-rust-analyzer-rustfmt-rangeformatting-enable t
-	 lsp-rust-analyzer-server-display-inlay-hints t
-	 )
-	(lsp)
-	;; (lsp-rust-analyzer-inlay-hints-mode)
+  (defun exec/rust-ts-mode-lsp-hook()
+	(lsp-deferred)
 	(flycheck-add-next-checker 'rust-cargo 'rust-clippy)
-	(add-hook 'lsp-rust-analyzer-inlay-hints-mode-hook
-			  (lambda nil
-				(custom-set-faces
-				 '(lsp-rust-analyzer-inlay-face
-				   ((t (
-						:inherit font-lock-comment-face
-						;; :height 0.8
-						;; :width normal
-						;; :foreground "light gray"
-						;; :background "dim gray"
-						:underline '(:color "white" :style wave)
-						)))))))
+	(add-hook 'before-save-hook (lambda () (when (eq 'rust-ts-mode major-mode)
+											 (lsp-format-buffer))))
 	)
+
   (defun lsp-goto-symbol-occurence (direction)
 	"DIRECTION is forward, backward, last, first."
 	(unless (lsp--capability "documentHighlightProvider")
@@ -2428,7 +2789,12 @@ if it encounter an error, then we execute `consult-outline'."
 	  (if (> (length highlights) 1)
 		  ;; map highlights to a point list
 		  (let* ((my--points (-map (lambda (it)
-									 (lsp--position-to-point (gethash "start" (gethash "range" it nil)))) highlights))
+									 (lsp--position-to-point
+									  (plist-get (plist-get it :range) :start)
+									  )
+									 )
+								   highlights)
+							 )
 				 (points (-sort '< my--points))
 				 (len (length my--points))
 				 (goto--index (pcase direction
@@ -2463,64 +2829,64 @@ if it encounter an error, then we execute `consult-outline'."
 	(interactive)
 	(lsp-goto-symbol-occurence 'backward))
 
+  (defun lsp-find-definition-or-reference()
+	(interactive)
+	(let ((previous-point (point)))
+	  (lsp-find-definition)
+	  (if (= previous-point (point))
+		  (lsp-find-references))))
+
+
   :bind
   ("M-i" . lsp-goto-symbol-occurence-backward)
   ("M-o" . lsp-goto-symbol-occurence-forward)
-  ;; (:map lsp-ui-peek-mode-map
-  ;;  ("C-j" . evil-next-line)
-  ;;  ("C-k" . evil-previous-line))
+  ("M-RET" . lsp-execute-code-action)
   :hook
-  (
-   ((shell-mode clojure-mode) . lsp)
-   (rust-mode . exec/rust-mode-lsp-hook)
-   (rust-ts-mode . exec/rust-mode-lsp-hook)
-   )
+  ((shell-mode clojure-mode) . lsp-deferred)
+  (rust-ts-mode . exec/rust-ts-mode-lsp-hook)
+  (lsp-completionmode . (lambda()
+						  (setq completion-category-defaults nil)))
+  (lsp-mode . (lambda()
+				(let ((lsp-keymap-prefix "C-c l"))
+				  (lsp-enable-which-key-integration))))
+  :custom-face
+  (lsp-inlay-hint-face ((t (:height 0.8))))
   :config
-
-  (add-hook 'lsp-completion-mode-hook (lambda()
-										(setq completion-category-defaults nil)))
-  (add-hook 'lsp-mode-hook (lambda()
-							 (let ((lsp-keymap-prefix "C-c l"))
-							   (lsp-enable-which-key-integration))
-							 ))
-
 
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
 
   (evil-add-command-properties #'lsp-find-type-definition :jump t)
   (evil-add-command-properties #'lsp-find-definition :jump t)
   (evil-add-command-properties #'goto-line :jump t)
+  (evil-add-command-properties #'evil-ex-search-word-forward :jump t)
+  (evil-add-command-properties #'org-roam-node-find :jump t)
+  (evil-add-command-properties #'lsp-find-definition-or-reference :jump t)
 
-  (setq
-   lsp-enable-indentation nil
-   lsp-enable-on-type-formatting nil
-   lsp-enable-symbol-highlighting t
-   lsp-enable-text-document-color t
-   lsp-headerline-breadcrumb-enable-diagnostics nil
-   lsp-idle-delay 1
-   lsp-lens-enable nil
-   lsp-log-io nil
-   lsp-references-exclude-definition nil
-   lsp-response-timeout nil
-   lsp-semantic-tokens-enable nil
-   lsp-ui-doc-show-with-cursor t
-   lsp-ui-doc-delay 1.0
-   lsp-ui-doc-header t
-   lsp-ui-doc-use-childframe t
-   lsp-ui-doc-use-webkit nil
-   lsp-ui-doc-include-signature t
-   lsp-ui-doc-position 'top
-   lsp-ui-sideline-enable nil
-   lsp-completion-sort-initial-results nil
-   lsp-eldoc-render-all nil
-   lsp-eldoc-enable-hover nil
+  (setq lsp-completion-no-cache nil
+		lsp-completion-sort-initial-results nil
+		lsp-eldoc-enable-hover nil
+		lsp-eldoc-render-all nil
+		lsp-enable-indentation t
+		lsp-enable-on-type-formatting t
+		lsp-enable-snippet t
+		lsp-enable-symbol-highlighting t
+		lsp-enable-text-document-color t
+		lsp-enable-links nil
+		lsp-headerline-breadcrumb-enable-diagnostics nil
+		lsp-headerline-arrow "/"
+		lsp-idle-delay 0.2
+		lsp-inlay-hint-enable t
+		lsp-lens-enable t
+		lsp-log-io nil
+		lsp-references-exclude-definition nil
+		lsp-references-exclude-definition t
+		lsp-response-timeout 10
+		lsp-ui-imenu-auto-refresh t
 
-   lsp-completion-no-cache nil
-   lsp-enable-snippet t
-
-   lsp-references-exclude-definition t
-   lsp-inlay-hint-enable t
-   )
+		lsp-ui-imenu-enable nil
+		lsp-headerline-breadcrumb-enable nil
+		lsp-semantic-tokens-enable t
+		)
 
   ;; lsp-bash
   (setq lsp-bash-explainshell-endpoint "https://explainshell.com"
@@ -2531,109 +2897,299 @@ if it encounter an error, then we execute `consult-outline'."
 		lsp-pylsp-plugins-flake8-enabled t
 		lsp-pylsp-plugins-pylint-enabled t)
 
+  (setq lsp-semgrep-languages nil)
+
   ;; (setq assignVariableTypes "assignVariableTypes")
-  (lsp-register-custom-settings '(
-								  ("gopls.allExperiments" t t)
+  (lsp-register-custom-settings '(("gopls.allExperiments" t t)
 								  ("gopls.completeUnimported" t t)
 								  ("gopls.staticcheck" t t)
 								  ("gopls.usePlaceholders" t t)
 								  ("gopls.allExperiments" t t)
-
 								  ("gopls.hints" ((assignVariableTypes . t)
 												  (compositeLiteralFields . t)
 												  (compositeLiteralTypes . t)
 												  (functionTypeParameters . t)
 												  (parameterNames . t)
-												  (rangeVariableTypes . t)
-												  )
-								   )
-								  )
-								)
-
-
-
-  (evil-define-key 'normal lsp-mode-map
-	(kbd "gd") 'lsp-find-definition
-	(kbd "M-b") 'lsp-find-definition
-	(kbd "gD") 'lsp-find-declaration
-	(kbd "gt") 'lsp-find-type-definition
-	(kbd "gr") 'lsp-find-references
-	(kbd "gi") 'lsp-find-implementation
-	)
+												  (rangeVariableTypes . t)))))
 
   (setq lsp-zig-zls-executable "zls")
-  )
+
+  (use-package lsp-ui
+
+	:hook
+	(lsp . lsp-ui-mode)
+	:custom-face
+	(lsp-ui-sideline-global ((t (:height 0.6 :underline (:color foreground-color :style wave :position nil)))))
+	(lsp-ui-sideline-symbol ((t (:height 0.6))))
+	(lsp-ui-sideline-symbol-info ((t (:height 0.6))))
+	(lsp-ui-sideline-current-symbol ((t (:height 0.6))))
+	(lsp-ui-sideline-code-action ((t (:height 0.6))))
+	:config
+	;; (defun exec/overwrite-lsp-ui()
+	;;   (interactive)
+
+	;;   (defun lsp-headerline--build-path-up-to-project-string ()
+	;; 	"Build the path-up-to-project segment for the breadcrumb."
+	;; 	(if-let ((root (lsp-headerline--workspace-root)))
+	;; 		(let ((segments (or
+	;; 						 lsp-headerline--path-up-to-project-segments
+	;; 						 (setq lsp-headerline--path-up-to-project-segments
+	;; 							   (lsp-headerline--path-up-to-project-root
+	;; 								root
+	;; 								(lsp-f-parent (buffer-file-name)))))))
+	;; 		  (mapconcat (lambda (next-dir)
+	;; 					   (propertize next-dir
+	;; 								   'font-lock-face
+	;; 								   (lsp-headerline--face-for-path
+	;; 									(get-text-property
+	;; 									 0 'lsp-full-path next-dir))))
+	;; 					 segments
+	;; 					 (concat (lsp-headerline--arrow-icon) "")))
+	;; 	  ""))
+
+	;;   (defun lsp-headerline--build-file-string ()
+	;; 	"Build the file-segment string for the breadcrumb."
+	;; 	(let* ((file-path (or (buffer-file-name) ""))
+	;; 		   (filename (f-filename file-path)))
+	;; 	  (if-let ((file-ext (f-ext file-path)))
+	;; 		  (concat (lsp-icons-get-by-file-ext file-ext 'headerline-breadcrumb)
+	;; 				  ""
+	;; 				  (propertize filename
+	;; 							  'font-lock-face
+	;; 							  (lsp-headerline--face-for-path file-path)))
+	;; 		filename)))
 
 
-(use-package lsp-ui
-  :config
-  (setq lsp-imenu-sort-methods nil)
-  ;; (custom-set-faces
-  ;;  '(lsp-ui-menu ((t (:inherit default :background "#282c34"))))
-  ;;  '(lsp-ui-sideline-global ((t (:family "Iosevka" :height 1.0 :width ultra-condensed))))
-  ;;  )
+	;;   (defun lsp-headerline--build-string ()
+	;; 	"Build the header-line string."
+	;; 	(string-trim-right
+	;; 	 (mapconcat
+	;; 	  (lambda (segment)
+	;; 		(let ((segment-string
+	;; 			   (pcase segment
+	;; 				 ('project (lsp-headerline--build-project-string))
+	;; 				 ('file (lsp-headerline--build-file-string))
+	;; 				 ('path-up-to-project (lsp-headerline--build-path-up-to-project-string))
+	;; 				 ('symbols (lsp-headerline--build-symbol-string))
+	;; 				 (_ (lsp-log "'%s' is not a valid entry for `lsp-headerline-breadcrumb-segments'"
+	;; 							 (symbol-name segment))
+	;; 					""))))
+	;; 		  (if (eq segment-string "")
+	;; 			  ""
+	;; 			(concat (lsp-headerline--arrow-icon)
+	;; 					""
+	;; 					segment-string
+	;; 					""))))
+	;; 	  lsp-headerline-breadcrumb-segments
+	;; 	  "")))
 
-  (add-hook 'lsp-ui-imenu-mode-hook
-			'(lambda()
-			   (interactive)
-			   (setq buffer-face-mode-face '(
-											 :family "Iosevka"
-											 ;; :height 100
-											 ))
-			   (buffer-face-mode)
-			   ))
-  )
-(use-package lsp-grammarly)
+	;;   (defun lsp-headerline--build-symbol-string ()
+	;; 	"Build the symbol segment for the breadcrumb."
+	;; 	(if (lsp-feature? "textDocument/documentSymbol")
+	;; 		(-if-let* ((lsp--document-symbols-request-async t)
+	;; 				   (symbols (lsp--get-document-symbols))
+	;; 				   (symbols-hierarchy (lsp--symbols->document-symbols-hierarchy symbols))
+	;; 				   (enumerated-symbols-hierarchy
+	;; 					(-map-indexed (lambda (index elt)
+	;; 									(cons elt (1+ index)))
+	;; 								  symbols-hierarchy)))
+	;; 			(mapconcat
+	;; 			 (-lambda (((symbol &as &DocumentSymbol :name)
+	;; 						. index))
+	;; 			   (let* ((symbol2-name
+    ;; 					   (propertize name
+	;; 								   'font-lock-face
+	;; 								   (lsp-headerline--face-for-symbol symbol)))
+	;; 					  (symbol2-icon (lsp-headerline--symbol-icon symbol))
+	;; 					  (full-symbol-2
+	;; 					   (concat
+	;; 						(if lsp-headerline-breadcrumb-enable-symbol-numbers
+	;; 							(concat
+	;; 							 (propertize (number-to-string index)
+	;; 										 'face
+	;; 										 'lsp-headerline-breadcrumb-symbols-face)
+	;; 							 "")
+	;; 						  "")
+	;; 						(if symbol2-icon
+	;; 							(concat symbol2-icon symbol2-name)
+	;; 						  symbol2-name))))
+	;; 				 (lsp-headerline--symbol-with-action symbol full-symbol-2)))
+	;; 			 enumerated-symbols-hierarchy
+	;; 			 (concat "⭢"
+	;; 					 ;; (lsp-headerline--arrow-icon)
+	;; 					 ))
+	;; 		  "")
+	;; 	  ""))
 
-(use-package consult-lsp
-  :after consult
-  )
-(use-package lsp-pyright
-  :config
-  (setq lsp-pyls-server-command "pyright")
-  )
+	;;   )
+	;; (add-hook 'lsp-ui-mode-hook 'exec/overwrite-lsp-ui)
+
+
+
+	(setq-default lsp-imenu-sort-methods nil
+				  lsp-ui-doc-show-with-cursor nil
+				  lsp-ui-doc-delay 1.0
+				  lsp-ui-doc-header t
+				  lsp-ui-doc-use-childframe t
+				  lsp-ui-doc-use-webkit nil
+				  lsp-ui-doc-include-signature t
+				  lsp-ui-doc-position 'top
+				  lsp-ui-sideline-enable nil)
+
+	;; (general-evil-define-key 'normal 'lsp-mode-map
+	;;   "M-b" 'lsp-find-definition-or-reference
+	;;   )
+	;; (add-hook 'prog-mode-hook 'evil-normalize-keymaps)
+	(evil-define-minor-mode-key 'normal 'lsp-mode
+	  (kbd "M-b") 'lsp-find-definition-or-reference)
+
+	(general-nmap :keymaps 'lsp-mode-map
+	  "gD" 'lsp-find-declaration
+	  "gt" 'lsp-find-type-definition
+	  "gd" 'lsp-find-definition
+	  "gr" 'lsp-find-references
+	  "gu" 'lsp-rust-find-parent-module
+	  )
+
+	(general-nmap :keymaps 'lsp-ui-mode-map
+	  "gi" 'lsp-ui-peek-find-implementation
+	  "gs" 'lsp-ui-find-workspace-symbol
+	  "M-d" 'lsp-ui-doc-glance
+	  )
+	(general-def :keymaps 'lsp-ui-peek-mode-map
+	  "j" 'lsp-ui-peek--select-next
+	  "k" 'lsp-ui-peek--select-prev
+	  "C-j" 'lsp-ui-peek--select-next
+	  "C-k" 'lsp-ui-peek--select-prev)
+
+
+	)
+
+  (use-package lsp-grammarly)
+
+  (use-package consult-lsp
+	:disabled
+	:after consult)
+
+  (use-package lsp-pyright
+	:hook
+	(python-mode . lsp-deferred)
+	:config
+	(setq lsp-pyls-server-command "pyright")
+	(setq lsp-pyright-use-library-code-for-types t) ;; set this to nil if getting too many false positive type errors
+	(setq lsp-pyright-stub-path "~/Projects/github.com/microsoft/python-type-stubs")))
+
 
 (use-package yasnippet
   :hook (after-init . yas-global-mode)
   :config
+  (setq yas-indent-line 'fixed)
   (yas-reload-all)
   (use-package yasnippet-snippets
 	:after yasnippet)
   )
 
+(use-package breadcrumb
+  :hook
+  (after-init . breadcrumb-mode)
+  :config
+  (defun exec/breadcrumb-imenu-crumbs (s_point)
+	(when-let ((alist (bc--ipath-alist)))
+      (when (cl-some #'identity alist)
+		(bc--summarize
+		 (cl-loop
+          for (p . more) on (bc-ipath alist s_point)
+          collect (bc--format-ipath-node p more))
+		 (bc--length bc-imenu-max-length)
+		 (propertize bc-imenu-crumb-separator
+					 'face 'bc-face)))))
+
+
+  )
 
 ;; (use-package lsp-bridge
-;;   :ensure nil
-;;   :straight (lsp-bridge :type git
-;; 			  :host github
-;; 			  :repo "manateelazycat/lsp-bridge"
-;; 			  :files ("*"))
+;;   :straight (lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge" :files ("*"))
 ;;   :config
-;;   (general-evil-define-key 'normal 'lsp-bridge-ref-mode-map
-;; 	"q" 'lsp-bridge-ref-quit
-;; 	"C-j" 'lsp-bridge-ref-jump-next-file
-;; 	"C-k" 'lsp-bridge-ref-jump-prev-file
-;; 	"RET" 'lsp-bridge-ref-open-file-and-stay
-;; 	"SPC" 'lsp-bridge-ref-open-file
+;;   (setq-default lsp-bridge-enable-hover-diagnostic t
+;; 				lsp-bridge-enable-completion-in-string t
+;; 				lsp-bridge-enable-completion-in-minibuffer t
+;; 				acm-menu-length 30
+;; 				acm-enable-copilot t
+;; 				lsp-bridge-user-langserver-dir "~/.emacs.d/lsp-bridge/user-langserver-dir"
+;; 				acm-completion-backend-merge-order '(
+;; 													 "template-first-part-candidates"
+;; 													 "template-second-part-candidates"
+;; 													 "copilot-candidates"
+;; 													 "mode-first-part-candidates"
+;; 													 "mode-second-part-candidates"
+;; 													 "tabnine-candidates"
+;; 													 "codeium-candidates"
+;; 													 )
+;; 				)
+
+;;   (add-hook 'acm-mode-hook 'evil-normalize-keymaps)
+;;   (general-imap :keymaps 'acm-mode-map
+;; 	"C-j" 'acm-select-next
+;; 	"C-k" 'acm-select-prev
+;; 	"C-h" 'acm-select-first
+;; 	"C-l" 'acm-select-last
+;; 	"C-f" 'acm-select-next-page
+;; 	"C-b" 'acm-select-prev-page
+;; 	"C-S-j" 'acm-doc-scroll-down
+;; 	"C-S-k" 'acm-doc-scroll-up
 ;; 	)
 
-;;   (general-evil-define-key 'normal 'lsp-bridge-mode-map
+
+;;   (general-nmap :keymaps 'lsp-bridge-ref-mode-map
+;; 	"q" 'lsp-bridge-ref-quit
 ;; 	"C-j" 'next-line
-;; 	"C-k" 'previous
+;; 	"C-k" 'previous-line
+;; 	"RET" 'lsp-bridge-ref-open-file-and-stay
+;; 	"SPC" 'lsp-bridge-ref-open-file
+;; 	"j" 'lsp-bridge-ref-jump-next-keyword
+;; 	"k" 'lsp-bridge-ref-jump-prev-keyword
+;; 	"l" 'lsp-bridge-ref-jump-next-file
+;; 	"h" 'lsp-bridge-ref-jump-prev-file
+;; 	)
+
+;;   (general-nmap :keymaps 'lsp-bridge-mode-map
 ;; 	"gd" 'lsp-bridge-find-def
 ;; 	"gt" 'lsp-bridge-find-type-def
 ;; 	"gr" 'lsp-bridge-find-references
 ;; 	"gR" 'lsp-bridge-find-def-return
-;; 	"gi" 'lsp-bridge-find-impl
+;; 	"gi" 'lsp-bridge-find-impl)
+
+;;   (add-hook 'lsp-bridge-peek-mode-hook 'evil-normalize-keymaps)
+
+;;   (general-nmap :keymaps 'lsp-bridge-peek-keymap
+;; 	"j"  'lsp-bridge-peek-file-content-next-line
+;; 	"k"  'lsp-bridge-peek-file-content-prev-line
+;; 	"J"  'lsp-bridge-peek-list-next-line
+;; 	"K"  'lsp-bridge-peek-list-prev-line
 ;; 	)
 
-;;   (global-lsp-bridge-mode)
-;;   )
+;;   (general-imap :keymaps 'lsp-bridge-mode-map
+;; 	"C-SPC" 'lsp-bridge-popup-complete-menu
+;; 	)
 
+
+;;   (global-lsp-bridge-mode))
 
 
 (use-package keycast
-  ;; :hook (after-init . keycast-tab-bar-mode)
+  :hook (after-init . keycast-tab-bar-mode)
+  )
+
+(use-package command-log-mode
+  :custom
+  (command-log-mode-key-binding-open-log "H-p l")
+  :straight (command-log-mode :type git :repo "lewang/command-log-mode")
+  :config
+  (setq command-log-mode-is-global t
+		command-log-mode-key-binding-open-log nil
+		command-log-mode-window-size 80
+		)
+  (global-command-log-mode)
   )
 
 (use-package powerthesaurus)
@@ -2650,18 +3206,6 @@ if it encounter an error, then we execute `consult-outline'."
 	))
 
 
-
-
-(add-hook 'dired-mode-hook '(lambda()
-							  ;; set font for buffer
-							  (interactive)
-							  (setq buffer-face-mode-face '(:family "Noto Sans Mono" ))
-							  (buffer-face-mode)
-							  ))
-
-
-
-
 (use-package rainbow-mode
   :hook
   (
@@ -2673,15 +3217,22 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package rainbow-delimiters
   :hook ((prog-mode emacs-lisp-mode minibuffer-mode) .  rainbow-delimiters-mode)
+  :config
+  )
+
+(use-package color-identifiers-mode
+  :config
+  (global-color-identifiers-mode)
   )
 
 (use-package indent-bars
   :straight (indent-bars :type git :host github :repo "jdtsmith/indent-bars")
-  ;; :hook (prog-mode  . indent-bars-mode)
+  :hook (prog-mode  . indent-bars-mode)
   :custom
   (indent-bars-treesit-support t)
   (indent-bars-no-descend-string t)
   (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  (indent-bars-prefer-character t)
   (indent-bars-treesit-wrap '((python argument_list parameters ; for python, as an example
 									  list list_comprehension
 									  dictionary dictionary_comprehension
@@ -2697,6 +3248,11 @@ if it encounter an error, then we execute `consult-outline'."
   (setq exercism-directory "~/Projects/github.com/eval-exec/exercism")
   )
 
+
+(use-package persistent-scratch
+  :config
+  (add-hook 'after-init-hook 'persistent-scratch-setup-default)
+  )
 
 
 (use-package beacon
@@ -2719,7 +3275,6 @@ if it encounter an error, then we execute `consult-outline'."
 		)
   )
 
-(use-package bufler)
 
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
@@ -2757,6 +3312,10 @@ if it encounter an error, then we execute `consult-outline'."
 											  " " (filename-and-process+ -1 -1 :left))))
   :config (all-the-icons-ibuffer-mode 1))
 
+(add-hook 'image-mode-hook '(lambda()
+							  (blink-cursor-mode -1)
+							  ))
+
 (use-package pdf-tools
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :hook (pdf-view . (lambda()
@@ -2779,15 +3338,18 @@ if it encounter an error, then we execute `consult-outline'."
 	)
 
   (use-package toc-mode)
+
   (use-package pdfgrep
 	:hook
 	(pdf-view-mode . pdfgrep-mode)
 	)
+
   (use-package saveplace-pdf-view
 	:hook
 	(pdf-view-mode . save-place-mode)
 	)
   )
+
 (use-package image-roll
   :straight (:host github :repo "dalanicolai/image-roll.el")
   )
@@ -2807,8 +3369,8 @@ if it encounter an error, then we execute `consult-outline'."
   (cargo-mode . ansi-color-for-comint-mode-on)
   )
 (setq compilation-scroll-output t)
-(add-hook 'compilation-mode-hook 'ansi-color-for-comint-mode-on)
-(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+;; (add-hook 'compilation-mode-hook 'ansi-color-for-comint-mode-on)
+;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 
 (use-package cargo-transient
   :custom
@@ -2832,18 +3394,6 @@ if it encounter an error, then we execute `consult-outline'."
 								:v-adjust 0.0
 								:height 1.0) " ")))
 
-
-(use-package persp-mode
-  :disabled t
-  :custom
-  (persp-keymap-prefix (kbd "C-c w"))
-  :config
-  ;; (persp-mode t)
-
-  (use-package persp-projectile
-	:disabled t
-	)
-  )
 
 
 
@@ -2870,39 +3420,102 @@ if it encounter an error, then we execute `consult-outline'."
 ;; (set inferior-lisp-program "sbcl")
 ;; (use-package common-lisp-snippets)
 
-(use-package slime
-  :disabled t
-  :config (setq inferior-lisp-program "sbcl"))
 
+(use-package dash
+  :hook
+  (after-init . global-dash-fontify-mode)
+  :config
+  (setq dash-fontify-mode-lighter " Dash")
+  )
 
 (use-package rust-playground
   :config
   (setq rust-playground-cargo-toml-template
 		"[package]\nname = \"rust-playground\"\nversion = \"0.1.0\"\nauthors = [\"Eval EXEC<execvy@gmail.com>\"]\nedition = \"2021\"\n\n[dependencies]"
 		rust-playground-confirm-deletion nil
+		rust-playground-basedir "/tmp/rust-playground"
 		)
   )
 (use-package cargo-mode)
 (use-package js2-mode)
 
 (use-package emr
-  :bind
-  (
-   ("M-RET" . 'emr-show-refactor-menu)
-   )
   )
 
-
-(use-package tree-sitter-langs)
-;; (use-package tree-sitter-indent)
-;; (use-package tree-sitter)
-
-(use-package magit
+(use-package rust-mode
   :config
-  (use-package forge)
   )
+(use-package treesit-auto
+  :demand t
+  :config
+  (setq treesit-auto-install t
+		treesit-auto-langs '(
+							 bash
+							 bibtex
+							 c
+							 c-sharp
+							 clojure
+							 cmake
+							 commonlisp
+							 cpp
+							 css
+							 dart
+							 dockerfile
+							 elixir
+							 go
+							 gomod
+							 heex
+							 html
+							 java
+							 javascript
+							 json
+							 julia
+							 kotlin
+							 latex
+							 lua
+							 make
+							 markdown
+							 proto
+							 python
+							 r
+							 ruby
+							 rust
+							 toml
+							 tsx
+							 typescript
+							 typst
+							 verilog
+							 vhdl
+							 yaml
+							 awk
+							 )
+		)
+  (treesit-auto-add-to-auto-mode-alist)
+
+  (global-treesit-auto-mode 1)
+  )
+
+(add-to-list 'auto-mode-alist '("/\\(Cargo.lock\\|\\.cargo/config\\)\\'" . toml-ts-mode))
+
+(add-to-list 'auto-mode-alist '("//.md//'" . markdown-mode))
+
+;; (use-package tree-sitter-langs)
+;; (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+
+;; (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+;; (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+;; (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
+;; (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode))
+;; (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
+;; (add-to-list 'major-mode-remap-alist '(sh-mode . bash-ts-mode))
+;; (add-to-list 'major-mode-remap-alist '(makefile-mode . cmake-ts-mode))
+;; (add-to-list 'major-mode-remap-alist '(conf-toml-mode . toml-ts-mode))
+
+
 
 (use-package git-commit)
+
+(use-package git-timemachine)
 
 (use-package solidity-mode)
 
@@ -2933,6 +3546,8 @@ if it encounter an error, then we execute `consult-outline'."
   ;; don't find this very useful, but it's frequently useful to only
   ;; look at interactive functions.
   ;; ("H-h C" . helpful-command))
+  :custom-face
+  (helpful-heading ((t (:foreground "cyan" :height 1.2))))
   :config
   (setq help-window-select t)
   )
@@ -2940,37 +3555,48 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package 2048-game)
 
 (use-package super-save
-  :config
-  (super-save-mode +1)
-  (setq super-save-auto-save-when-idle t)
+  :init
   (setq auto-save-default nil)
+  :config
+  (setq super-save-auto-save-when-idle nil
+		super-save-idle-duration 10
+		super-save-hook-triggers '(evil-insert-state-exit-hook
+								   evil-operator-state-exit-hook
+								   evil-replace-state-exit-hook
+								   mouse-leave-buffer-hook focus-out-hook)
+		)
+
+  ;; (addt- 's- 'evil-insert---)
+  ;; (add-to-list 'super--triggers 'evil-replace-state-exit-hook)
+  ;; (add-to-list 'super---triggers 'evil-operator-state-exit-hook)
+  (super-save-mode +1)
   )
 
 
 (use-package hungry-delete
   :config
-  (global-hungry-delete-mode -1)
+  (global-hungry-delete-mode)
   )
 
 
 (defun exec/nov-mode-face()
   (interactive)
-  (setq-local buffer-face-mode-face '(
-									  :family "Sarasa Gothic SC"
-									  :height 2.0
-									  :background "white"
-									  :foreground "black"
-									  ))
-  (make-local-variable 'buffer-face-mode-face)
-  (blink-cursor-mode -1)
-  (tab-bar-mode -1)
-  (buffer-face-mode)
+  ;; (setq-local buffer-face-mode-face '(
+  ;; 									  :family "Sarasa Gothic SC"
+  ;; 									  :height 2.0
+  ;; 									  :background "white"
+  ;; 									  :foreground "black"
+  ;; 									  ))
+  ;; (make-local-variable 'buffer-face-mode-face)
+  ;; (blink-cursor-mode -1)
+  ;; (tab-bar-mode -1)
+  ;; (buffer-face-mode)
   )
 
 (use-package nov
   :hook
   (nov-mode . exec/nov-mode-face)
-  (nov-mode . writeroom-mode)
+  ;; (nov-mode . writeroom-mode)
   :config
   (setq nov-unzip-program "unzip"
 		nov-text-width t
@@ -2986,7 +3612,7 @@ if it encounter an error, then we execute `consult-outline'."
 	(when (eq major-mode 'nov-mode)
 	  (condition-case err
 		  (progn
-			(next-line))
+			(pixel-scroll-up))
 		(error
 		 (nov-next-document)))))
   )
@@ -3003,6 +3629,7 @@ if it encounter an error, then we execute `consult-outline'."
   )
 
 (use-package scrollkeeper
+  :disabled
   :config
   )
 (use-package better-scroll
@@ -3052,10 +3679,32 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package pangu-spacing
   :custom
   (pangu-spacing-real-insert-separtor  t)
-  (pangu-spacing-inhibit-mode-alist  '(eshell-mode shell-mode term-mode))
-  :config
-  ;; (global-pangu-spacing-mode)
+  (pangu-spacing-inhibit-mode-alist  '(eshell-mode shell-mode term-mode vterm-mode))
+  :hook
+  ((prog-mode emacs-lisp-mode org-mode org-journal-mode) . pangu-spacing-mode)
   )
+;; (use-package websocket
+;;   :straight (websocket :host github :repo "ahyatt/emacs-websocket" :branch main)
+;;   )
+
+;; (use-package deno-bridge
+;;   :straight (deno-bridge :host github :repo "manateelazycat/deno-bridge")
+;;   :config
+;;   )
+
+
+;; (use-package deno-bridge-jieba
+;;   :disabled
+;;   :straight (deno-bridge-jieba :host github :repo "ginqi7/deno-bridge-jieba")
+;;   :config
+;;   ;; 早上好，你好吗我能吞下玻璃而不伤身体
+;;   (deno-bridge-jieba-start)
+;;   (general-def :states '(normal motion visual) :keymaps 'global
+;; 	"e" 'deno-bridge-jieba-forward-word
+;; 	"b" 'deno-bridge-jieba-backward-word
+;; 	)
+
+;;   )
 
 (use-package eglot
   :disabled
@@ -3132,7 +3781,7 @@ if it encounter an error, then we execute `consult-outline'."
   (setq telega-chat-show-avatars t)
   (setq telega-photo-show-details nil)
   (setq telega-translate-to-language-by-default "zh-CN")
-  (setq telega-server-libs-prefix "/nix/store/cnvn9jsls70idm7cd981s4qr20pry3rv-tdlib-1.8.16")
+  (setq telega-server-libs-prefix "/nix/store/dbz1l9mipbn0q22rk3rzr0cxwgns5ihm-tdlib-1.8.19")
   )
 
 ;; (use-package plz
@@ -3151,16 +3800,16 @@ if it encounter an error, then we execute `consult-outline'."
   (defun exec/clip-to-PNG ()
     (interactive)
     (when (string-match-p (regexp-quote "image/png") (shell-command-to-string "xclip -selection clipboard -o -t TARGETS"))
-      (let
-          ((image-file (concat "/tmp/" (format-time-string "tmp_%Y%m%d_%H%M%S.png"))))
+	  (let
+		  ((image-file (concat "/tmp/" (format-time-string "tmp_%Y%m%d_%H%M%S.png"))))
         (shell-command-to-string (concat "xclip -o -selection clipboard -t image/png > " image-file))
         image-file)))
 
   (defun exec/mu4e-attach-image-from-clipboard ()
     (interactive)
     (let ((image-file (exec/clip-to-PNG)) ;; paste clipboard to temp file
-          (pos (point-marker)))
-      (when image-file
+		  (pos (point-marker)))
+	  (when image-file
         (goto-char (point-max))
         (mail-add-attachment image-file)
         (goto-char pos))))
@@ -3169,6 +3818,9 @@ if it encounter an error, then we execute `consult-outline'."
   :straight (:type built-in)
   :config
 
+  (general-def 'normal mu4e-main-mode-map
+	"q" 'previous-buffer
+	)
 
   (setq mu4e-mu-binary (executable-find "mu"))
   ;; use mu4e for e-mail in emacs
@@ -3212,7 +3864,7 @@ if it encounter an error, then we execute `consult-outline'."
 
   (setq mu4e-bookmarks '(
 						 ("flag:unread"                       "Unread messages"                  ?u)
-						 (""                  "All messages"                     ?a)
+						 (""                                  "All messages"                     ?a)
 						 ("date:today..now"                   "Today's messages"                 ?t)
 						 ("date:1d..now"                      "Last 1 days"                      ?y)
 						 ("date:7d..now"                      "Last 7 days"                      ?w)
@@ -3220,7 +3872,8 @@ if it encounter an error, then we execute `consult-outline'."
 						 ("maildir:/sent"                     "sent"                             ?s)
 						 ("maildir:/drafts"                   "drafts"                           ?d)
 						 ("mime:image/*"                      "Messages with images"             ?p)
-						 ("maildir:/trash"                    "Trash"                            ?g)
+						 ("maildir:/trash"                    "Trash"                            ?G)
+						 ("from:github.com OR from:mail.notion.so" "Github & Notion"             ?i)
 						 ))
 
   ;; allow for updating mail using 'U' in the main view:
@@ -3230,14 +3883,16 @@ if it encounter an error, then we execute `consult-outline'."
 		mu4e-index-cleanup t
 		mu4e-index-lazy-check nil
 		mu4e-notification-support t
-		mu4e-speedbar-support t
+		mu4e-speedbar-support nil
 		)
 
 
   (setq mu4e-use-fancy-chars t
+		mu4e-modeline-support t
 		mu4e-marker-icons-use-unicode t
 		mu4e-debug nil
 		mu4e-hide-index-messages t
+		mu4e-search-threads t
 		mu4e-headers-fields '((:human-date . 21) (:flags . 8) (:mailing-list . 12) (:from . 24)
 							  (:subject)))
 
@@ -3302,7 +3957,9 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package ement
   :config
-  (setq ement-notify-dbus-p nil)
+  (setq ement-notify-dbus-p nil
+		ement-initial-sync-timeout 600
+		)
   (defun exec/ement-connect ()
 	(interactive)
 	(ement-connect
@@ -3313,8 +3970,16 @@ if it encounter an error, then we execute `consult-outline'."
 		"[%S%L]: %B%r%R%t"
 		ement-room-list-column-Name-max-width 40
 		ement-room-left-margin-width 24
+		ement-room-retro-messages-number 1000
 		)
+
+  (evil-collection-ement-setup)
+  (setq evil-collection-ement-want-auto-retro t)
+  (general-nmap :keymaps 'ement-room-mode-map
+	"C-b" 'ement-room-scroll-down-command
+	)
   )
+
 
 (use-package mermaid-mode
   :config
@@ -3331,13 +3996,15 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package vimrc-mode)
 
 (use-package format-all
-  :hook
-  (prog-mode . format-all-mode)
-  (emacs-lisp-mode . format-all-mode)
-  (nix-mode . format-all-mode)
-
+  ;; :hook
+  ;; (prog-mode . format-all-mode)
+  ;; (emacs-lisp-mode . format-all-mode)
+  ;; (nix-mode . format-all-mode)
   :config
-  (setq-default format-all-show-errors 'error)
+
+  (setq-default format-all-show-errors "Never"
+				format-all-debug nil)
+
   (setq-default format-all-formatters   '(
 										  ("Emacs Lisp" emacs-lisp)
 										  ("Nix" nixfmt)
@@ -3346,13 +4013,30 @@ if it encounter an error, then we execute `consult-outline'."
 										  ("C" clang-format)
 										  ("C++" clang-format)
 										  ))
+  ;; remove hook initially assigned when autoload
+  ;; (remove-hook 'before-save-hook 'format-all--buffer-from-hook t)
+
+  ;; (defun exec/format-all-buffer ()
+  ;; 	"format-all-buffer without jumps of cursor"
+  ;; 	(interactive)
+  ;; 	(let ((point (point)) (wstart (window-start)))
+  ;;     (format-all-buffer)
+  ;;     (goto-char point)
+  ;;     (set-window-start (selected-window) wstart)))
+  ;; (add-hook 'before-save-hook 'exec/format-all-buffer)
   )
+
+(use-package apheleia
+  :config
+  (apheleia-global-mode -1)
+  )
+
 
 (use-package clang-format)
 
 (defun skx/update-org-modified-property ()
   "If a file contains a '#+LAST_MODIFIED' property update it to contain
-  the current date/time"
+		the current date/time"
   (interactive)
   (save-excursion (widen)
 				  (goto-char (point-min))
@@ -3376,7 +4060,7 @@ if it encounter an error, then we execute `consult-outline'."
 ;;;###diary-autoload
 (defun diary-sunrise ()
   "Local time of sunrise as a diary entry.
-  Accurate to a few seconds."
+		Accurate to a few seconds."
   (or (and calendar-latitude
 		   calendar-longitude
 		   calendar-time-zone
@@ -3398,7 +4082,7 @@ if it encounter an error, then we execute `consult-outline'."
 ;;;###diary-autoload
 (defun diary-sunset ()
   "Local time of sunset as a diary entry.
-  Accurate to a few seconds."
+		Accurate to a few seconds."
   (or (and calendar-latitude
 		   calendar-longitude
 		   calendar-time-zone
@@ -3417,9 +4101,11 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package affe
   :config
   (setq affe-count 500
-		affe-find-command "fd "
+		affe-find-command ;; "fd "
+		"rg  --color=never --files"
 		)
   )
+
 (use-package fussy
   :config
   ;; (push 'fussy completion-styles)
@@ -3450,10 +4136,10 @@ if it encounter an error, then we execute `consult-outline'."
 		 (title (exec/get-url-title url)))
 	(insert (format "[%s](%s)" title url))))
 
-(use-package markdown-mode
-  :config
-  (setq markdown-fontify-code-blocks-natively t)
-  )
+;; (use-package markdown-mode
+;;   :config
+;;   (setq markdown-fontify-code-blocks-natively t)
+;;   )
 
 (use-package hackernews
   :config
@@ -3461,14 +4147,21 @@ if it encounter an error, then we execute `consult-outline'."
 
   )
 
-(setq epg-pinentry-mode nil)
+(setq epg-pinentry-mode 'loopback)
 (epa-file-enable)
+
+(use-package pinentry
+  :config (pinentry-start))
 
 (use-package org
   ;;   :hook (
   ;; 		 (before-save . skx-org-mode-before-save-hook)
   ;; 		 (org-trigger . save-buffer)
   ;; 		 )
+  :custom-face
+  (org-level-1 ((t (:height 1.5))))
+  (org-level-2 ((t (:height 1.3))))
+  (org-level-3 ((t (:height 1.1))))
   :config
 
   ;; (org-crypt-use-before-save-magic)
@@ -3495,6 +4188,11 @@ if it encounter an error, then we execute `consult-outline'."
 				(directory-files-recursively "~/org/notes/" "\.org$")
 				(directory-files-recursively "~/org/journal/" "\.org$")))
 
+  (setq org-habit-preceding-days 21
+		org-habit-following-days 7
+		org-habit-graph-column 54
+		org-habit-show-habits-only-for-today nil
+		)
   ;; (org-agenda-include-diary . t)
   (setq org-agenda-time-grid '((daily today require-timed)
 							   (000 100 200 300 400 500 600 700 800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300 2400)
@@ -3506,6 +4204,7 @@ if it encounter an error, then we execute `consult-outline'."
   (setq org-agenda-restore-windows-after-quit  t)
   (setq org-agenda-start-on-weekday nil
 		org-agenda-time-leading-zero t
+		org-agenda-log-mode-items '(closed clock state)
 		)
 
   (setq-local transient-force-fixed-pitch t)
@@ -3553,8 +4252,8 @@ if it encounter an error, then we execute `consult-outline'."
 								("w" "work" entry
 								 (file+headline  "~/org/GTD/work.org" "WORK" )
 								 "** TODO [#B] %i %?
-		 %T
-		 ")
+		%T
+		")
 								("p" "personal stuff" entry (file+headline "~/org/personal/personal.org" "Personl")
 								 "* TODO %i %?")
 								("e" "EXEC" plain (file+headline "~/org/GTD/personal.org" "EXEC") "** %i %?")
@@ -3587,6 +4286,8 @@ if it encounter an error, then we execute `consult-outline'."
   (use-package org-super-agenda
 	)
 
+  (use-package org-ql)
+
   (use-package ob-mermaid
 	:config
 	(setq ob-mermaid-cli-path "/usr/bin/mmdc"))
@@ -3607,8 +4308,10 @@ if it encounter an error, then we execute `consult-outline'."
   (use-package org-modern
 	:after org
 	:config
-	(set-face-attribute 'org-modern-symbol nil :height 1.0)
 	(global-org-modern-mode)
+	(set-face-attribute 'org-modern-symbol nil
+						:height 1.0
+						:family "Iosevka")
 	)
   (use-package svg-tag-mode)
 
@@ -3762,7 +4465,9 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package go-translate
   :config
   (setq gts-translate-list '(("en" "zh")))
-  (set-face-attribute gts-pin-posframe-bdcolor "red")
+  (setq-default gts-pin-posframe-bdcolor "#ffffff"
+				gts-pop-posframe-backcolor "#0f0f0f"
+				)
   (setq gts-default-translator
 		(gts-translator
 		 :picker (gts-prompt-picker)
@@ -3790,11 +4495,11 @@ if it encounter an error, then we execute `consult-outline'."
 							 )
 					)))
 
-  (add-hook 'gts-after-buffer-render-hook ;; use 'gts-after-buffer-multiple-render-hook instead if you have multiple engines
-			(defun your-hook-that-disable-evil-mode-in-go-translate-buffer (&rest _)
-			  (evil-emacs-state)
-			  (exec/go-translate-mode-no-mono)
-			  ))
+  ;; (add-hook 'gts-after-buffer-render-hook ;; use 'gts-after-buffer-multiple-render-hook instead if you have multiple engines
+  ;; 			(defun your-hook-that-disable-evil-mode-in-go-translate-buffer (&rest _)
+  ;; 			  (evil-emacs-state)
+  ;; 			  (exec/go-translate-mode-no-mono)
+  ;; 			  ))
   )
 
 
@@ -3830,6 +4535,7 @@ if it encounter an error, then we execute `consult-outline'."
 
   (org-roam-db-autosync-mode))
 
+
 (use-package org-attach-screenshot)
 
 (use-package org-roam-ui
@@ -3848,6 +4554,11 @@ if it encounter an error, then we execute `consult-outline'."
 
 (use-package websocket)
 
+(use-package hyperbole
+  :config
+  (hyperbole-mode -1)
+  )
+
 (use-package dumb-jump
   :hook(
 		(xref-backend-functions . dumb-jump-xref-activate)
@@ -3861,7 +4572,8 @@ if it encounter an error, then we execute `consult-outline'."
   :config (setq-default org-download-image-dir "~/Pictures/org/"))
 
 (use-package makefile-executor
-  :hook makefile-mode
+  :hook (projectile-mode . makefile-executor-mode)
+  :config
   )
 
 
@@ -3913,7 +4625,7 @@ if it encounter an error, then we execute `consult-outline'."
 (use-package projectile
   :bind("C-c p" . projectile-command-map)
   :config
-  (setq projectile-auto-discover t)
+  (setq projectile-auto-discover nil)
   (setq projectile-current-project-on-switch 'keep)
   (setq projectile-indexing-method 'hybrid)
   (setq projectile-enable-caching nil)
@@ -3922,8 +4634,12 @@ if it encounter an error, then we execute `consult-outline'."
   (setq projectile-ignored-projects '(
 									  "~/.emacs.d/"
 									  )
-		projectile-auto-discover t
-		projectile-auto-update-cache t)
+		projectile-auto-update-cache t
+
+		;; projectile-switch-project-action 'consult-projectile-find-file
+		projectile-switch-project-action 'exec/dired-current-directory
+		projectile-project-search-path '(( "~/Projects" . 3))
+		)
   (defun projectile-project-current (dir)
 	"Retrieve the root directory of the project at DIR using `project-current'."
 	(cdr (project-current nil dir)))
@@ -3946,17 +4662,17 @@ if it encounter an error, then we execute `consult-outline'."
 
   (defun projectile-compile--double-prefix-means-run-comint (func &optional args)
     "allow running compilation interactively when multiple prefixes are given.
-with two prefixes (C-u C-u) runs default compilation command in interactive
-compilation buffer. with three prompts for command and then runs it in an
-interactive compilation buffer."
+		with two prefixes (C-u C-u) runs default compilation command in interactive
+		compilation buffer. with three prompts for command and then runs it in an
+		interactive compilation buffer."
     (let ((prefix current-prefix-arg))
-      (if (and (consp prefix)
-               (setq prefix (car prefix))
-               (>= prefix 16))
-          (cl-letf* (((symbol-function 'actual-compile)
-                      (symbol-function 'compile))
+	  (if (and (consp prefix)
+			   (setq prefix (car prefix))
+			   (>= prefix 16))
+		  (cl-letf* (((symbol-function 'actual-compile)
+					  (symbol-function 'compile))
                      ((symbol-function 'compile)
-                      (lambda (command &optional comint)
+					  (lambda (command &optional comint)
                         (actual-compile command t))))
             (funcall func (if (eq prefix 16) nil '(4))))
         (funcall func prefix))))
@@ -3964,6 +4680,7 @@ interactive compilation buffer."
   (advice-add 'projectile-run-project     :around #'projectile-compile--double-prefix-means-run-comint)
   (advice-add 'projectile-compile-project :around #'projectile-compile--double-prefix-means-run-comint)
   (advice-add 'projectile-test-project    :around #'projectile-compile--double-prefix-means-run-comint)
+
   (projectile-update-project-type
    'rust-cargo
    :related-files-fn
@@ -3973,12 +4690,35 @@ interactive compilation buffer."
    :test-prefix nil
    :precedence 'high)
 
+  (defun exec/projectile-open-all-buffers()
+	(interactive)
 
-  (use-package projectile-ripgrep
-	:config
-	)
+	;; get all fiels by projectile-dir-files, if it's `.rs' file, and open them
+	(let ((files (projectile-dir-files (projectile-project-root))))
+	  (dolist (file files)
+		(if (string-suffix-p ".rs" file)
+			(let ((pathfile (concat  (projectile-project-root) file)))
+			  (message "opening %s" pathfile)
+			  (find-file  pathfile)
+			  )
+		  )
+		)
+	  ))
+
+
+
+  (use-package projectile-ripgrep)
+
   (projectile-mode)
+  (defun exec/projectile-mode-hook()
+	(interactive)
+	(add-to-list 'compilation-search-path (projectile-project-root))
+	)
+
+  (add-hook 'projectile-mode-hook #'exec/projectile-mode-hook)
+
   )
+
 (use-package cus-dir
   :straight (cus-dir :type git :host gitlab :repo "mauroaranda/cus-dir")
   )
@@ -4007,7 +4747,7 @@ interactive compilation buffer."
     ;; that it will be tried first.
     (setq-local completion-at-point-functions
                 (cons #'tempel-expand
-                      completion-at-point-functions)))
+					  completion-at-point-functions)))
 
   (add-hook 'prog-mode-hook 'tempel-setup-capf)
   (add-hook 'text-mode-hook 'tempel-setup-capf)
@@ -4030,15 +4770,23 @@ interactive compilation buffer."
     (if filename
         (if (y-or-n-p (concat "Do you really want to delete file " filename " ?"))
             (progn
-              (delete-file filename)
-              (message "Deleted file %s." filename)
-              (kill-buffer)))
-      (message "Not a file visiting buffer!"))))
+			  (delete-file filename)
+			  (message "Deleted file %s." filename)
+			  (kill-buffer)))
+	  (message "Not a file visiting buffer!"))))
 
 (use-package treemacs
   ;; :disabled t
   ;; :init (with-eval-after-load 'winum (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   ;; :init (with-eval-after-load 'winum (evil-leader/set-key "n" 'treemacs-select-window))
+  :init
+  (defun exec/open-treemacs-no-focus()
+	(interactive)
+	(treemacs)
+	(treemacs-select-window))
+
+  :hook
+  (treemacs-mode . exec/decrease-buffer-font)
   :config
   (defun exec/treemacs-set-narrow-font()
 	(set-face-attribute 'treemacs-root-face nil :family "Iosevka" )
@@ -4051,10 +4799,10 @@ interactive compilation buffer."
 
   ;; delay related stuff
   (setq
-   treemacs-deferred-git-apply-delay  0.1
-   treemacs-file-event-delay          0.1
-   treemacs-file-follow-delay         0.1
-   treemacs-tag-follow-delay          0.1
+   treemacs-deferred-git-apply-delay  0.7
+   treemacs-file-event-delay          0.7
+   treemacs-file-follow-delay         0.7
+   treemacs-tag-follow-delay          0.7
    )
 
   (progn
@@ -4068,9 +4816,9 @@ interactive compilation buffer."
 		  treemacs-expand-after-init             t
 		  treemacs-git-command-pipe ""
 		  treemacs-goto-tag-strategy             'refetch-index
-		  treemacs-indentation 0
-		  treemacs-indentation-string            ""
-		  treemacs-is-never-other-window nil
+		  treemacs-indentation 1
+		  treemacs-indentation-string            " "
+		  treemacs-is-never-other-window        t
 		  treemacs-max-git-entries               5000
 		  treemacs-missing-project-action 'ask
 		  treemacs-move-forward-on-expand        nil
@@ -4095,9 +4843,12 @@ interactive compilation buffer."
 		  treemacs-space-between-root-nodes      t
 		  treemacs-tag-follow-cleanup            t
 		  treemacs-user-mode-line-format         nil
-		  treemacs-user-header-line-format nil
-		  treemacs-width                         35
-		  treemacs-workspace-switch-cleanup nil)
+		  treemacs-user-header-line-format       nil
+		  treemacs-width                         25
+		  treemacs-workspace-switch-cleanup      nil
+		  treemacs-silent-refresh t
+		  treemacs-silent-filewatch t
+		  )
 
 	;; The default width and height of the icons is 22 pixels. If you are
 	;; using a Hi-DPI display, uncomment this to double the icon size.
@@ -4115,7 +4866,7 @@ interactive compilation buffer."
 	   (treemacs-git-mode 'simple)))
 	(treemacs-hide-gitignored-files-mode t)
 	)
-  :bind(("M-0"       . treemacs-select-window)
+  :bind(
 		("C-c t 1"   . treemacs-delete-other-windows)
 		("C-c t t"   . treemacs)
 		("C-c t d"   . treemacs-display-current-project-exclusively)
@@ -4149,11 +4900,14 @@ interactive compilation buffer."
 
 
 
+
 (use-package treemacs-projectile
-  :disabled t
-  :after (treemacs projectile)
+  :config
+
   )
 
+(setopt consult-projectile-use-projectile-switch-project t)
+(add-hook 'projectile-after-switch-project-hook 'exec/open-treemacs-no-focus)
 
 
 (use-package treemacs-magit
@@ -4163,79 +4917,195 @@ interactive compilation buffer."
 
 
 (use-package tab-bar
-  :init
-  (defun exec/tab-bar-mode-hook()
-	(interactive)
-	(setq
-	 tab-bar-format '(
-					  tab-bar-format-menu-bar
-					  tab-bar-format-history
-					  tab-bar-format-tabs-groups
-					  ;; tab-bar-format-tabs
-					  tab-bar-separator
-					  tab-bar-format-add-tab
-					  tab-bar-format-align-right
-					  tab-bar-format-global
-					  ))
+  ;; :init
 
-	(setq tab-bar-format (delete-dups tab-bar-format))
-	)
-  (defun exec/name-tab-by-project-or-default ()
-	"Return project name if in a project, or default tab-bar name if not.
-The default tab-bar name uses the buffer name."
-	(let ((project-name (projectile-project-name)))
-      (if (string= "-" project-name)
-          (tab-bar-tab-name-current)
-		(projectile-project-name))))
-  (defun exec/tab-bar-project-name(tab_name &optional)
-	(projectile-project-name)
-	)
+  ;; (defun exec/tab-bar-mode-hook()
+  ;; 	(interactive)
+  ;; 	(setq
+  ;; 	 tab-bar-format '(
+  ;; 					  tab-bar-format-menu-bar
+  ;; 					  tab-bar-format-history
+  ;; 					  tab-bar-format-tabs-groups
+  ;; 					  ;; tab-bar-format-tabs
+  ;; 					  tab-bar-separator
+  ;; 					  tab-bar-format-add-tab
+  ;; 					  tab-bar-format-align-right
+  ;; 					  tab-bar-format-global
+  ;; 					  ))
+
+  ;; 	(setq tab-bar-format (delete-dups tab-bar-format))
+  ;; 	)
+
+  ;; (defun exec/name-tab-by-project-or-default ()
+  ;; 	"Return project name if in a project, or default tab-bar name if not.
+  ;; 		The default tab-bar name uses the buffer name."
+  ;; 	(let ((project-name (projectile-project-name)))
+  ;; 	  (if (string= "-" project-name)
+  ;; 		  (tab-bar-tab-name-current)
+  ;; 		(projectile-project-name))))
+
+  ;; (defun exec/tab-bar-project-name(tab_name &optional)
+  ;; 	(projectile-project-name)
+  ;; 	)
+  :custom
+  (tab-bar-format  '(tab-bar-format-menu-bar
+					 tab-bar-format-history
+					 tab-bar-format-tabs
+					 tab-bar-separator
+					 tab-bar-format-add-tab
+					 tab-bar-separator
+					 tab-bar-format-align-right
+					 tab-bar-format-global
+					 )
+				   )
 
   :hook
   (after-init . tab-bar-mode)
-  (after-init . tab-bar-history-mode)
-  (tab-bar-mode . exec/tab-bar-mode-hook)
+  ;; (after-init . tab-bar-history-mode)
+  ;; (tab-bar-mode . exec/tab-bar-mode-hook)
   :custom-face
-  (tab-bar ((t (:height 1.0 :font "Noto Sans CJK SC"))))
+  (tab-bar ((t (:height 1.0))))
   :config
-  (setq tab-bar-close-button-show nil
-		tab-bar-separator " "
-		tab-bar-border 0
-		tab-bar-button-margin 0
-		tab-bar-auto-width nil
-		tab-bar-tab-name-function 'tab-bar-tab-name-current
-		tab-bar-tab-group-function 'exec/tab-bar-project-name
-		tab-bar-new-tab-choice "*scratch*"
-		tab-bar-new-tab-group  'projectile-project-name
+  ;; (setq tab-bar-close-button-show nil
+  ;; 		tab-bar-separator " "
+  ;; 		tab-bar-border 0
+  ;; 		tab-bar-button-margin 0
+  ;; 		tab-bar-auto-width nil
+  ;; 		tab-bar-tab-name-function 'tab-bar-tab-name-current
+  ;; 		;; tab-bar-tab-group-function 'exec/tab-bar-project-name
+  ;; 		tab-bar-new-tab-choice "*scratch*"
+  ;; 		tab-bar-new-tab-group  'projectile-project-name
+  ;; 		)
+  ;; (setq tab-bar-format (delete-dups tab-bar-format))
+
+  ;; (add-hook 'persp-before-deactivate-functions
+  ;;           (defun +workspaces-save-tab-bar-data-h (_)
+  ;;             (when (get-current-persp)
+  ;;               (set-persp-parameter
+  ;;                'tab-bar-tabs (tab-bar-tabs)))))
+
+  ;; (add-hook 'persp-activated-functions
+  ;;           (defun +workspaces-load-tab-bar-data-h (_)
+  ;;             (tab-bar-tabs-set (persp-parameter 'tab-bar-tabs))
+  ;;             (tab-bar--update-tab-bar-lines t))))
+
+  (funcall tab-bar-tab-name-function)
+  (dolist (tab  (funcall tab-bar-tabs-function))
+	(message "tab: %s\n" tab)
+	)
+
+  (defun exec/tab-bar-new-tab-choice()
+	(interactive)
+	(scratch-buffer)
+	(consult-projectile-switch-project)
+	"*scratch*"
+	)
+
+  (defun exec/tab-bar-tab-name-function-default()
+	(projectile-project-name)
+	)
+  (let ((tabs (frame-parameter (window-frame) 'tabs)))
+    (if tabs
+        (let* ((current-tab (tab-bar--current-tab-find tabs))
+               (current-tab-name (assq 'name current-tab))
+               (current-tab-explicit-name (assq 'explicit-name current-tab)))
+          (when (and current-tab-name
+                     current-tab-explicit-name
+                     (not (cdr current-tab-explicit-name)))
+            (setf (cdr current-tab-name)
+                  (funcall tab-bar-tab-name-function))))
+      ;; Create default tabs
+      (setq tabs (list (tab-bar--current-tab-make)))
+      (tab-bar-tabs-set tabs frame))
+    tabs)
+
+  (setq tab-bar-auto-width nil
+		tab-bar-close-button-show nil
+		tab-bar-new-tab-choice #'exec/tab-bar-new-tab-choice
+		tab-bar-new-tab-group nil
+		tab-bar-new-tab-to 'rightmost
+		tab-bar-tab-name-function
+		#'exec/tab-bar-tab-name-function-default
 		)
-  (setq tab-bar-format (delete-dups tab-bar-format)))
+  )
 
 (use-package tab-line
   :straight (:type built-in)
   :custom-face
-  (tab-line ((t (:background "black"))))
+  (tab-line ((t (:background "black" :height 0.9))))
+  (tab-line-tab ((t (:height 0.9))))
   (tab-line-tab-inactive ((t (:inherit tab-line))))
-  (tab-line-tab-current ((t (:inherit tab-line :weight bold :overline t :background "black" :foreground "yellow"))))
+  (tab-line-tab-modified ((t (:inherit tab-line :foreground "pink" :background "black" :height 0.9))))
+  (tab-line-tab-current ((t (:inherit tab-line :weight bold :background "black" :foreground "green"))))
   :config
-  (setq tab-line-close-button-show nil
-		tab-line-close-tab-function 'kill-buffer)
-  (global-tab-line-mode))
 
-;; (use-package tabspaces
-;;   :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup.
-;;   :commands (tabspaces-switch-or-create-workspace
-;;              tabspaces-open-or-create-project-and-workspace)
-;;   :custom
-;;   (tabspaces-use-filtered-buffers-as-default t)
-;;   (tabspaces-default-tab "Default")
-;;   (tabspaces-remove-to-default t)
-;;   (tabspaces-include-buffers '("*scratch*"))
-;;   (tabspaces-initialize-project-with-todo t)
-;;   (tabspaces-todo-file-name "project-todo.org")
-;;   ;; sessions
-;;   (tabspaces-session t)
-;;   (tabspaces-session-auto-restore t)
-;;   )
+  (defun exec/tab-line-buffer-group (buffer)
+	"Use the project.el name for the buffer group"
+	(with-current-buffer buffer
+	  (s-chop-suffix "/" (projectile-project-root))))
+
+  (defun exec/buffer-sort (a b)
+	(string< (buffer-name a) (buffer-name b)))
+
+  (defun exec/tab-line-tabs-function()
+	(if (projectile-project-p)
+		(projectile-project-buffers)
+	  (tab-line-tabs-buffer-list))
+	)
+
+  (setq tab-line-close-button-show nil
+		tab-line-switch-cycling t
+		tab-line-left-button nil
+		tab-line-right-button nil
+		tab-line-auto-hscroll t
+		tab-line-close-tab-function 'kill-buffer
+		tab-line-separator "|"
+		tab-line-tabs-buffer-group-sort-function #'exec/buffer-sort
+		tab-line-tabs-buffer-group-function #'exec/tab-line-buffer-group
+		tab-line-tabs-buffer-list-function #'tab-line-tabs-buffer-list
+		tab-line-tabs-function
+		#'exec/tab-line-tabs-function
+		;; 'projectile-project-buffers
+		;; 'tab-line-tabs-window-buffers
+		;; 'tab-line-tabs-buffer-list
+		tab-line-exclude-modes '(w3m-mode completion-list-mode)
+		)
+
+  (defun exec/tab-line-tab-name (cand &optional _buffers)
+	"Generate tab name from BUFFER.
+Reduce tab width proportionally to space taken by other tabs.
+This function can be overridden by changing the default value of the
+variable `tab-line-tab-name-function'."
+	;; (concat (nerd-icons-icon-for-buffer buffer)
+	;; 		(buffer-name buffer))
+	(let* ((mode (buffer-local-value 'major-mode (get-buffer cand)))
+		   (icon (nerd-icons-icon-for-mode mode))
+		   (parent-icon (nerd-icons-icon-for-mode
+						 (get mode 'derived-mode-parent))))
+	  (concat
+	   (if (symbolp icon)
+		   (if (symbolp parent-icon)
+			   (nerd-icons-faicon "nf-fa-sticky_note_o")
+			 parent-icon)
+		 icon)
+	   " "
+	   (buffer-name cand)))
+	)
+
+  (setq tab-line-tab-name-function 'exec/tab-line-tab-name)
+
+
+  (global-tab-line-mode)
+  )
+
+(use-package intuitive-tab-line
+  :disabled
+  :straight (:host github :repo "thread314/intuitive-tab-line-mode")
+  :custom
+  (tab-line-tabs-function 'intuitive-tab-line-buffers-list)
+  )
+
+
 
 (use-package centaur-tabs
   :disabled t
@@ -4368,7 +5238,6 @@ The default tab-bar name uses the buffer name."
 (use-package parchment-theme)
 (use-package atom-one-dark-theme)
 (use-package wildcharm-theme)
-(use-package color-theme-sanityinc-tomorrow)
 (use-package tron-legacy-theme)
 (use-package kaolin-themes)
 (use-package mindre-theme)
@@ -4395,6 +5264,7 @@ The default tab-bar name uses the buffer name."
   )
 
 (use-package doom-modeline
+  :disabled
 										; :hook
   ;; (after-init . doom-modeline-mode)
   :config
@@ -4457,16 +5327,19 @@ The default tab-bar name uses the buffer name."
   ;; Allow C-h to trigger which-key before it is done automatically
   (setq which-key-show-early-on-C-h t)
   (setq which-key-popup-type 'minibuffer)
-  (setq which-key-frame-max-width 1000)
-  (setq which-key-frame-max-height 2000)
+  (setq which-key-frame-max-width (frame-width))
+  (setq which-key-frame-max-height (frame-height))
   (setq which-key-idle-delay 0.3)
   (setq which-key-idle-secondary-delay 0)
-  (setq which-key-max-description-length nil)
-  (setq which-key-side-window-max-height 1000)
+  (setq which-key-max-description-length 57)
+  (setq which-key-side-window-max-height 0.5)
   (setq which-key-allow-evil-operators t)
   (setq which-key-sort-order
 		;; 'which-key-prefix-then-key-order-reverse
 		'which-key-description-order
+
+		which-key-dont-use-unicode t
+		which-key-ellipsis ".."
 		)
   ;; I should bind which-key-show-top-level
   (which-key-mode)
@@ -4483,8 +5356,10 @@ The default tab-bar name uses the buffer name."
   :init
   :config
   (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-left-corner
-		which-key-posframe-border-width 1
-		which-key-posframe-font (face-attribute 'fixed-pitch :family))
+		which-key-posframe-border-width 0
+		which-key-posframe-font nil
+		which-key-is-verbose t)
+
   (if (display-graphic-p)
 	  (which-key-posframe-mode)))
 
@@ -4498,6 +5373,11 @@ The default tab-bar name uses the buffer name."
 (use-package highlight-defined
   :hook
   (emacs-lisp-mode . highlight-defined-mode))
+
+(use-package morlock
+  :config
+  (global-morlock-mode -1)
+  )
 
 
 (defun exec/white-bg-face()
@@ -4534,10 +5414,13 @@ The default tab-bar name uses the buffer name."
   ;; :hook
   ;; (eww-mode . exec/white-bg-face)
   ;; https://www.google.com/search?q=%s&pws=0&gl=us&gws_rd=cr
+  ;; https://google.com
 
   :config
   (setq eww-search-prefix "https://www.google.com/search?pws=0&gl=us&gws_rd=cr&q="
 		eww-retrieve-command nil
+		browse-url-browser-function 'browse-url-default-browser
+		;; 'eww-browse-url
 		)
   (defun exec/eww-render-current-buffer ()
 	"Render HTML in the current buffer with EWW"
@@ -4553,7 +5436,12 @@ The default tab-bar name uses the buffer name."
   :straight (:type built-in)
   ;; :hook
   ;; (dired-mode . dired-filter-mode)
+  :bind
+  (:map dired-mode-map ("<mouse-2>" . dired-mouse-find-file))
   :config
+  (general-nmap :keymaps 'dired-mode-map
+	"<mouse-2>"                     'dired-mouse-find-file
+	)
 
   ;; (setq dired-listing-switches "-alFh --group-directories-first --no-group")
   (setq dired-listing-switches
@@ -4608,10 +5496,21 @@ The default tab-bar name uses the buffer name."
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
-(setq inferior-lisp-program "/usr/bin/sbcl")
+(use-package sicp)
+
 (use-package sly
+  :init
+  (setq-default inferior-lisp-program "/etc/profiles/per-user/exec/bin/sbcl")
+  (setq-default sly-net-coding-system 'utf-8-unix)
   :config
   )
+
+;; (use-package slime ;; shouldn't be with sly
+;;   :config (setq inferior-lisp-program "sbcl"
+;; 				slime-net-coding-system 'utf-8-unix
+;; 				)
+;;   )
+
 (defun exec/screenshot-svg ()
   "Save a screenshot of the current frame as an SVG image.
   Saves to a temp file and puts the filename in the kill ring."
@@ -4660,13 +5559,13 @@ The default tab-bar name uses the buffer name."
 (defun exec/org-mode-fixed()
   "Set a fixed width (monospace) font in current buffer."
   (interactive)
-  ;; (custom-set-faces
-  ;;  '(org-verbatim       ((t  (:inherit  org-verbatim      :family "Sarasa Term CL"  :height  1.0))))
-  ;;  '(org-formula        ((t  (:inherit  org-table         :family "Sarasa Term CL"  :height  1.0))))
-  ;;  '(org-modern-symbol  ((t  (:inherit  org-modern-symbol :family "Sarasa Term CL"  :height  1.0))))
-  ;;  '(org-block          ((t  (:inherit  org-block         :family "Sarasa Term CL"  :height  1.0))))
-  ;;  '(org-table          ((t  (:inherit  org-table         :family "Sarasa Term CL"  :height  1.0))))
-  ;;  )
+  (custom-set-faces
+   ;;  '(org-verbatim       ((t  (:inherit  org-verbatim      :family "Sarasa Term CL"  :height  1.0))))
+   ;;  '(org-formula        ((t  (:inherit  org-table         :family "Sarasa Term CL"  :height  1.0))))
+   '(org-modern-symbol  ((t (:family "Iosevka"  :height  1.0))))
+   ;;  '(org-block          ((t  (:inherit  org-block         :family "Sarasa Term CL"  :height  1.0))))
+   ;;  '(org-table          ((t  (:inherit  org-table         :family "Sarasa Term CL"  :height  1.0))))
+   )
   (setq-local buffer-face-mode-face '(:height 1.0))
   (buffer-face-mode))
 
@@ -4678,32 +5577,26 @@ The default tab-bar name uses the buffer name."
   )
 
 
+
+;; (add-hook 'prog-mode-hook 'exec/prog-mode-font)
+;; (add-hook 'emacs-lisp-mode-hook 'exec/prog-mode-font)
+
 ;; (add-hook 'org-mode-hook 'exec/increase-buffer-font)
 ;; (add-hook 'org-journal-mode-hook 'exec/increase-buffer-font)
 
-(defun exec/non-mono-font()
+(defun exec/prog-mode-font()
   (interactive)
-  (setq-local buffer-face-mode-face '(:family "Sarasa Gothic CL"))
+  (setq-local buffer-face-mode-face '(:family "JetbrainsMonoNL"))
   (buffer-face-mode))
-
-;; (add-hook 'org-mode-hook 'exec/non-mono-font)
-;; (add-hook 'org-mode-hook 'exec/org-mode-fixed)
-;; (add-hook 'org-journal-mode-hook 'exec/non-mono-font)
-
-(dolist (hook '(prog-mode-hook emacs-lisp-mode-hook mu4e-main-mode-hook vterm-mode-hook calendar-mode-hook org-agenda-mode-hook help-mode-hook))
-  (add-hook hook 'exec/fixed-pitch-mode))
-
-(add-hook 'prog-mode-hook 'exec/increase-buffer-font)
-(with-current-buffer (get-buffer " *Echo Area 0*")                             ; the leading space character is correct
-  (setq-local face-remapping-alist '((default (:height 0.9) variable-pitch)))) ; etc.
+;; (add-hook 'prog-mode-hook 'exec/increase-buffer-font)
 
 
-;; (add-hook 'prog-mode-hook 'hdisplay-line-numbers-mode)
+;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 ;; (add-hook 'text-mode-hook 'display-line-numbers-mode)
 ;; (add-hook 'toml-mode-hook 'display-line-numbers-mode)
 ;; (add-hook 'conf-mode-hook 'display-line-numbers-mode)
-;; (add-hook 'consult-preview-at-point-mode-hook 'display-line-numbers-mode)
 ;; (add-hook 'ssh-config-mode-hook 'display-line-numbers-mode)
+;; (add-hook 'consult-preview-at-point-mode-hook 'display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'electric-indent-mode)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook (lambda ()
@@ -4722,7 +5615,7 @@ The default tab-bar name uses the buffer name."
   )
 
 (use-package deadgrep
-  ;; :hook (deadgrep-mode . next-error-follow-minor-mode)
+  :hook (deadgrep-mode . next-error-follow-minor-mode)
   :config
   (setq
    deadgrep-executable "rg"
@@ -4751,42 +5644,137 @@ The default tab-bar name uses the buffer name."
 	  (find-file-other-window filename)
 	  (rename-buffer buffer-name)))
 
-  ;; (defun deadgrep-preview-result()
-  ;; 	"Goto the search result at point, opening it in a specific window which named deadgrep-preview."
-  ;; 	(interactive)
-  ;; 	(deadgrep--visit-result #'find-file-in-other-window-with-prefix-buffer-name))
+  (defun exec/deadgrep-posframe-show(file-name)
+	(interactive)
+	(defconst deadgrep-preview-posframe "*deadgrep-preview-posframe*")
+	(posframe-show deadgrep-preview-posframe
+				   :string "This is a test"
+				   :position (point))
+
+	)
+
+  (defun deadgrep-preview-result()
+	"Goto the search result at point, opening it in a specific window which named deadgrep-preview."
+	(interactive)
+	(deadgrep-visit-result-other-window))
   )
 
 (use-package color-rg
-  :ensure nil
   :straight (color-rg :type git :host github :repo "manateelazycat/color-rg")
+  :custom-face
+  (color-rg-font-lock-file ((t (:height 0.8))))
+  (color-rg-font-lock-match ((t (:foreground "unspecific" :underline (:color "yellow":style wave)))))
+
+  :init
+  (defun exec/color-rg-search-project()
+	(interactive)
+	(setq color-rg-search-project-invoke-file-name buffer-file-name)
+	(color-rg-search-project))
+
+  (defun exec/color-rg-search-in-invoke-dir()
+	(interactive)
+	(setf
+	 (color-rg-search-dir color-rg-cur-search)
+	 (file-name-directory
+	  (directory-file-name
+	   color-rg-search-project-invoke-file-name
+	   ))
+	 )
+	(color-rg-rerun)
+	)
+
+  :config
+  (define-key isearch-mode-map (kbd "M-r") 'isearch-toggle-color-rg)
+  (setq color-rg-recenter-match-line t
+		color-rg-search-no-ignore-file nil
+		)
+  (general-nmap 'color-rg-mode-map
+	"J" 'color-rg-jump-next-file
+	"K" 'color-rg-jump-prev-file
+	"P" 'color-rg-rerun-in-project
+	"d" 'color-rg-remove-line-from-results
+	"D" 'exec/color-rg-search-in-invoke-dir
+	)
   )
 
-;; (add-to-list 'load-path "~/.emacs.d/elisp/blink-search")
-;; (require 'blink-search)
+(use-package blink-search
+  :straight (blink-search :type git :host github :repo "manateelazycat/blink-search"
+						  :files ("*.el" "*.py" "core" "backend" "icons"))
+  :config
+  (setq blink-search-enable-posframe t
+		blink-search-posframe-standalone nil
+		blink-search-posframe-width-ratio 0.9)
+  )
+
 
 (use-package awesome-tray
-  :disabled t
   :straight (:host github :repo "manateelazycat/awesome-tray")
+  :config
+  (setq awesome-tray-adjust-mode-line-color-enable t
+		awesome-tray-buffer-name-buffer-changed t
+		awesome-tray-file-path-show-filename t
+		awesome-tray-file-path-full-dirname-levels 3
+		awesome-tray-file-path-truncated-name-length 10
+		awesome-tray-file-name-max-length 100
+		awesome-tray-active-modules '("git" "location-or-page" "buffer-name" "evil" "mode-name" "last-command" "battery" "date")
+		awesome-tray-date-format "%m-%d %-H:%M %a"
+		)
+
+  ;; (awesome-tray-mode)
   )
 
-;; (use-package holo-layer
-;;   :ensure nil
-;;   :disabled t
-;;   :straight (:host github :repo "manateelazycat/holo-layer" :files ("*.el" "*.py" "plugin" "resources"))
+(use-package sort-tab
+  :disabled
+  :straight (:host github :repo "manateelazycat/sort-tab" :files ("*.el"))
+  :config
+  )
+
+(use-package holo-layer
+  :straight (:host github :repo "manateelazycat/holo-layer" :files ("*.el" "*.py" "plugin" "resources"))
+  :config
+  (setq-default
+   ;; holo-layer-python-command "python"
+   holo-layer-enable-cursor-animation nil
+   holo-layer-enable-window-border t
+   holo-layer-active-window-color "green"
+   holo-layer-inactive-window-color "gray"
+   holo-layer-cursor-animation-type "jelly easing"
+   holo-layer-sort-tab-ui t
+   ;; holo-layer-sort-tab-font-size 30
+   ;; holo-layer-cursor-animation-duration 200
+   ;; holo-layer-cursor-animation-interval 10
+   holo-layer-hide-mode-line t
+   ;; holo-layer-cursor-color "blue"
+   ;; holo-layer-cursor-alpha 220
+   holo-layer-enable-debug nil
+   holo-layer-enable-place-info t
+   holo-layer-enable-window-number-background nil
+   )
+  ;; (holo-layer-enable)
+  )
+
+(use-package ctable)
+
+;; (use-package eaf
+;;   :straight (:host github :repo "manateelazycat/emacs-application-framework" :files
+;; 				   ("*.el" "*.py" "*.json" "extension" "core" "app"))
 ;;   :config
-;;   (holo-layer-enable)
-;;   (setq holo-layer-python-command "/home/exec/.emacs.d/straight/repos/holo-layer/.venv/bin/python3"
-;; 		holo-layer-enable-cursor-animation t
-;; 		holo-layer-cursor-animation-type "jelly"
-;; 		holo-layer-cursor-animation-duration 200
-;; 		holo-layer-cursor-animation-interval 10
-;; 		holo-layer-hide-mode-line nil
-;; 		holo-layer-cursor-color "blue"
-;; 		holo-layer-cursor-alpha 220
-;; 		holo-layer-enable-debug nil
-;; 		holo-layer-enable-place-info nil
-;; 		)
+;;   (require 'eaf-browser)
+;;   (require 'eaf-pdf-viewer)
+;;   (require 'eaf-pyqterminal)
+;;   (require 'eaf-music-player)
+
+;;   (eaf-setq eaf-webengine-default-zoom  "2.0"
+;; 			eaf-enable-debug nil)
+
+;;   (eaf-setq eaf-pdf-dark-mode "ignore")
+;;   (setq browse-url-browser-function 'eaf-open-browser)
+;;   (eaf-setq
+;;    eaf-browser-auto-import-chrome-cookies t)
+
+
+;;   (eaf-setq eaf-pyqterminal-font-size 32
+;; 			eaf-pyqterminal-font-family "Sarasa Term SC Nerd")
 ;;   )
 
 
@@ -4812,26 +5800,25 @@ The default tab-bar name uses the buffer name."
 
 
   )
-(setq compilation-environment '("TERM=xterm-256color"))
-(defun my/advice-compilation-filter (f proc string)
-  (funcall f proc (xterm-color-filter string)))
+;; (setq compilation-environment '("TERM=xterm-256color"))
+;; (defun my/advice-compilation-filter (f proc string)
+;;   (funcall f proc (xterm-color-filter string)))
 
-(advice-add 'compilation-filter :around #'my/advice-compilation-filter)
+;; (advice-add 'compilation-filter #'my/advice-compilation-filter)
 
-(use-package ansi-color
-  :config
-  (defadvice display-message-or-buffer (before ansi-color activate)
-	"Process ANSI color codes in shell output."
-	(let ((buf (ad-get-arg 0)))
-	  (and (bufferp buf)
-		   (string= (buffer-name buf) "*Shell Command Output*")
-		   (with-current-buffer buf
-			 (ansi-color-apply-on-region (point-min) (point-max))))))
+;; (use-package ansi-color
+;;   :config
+;;   (defadvice display-message-or-buffer (before ansi-color activate)
+;; 	"Process ANSI color codes in shell output."
+;; 	(let ((buf (ad-get-arg 0)))
+;; 	  (and (bufferp buf)
+;; 		   (string= (buffer-name buf) "*Shell Command Output*")
+;; 		   (with-current-buffer buf
+;; 			 (ansi-color-apply-on-region (point-min) (point-max))))))
 
-  (custom-set-faces '(ansi-color-black ((t ( :foreground "#696969" :background "#696969")))))
-  (custom-set-faces '(ansi-color-white ((t ( :foreground "#d9d9d9" :background "#d9d9d9")))))
-
-  )
+;;   (custom-set-faces '(ansi-color-black ((t ( :foreground "#696969" :background "#696969")))))
+;;   (custom-set-faces '(ansi-color-white ((t ( :foreground "#d9d9d9" :background "#d9d9d9")))))
+;; )
 
 
 (use-package shell
@@ -4848,6 +5835,9 @@ The default tab-bar name uses the buffer name."
 		 ("C-c n -" . evil-numbers/dec-at-pt)
 		 )
   )
+
+(use-package evil-textobj-tree-sitter)
+
 (use-package multiple-cursors
 
   )
@@ -4970,21 +5960,6 @@ The default tab-bar name uses the buffer name."
   (setq wordreference-source-lang "en")
   )
 
-(use-package python-mode)
-(use-package clojure-mode)
-(use-package typescript-mode)
-(use-package rust-mode
-  :mode "\\.rs\\'"
-  )
-
-(use-package go-mode
-  :config
-  (use-package go-impl)
-  (use-package go-guru)
-  (use-package go-playground)
-  (use-package go-expr-completion
-	)
-  )
 
 
 (use-package htmlize)
@@ -5048,6 +6023,7 @@ The default tab-bar name uses the buffer name."
 								   (recenter 0)
 								   )
 		gptel-post-response-hook 'end-of-buffer
+		gptel-mode "gpt4"
 		gptel-directives '((default .
 									"You are a large language model living in Emacs and a helpful assistant. Respond concisely. Your reponse paragraph should start with `🤖:: ` please")
 						   (programming .
@@ -5076,20 +6052,17 @@ The default tab-bar name uses the buffer name."
 
 (defun exec/vterm-post-hook()
   (interactive)
-  ;; (setq-local buffer-face-mode-face '(:family "JuliaMono"))
-  ;; (buffer-face-mode t)
-
+  (setq-local buffer-face-mode-face '(:family "Sarasa Term SC"))
   ;; (setq-local  buffer-face-mode-face '(
   ;; 									   ;; "NotoSansMNerdFontMono"
-  ;; 									   ;; :family "JetBrainsMonoNL Nerd Font"
+  ;; 									   :family "JetBrainsMonoNL Nerd Font"
   ;; 									   ;; :height  100
   ;; 									   :background "black"
   ;; 									   )
-  ;; 			   mode-line-format nil
   ;; 			   )
-  (setq-local mode-line-format nil)
-  (tab-line-mode -1)
-  ;; (buffer-face-mode)
+  ;; (setq-local mode-line-format nil)
+  ;; (tab-line-mode -1)
+  (buffer-face-mode)
   ;; (origami-mode -1)
   ;; (fringe-mode -1)
   ;; (set-left-margin 0)
@@ -5099,6 +6072,8 @@ The default tab-bar name uses the buffer name."
 (use-package vterm
   ;; :bind ("C-<return>" . vterm-send-return)
   :hook (vterm-mode  . exec/vterm-post-hook)
+  :custom
+  (shell-file-name "zsh")
   :config
   (general-evil-define-key 'insert 'vterm-mode-map
 	"C-r" 'vterm--self-insert
@@ -5140,6 +6115,7 @@ The default tab-bar name uses the buffer name."
   (add-hook 'eshell-load-hook #'eat-eshell-mode))
 
 (use-package fcitx
+  :disabled
   :after evil
   :config
   (setq fcitx-remote-command "fcitx5-remote")
@@ -5148,6 +6124,7 @@ The default tab-bar name uses the buffer name."
 
 
 (use-package rime
+  :disabled
   :straight (:type built-in)
   :init
   (setq rime-show-candidate 'posframe
@@ -5156,28 +6133,14 @@ The default tab-bar name uses the buffer name."
   (setq rime-user-data-dir "~/.local/share/fcitx5/rime")
   :bind ("s-=" . 'toggle-input-method)
   :config
-  (setq rime-posframe-properties
-		(list :font "Noto Sans CJK SC"
-			  :internal-border-width 1))
+  ;; (setq rime-posframe-properties
+  ;; 		(list :font "Noto Sans CJK SC"
+  ;; 			  :internal-border-width 1))
   (setq rime-show-preedit t)
   )
 
-
-
-;; (global-set-key (kbd "s-=") 'toggle-input-method)
-;; (setq default-input-method "rime")
-
-
-
-
-;; (global-set-key (kbd "s-=") (lambda()
-;; 			      (interactive)
-;; 			      (shell-command "/usr/bin/fcitx-remote -t")
-;; 			      ))
-
 (unless (server-running-p)
-  (server-start)
-  )
+  (server-start))
 ;;; init.el ends here
 
 
@@ -5196,20 +6159,158 @@ The default tab-bar name uses the buffer name."
 
 (use-package google-this)
 
+(use-package imenu
+  :straight (:type built-in)
+  :config
+  (setopt imenu-max-item-length nil
+		  imenu-space-replacement nil)
+  )
+
 (use-package imenu-list
   :ensure nil
   :straight (imenu-list :type git :host github :repo "bmag/imenu-list")
+  :custom-face
+  (imenu-list-entry-subalist-face-0 ((t (:underline nil))))
+  ;; :hook
+  ;; (prog-mode . imenu-list-minor-mode)
   :config
-  ;; (imenu-list-minor-mode)
-  )
+  (setopt imenu-list-auto-resize nil
+		  imenu-list-size (/ (float (if (boundp 'treemacs-width) treemacs-width 33))  (frame-width)))
+
+  (defun exec/imenu-list-set-window-parameters()
+	(interactive)
+	(window-preserve-size (get-buffer-window imenu-list-buffer-name) t t)
+	(set-window-parameter
+	 (get-buffer-window imenu-list-buffer-name)
+	 'no-other-window t)
+	;; (set-window-parameter
+	;;  (get-buffer-window imenu-list-buffer-name)
+	;;  'window-side 'right)
+	;; (set-window-parameter
+	;;  (get-buffer-window imenu-list-buffer-name)
+	;;  'window-slot 0)
+	(set-window-parameter
+	 (get-buffer-window imenu-list-buffer-name)
+	 'no-delete-other-windows t)
+	)
+
+  (add-hook 'imenu-list-minor-mode-hook 'exec/imenu-list-set-window-parameters)
+
+  (add-hook 'imenu-list-update-hook
+			'(lambda()
+			   (if (= (length imenu-list--imenu-entries) 0)
+				   (imenu-list-quit-window))))
+
+  ;; (defun imenu-list-display-buffer (buffer alist)
+  ;;   "Display the imenu-list buffer at the side.
+  ;; This function should be used with `display-buffer-alist'.
+  ;; See `display-buffer-alist' for a description of BUFFER and ALIST."
+  ;;   (or (get-buffer-window buffer)
+
+  ;;       (let ((window (ignore-errors (split-window (frame-root-window) (imenu-list-split-size) imenu-list-position))))
+  ;;         (when window
+  ;;           ;; since Emacs 27.0.50, `window--display-buffer' doesn't take a
+  ;;           ;; `dedicated' argument, so instead call `set-window-dedicated-p'
+  ;;           ;; directly (works both on new and old Emacs versions)
+  ;;           (window--display-buffer buffer window 'window alist)
+  ;;           (set-window-dedicated-p window t)
+  ;;           window))
+  ;; 	  ))
+
+
+  (require 's)
+  (defun exec/imenu-get-icon(entry &optional name)
+	(cond ((equal entry "Types") (nerd-icons-codicon "nf-cod-symbol_class"))
+		  ((equal entry "Type") (nerd-icons-codicon "nf-cod-symbol_class"))
+		  ((equal entry "Variables") (nerd-icons-codicon "nf-cod-symbol_variable"))
+		  ((equal entry "Struct") (nerd-icons-codicon "nf-cod-symbol_structure"))
+		  ((equal entry "Interface") (nerd-icons-codicon "nf-cod-symbol_interface"))
+		  ((equal entry "Function") (nerd-icons-mdicon "nf-md-function"))
+		  ((equal entry "Method") (nerd-icons-codicon "nf-cod-symbol_method"))
+		  ((equal entry "Package") (nerd-icons-codicon "nf-cod-package"))
+		  ((equal entry "Packages") (nerd-icons-codicon "nf-cod-package"))
+		  ((equal entry "Fn") (nerd-icons-mdicon "nf-md-function"))
+
+		  ((s-contains? "fn(" (format "%s" entry)) (nerd-icons-mdicon "nf-md-function"))
+		  ((equal entry nil)
+		   (cond
+			((s-suffix? "-mode-map" (format "%s" name)) (nerd-icons-mdicon "nf-md-map"))
+			((s-prefix? "exec/" (format "%s" name)) "👿")
+			((s-contains? " fn(" name) (nerd-icons-mdicon "nf-md-function"))
+			((equal name "Signature") (nerd-icons-mdicon "nf-md-signature_freehand"))
+			((equal name "References") (nerd-icons-codicon "nf-cod-references"))
+			((equal name "Documentation") (nerd-icons-mdicon "nf-md-file_document"))
+			((equal name "Debugging") (nerd-icons-codicon "nf-cod-debug"))
+			((equal name "Source Code") (nerd-icons-codicon "nf-cod-code"))
+			(t
+			 (nerd-icons-mdicon "nf-md-null")
+			 ;; ""
+			 )))
+		  (t (progn
+			   (nerd-icons-codicon "nf-cod-question")
+			   ;; ""
+			   ))))
+
+  (defun imenu-list-insert-entries ()
+	"Insert all imenu entries into the current buffer.
+The entries are taken from `imenu-list--imenu-entries'.
+Each entry is inserted in its own line.
+Each entry is appended to `imenu-list--line-entries' as well
+ (`imenu-list--line-entries' is cleared in the beginning of this
+function)."
+	(let ((inhibit-read-only t))
+	  (erase-buffer)
+	  (setq imenu-list--line-entries nil)
+	  (imenu-list--insert-entries-internal nil imenu-list--imenu-entries 0)
+	  (setq imenu-list--line-entries (nreverse imenu-list--line-entries))))
+
+  (defun imenu-list--insert-entries-internal (parent_entry index-alist depth)
+	"Insert all imenu entries in INDEX-ALIST into the current buffer.
+DEPTH is the depth of the code block were the entries are written.
+Each entry is inserted in its own line.
+Each entry is appended to `imenu-list--line-entries' as well."
+	(dolist (entry index-alist)
+	  (setq imenu-list--line-entries (cons entry imenu-list--line-entries))
+	  (imenu-list--insert-entry parent_entry entry depth)
+	  (when (imenu--subalist-p entry)
+		(imenu-list--insert-entries-internal (car entry) (cdr entry) (1+ depth)))))
+
+  (defun imenu-list--insert-entry (parent-entry entry depth)
+	"Insert a line for ENTRY with DEPTH."
+	(if (imenu--subalist-p entry)
+		(progn
+		  (insert (imenu-list--depth-string depth))
+		  (insert-button (format "%s %s"
+								 (if
+									 (not parent-entry)
+									 (exec/imenu-get-icon (car entry))
+								   (exec/imenu-get-icon parent-entry))
+								 (car entry))
+						 'face (imenu-list--get-face depth t)
+						 'help-echo (format "Toggle: %s"
+											(car entry))
+						 'follow-link t
+						 'action ;; #'imenu-list--action-goto-entry
+						 #'imenu-list--action-toggle-hs)
+		  (insert "\n"))
+	  (insert (imenu-list--depth-string depth))
+	  (insert-button (format "%s %s"
+							 (exec/imenu-get-icon parent-entry (car entry))
+							 (car entry))
+					 'face (imenu-list--get-face depth nil)
+					 'help-echo (format "Go to: %s"
+										(car entry))
+					 'follow-link t
+					 'action #'imenu-list--action-goto-entry)
+	  (insert "\n"))))
 
 
 
 (use-package hl-line
-  :disabled t
-  :config
-  (set-face-attribute 'hl-line nil :background "#000000")
-  ;; :global-minor-mode global-hl-line-mode
+  :hook
+  (after-init . global-hl-line-mode)
+  :custom-face
+  (hl-line ((t (:background "gray20" :inherit nil))))
   )
 
 (use-package hl-line+
@@ -5225,83 +6326,148 @@ The default tab-bar name uses the buffer name."
   (hl-line-overlay-priority -100) ;; sadly, seems not observed by diredfl
   )
 
+(use-package form-feed-st
+  :config
+  (global-form-feed-st-mode)
+  )
 
-;; (setq builtin-bitmaps
-;; 	  ' ((question-mark [#x3c #x7e #xc3 #xc3 #x0c #x18 #x18 #x00 #x18 #x18])
-;; 		 (exclamation-mark [#x18 #x18 #x18 #x18 #x18 #x18 #x18 #x00 #x18 #x18])
-;; 		 (left-arraw [#x18 #x30 #x60 #xfc #xfc #x60 #x30 #x18])
-;; 		 (right-arrow [#x18 #x0c #x06 #x3f #x3f #x06 #x0c #x18])
-;; 		 (up-arrow [#x18 #x3c #x7e #xff #x18 #x18 #x18 #x18])
-;; 		 (down-arrow [#x18 #x18 #x18 #x18 #xff #x7e #x3c #x18])
-;; 		 (left-curly-arrow [#x3c #x7c #xc0 #xe4 #xfc #x7c #x3c #x7c])
-;; 		 (right-curly-arrow [#x3c #x3e #x03 #x27 #x3f #x3e #x3c #x3e])
-;; 		 (left-triangle [#x03 #x0f #x1f #x3f #x3f #x1f #x0f #x03])
-;; 		 (right-triangle [#xc0 #xf0 #xf8 #xfc #xfc #xf8 #xf0 #xc0])
-;; 		 (top-left-angle [#xfc #xfc #xc0 #xc0 #xc0 #xc0 #xc0 #x00])
-;; 		 (top-right-angle [#x3f #x3f #x03 #x03 #x03 #x03 #x03 #x00])
-;; 		 (bottom-left-angle [#x00 #xc0 #xc0 #xc0 #xc0 #xc0 #xfc #xfc])
-;; 		 (bottom-right-angle [#x00 #x03 #x03 #x03 #x03 #x03 #x3f #x3f])
-;; 		 (left-bracket [#xfc #xfc #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xfc #xfc])
-;; 		 (right-bracket [#x3f #x3f #x03 #x03 #x03 #x03 #x03 #x03 #x3f #x3f])
-;; 		 (filled-rectangle [#xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe #xfe])
-;; 		 (hollow-rectangle [#xfe #x82 #x82 #x82 #x82 #x82 #x82 #x82 #x82 #x82 #x82 #x82 #xfe])
-;; 		 (hollow-square [#x7e #x42 #x42 #x42 #x42 #x7e])
-;; 		 (filled-square [#x7e #x7e #x7e #x7e #x7e #x7e])
-;; 		 (vertical-bar [#xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0 #xc0])
-;; 		 (horizontal-bar [#xfe #xfe])))
-
-;; (dolist (bitmap builtin-bitmaps)
-;;   (define-fringe-bitmap (car bitmap) (cadr bitmap)))
-
-;; (fringe-mode 16)
+(put 'list-timers 'disabled nil)
 
 
-;; (use-package fringe-scale
-;;  :straight (emacs-fringe-scale :type git :host github :repo "blahgeek/emacs-fringe-scale")
-;;  :config
-;;  (progn
-;;    (set-fringe-mode 16)
-;;    (setq fringe-scale-width 16)
-;;    (fringe-scale-setup))
+;; (use-package crazy-theme
+;;   :straight (:local-repo "~/Projects/github.com/eval-exec/crazy-theme.el")
+;;   :config
 ;;   )
-(define-fringe-bitmap 'left-curly-arrow
-  (vector #b0011111110000000
-          #b0011111110000000
-          #b0011111110000000
-          #b0011100000000000
-          #b0011100000000000
-          #b0011100000000000
-          #b0011100000000000
-          #b0011100001000000
-          #b0011100001100000
-          #b0011100001110000
-          #b0011111111111000
-          #b0011111111111100
-          #b0011111111111000
-          #b0000000001110000
-          #b0000000001100000
-          #b0000000001000000
-          )
-  16 16)
 
-(define-fringe-bitmap 'right-curly-arrow
-  [
-   #b0000000000000001
-   #b0000000000000011
-   #b0000000000000111
-   #b0000000000001111
-   #b0000000000011111
-   #b0000000000111111
-   #b0000000001111111
-   #b0000000011111111
-   #b0000000111111111
-   #b0000001111111111
-   #b0000011111111111
-   #b0000111111111111
-   #b0001111111111111
-   #b0011111111111111
-   #b0111111111111111
-   #b1111111111111111
-   ] 16 16 'center)
+;; execute `xdotool getactivewindow', assert we will get an interger number, and write this file into /tmp/show_hide/emacs.wid
+(defun exec/get-active-window-id ()
+  (let ((window-id (shell-command-to-string "xdotool getactivewindow")))
+    (string-to-number window-id)))
 
-(setq visual-line-fringe-indicators '(nil right-curly-arrow))
+(defun exec/write-window-id-to-file (file-path window-id)
+  (with-temp-file file-path
+    (insert (number-to-string window-id))))
+
+(defun exec/write-window-id()
+  (interactive)
+  (setq window-id (exec/get-active-window-id))
+  (let ((file-path "/tmp/_-_GNU_Emacs_at_Mufasa.wid"))
+	(exec/write-window-id-to-file file-path window-id))
+  (remove-hook 'focus-in-hook 'exec/write-window-id)
+  )
+
+(add-hook 'focus-in-hook 'exec/write-window-id)
+
+
+
+(defun exec/keymap-symbol (keymap)
+  "Return the symbol to which KEYMAP is bound, or nil if no such symbol exists."
+  (interactive)
+  (catch 'gotit
+    (mapatoms (lambda (sym)
+                (and (boundp sym)
+                     (eq (symbol-value sym) keymap)
+                     (not (eq sym 'keymap))
+                     (throw 'gotit sym))))))
+
+(defun exec/print-keymap-symbol()
+  (interactive)
+  (message (exec/keymap-symbol (current-local-map))))
+
+(general-def
+  "H-i" 'exec/print-keymap-symbol
+  "<mouse-8>" 'evil-jump-backward
+  "<mouse-9>" 'evil-jump-forward
+  )
+
+(defun exec/minibuffer-setup ()
+  (set (make-local-variable 'face-remapping-alist)
+	   '((default :height 0.8))))
+;; (add-hook 'minibuffer-setup-hook 'exec/minibuffer-setup)
+
+
+
+(use-package tabspaces
+  :disabled
+  :hook (after-init . tabspaces-mode) ;; use this only if you want the minor-mode loaded at startup.
+  :commands (tabspaces-switch-or-create-workspace
+             tabspaces-open-or-create-project-and-workspace)
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-default-tab "Default")
+  (tabspaces-remove-to-default t)
+  (tabspaces-include-buffers '("*scratch*"))
+  (tabspaces-initialize-project-with-todo t)
+  (tabspaces-todo-file-name "project-todo.org")
+  ;; sessions
+  (tabspaces-session t)
+  (tabspaces-session-auto-restore t))
+
+(use-package persp-mode
+  :disabled
+  :custom
+  (persp-keymap-prefix (kbd "<f5>"))
+  :config
+  (persp-mode t)
+
+  (use-package persp-mode-projectile-bridge
+	:config
+
+	(add-hook 'persp-mode-projectile-bridge-mode-hook #'(lambda ()
+														  (if persp-mode-projectile-bridge-mode
+															  (persp-mode-projectile-bridge-find-perspectives-for-all-buffers)
+															(persp-mode-projectile-bridge-kill-perspectives))))
+	(add-hook 'after-init-hook #'(lambda ()
+								   (persp-mode-projectile-bridge-mode 1))
+			  t)))
+
+(defun exec/self-screenshot (&optional type)
+  "Save a screenshot of type TYPE of the current Emacs frame.
+As shown by the function `', type can weild the value `svg',
+`png', `pdf'.
+
+This function will output in /tmp a file beginning with \"Emacs\"
+and ending with the extension of the requested TYPE."
+  (interactive (list
+                (intern (completing-read "Screenshot type: "
+                                         '(png svg pdf postscript)))))
+  (let* ((extension (pcase type
+                      ('png        ".png")
+                      ('svg        ".svg")
+                      ('pdf        ".pdf")
+                      ('postscript ".ps")
+                      (otherwise (error "Cannot export screenshot of type %s" otherwise))))
+         (filename (make-temp-file "Emacs-" nil extension))
+         (data     (x-export-frames nil type)))
+    (with-temp-file filename
+      (insert data))
+    (kill-new filename)
+    (message filename)))
+
+
+(use-package prism)
+
+(use-package bufler
+  :disabled
+  :config
+  (bufler-mode)
+  (bufler-workspace-mode)
+  )
+(use-package burly)
+
+(use-package timer
+  :straight (:type built-in)
+  :config
+  (general-nmap 'timer-list-mode-map
+	"c" 'timer-list-cancel))
+
+(progn ;; Life
+  (defun exec/washing-machine-alert()
+	(notifications-notify
+	 :title "洗衣机检查提醒"
+	 :body "！洗衣机于现在应该洗好了"))
+
+  ;; (run-at-time "11:30" 10 #'exec/washing-machine-alert)
+  )
+
+(setq debug-on-error nil)
