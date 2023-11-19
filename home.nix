@@ -434,7 +434,7 @@
         vim = "nvim";
         update = "sudo nixos-rebuild switch";
         emacs = "emacsclient -nw";
-        magit = "emacsclient -nw -e '(magit)'";
+        magit = "emacs -Q -nw -l ~/.emacs.d/init-nw.el -e '(magit)'";
         gpt = "sgpt";
         psgrep = "ps -eF | head -n1 && ps -eF | grep";
       };
