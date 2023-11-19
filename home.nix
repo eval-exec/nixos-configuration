@@ -386,6 +386,10 @@
         pkgs.emacsPackages.vterm
         pkgs.emacsPackages.w3m
         pkgs.emacsPackages.xwidgets-reuse
+        pkgs.emacsPackages.evil
+        pkgs.emacsPackages.evil-collection
+        pkgs.emacsPackages.magit
+        pkgs.emacsPackages.forge
         pkgs.librime
         pkgs.mu
         pkgs.noto-fonts-color-emoji
