@@ -494,6 +494,7 @@
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
   programs.zsh.enable = true;
+  programs.wshowkeys.enable = true;
 
   programs.steam = {
     enable = true;

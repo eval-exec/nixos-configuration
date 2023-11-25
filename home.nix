@@ -203,7 +203,7 @@
     zsh-powerlevel10k
     zulip
   ];
-  home.file.".Xmodmap" = { source = ./Xmodmap; };
+  # home.file.".Xmodmap" = { source = ./Xmodmap; };
   # home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
   # home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
 
@@ -384,7 +384,8 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      package = pkgs.emacs-git.override { withGTK3 = true; };
+      # package = pkgs.emacs-git.override { withPgtk = true; };
+      package = pkgs.emacs-pgtk;
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
