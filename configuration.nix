@@ -44,7 +44,7 @@
       cleanOnBoot = true;
     };
   };
-  console.useXkbConfig = true;
+  # console.useXkbConfig = true;
 
   documentation = {
     enable = true;
@@ -165,7 +165,7 @@
       enable = true;
       layout = "us";
       # xkbVariant = "";
-      xkbOptions = "ctrl:hyper_capscontrol";
+      # xkbOptions = "ctrl:hyper_capscontrol";
 
       videoDrivers = [ "nvidia" ];
       #   config = lib.mkAfter ''
