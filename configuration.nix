@@ -164,19 +164,23 @@
     xserver = {
       enable = true;
       # xkbVariant = "";
-      xkbOptions = "ctrl:hyper_capscontrol";
-      layout = "us";
+      # xkbOptions = "ctrl:hyper_capscontrol";
+      layout = "mine";
       extraLayouts = {
         mine = {
-          description = "mine keyboard";
-          languages = [ "en" ];
+          description = "US Layout With Hyper as Mod3";
+          languages = [ "eng" ];
+
+          # include "pc"
+          # include "us"
+          # include "inet(evdev)"
           symbolsFile = pkgs.writeText "myinclude.conf" ''
-            include "pc"
-            include "us"
-            include "inet(evdev)"
-            key <HYPR> {[  Hyper_L  ]};
-            key <HYPR> {[  Hyper_R  ]};
-            modifier_map Mod4 { Hyper_L, Hyper_R };
+            partial modifier_keys
+            xkb_symbols "mine" {
+              include "us(basic)"
+              key <HYPR> {[  Hyper_L, Hyper_R ]};
+              modifier_map Mod3 { <HYPR> };
+            };
           '';
         };
       };
