@@ -178,7 +178,9 @@
             partial modifier_keys
             xkb_symbols "mine" {
               include "us(basic)"
-              key <HYPR> {[  Hyper_L, Hyper_R ]};
+              // key <HYPR> {[  Hyper_L, Hyper_R ]};
+              replace key <LCTL> { [ Caps_Lock ]};
+              replace key <CAPS> { [ CTRL ]};
               modifier_map Mod3 { <HYPR> };
             };
           '';
