@@ -12,6 +12,7 @@
     tree-sitter
     tree-sitter-grammars.tree-sitter-markdown
     libressl
+    wev
     fuse
     tor
     tor-browser
