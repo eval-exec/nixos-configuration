@@ -208,6 +208,7 @@
 
       # Enable the KDE Plasma Desktop Environment.
       displayManager = {
+        defaultSession = "plasmawayland";
         sddm = {
           enable = true;
           enableHidpi = true;
