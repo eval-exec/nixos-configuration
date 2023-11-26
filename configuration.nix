@@ -167,21 +167,32 @@
         model = "pc104";
         layout = "us";
         # xkbVariant = "";
-        options = "ctrl:hyper_capscontrol";
+        options = "ctrl:nocaps";
         extraLayouts = {
           ctrl = {
             description = "Caps as Ctrl, Ctrl as Hyper as Mod3";
             languages = [ "eng" ];
             symbolsFile = pkgs.writeText "ctrl" ''
+              // Eliminate CapsLock, making it another Ctrl.
               partial modifier_keys
-              xkb_symbols "hyper_capscontrol" {
-
+              xkb_symbols "nocaps" {
                   replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
-                  replace key <LCTL> { [ Hyper_L ] };
                   modifier_map Control { <CAPS> };
-                  modifier_map Mod3    { <LCTL> };
-              };
 
+
+                  modifier_map Mod4 { Super_L, Super_R };
+
+                  key <SUPR> {    [ NoSymbol, Super_L ]   };
+                  modifier_map Mod4   { <SUPR> };
+
+                  replace key <LCTL> { [ Hyper_L ] };
+                  modifier_map Mod3    { <LCTL> };
+
+                  
+                  
+                  key <HYPR> {    [ NoSymbol, Hyper_L ]   };
+                  modifier_map Mod3   { <HYPR> };
+              };
             '';
           };
         };
@@ -232,9 +243,9 @@
         sddm = {
           enable = true;
           enableHidpi = true;
-          wayland.enable = true;
+          wayland.enable = false;
         };
-        xserverArgs = [ "-verbose" "-logverbose" ];
+        # xserverArgs = [ "-verbose" "-logverbose" ];
         # setupCommands = "";
         # sessionCommands run before setupCommands
         # sessionCommands =
@@ -527,7 +538,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-  programs.xwayland.enable = true;
+  programs.xwayland.enable = false;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
   programs.zsh.enable = true;

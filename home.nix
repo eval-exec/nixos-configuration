@@ -13,6 +13,8 @@
     aspell
     aspellDicts.en
     aspellDicts.en-computers
+    zls
+    gopls
     aspellDicts.en-science
     atool
     autoconf
@@ -374,7 +376,7 @@
     emacs = {
       enable = true;
       # package = pkgs.emacs-git.override { withPgtk = true; };
-      package = pkgs.emacs-pgtk;
+      package = pkgs.emacs-git;
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
