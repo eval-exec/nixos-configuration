@@ -6,95 +6,56 @@
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
-    bear
-    alacritty
-    semgrep
-    tree-sitter
-    tree-sitter-grammars.tree-sitter-markdown
-    libressl
-    wev
-    fuse
-    tor
-    tor-browser
-    onionshare
-    nil
-    fuse3
-    ncurses
-    mermaid-cli
-    chromaprint
-    nodePackages.pyright
-    nodePackages.typescript-language-server
-    epubcheck
-    simplescreenrecorder
-    coreutils-full
-    shell_gpt
-    graphviz
-    difftastic
-    semgrep
-    semgrep-core
-    xfsprogs
-    nacelle
     aileron
-    sbcl
-    pandoc
-    fftw
-    deno
-    retry
-    osdlyrics
-    w3m
-    lynx
-    ncmpcpp
+    alacritty
     alejandra
-    # beets
-    picard
     amdgpu_top
-    atool
-    mpc-cli
-    autoconf
-    automake
-    # spotdl
     aspell
     aspellDicts.en
-    aspellDicts.en-science
     aspellDicts.en-computers
-    bitcoin
-    google-cloud-sdk
-    sdcv
-    crate2nix
-    yesplaymusic
-    youtube-music
-    nuclear
+    aspellDicts.en-science
+    atool
+    autoconf
+    automake
     babashka
     bat
+    bear
+    # beets
     bitcoin
+    bitcoin
+    browsh
     calibre
+    chromaprint
     clinfo
-    glxinfo
     clj-kondo
-    libcamera
-
     clojure
     clojure-lsp
     cmake
-    gptcommit
-    imagemagick
     cool-retro-term
     copyq
+    coreutils-full
     cpupower-gui
+    crate2nix
     ddcui
     ddcutil
     delta
+    deno
+    difftastic
     dig
     direnv
     dmidecode
     dolphin
     du-dust
     element-desktop
+    epubcheck
+    evtest
     exercism
     fd
     ffmpeg-full
-    libnotify
+    fftw
     flameshot
+    fuse
+    fuse3
     fzf
     g810-led
     gdb
@@ -104,9 +65,13 @@
     gifski
     github-copilot-cli
     github-desktop
+    glxinfo
     go-ethereum
     goimapnotify
     google-chrome
+    google-cloud-sdk
+    gptcommit
+    graphviz
     grc
     gst_all_1.gst-plugins-good
     gst_all_1.gst-plugins-ugly
@@ -116,6 +81,7 @@
     httpie
     hugo
     iftop
+    imagemagick
     inetutils
     intel-gpu-tools
     isync
@@ -124,11 +90,14 @@
     # jetbrains.idea-ultimate
     joker
     jq
+    keyd
     kitty
-    browsh
     kitty-themes
     leiningen
+    libcamera
     libfaketime
+    libnotify
+    libressl
     libsForQt5.khotkeys
     libstdcxx5
     llvmPackages.libcxx
@@ -137,25 +106,37 @@
     logseq
     lshw
     lsof
+    lynx
     mercurial
+    mermaid-cli
     meson
     microsoft-edge-dev
-    roswell
-    sbclPackages.qlot
     mlocate
     mold
     moreutils
     most
+    mpc-cli
     mpv
     mu
+    nacelle
+    ncmpcpp
+    ncurses
     ncurses
     neovide
+    nil
     ninja
     nixfmt
+    nodePackages.pyright
+    nodePackages.typescript-language-server
+    nuclear
+    onionshare
+    osdlyrics
+    pandoc
     pastebinit
     patchelf
     peek
     pharo
+    picard
     pipenv
     pkg-config
     powershell
@@ -163,48 +144,55 @@
     protobuf
     qbittorrent
     qrcp
+    retry
     ripgrep
+    roswell
+    sbcl
+    sbclPackages.qlot
     sccache
+    sdcv
+    semgrep
+    semgrep
+    semgrep-core
+    shell_gpt
     silver-searcher
+    simplescreenrecorder
     sioyek
     sops
+    # spotdl
     spotify
     sysstat
     tmux
+    tor
+    tor-browser
+    tree-sitter
+    tree-sitter-grammars.tree-sitter-markdown
     typos
     unzip
     vagrant
     variety
     vimpager
     vlc
+    w3m
     wakatime
+    wev
     wezterm
     winetricks
     wineWowPackages.stable
     wmctrl
     wofi
-    xclip
-    xdotool
-    xorg.libxcb
-    xorg.xcbutil
-    xorg.xcbutilimage
-    xorg.xcbutilwm
-    xorg.xdpyinfo
-    xorg.xmodmap
-    xorg.xwininfo
-    xorg.xev
-    evtest
+    yesplaymusic
+    youtube-music
     yq
     yt-dlp
-    zlib
     zig
-    keyd
+    zlib
     zsh
     zsh-autosuggestions
     zsh-powerlevel10k
     zulip
   ];
-  home.file.".Xmodmap" = { source = ./Xmodmap; };
+  # home.file.".Xmodmap" = { source = ./Xmodmap; };
   # home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
   # home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
 
@@ -342,10 +330,10 @@
   };
   xsession = {
     enable = false;
-    initExtra = ''
-      ${pkgs.xorg.xmodmap}/bin/xmodmap -e "remove mod4 = Hyper_L";
-      ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
-    '';
+    # initExtra = ''
+    #   ${pkgs.xorg.xmodmap}/bin/xmodmap -e "remove mod4 = Hyper_L";
+    #   ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
+    # '';
   };
 
   programs = {

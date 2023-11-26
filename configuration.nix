@@ -164,23 +164,29 @@
     xserver = {
       enable = true;
       # xkbVariant = "mine";
-      xkbOptions = "ctrl:hyper_capscontrol";
-      layout = "us";
+      # xkbOptions = "ctrl:hyper_capscontrol";
+      layout = "us-mine";
       extraLayouts = {
-        hyper = {
+        us-mine = {
           description = "Hyper as Mod3";
           languages = [ "eng" ];
-          symbolsFile = pkgs.writeText "hyper" ''
-            // Make the left Ctrl key a left Hyper,
-            // and the CapsLock key a left Control.
+          symbolsFile = pkgs.writeText "us-mine" ''
+            partial alphanumeric_keys
             partial modifier_keys
-            xkb_symbols "hyper_capscontrol" {
-                include "us"
+            xkb_symbols "us-mine" {
+                include "us(basic)"            // includes the base US keys
+                include "inet(media_common)"
+                include "inet(nav_common)"
+                include "inet(evdev)"
+                include "level3(ralt_switch)"  // configures right alt as a third level switch
+
                 replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
-                replace key <LCTL> { [ Hyper_L ] };
                 modifier_map Control { <CAPS> };
-                modifier_map Mod3    { <LCTL> };
+
+                // replace key <LCTL> { [ Hyper_L ] };
+                // modifier_map Mod3    { <LCTL> };
             };
+
           '';
         };
       };
@@ -234,7 +240,7 @@
         setupCommands = "";
         # sessionCommands run before setupCommands
         # sessionCommands =
-        #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout mine";
+        #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout us-mine";
         autoLogin = {
           enable = false;
           user = "exec";
@@ -422,26 +428,21 @@
     appimage-run
     cachix
     clang
-    linux-manual
-    man-pages-posix
-    glibcInfo
-    man-pages-posix
-    scheme-manpages
-
-    stdman
-    stdmanpages
-
     discord
     docker-compose
     dua
     duf
     file
     git
+    glibcInfo
     gnumake
     libclang
     libcxx
     libvterm
+    linux-manual
     lldb
+    man-pages-posix
+    man-pages-posix
     ncurses
     neovim
     nodejs
@@ -456,6 +457,9 @@
     proxychains-ng
     python3
     qemu
+    scheme-manpages
+    stdman
+    stdmanpages
     steam-run
     sysfsutils
     tdesktop
@@ -464,6 +468,18 @@
     vim
     wakatime
     wget
+    xclip
+    xdotool
+    xfsprogs
+    xorg.libxcb
+    xorg.xcbutil
+    xorg.xcbutilimage
+    xorg.xcbutilwm
+    xorg.xdpyinfo
+    xorg.xev
+    xorg.xkbcomp
+    xorg.xmodmap
+    xorg.xwininfo
     zlib
     # nvidia-vaapi-driver
   ];
@@ -512,6 +528,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
+  programs.xwayland.enable = true;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
   programs.zsh.enable = true;
