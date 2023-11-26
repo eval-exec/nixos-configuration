@@ -163,25 +163,23 @@
     # Configure keymap in X11
     xserver = {
       enable = true;
-      # xkbVariant = "";
-      # xkbOptions = "ctrl:hyper_capscontrol";
-      layout = "mine";
+      # xkbVariant = "mine";
+      xkbOptions = "ctrl:hyper_capscontrol";
+      layout = "us";
       extraLayouts = {
-        mine = {
-          description = "US Layout With Hyper as Mod3";
+        hyper = {
+          description = "Hyper as Mod3";
           languages = [ "eng" ];
-
-          # include "pc"
-          # include "us"
-          # include "inet(evdev)"
-          symbolsFile = pkgs.writeText "myinclude.conf" ''
+          symbolsFile = pkgs.writeText "hyper" ''
+            // Make the left Ctrl key a left Hyper,
+            // and the CapsLock key a left Control.
             partial modifier_keys
-            xkb_symbols "mine" {
-              include "us(basic)"
-              // key <HYPR> {[  Hyper_L, Hyper_R ]};
-              replace key <LCTL> { [ Caps_Lock ]};
-              replace key <CAPS> { [ CTRL ]};
-              modifier_map Mod3 { <HYPR> };
+            xkb_symbols "hyper_capscontrol" {
+                include "us"
+                replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
+                replace key <LCTL> { [ Hyper_L ] };
+                modifier_map Control { <CAPS> };
+                modifier_map Mod3    { <LCTL> };
             };
           '';
         };
@@ -228,13 +226,15 @@
 
       # Enable the KDE Plasma Desktop Environment.
       displayManager = {
-        defaultSession = "plasmawayland";
+        # defaultSession = "plasmawayland";
         sddm = {
           enable = true;
           enableHidpi = true;
         };
         setupCommands = "";
         # sessionCommands run before setupCommands
+        # sessionCommands =
+        #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout mine";
         autoLogin = {
           enable = false;
           user = "exec";
@@ -398,6 +398,7 @@
 
   environment = {
     variables = {
+      # XKB_DEFAULT_LAYOUT = "us";
       EDITOR = "nvim";
       VISUAL = "nvim";
       LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
