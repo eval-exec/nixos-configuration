@@ -163,31 +163,27 @@
     # Configure keymap in X11
     xserver = {
       enable = true;
-      # xkbVariant = "mine";
-      # xkbOptions = "ctrl:hyper_capscontrol";
-      layout = "us-mine";
-      extraLayouts = {
-        us-mine = {
-          description = "Hyper as Mod3";
-          languages = [ "eng" ];
-          symbolsFile = pkgs.writeText "us-mine" ''
-            partial alphanumeric_keys
-            partial modifier_keys
-            xkb_symbols "us-mine" {
-                include "us(basic)"            // includes the base US keys
-                include "inet(media_common)"
-                include "inet(nav_common)"
-                include "inet(evdev)"
-                include "level3(ralt_switch)"  // configures right alt as a third level switch
+      xkb = {
+        model = "pc104";
+        layout = "us";
+        # xkbVariant = "";
+        options = "ctrl:hyper_capscontrol";
+        extraLayouts = {
+          ctrl = {
+            description = "Caps as Ctrl, Ctrl as Hyper as Mod3";
+            languages = [ "eng" ];
+            symbolsFile = pkgs.writeText "ctrl" ''
+              partial modifier_keys
+              xkb_symbols "hyper_capscontrol" {
 
-                replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
-                modifier_map Control { <CAPS> };
+                  replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
+                  replace key <LCTL> { [ Hyper_L ] };
+                  modifier_map Control { <CAPS> };
+                  modifier_map Mod3    { <LCTL> };
+              };
 
-                // replace key <LCTL> { [ Hyper_L ] };
-                // modifier_map Mod3    { <LCTL> };
-            };
-
-          '';
+            '';
+          };
         };
       };
 
@@ -236,8 +232,10 @@
         sddm = {
           enable = true;
           enableHidpi = true;
+          wayland.enable = true;
         };
-        setupCommands = "";
+        xserverArgs = [ "-verbose" "-logverbose" ];
+        # setupCommands = "";
         # sessionCommands run before setupCommands
         # sessionCommands =
         #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout us-mine";
@@ -436,6 +434,7 @@
     git
     glibcInfo
     gnumake
+    interception-tools
     libclang
     libcxx
     libvterm
