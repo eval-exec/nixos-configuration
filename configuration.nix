@@ -239,11 +239,11 @@
 
       # Enable the KDE Plasma Desktop Environment.
       displayManager = {
-        # defaultSession = "plasmawayland";
+        defaultSession = "plasmawayland";
         sddm = {
           enable = true;
           enableHidpi = true;
-          wayland.enable = false;
+          wayland.enable = true;
         };
         # xserverArgs = [ "-verbose" "-logverbose" ];
         # setupCommands = "";
@@ -538,7 +538,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-  programs.xwayland.enable = false;
+  programs.xwayland.enable = true;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
   programs.zsh.enable = true;

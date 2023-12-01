@@ -230,7 +230,7 @@
               ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --pull "execvy-inbox"
             '';
             onNotifyPost =
-              "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
+              "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
           };
 
           mbsync = {
@@ -323,7 +323,7 @@
       # preExec =
       #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       postExec =
-        "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
+        "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       verbose = true;
     };
   };
@@ -372,8 +372,8 @@
     java = { enable = true; };
     emacs = {
       enable = true;
-      # package = pkgs.emacs-git.override { withPgtk = true; };
-      package = pkgs.emacs-git;
+      # package = pkgs.emacs-git.override { withGTK3 = true; };
+      package = pkgs.emacs-pgtk;
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
@@ -431,7 +431,7 @@
         cat = "bat -p";
         vim = "nvim";
         update = "sudo nixos-rebuild switch";
-        emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
+        emacs = "${pkgs.emacs-pgtk}/bin/emacsclient -nw";
         magit = ''
           \emacs -Q -nw -l ~/.emacs.d/init-nw.el --funcall magit
         '';
