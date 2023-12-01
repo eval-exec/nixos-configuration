@@ -10,12 +10,9 @@
     alacritty
     alejandra
     amdgpu_top
-    aspell
-    aspellDicts.en
-    aspellDicts.en-computers
+    (aspellWithDicts (ds: with ds; [ en en-computers en-science ]))
     zls
     gopls
-    aspellDicts.en-science
     atool
     autoconf
     automake

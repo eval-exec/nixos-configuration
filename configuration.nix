@@ -401,12 +401,12 @@
          </alias>
         </fontconfig>
       '';
-      defaultFonts = {
-        serif = [ "Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
-        sansSerif = [ "Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
-        monospace = [ "JuliaMono" "Jetbrains Mono" ];
-        emoji = [ "Noto Color Emoji" "Twitter Color Emoji" ];
-      };
+      # defaultFonts = {
+      #   serif = [ "Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
+      #   sansSerif = [ "Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
+      #   monospace = [ "JuliaMono" "Jetbrains Mono" ];
+      #   emoji = [ "Noto Color Emoji" "Twitter Color Emoji" ];
+      # };
     };
 
   };

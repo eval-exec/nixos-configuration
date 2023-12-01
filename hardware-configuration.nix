@@ -24,7 +24,10 @@
     # "amdgpu.aspm=0"
   ];
   boot.extraModulePackages = [ ];
-  boot.kernel.sysctl = { "kernel.sysrq" = 1; };
+  boot.kernel.sysctl = {
+    "kernel.sysrq" = 1;
+    "fs.inotify.max_user_watches" = 524288;
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
