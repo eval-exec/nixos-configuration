@@ -567,6 +567,7 @@
     enable = true;
     libraries = with pkgs; [
       stdenv.cc.cc.lib
+      sqlite
       fuse3
       fuse
       libgit2
