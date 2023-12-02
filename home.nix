@@ -68,6 +68,8 @@
     go-ethereum
     goimapnotify
     google-chrome
+    vivaldi
+    vivaldi-ffmpeg-codecs
     google-cloud-sdk
     gptcommit
     graphviz

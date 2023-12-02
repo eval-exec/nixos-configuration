@@ -416,7 +416,7 @@
       QT_IM_MODULE = lib.mkForce "";
       EDITOR = "nvim";
       VISUAL = "nvim";
-      MOZ_ENABLE_WAYLAND = 1;
+      MOZ_ENABLE_WAYLAND = "1";
       LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
     };
     localBinInPath = true;
