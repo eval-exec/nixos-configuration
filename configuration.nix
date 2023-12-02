@@ -431,6 +431,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    libsForQt5.xdg-desktop-portal-kde
+    xdg-desktop-portal
     appimage-run
     cachix
     clang
