@@ -411,8 +411,8 @@
   environment = {
     variables = {
       # XKB_DEFAULT_LAYOUT = "us";
-      GTK_IM_MODULE = "";
-      QT_IM_MODULE = "";
+      GTK_IM_MODULE = lib.mkForce "";
+      QT_IM_MODULE = lib.mkForce "";
       EDITOR = "nvim";
       VISUAL = "nvim";
       LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
