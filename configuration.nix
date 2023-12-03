@@ -122,8 +122,10 @@
       enable = true;
       keyboards.default.settings = {
         main = {
-          capslock = "overload(control, esc)";
-          leftcontrol = "overload(hyper, capslock)";
+          # capslock = "overload(control, esc)";
+          # leftcontrol = "overload(hyper, capslock)";
+          capslock = "control";
+          leftcontrol = "hyper";
         };
         "hyper:C-M-A" = { };
       };
