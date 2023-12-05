@@ -6,6 +6,7 @@
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
+    readability-cli
     aileron
     alacritty
     alejandra
@@ -45,7 +46,7 @@
     dmidecode
     dolphin
     du-dust
-    element-desktop
+    element-desktop-wayland
     epubcheck
     evtest
     exercism
