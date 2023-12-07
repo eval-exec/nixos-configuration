@@ -5,7 +5,7 @@
   home.homeDirectory = "/home/exec";
   home.stateVersion = "23.05";
   home.pointerCursor = {
-    package = pkgs.gnome.adwaita-icon-theme;
+    package = pkgs.gnome.gnome-themes-extra;
     name = "Breeze";
     size = 24;
     gtk.enable = true;
