@@ -4,8 +4,20 @@
   home.username = "exec";
   home.homeDirectory = "/home/exec";
   home.stateVersion = "23.05";
+  home.pointerCursor = {
+    package = pkgs.gnome.adwaita-icon-theme;
+    name = "Breeze";
+    size = 24;
+    gtk.enable = true;
+  };
 
   home.packages = with pkgs; [
+    (google-chrome.override {
+      commandLineArgs = [
+        "--enable-wayland-ime" # on purpose to make it break
+      ];
+    })
+    yaml-language-server
     readability-cli
     aileron
     alacritty
@@ -68,7 +80,6 @@
     glxinfo
     go-ethereum
     goimapnotify
-    google-chrome
     vivaldi
     vivaldi-ffmpeg-codecs
     google-cloud-sdk
