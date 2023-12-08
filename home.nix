@@ -383,7 +383,10 @@
       # extraOptions = [];
     };
 
-    java = { enable = true; };
+    java = {
+      enable = true;
+      package = pkgs.jdk21;
+    };
     emacs = {
       enable = true;
       # package = pkgs.emacs-git.override { withGTK3 = true; };
