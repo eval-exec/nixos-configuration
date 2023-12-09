@@ -447,6 +447,13 @@
       shellAliases = {
         cat = "bat -p";
         vim = "nvim";
+        goland = "~/.local/share/JetBrains/Toolbox/apps/goland/bin/goland.sh";
+        rustrover =
+          "~/.local/share/JetBrains/Toolbox/apps/rustrover/bin/rustrover.sh";
+        clion =
+          "~/.local/share/JetBrains/Toolbox/apps/clion-nova/bin/clion.sh";
+        idea =
+          "~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea.sh";
         update = "sudo nixos-rebuild switch";
         emacs = "${pkgs.emacs-pgtk}/bin/emacsclient -nw";
         magit = ''
