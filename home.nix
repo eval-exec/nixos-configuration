@@ -201,6 +201,7 @@
     zig
     zlib
     zsh
+    fish
     zsh-autosuggestions
     zsh-powerlevel10k
     zulip
@@ -367,6 +368,7 @@
     nix-index = {
       enable = true;
       enableZshIntegration = true;
+      enableFishIntegration = true;
     };
     thunderbird = {
       enable = true;
@@ -412,8 +414,11 @@
       ];
     };
 
-    zsh = {
+    fish = {
       enable = true;
+    };
+    zsh = {
+      enable = false;
       enableAutosuggestions = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
@@ -499,6 +504,7 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      enableFishIntegration = true;
       settings = {
         add_newline = false;
         command_timeout = 200;

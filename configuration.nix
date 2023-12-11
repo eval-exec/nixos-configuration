@@ -295,7 +295,7 @@
     extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" ];
     packages = with pkgs; [ firefox kate neofetch ];
   };
-  users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.fish;
   virtualisation = {
     libvirtd.enable = false;
     virtualbox.host.enable = true;
@@ -548,7 +548,7 @@
   programs.xwayland.enable = true;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
   programs.wshowkeys.enable = true;
 
   programs.steam = {
