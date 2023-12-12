@@ -416,6 +416,9 @@
 
     fish = {
       enable = true;
+      loginShellInit = ''
+        set -U fish_greeting
+      '';
     };
     zsh = {
       enable = false;
@@ -498,6 +501,7 @@
     fzf = {
       enable = true;
       enableBashIntegration = true;
+      enableFishIntegration = true;
     };
 
     starship = {
