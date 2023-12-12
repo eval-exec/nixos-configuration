@@ -292,6 +292,7 @@
   users.users.exec = {
     isNormalUser = true;
     description = "exec";
+    shell = pkgs.fish;
     extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" ];
     packages = with pkgs; [ firefox kate neofetch ];
   };
