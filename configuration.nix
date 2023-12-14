@@ -329,7 +329,7 @@
 
   # Allow unfree packages
   fonts = {
-    enableDefaultPackages = true;
+    enableDefaultPackages = false;
     fontDir.enable = true;
     packages = with pkgs; [
       anonymousPro
@@ -402,12 +402,12 @@
          </alias>
         </fontconfig>
       '';
-      # defaultFonts = {
-      #   serif = [ "Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
-      #   sansSerif = [ "Sans Serif" "Noto Sans CJK SC" "Sarasa Gothic SC" ];
-      #   monospace = [ "JuliaMono" "Jetbrains Mono" ];
-      #   emoji = [ "Noto Color Emoji" "Twitter Color Emoji" ];
-      # };
+      defaultFonts = {
+        serif = [ "Serif" ];
+        sansSerif = [ "Sans Serif" ];
+        monospace = [ "Noto Sans Mono" ];
+        emoji = [ "Noto Color Emoji" ];
+      };
     };
 
   };
