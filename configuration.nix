@@ -341,6 +341,7 @@
       jetbrains-mono
       julia-mono
       powerline-fonts
+      powerline-symbols
       liberation_ttf
       maple-mono
       maple-mono-NF
