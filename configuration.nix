@@ -340,6 +340,7 @@
       iosevka
       jetbrains-mono
       julia-mono
+      powerline-fonts
       liberation_ttf
       maple-mono
       maple-mono-NF
