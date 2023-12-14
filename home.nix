@@ -420,15 +420,20 @@
       loginShellInit = ''
         set -U fish_greeting
       '';
-      plugins = [{
-        name = "tide";
-        src = pkgs.fetchFromGitHub {
-          owner = "IlanCosman";
-          repo = "tide";
-          rev = "18d5fcfcfcbb79a56f4c4da1642084e5f41dfa65";
-          sha256 = "cUHFbuH8rsDoZ1hsTtZ6c9kFdzQUkHg4bnnKmIUpy5E=";
-        };
-      }];
+      plugins = [
+        {
+          name = "tide";
+          src = pkgs.fishPlugins.tide.src;
+        }
+        {
+          name = "wakatime-fish";
+          src = pkgs.fishPlugins.wakatime-fish.src;
+        }
+        {
+          name = "grc";
+          src = pkgs.fishPlugins.grc.src;
+        }
+      ];
     };
     zsh = {
       enable = false;
