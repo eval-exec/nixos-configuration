@@ -196,7 +196,7 @@
         # };
       };
 
-      videoDrivers = [ "amdgpu" ];
+      videoDrivers = [ "nvidia" ];
       #   config = lib.mkAfter ''
       #     Section "Module"
       #         Load           "modesetting"
@@ -294,7 +294,7 @@
     description = "exec";
     useDefaultShell = true;
     extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" ];
-    packages = with pkgs; [ firefox kate neofetch ];
+    packages = with pkgs; [ firefox kate ];
   };
   users.defaultUserShell = pkgs.fish;
   virtualisation = {

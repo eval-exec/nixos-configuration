@@ -22,6 +22,7 @@
     aileron
     alacritty
     alejandra
+    fastfetch
     amdgpu_top
     (aspellWithDicts (ds: with ds; [ en en-computers en-science ]))
     zls
@@ -505,7 +506,7 @@
     };
 
     starship = {
-      enable = true;
+      enable = false;
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
