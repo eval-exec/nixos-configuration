@@ -26,6 +26,7 @@
     amdgpu_top
     (aspellWithDicts (ds: with ds; [ en en-computers en-science ]))
     zls
+    go2tv
     gopls
     atool
     autoconf
@@ -422,10 +423,6 @@
       '';
       plugins = [
         {
-          name = "tide";
-          src = pkgs.fishPlugins.tide.src;
-        }
-        {
           name = "wakatime-fish";
           src = pkgs.fishPlugins.wakatime-fish.src;
         }
@@ -520,7 +517,7 @@
     };
 
     starship = {
-      enable = false;
+      enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
