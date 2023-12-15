@@ -36,7 +36,6 @@
     bear
     # beets
     bitcoin
-    bitcoin
     browsh
     calibre
     chromaprint
