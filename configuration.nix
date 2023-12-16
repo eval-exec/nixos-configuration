@@ -431,7 +431,8 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      permittedInsecurePackages = [ "openssl-1.1.1w" "electron-24.8.6" ];
+      permittedInsecurePackages =
+        [ "openssl-1.1.1w" "electron-24.8.6" "electron-25.9.0" ];
       vivaldi = {
         proprietaryCodecs = true;
         enableWideVine = true;
