@@ -557,6 +557,12 @@
   programs.zsh.enable = true;
   programs.wshowkeys.enable = true;
 
+  programs.wayfire = {
+    enable = true;
+    plugins =
+      (with pkgs.wayfirePlugins; [ wcm wf-shell wayfire-plugins-extra ]);
+  };
+
   programs.steam = {
     enable = true;
     package = pkgs.steam.override {
