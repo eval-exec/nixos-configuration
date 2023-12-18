@@ -118,6 +118,7 @@
   # };
 
   services = {
+    fprintd = { enable = false; };
     keyd = {
       enable = true;
       keyboards.default.settings = {
@@ -296,7 +297,7 @@
     extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" ];
     packages = with pkgs; [ firefox kate ];
   };
-  users.defaultUserShell = pkgs.fish;
+  users.defaultUserShell = pkgs.zsh;
   virtualisation = {
     libvirtd.enable = false;
     virtualbox.host.enable = true;
@@ -552,7 +553,8 @@
   programs.xwayland.enable = true;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
-  programs.fish.enable = true;
+  programs.fish.enable = false;
+  programs.zsh.enable = true;
   programs.wshowkeys.enable = true;
 
   programs.steam = {

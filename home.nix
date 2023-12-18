@@ -182,6 +182,7 @@
     tree-sitter
     tree-sitter-grammars.tree-sitter-markdown
     typos
+    zip
     unzip
     vagrant
     variety
@@ -416,7 +417,7 @@
     };
 
     fish = {
-      enable = true;
+      enable = false;
       loginShellInit = ''
         set -U fish_greeting
       '';
@@ -432,7 +433,7 @@
       ];
     };
     zsh = {
-      enable = false;
+      enable = true;
       enableAutosuggestions = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;
@@ -485,7 +486,7 @@
         path = "${config.xdg.dataHome}/zsh/history";
       };
       oh-my-zsh = {
-        enable = true;
+        enable = false;
         plugins =
           [ "git" "fzf" "man" "warhol" "zsh-wakatime" "fzf-tab" "nix-shell" ];
         # theme = "mlh";
@@ -513,10 +514,11 @@
       enable = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
+      enableZshIntegration = true;
     };
 
     starship = {
-      enable = false;
+      enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
