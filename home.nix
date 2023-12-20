@@ -183,6 +183,7 @@
     tree-sitter-grammars.tree-sitter-markdown
     typos
     zip
+    gh-dash
     unzip
     vagrant
     variety
@@ -206,6 +207,11 @@
     fish
     zsh-autosuggestions
     zsh-powerlevel10k
+    zsh-fzf-tab
+    zsh-nix-shell
+
+    nix-zsh-completions
+
     zulip
   ];
   # home.file.".Xmodmap" = { source = ./Xmodmap; };
