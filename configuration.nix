@@ -558,7 +558,7 @@
   programs.wshowkeys.enable = true;
 
   programs.wayfire = {
-    enable = true;
+    enable = false;
     plugins =
       (with pkgs.wayfirePlugins; [ wcm wf-shell wayfire-plugins-extra ]);
   };
