@@ -19,6 +19,8 @@
     })
     yaml-language-server
     readability-cli
+    obs-studio
+    obs-studio-plugins.wlrobs
     aileron
     alacritty
     alejandra
@@ -209,9 +211,7 @@
     zsh-powerlevel10k
     zsh-fzf-tab
     zsh-nix-shell
-
     nix-zsh-completions
-
     zulip
   ];
   # home.file.".Xmodmap" = { source = ./Xmodmap; };
@@ -468,7 +468,9 @@
 
         setopt NO_HUP
       '';
-      initExtra = "";
+      initExtra = ''
+        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh;
+      '';
 
       shellAliases = {
         cat = "bat -p";

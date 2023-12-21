@@ -197,7 +197,7 @@
         # };
       };
 
-      videoDrivers = [ "amdgpu" "nvidia" ];
+      videoDrivers = [ "amdgpu" ];
       #   config = lib.mkAfter ''
       #     Section "Module"
       #         Load           "modesetting"
@@ -446,6 +446,7 @@
   environment.systemPackages = with pkgs; [
     libsForQt5.xdg-desktop-portal-kde
     xdg-desktop-portal
+    xdg-desktop-portal-wlr
     appimage-run
     cachix
     clang
@@ -465,6 +466,7 @@
     lldb
     man-pages-posix
     man-pages-posix
+    wireplumber
     ncurses
     neovim
     nodejs
