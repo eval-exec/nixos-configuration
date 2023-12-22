@@ -3,10 +3,20 @@
 
   inputs = rec {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    sops-nix.url = "github:Mic92/sops-nix";
-
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     hardware.url = "github:nixos/nixos-hardware";
 
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,6 +26,8 @@
       url = "github:nix-community/emacs-overlay";
       # "github:nix-community/emacs-overlay?rev=238d4cd5adee2a5dd893e27f0cf7e5af856d576e";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
   };
 
