@@ -166,35 +166,35 @@
     xserver = {
       enable = true;
       # xkb = {
-        # model = "pc104";
-        # layout = "us";
-        # xkbVariant = "";
-        # options = "ctrl:nocaps";
-        # extraLayouts = {
-        #   ctrl = {
-        #     description = "Caps as Ctrl, Ctrl as Hyper as Mod3";
-        #     languages = [ "eng" ];
-        #     symbolsFile = pkgs.writeText "ctrl" ''
-        #       // Eliminate CapsLock, making it another Ctrl.
-        #       partial modifier_keys
-        #       xkb_symbols "nocaps" {
-        #           replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
-        #           modifier_map Control { <CAPS> };
+      # model = "pc104";
+      # layout = "us";
+      # xkbVariant = "";
+      # options = "ctrl:nocaps";
+      # extraLayouts = {
+      #   ctrl = {
+      #     description = "Caps as Ctrl, Ctrl as Hyper as Mod3";
+      #     languages = [ "eng" ];
+      #     symbolsFile = pkgs.writeText "ctrl" ''
+      #       // Eliminate CapsLock, making it another Ctrl.
+      #       partial modifier_keys
+      #       xkb_symbols "nocaps" {
+      #           replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
+      #           modifier_map Control { <CAPS> };
 
-        #           modifier_map Mod4 { Super_L, Super_R };
+      #           modifier_map Mod4 { Super_L, Super_R };
 
-        #           key <SUPR> {    [ NoSymbol, Super_L ]   };
-        #           modifier_map Mod4   { <SUPR> };
+      #           key <SUPR> {    [ NoSymbol, Super_L ]   };
+      #           modifier_map Mod4   { <SUPR> };
 
-        #           replace key <LCTL> { [ Hyper_L ] };
-        #           modifier_map Mod3    { <LCTL> };
+      #           replace key <LCTL> { [ Hyper_L ] };
+      #           modifier_map Mod3    { <LCTL> };
 
-        #           key <HYPR> {    [ NoSymbol, Hyper_L ]   };
-        #           modifier_map Mod3   { <HYPR> };
-        #       };
-        #     '';
-        #   };
-        # };
+      #           key <HYPR> {    [ NoSymbol, Hyper_L ]   };
+      #           modifier_map Mod3   { <HYPR> };
+      #       };
+      #     '';
+      #   };
+      # };
       # };
 
       videoDrivers = [ "amdgpu" ];
