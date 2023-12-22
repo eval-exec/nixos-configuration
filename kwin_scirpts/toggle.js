@@ -48,7 +48,7 @@ function toggleWezterm() {
 }
 
 function toggleEmacs() {
-  toggleClient("emacs-30.0.50");
+  toggleClient("emacs");
 }
 
 registerShortcut(
