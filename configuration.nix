@@ -165,9 +165,9 @@
     # Configure keymap in X11
     xserver = {
       enable = true;
-      xkb = {
-        model = "pc104";
-        layout = "us";
+      # xkb = {
+        # model = "pc104";
+        # layout = "us";
         # xkbVariant = "";
         # options = "ctrl:nocaps";
         # extraLayouts = {
@@ -195,7 +195,7 @@
         #     '';
         #   };
         # };
-      };
+      # };
 
       videoDrivers = [ "amdgpu" ];
       #   config = lib.mkAfter ''

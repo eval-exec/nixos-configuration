@@ -446,6 +446,7 @@
       enableCompletion = true;
       defaultKeymap = "emacs";
       envExtra = ''
+        export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
         export NIXPKGS_ALLOW_UNFREE=1;
         # Preview file content using bat (https://github.com/sharkdp/bat)
         export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
