@@ -19,6 +19,7 @@
     })
     ripgrep
     yaml-language-server
+    ascii
     readability-cli
     obs-studio
     obs-studio-plugins.wlrobs

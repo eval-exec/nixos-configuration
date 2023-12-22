@@ -6,9 +6,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     hardware.url = "github:nixos/nixos-hardware";
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
+    flake-utils = { url = "github:numtide/flake-utils"; };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
