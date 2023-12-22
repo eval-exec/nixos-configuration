@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, ... }: {
+{ config, pkgs, inputs, lib, fetchFromGitHub, rustPlatform, ... }: {
   # home config example
 
   home.username = "exec";
@@ -17,6 +17,7 @@
         "--enable-wayland-ime" # on purpose to make it break
       ];
     })
+    ripgrep
     yaml-language-server
     readability-cli
     obs-studio
@@ -161,7 +162,6 @@
     qbittorrent
     qrcp
     retry
-    ripgrep
     roswell
     sbcl
     sbclPackages.qlot
