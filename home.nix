@@ -23,6 +23,7 @@
     readability-cli
     obs-studio
     obs-studio-plugins.wlrobs
+    wl-clipboard
     aileron
     alacritty
     alejandra
@@ -496,7 +497,7 @@
         path = "${config.xdg.dataHome}/zsh/history";
       };
       oh-my-zsh = {
-        enable = false;
+        enable = true;
         plugins =
           [ "git" "fzf" "man" "warhol" "zsh-wakatime" "fzf-tab" "nix-shell" ];
         # theme = "mlh";
