@@ -118,7 +118,7 @@
   # };
 
   services = {
-    guix = { enable = true; };
+    guix = { enable = false; };
     fprintd = { enable = false; };
     keyd = {
       enable = true;
