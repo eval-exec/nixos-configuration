@@ -26,6 +26,7 @@
     wl-clipboard
     aileron
     alacritty
+    pstree
     alejandra
     fastfetch
     amdgpu_top
