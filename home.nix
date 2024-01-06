@@ -50,6 +50,7 @@
     clojure
     clojure-lsp
     cmake
+    extra-cmake-modules
     cool-retro-term
     copyq
     coreutils-full
