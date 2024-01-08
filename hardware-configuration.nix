@@ -14,7 +14,7 @@
   boot.resumeDevice = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
   boot.kernelParams = [
     "resume_offset=196851712"
-    "video=eDP-1:3456x2160@60"
+    # "video=eDP-1:3456x2160@60"
     "mem_sleep_default=deep"
     # "i915.enable_psr=0"
     # "i915.fastboot=1"
