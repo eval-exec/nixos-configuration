@@ -405,8 +405,8 @@
     };
     emacs = {
       enable = true;
-      package = pkgs.emacs-pgtk;
-      # package = pkgs.emacs-git.override { withGTK3 = true; };
+      # package = pkgs.emacs-pgtk;
+      package = pkgs.emacs-git.override { withGTK3 = true; };
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
