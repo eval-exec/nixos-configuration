@@ -239,12 +239,13 @@
 
       # Enable the KDE Plasma Desktop Environment.
       displayManager = {
-        defaultSession = "plasmawayland";
+        # defaultSession = "plasmawayland";
         sddm = {
-          enable = true;
+          enable = false;
           enableHidpi = true;
           wayland.enable = true;
         };
+        gdm.enable = true;
         # xserverArgs = [ "-verbose" "-logverbose" ];
         # setupCommands = "";
         # sessionCommands run before setupCommands
@@ -255,7 +256,10 @@
           user = "exec";
         };
       };
-      desktopManager.plasma5.enable = true;
+      desktopManager = {
+        plasma5.enable = false;
+        gnome.enable = true;
+      };
     };
 
     # Enable CUPS to print documents.
