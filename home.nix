@@ -30,6 +30,7 @@
     pstree
     alejandra
     fastfetch
+    kodi
     amdgpu_top
     (aspellWithDicts (ds: with ds; [ en en-computers en-science ]))
     shfmt
