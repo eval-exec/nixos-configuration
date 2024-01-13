@@ -553,7 +553,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-  programs.xwayland.enable = true;
+  programs.xwayland.enable = false;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
   programs.fish.enable = false;

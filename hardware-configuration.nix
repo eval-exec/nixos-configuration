@@ -69,11 +69,11 @@
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
-  # nixpkgs.config.packageOverrides = pkgs: {
-  #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
-  # };
-  hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
-  hardware.opengl.extraPackages32 = with pkgs; [ intel-media-driver ];
+  # # nixpkgs.config.packageOverrides = pkgs: {
+  # #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
+  # # };
+  # hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
+  # hardware.opengl.extraPackages32 = with pkgs; [ intel-media-driver ];
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
