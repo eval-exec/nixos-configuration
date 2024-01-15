@@ -239,26 +239,26 @@
 
       # Enable the KDE Plasma Desktop Environment.
       displayManager = {
-        # defaultSession = "plasmawayland";
+        defaultSession = "plasmawayland";
         sddm = {
-          enable = false;
+          enable = true;
           enableHidpi = true;
           wayland.enable = true;
         };
-        gdm.enable = true;
+        gdm.enable = false;
         # xserverArgs = [ "-verbose" "-logverbose" ];
         # setupCommands = "";
         # sessionCommands run before setupCommands
         # sessionCommands =
         #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout us-mine";
         autoLogin = {
-          enable = false;
+          enable = true;
           user = "exec";
         };
       };
       desktopManager = {
-        plasma5.enable = false;
-        gnome.enable = true;
+        gnome.enable = false;
+        plasma5.enable = true;
       };
     };
 
@@ -419,8 +419,12 @@
   };
 
   environment = {
+    # sessionVariables = {
+    # };
     variables = {
       # XKB_DEFAULT_LAYOUT = "us";
+      NIXOS_OZONE_WL = "1";
+      GDK_BACKEND = "wayland";
       GTK_IM_MODULE = lib.mkForce "";
       QT_IM_MODULE = lib.mkForce "";
       EDITOR = "nvim";
@@ -455,7 +459,6 @@
     appimage-run
     cachix
     clang
-    discord
     docker-compose
     dua
     duf
