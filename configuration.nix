@@ -533,9 +533,9 @@
 
       substituters = [
         "https://mirror.sjtu.edu.cn/nix-channels/store"
-        "https://cache.nixos.org/"
-        "https://nix-community.cachix.org"
-        "https://devenv.cachix.org"
+        # "https://cache.nixos.org/"
+        # "https://nix-community.cachix.org"
+        # "https://devenv.cachix.org"
       ];
       experimental-features = [ "nix-command" "flakes" ];
     };

@@ -12,8 +12,10 @@
   };
 
   home.packages = with pkgs; [
-    (google-chrome.override { commandLineArgs = [ "--enable-wayland-ime" ]; })
-    (discord.override { commandLineArgs = [ "--enable-wayland-ime" ]; })
+    # (discord.override { commandLineArgs = [ "--enable-wayland-ime" ]; })
+    # (google-chrome.override { commandLineArgs = [ "--enable-wayland-ime" ]; })
+    google-chrome
+    discord
     ripgrep
     yaml-language-server
     ascii
@@ -40,7 +42,7 @@
     babashka
     bat
     bear
-    graalvm-ce
+    # graalvm-ce
     # beets
     bitcoin
     browsh
