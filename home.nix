@@ -80,7 +80,6 @@
     fuse
     fuse3
     fzf
-    g810-led
     gdb
     gf
     gh
@@ -91,8 +90,8 @@
     glxinfo
     go-ethereum
     goimapnotify
-    vivaldi
-    vivaldi-ffmpeg-codecs
+    # vivaldi
+    # vivaldi-ffmpeg-codecs
     google-cloud-sdk
     gptcommit
     graphviz
@@ -130,6 +129,8 @@
     logseq
     lshw
     lsof
+    mudlet
+    tintin
     lynx
     mercurial
     mermaid-cli
@@ -422,6 +423,7 @@
         pkgs.emacsPackages.evil-collection
         pkgs.emacsPackages.magit
         pkgs.emacsPackages.forge
+        pkgs.emacsPackages.telega
         pkgs.librime
         pkgs.mu
         pkgs.noto-fonts-color-emoji
