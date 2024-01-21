@@ -567,22 +567,22 @@
     };
 
     services = {
-      use_hyper_key = {
-        Unit = { Description = "use_hyper_key"; };
-        Install = { WantedBy = [ "default.rarget" ]; };
-        Service = {
-          Type = "oneshot";
-          ExecStart = "true";
+      # use_hyper_key = {
+      #   Unit = { Description = "use_hyper_key"; };
+      #   Install = { WantedBy = [ "default.rarget" ]; };
+      #   Service = {
+      #     Type = "oneshot";
+      #     ExecStart = "true";
 
-          # " ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'remove mod4 = Hyper_L' && ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 37 = Hyper_L' && ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'add mod3 = Hyper_L'";
-        };
-      };
+      #     # " ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'remove mod4 = Hyper_L' && ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 37 = Hyper_L' && ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'add mod3 = Hyper_L'";
+      #   };
+      # };
       clash = {
         Unit = {
           Description = "clash";
-          After = [ "network-online.target" ];
+          After = [ "network.target" ];
         };
-        Install = { WantedBy = [ "default.target" ]; };
+        Install = { WantedBy = [ "multi-user.target" ]; };
         Service = {
           ExecStart =
             "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
