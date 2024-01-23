@@ -580,13 +580,12 @@
       clash = {
         Unit = {
           Description = "clash";
-          After = [ "network.target" ];
+          After = [ "network-online.target" ];
         };
-        Install = { WantedBy = [ "multi-user.target" ]; };
+        Install = { WantedBy = [ "default.target" ]; };
         Service = {
           ExecStart =
             "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
-          Restart = "no";
         };
       };
     };

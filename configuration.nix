@@ -67,6 +67,7 @@
       enable = true;
       dns = "none";
     };
+    nameservers = [ "1.1.1.1" "8.8.8.8" ];
     firewall = {
       enable = false;
       # allowedTCPPortRanges = [{
@@ -256,7 +257,7 @@
         # sessionCommands =
         #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout us-mine";
         autoLogin = {
-          enable = true;
+          enable = false;
           user = "exec";
         };
       };
