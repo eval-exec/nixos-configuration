@@ -30,6 +30,8 @@
     alejandra
     fastfetch
     kodi
+    pprof
+    jemalloc
     amdgpu_top
     (aspellWithDicts (ds: with ds; [ en en-computers en-science ]))
     shfmt
