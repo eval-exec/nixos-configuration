@@ -30,6 +30,7 @@
     alejandra
     fastfetch
     kodi
+    zoxide
     pprof
     jemalloc
     amdgpu_top
