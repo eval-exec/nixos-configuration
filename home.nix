@@ -12,9 +12,8 @@
   };
 
   home.packages = with pkgs; [
-    # (discord.override { commandLineArgs = [ "--enable-wayland-ime" ]; })
-    # (google-chrome.override { commandLineArgs = [ "--enable-wayland-ime" ]; })
     google-chrome
+    anytype
     discord
     ripgrep
     yaml-language-server
@@ -264,7 +263,7 @@
               ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --pull "execvy-inbox"
             '';
             onNotifyPost =
-              "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
+              "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
           };
 
           mbsync = {
@@ -346,18 +345,18 @@
       };
 
     };
-    imapnotify = { enable = true; };
+    imapnotify = { enable = false; };
     kdeconnect = {
       enable = true;
       indicator = true;
     };
     mbsync = {
-      enable = true;
+      enable = false;
       # frequency = "*-*-* *:*:00,20,40";
       # preExec =
-      #   "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
+      #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       postExec =
-        "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
+        "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       verbose = true;
     };
   };
@@ -410,8 +409,8 @@
     };
     emacs = {
       enable = true;
-      package = pkgs.emacs-pgtk;
-      # package = pkgs.emacs-git.override { withGTK2 = true; };
+      # package = pkgs.emacs-git;
+      package = pkgs.emacs-git.override { withGTK3 = true; };
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
@@ -495,7 +494,7 @@
         idea =
           "~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea.sh";
         update = "sudo nixos-rebuild switch";
-        emacs = "${pkgs.emacs-pgtk}/bin/emacsclient -nw";
+        emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
         magit = ''
           \emacs -Q -nw -l ~/.emacs.d/init-nw.el --funcall magit
         '';
