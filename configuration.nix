@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 # test suda sudoa
-{ config, pkgs, inputs, lib, emacs-overlay, ... }: {
+{ config, pkgs, inputs, lib, emacs-overlay, kde2nix, ... }: {
   imports = [
     # Include the results of the hardware scan.
     # ./hardware-configuration.nix
@@ -244,7 +244,7 @@
 
       # Enable the KDE Plasma Desktop Environment.
       displayManager = {
-        defaultSession = "plasmawayland";
+        defaultSession = "plasma";
         sddm = {
           enable = true;
           enableHidpi = true;
@@ -539,9 +539,9 @@
 
       substituters = [
         "https://mirror.sjtu.edu.cn/nix-channels/store"
-        # "https://cache.nixos.org/"
-        # "https://nix-community.cachix.org"
-        # "https://devenv.cachix.org"
+        "https://cache.nixos.org/"
+        "https://nix-community.cachix.org"
+        "https://devenv.cachix.org"
       ];
       experimental-features = [ "nix-command" "flakes" ];
     };

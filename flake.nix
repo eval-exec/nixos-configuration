@@ -24,8 +24,11 @@
 
       nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit nixpkgs home-manager emacs-overlay sops-nix; };
+        specialArgs = {
+          inherit nixpkgs home-manager emacs-overlay sops-nix kde2nix;
+        };
         modules = [
+          kde2nix.nixosModules.default
           ./hardware-configuration.nix
           ./configuration.nix
           nur.nixosModules.nur
