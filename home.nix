@@ -21,6 +21,7 @@
     gimp
     readability-cli
     obs-studio
+    android-tools
     obs-studio-plugins.wlrobs
     wl-clipboard
     aileron

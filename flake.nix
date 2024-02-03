@@ -3,34 +3,18 @@
 
   inputs = rec {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
-
+    kde2nix = { url = "github:nix-community/kde2nix"; };
     flake-utils = { url = "github:numtide/flake-utils"; };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      # url =
-      #   "github:nix-community/emacs-overlay?rev=a99d70addcc094dfb2c93d74073850c11c0b5a7f";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-    };
+    sops-nix = { url = "github:Mic92/sops-nix"; };
+    home-manager = { url = "github:nix-community/home-manager"; };
+    emacs-overlay = { url = "github:nix-community/emacs-overlay"; };
   };
 
-  outputs =
-    { self, nixpkgs, nur, home-manager, emacs-overlay, sops-nix, ... }: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, nur, home-manager, emacs-overlay
+    , sops-nix, kde2nix, ... }: {
       # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
       # packages.x86_64-linux = [
