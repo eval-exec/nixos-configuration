@@ -4,12 +4,12 @@
   home.username = "exec";
   home.homeDirectory = "/home/exec";
   home.stateVersion = "23.05";
-  home.pointerCursor = {
-    package = pkgs.gnome.gnome-themes-extra;
-    name = "Breeze";
-    size = 24;
-    gtk.enable = true;
-  };
+  # home.pointerCursor = {
+  #   package = pkgs.gnome.gnome-themes-extra;
+  #   name = "Breeze";
+  #   size = 24;
+  #   gtk.enable = true;
+  # };
 
   home.packages = with pkgs; [
     google-chrome
@@ -20,6 +20,7 @@
     ascii
     gimp
     readability-cli
+    magic-wormhole
     obs-studio
     android-tools
     obs-studio-plugins.wlrobs
