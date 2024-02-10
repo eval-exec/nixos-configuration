@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 # test suda sudoa
-{ config, pkgs, inputs, lib, emacs-overlay, kde2nix, ... }: {
+{ config, pkgs, inputs, lib, kde2nix, ... }: {
   imports = [
     # Include the results of the hardware scan.
     # ./hardware-configuration.nix
@@ -447,8 +447,12 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      permittedInsecurePackages =
-        [ "openssl-1.1.1w" "electron-24.8.6" "electron-25.9.0" ];
+      permittedInsecurePackages = [
+        "openssl-1.1.1w"
+        "electron-24.8.6"
+        "electron-25.9.0"
+        "electron-19.1.9"
+      ];
       vivaldi = {
         proprietaryCodecs = true;
         enableWideVine = true;

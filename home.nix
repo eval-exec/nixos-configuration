@@ -210,7 +210,7 @@
     wev
     wezterm
     winetricks
-    wineWowPackages.stable
+    wine64Packages.stagingFull
     wmctrl
     wofi
     yesplaymusic

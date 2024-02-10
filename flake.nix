@@ -25,7 +25,7 @@
       nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit nixpkgs home-manager emacs-overlay sops-nix kde2nix;
+          inherit nixpkgs home-manager emacs-overlay sops-nix kde2nix nur;
         };
         modules = [
           kde2nix.nixosModules.default
@@ -39,7 +39,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.exec = import ./home.nix;
             # home-manager.extraSpecialArgs = { inherit config; };
-            nixpkgs.overlays = [ emacs-overlay.overlay ];
+            nixpkgs.overlays = [ nur.overlay emacs-overlay.overlay ];
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
