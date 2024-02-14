@@ -211,6 +211,7 @@
     wezterm
     winetricks
     wine64Packages.stagingFull
+    bottles
     wmctrl
     wofi
     yesplaymusic

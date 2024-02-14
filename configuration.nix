@@ -123,6 +123,7 @@
   # };
 
   services = {
+    flatpak = { enable = true; };
     guix = { enable = false; };
     fprintd = { enable = false; };
     keyd = {
@@ -203,7 +204,7 @@
       # };
       # };
 
-      videoDrivers = [ "amdgpu" ];
+      videoDrivers = [ "nvidia" ];
       #   config = lib.mkAfter ''
       #     Section "Module"
       #         Load           "modesetting"
