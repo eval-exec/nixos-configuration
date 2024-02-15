@@ -160,7 +160,7 @@
     nodePackages.pyright
     nodePackages.typescript-language-server
     nuclear
-    onionshare
+    # ionshare
     osdlyrics
     pandoc
     pastebinit
