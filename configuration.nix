@@ -311,8 +311,8 @@
   };
   users.defaultUserShell = pkgs.zsh;
   virtualisation = {
-    libvirtd.enable = false;
-    xen.enable = true;
+    libvirtd.enable = true;
+    xen.enable = false;
 
     virtualbox = {
       host = {
@@ -477,6 +477,7 @@
     duf
     file
     git
+    gnome3.gnome-tweaks
     glibcInfo
     gnumake
     interception-tools
@@ -579,6 +580,7 @@
   programs.fish.enable = false;
   programs.zsh.enable = true;
   programs.wshowkeys.enable = true;
+  programs.virt-manager.enable = true;
 
   programs.wayfire = {
     enable = false;
