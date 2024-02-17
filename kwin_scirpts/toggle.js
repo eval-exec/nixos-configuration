@@ -49,8 +49,8 @@ function toggleClient(app_name) {
   }
 }
 
-function toggleWezterm() {
-  toggleClient("wezterm-gui");
+function toggleAlacritty() {
+  toggleClient("alacritty");
 }
 
 function toggleEmacs() {
@@ -58,10 +58,10 @@ function toggleEmacs() {
 }
 
 registerShortcut(
-  "ToggleWeztermWindow",
-  "ToggleWeztermWindow",
+  "ToggleAlacrittyWindow",
+  "ToggleAlacrittyWindow",
   "Meta+F",
-  toggleWezterm,
+  toggleAlacritty,
 );
 
 registerShortcut(
