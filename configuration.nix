@@ -123,6 +123,18 @@
   # };
 
   services = {
+    samba = {
+      enable = true;
+      shares = {
+        public = {
+          path = "/tmp/samba/public";
+          browseable = true;
+          writable = true;
+          printable = false;
+          createMask = "0777";
+        };
+      };
+    };
     flatpak = { enable = true; };
     guix = { enable = false; };
     fprintd = { enable = false; };

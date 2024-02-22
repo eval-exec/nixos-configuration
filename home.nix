@@ -13,6 +13,7 @@
 
   home.packages = with pkgs; [
     google-chrome
+    bc
     pv
     anytype
     discord
