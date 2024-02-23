@@ -13,6 +13,7 @@
 
   home.packages = with pkgs; [
     google-chrome
+    btop
     bc
     pv
     anytype

@@ -127,7 +127,7 @@
       enable = true;
       shares = {
         public = {
-          path = "/tmp/samba/public";
+          path = "/home/exec/Temp/samba";
           browseable = true;
           writable = true;
           printable = false;
