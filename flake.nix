@@ -6,7 +6,6 @@
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
-    kde2nix = { url = "github:nix-community/kde2nix"; };
     flake-utils = { url = "github:numtide/flake-utils"; };
     sops-nix = { url = "github:Mic92/sops-nix"; };
     home-manager = { url = "github:nix-community/home-manager"; };
@@ -14,7 +13,7 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nur, home-manager, emacs-overlay
-    , sops-nix, kde2nix, ... }: {
+    , sops-nix, ... }: {
       # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
       # packages.x86_64-linux = [
@@ -25,10 +24,9 @@
       nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit nixpkgs home-manager emacs-overlay sops-nix kde2nix nur;
+          inherit nixpkgs home-manager emacs-overlay sops-nix nur;
         };
         modules = [
-          kde2nix.nixosModules.default
           ./hardware-configuration.nix
           ./configuration.nix
           nur.nixosModules.nur
