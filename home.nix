@@ -14,6 +14,7 @@
   home.packages = with pkgs; [
     google-chrome
     btop
+    cpulimit
     bc
     pv
     anytype
