@@ -1,5 +1,19 @@
 function toggleClient(app_name) {
-  const clients = workspace.clientList();
+  const getMethods = (obj) => {
+    let properties = new Set();
+    let currentObj = obj;
+    do {
+      Object.getOwnPropertyNames(currentObj).map((item) =>
+        properties.add(item)
+      );
+    } while ((currentObj = Object.getPrototypeOf(currentObj)));
+    return [...properties.keys()].filter((item) =>
+      typeof obj[item] === "function"
+    );
+  };
+
+  console.log("in toggle client", app_name);
+  let clients = workspace.windowList();
 
   let client = null;
 
@@ -17,17 +31,36 @@ function toggleClient(app_name) {
       }
     }
   }
+  // console.log("workspace : methods: ", getMethods(workspace));
+  // console.log("workspace : keys: ", Object.keys(workspace));
 
   if (client) {
-    if (client.desktop != workspace.currentDesktop) {
-      client.desktop = workspace.currentDesktop;
-      client.minimized = false;
-      workspace.activeClient = client;
+    // console.log("clients: methods: ", getMethods(client));
+    // console.log("clients: keys: ", Object.keys(client));
+
+    // console.log(
+    //   "currentdesktop : methods: ",
+    //   getMethods(workspace.currentDesktop),
+    // );
+    // console.log(
+    //   "currentdesktop: keys: ",
+    //   Object.keys(workspace.currentDesktop),
+    // );
+
+    // console.log("on current desktop: ", client.active);
+    // console.log("client.desktopWindow", client.desktopWindow);
+
+    // if (client.desktop() != workspace.currentDesktop) {
+    if (!client.active) {
+      // client.desktopWindow = true;
+      // client.desktop = workspace.currentDesktop.id;
+      // client.minimized = false;
+      workspace.activeWindow = client;
       console.log("app not in current desktop, activate now", app_name);
     } else {
       if (client.minimized) {
-        client.minimized = false;
-        workspace.activeClient = client;
+        // client.minimized = false;
+        workspace.activeWindow = client;
         console.log(
           "in current desktop, but minimized, activate now",
           app_name,
@@ -57,16 +90,28 @@ function toggleEmacs() {
   toggleClient("emacs");
 }
 
-registerShortcut(
-  "ToggleAlacrittyWindow",
-  "ToggleAlacrittyWindow",
-  "Meta+F",
-  toggleAlacritty,
-);
-
-registerShortcut(
+{
+  let registed = registerShortcut(
+    "ToggleAlacrittyWindow",
+    "ToggleAlacrittyWindow",
+    "Meta+F",
+    toggleAlacritty,
+  );
+  if (registed) {
+    console.log("registed alacritty");
+  } else {
+    console.log("failed to registed alacritty");
+  }
+}
+let registed = registerShortcut(
   "ToggleEmacsWindow",
   "ToggleEmacsWindow",
   "Meta+S",
   toggleEmacs,
 );
+
+if (registed) {
+  console.log("registed emacs");
+} else {
+  console.log("failed to registed emacs");
+}

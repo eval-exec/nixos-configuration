@@ -16,6 +16,7 @@
     btop
     cpulimit
     bc
+    p7zip
     pv
     anytype
     discord
