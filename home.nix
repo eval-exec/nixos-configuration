@@ -12,7 +12,6 @@
   # };
 
   home.packages = with pkgs; [
-    google-chrome
     btop
     cpulimit
     bc
@@ -391,7 +390,11 @@
       extraConfig = "";
     };
     msmtp = { enable = true; };
-    chromium = { enable = true; };
+    chromium = {
+      enable = true;
+      pacakge = pkgs.google-chrome;
+      commandLineArgs = [ "--enable-wayland-ime" ];
+    };
     nix-index = {
       enable = true;
       enableZshIntegration = true;
