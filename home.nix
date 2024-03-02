@@ -17,6 +17,7 @@
     bc
     p7zip
     pv
+    woman
     anytype
     discord
     ripgrep
@@ -390,9 +391,9 @@
       extraConfig = "";
     };
     msmtp = { enable = true; };
-    chromium = {
+    chromium = { enable = true; };
+    google-chrome = {
       enable = true;
-      pacakge = pkgs.google-chrome;
       commandLineArgs = [ "--enable-wayland-ime" ];
     };
     nix-index = {
