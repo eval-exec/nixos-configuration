@@ -19,6 +19,7 @@ function toggleClient(app_name) {
 
   for (var i = 0; i < clients.length; i++) {
     let resource_name = clients[i].resourceName;
+    console.log(resource_name);
 
     if (resource_name == app_name) {
       client = clients[i];
@@ -90,6 +91,10 @@ function toggleEmacs() {
   toggleClient("emacs");
 }
 
+function toggleChrome() {
+  toggleClient("chrome");
+}
+
 {
   let registed = registerShortcut(
     "ToggleAlacrittyWindow",
@@ -103,15 +108,31 @@ function toggleEmacs() {
     console.log("failed to registed alacritty");
   }
 }
-let registed = registerShortcut(
-  "ToggleEmacsWindow",
-  "ToggleEmacsWindow",
-  "Meta+S",
-  toggleEmacs,
-);
 
-if (registed) {
-  console.log("registed emacs");
-} else {
-  console.log("failed to registed emacs");
+{
+  let registed = registerShortcut(
+    "ToggleChromeWindow",
+    "ToggleChromeWindow",
+    "Meta+W",
+    toggleChrome,
+  );
+  if (registed) {
+    console.log("registed chrome");
+  } else {
+    console.log("failed to registed chrome");
+  }
+}
+{
+  let registed = registerShortcut(
+    "ToggleEmacsWindow",
+    "ToggleEmacsWindow",
+    "Meta+S",
+    toggleEmacs,
+  );
+
+  if (registed) {
+    console.log("registed emacs");
+  } else {
+    console.log("failed to registed emacs");
+  }
 }

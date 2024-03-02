@@ -17,7 +17,7 @@
     bc
     p7zip
     pv
-    woman
+    warp-terminal
     anytype
     discord
     ripgrep
