@@ -3,7 +3,6 @@
 
   inputs = rec {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
     flake-utils = { url = "github:numtide/flake-utils"; };
@@ -12,8 +11,8 @@
     emacs-overlay = { url = "github:nix-community/emacs-overlay"; };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nur, home-manager, emacs-overlay
-    , sops-nix, ... }: {
+  outputs =
+    { self, nixpkgs, nur, home-manager, emacs-overlay, sops-nix, ... }: {
       # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
       # packages.x86_64-linux = [

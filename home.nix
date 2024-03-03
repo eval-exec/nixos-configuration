@@ -272,7 +272,7 @@
               ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --pull "execvy-inbox"
             '';
             onNotifyPost =
-              "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
+              "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
           };
 
           mbsync = {
@@ -363,9 +363,9 @@
       enable = false;
       # frequency = "*-*-* *:*:00,20,40";
       # preExec =
-      #   "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
+      #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       postExec =
-        "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
+        "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       verbose = true;
     };
   };
@@ -422,7 +422,7 @@
     };
     emacs = {
       enable = true;
-      package = pkgs.emacs-pgtk;
+      package = pkgs.emacs-git;
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
@@ -494,6 +494,7 @@
       '';
       initExtra = ''
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh;
+        if [[ "$ALACRITTY_SOCKET" != "" && "$TMUX" = "" ]]; then tmux a; fi
       '';
 
       shellAliases = {
@@ -506,7 +507,7 @@
         idea =
           "~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea.sh";
         update = "sudo nixos-rebuild switch";
-        emacs = "${pkgs.emacs-pgtk}/bin/emacsclient -nw";
+        emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
         magit = ''
           \emacs -Q -nw -l ~/.emacs.d/init-nw.el --funcall magit
         '';
@@ -602,6 +603,34 @@
             "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
         };
       };
+
+      alacritty-daemon = {
+        Unit = {
+          Description = "alacritty daemon";
+          # After = [ "network-online.target" ];
+        };
+        Install = { WantedBy = [ "default.target" ]; };
+        Service = {
+          # Type = "forking";
+          Restart = "always";
+          RestartSec = 0;
+          ExecStart = "${pkgs.alacritty}/bin/alacritty";
+        };
+      };
+
+      tmux = {
+        Unit = {
+          Description = "tmux";
+          # After = [ "network-online.target" ];
+        };
+        Install = { WantedBy = [ "default.target" ]; };
+        Service = {
+          Type = "forking";
+          ExecStart = "${pkgs.tmux}/bin/tmux new -d";
+          ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
+        };
+      };
+
     };
   };
 }
