@@ -22,8 +22,6 @@
     discord
     ripgrep
     yaml-language-server
-    piper-tts
-    piper-train
     ascii
     gimp
     readability-cli
