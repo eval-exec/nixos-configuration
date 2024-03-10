@@ -21,6 +21,7 @@
     anytype
     discord
     ripgrep
+    dpkg
     yaml-language-server
     ascii
     gimp
