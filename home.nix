@@ -17,7 +17,6 @@
     bc
     p7zip
     pv
-    warp-terminal
     anytype
     discord
     ripgrep
@@ -96,8 +95,8 @@
     gh
     ghostie
     gifski
-    github-copilot-cli
-    github-desktop
+    # github-copilot-cli
+    # github-desktop
     glxinfo
     go-ethereum
     goimapnotify
@@ -147,7 +146,7 @@
     mercurial
     mermaid-cli
     meson
-    microsoft-edge-dev
+    # microsoft-edge-dev
     mlocate
     mold
     moreutils
