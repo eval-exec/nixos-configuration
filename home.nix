@@ -609,7 +609,7 @@
       alacritty-daemon = {
         Unit = {
           Description = "alacritty daemon";
-          # After = [ "network-online.target" ];
+          After = [ "display-service.target" ];
         };
         Install = { WantedBy = [ "default.target" ]; };
         Service = {
@@ -623,7 +623,7 @@
       tmux = {
         Unit = {
           Description = "tmux";
-          # After = [ "network-online.target" ];
+          After = [ "display-service.target" ];
         };
         Install = { WantedBy = [ "default.target" ]; };
         Service = {

@@ -123,10 +123,7 @@
   # };
 
   services = {
-    desktopManager = {
-      gnome.enable = false;
-      plasma6.enable = true;
-    };
+    desktopManager = { plasma6.enable = true; };
 
     samba = {
       enable = true;
