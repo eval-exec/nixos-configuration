@@ -123,6 +123,11 @@
   # };
 
   services = {
+    desktopManager = {
+      gnome.enable = false;
+      plasma6.enable = true;
+    };
+
     samba = {
       enable = true;
       shares = {
@@ -273,11 +278,6 @@
           enable = false;
           user = "exec";
         };
-      };
-      desktopManager = {
-        gnome.enable = false;
-        # plasma5.enable = true;
-        plasma6.enable = true;
       };
     };
 
