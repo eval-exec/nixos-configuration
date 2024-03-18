@@ -18,6 +18,7 @@
     p7zip
     pv
     anytype
+    qrencode
     discord
     ripgrep
     dpkg
