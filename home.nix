@@ -428,7 +428,6 @@
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
-        pkgs.emacsPackages.lsp-bridge
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.rime
         pkgs.emacsPackages.sqlite3
