@@ -239,6 +239,8 @@
   # home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
   # home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
 
+  home.sessionVariables = { EMACS_TELEGA_SERVER_LIB_PREFIX = "${pkgs.tdlib}"; };
+
   home.sessionPath = [
 
     "/home/exec/.cargo/bin"
@@ -438,7 +440,6 @@
         pkgs.emacsPackages.evil-collection
         pkgs.emacsPackages.magit
         pkgs.emacsPackages.forge
-        pkgs.emacsPackages.telega
         pkgs.librime
         pkgs.mu
         pkgs.noto-fonts-color-emoji
