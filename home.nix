@@ -165,6 +165,7 @@
     nixfmt
     nodePackages.pyright
     nodePackages.typescript-language-server
+    nodePackages.bash-language-server
     nuclear
     # ionshare
     osdlyrics
