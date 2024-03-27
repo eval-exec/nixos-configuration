@@ -644,7 +644,6 @@
       glib
       gtk3
       libcxx
-      libcxxabi
       libGL
       libappindicator-gtk3
       libdrm
