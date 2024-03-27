@@ -31,6 +31,7 @@
     android-tools
     obs-studio-plugins.wlrobs
     wl-clipboard
+    nil
     aileron
     alacritty
     pstree
