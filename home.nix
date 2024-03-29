@@ -278,7 +278,7 @@
               ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --pull "execvy-inbox"
             '';
             onNotifyPost =
-              "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
+              "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
           };
 
           mbsync = {
@@ -369,9 +369,9 @@
       enable = false;
       # frequency = "*-*-* *:*:00,20,40";
       # preExec =
-      #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
+      #   "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       postExec =
-        "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
+        "${pkgs.emacs-pgtk}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       verbose = true;
     };
   };
@@ -428,7 +428,8 @@
     };
     emacs = {
       enable = true;
-      package = pkgs.emacs-git.override { withGTK3 = true; };
+      package = pkgs.emacs-pgtk;
+      # package = pkgs.emacs-pgtk.override { withGTK3 = true; };
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
@@ -511,7 +512,7 @@
         idea =
           "~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea.sh";
         update = "sudo nixos-rebuild switch";
-        emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
+        emacs = "${pkgs.emacs-pgtk}/bin/emacsclient -nw";
         magit = ''
           \emacs -Q -nw -l ~/.emacs.d/init-nw.el --funcall magit
         '';
