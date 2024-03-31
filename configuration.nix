@@ -329,7 +329,6 @@
         enableExtensionPack = false;
       };
       guest.enable = false;
-      guest.x11 = false;
     };
     docker = { enable = true; };
     vmware = {
