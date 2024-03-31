@@ -630,9 +630,9 @@
         Install = { WantedBy = [ "default.target" ]; };
         Service = {
           Type = "forking";
-          Environment = "HOME=%h";
           # WorkingDirectory = "%h";
-          ExecStart = "${pkgs.tmux}/bin/tmux new-session -d";
+          ExecStart =
+            "${pkgs.tmux}/bin/tmux -f /home/exec/.tmux.conf new-session -d";
           ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
         };
       };
