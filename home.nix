@@ -612,9 +612,9 @@
       alacritty-daemon = {
         Unit = {
           Description = "alacritty daemon";
-          After = [ "display-service.target" ];
+          After = [ "graphical-session.target" ];
         };
-        Install = { WantedBy = [ "default.target" ]; };
+        Install = { WantedBy = [ "graphical-session.target" ]; };
         Service = {
           Type = "forking";
           Restart = "always";
@@ -631,6 +631,7 @@
         Install = { WantedBy = [ "default.target" ]; };
         Service = {
           Type = "forking";
+          User = "exec";
           ExecStart = "${pkgs.tmux}/bin/tmux new-session -d";
           ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
         };
