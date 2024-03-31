@@ -625,11 +625,12 @@
       tmux = {
         Unit = {
           Description = "tmux";
-          After = [ "display-service.target" ];
+          # After = [ "display-service.target" ];
         };
         Install = { WantedBy = [ "default.target" ]; };
         Service = {
           Type = "forking";
+          WorkingDirectory = "~";
           ExecStart = "${pkgs.tmux}/bin/tmux new-session -d";
           ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
         };
