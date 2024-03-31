@@ -616,7 +616,7 @@
         };
         Install = { WantedBy = [ "default.target" ]; };
         Service = {
-          # Type = "forking";
+          Type = "forking";
           Restart = "always";
           RestartSec = 0;
           ExecStart = "${pkgs.alacritty}/bin/alacritty";
@@ -631,7 +631,7 @@
         Install = { WantedBy = [ "default.target" ]; };
         Service = {
           Type = "forking";
-          ExecStart = "${pkgs.tmux}/bin/tmux new -d";
+          ExecStart = "${pkgs.tmux}/bin/tmux new-session -d";
           ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
         };
       };
