@@ -616,7 +616,6 @@
         };
         Install = { WantedBy = [ "graphical-session.target" ]; };
         Service = {
-          Type = "forking";
           Restart = "always";
           RestartSec = 0;
           ExecStart = "${pkgs.alacritty}/bin/alacritty";
