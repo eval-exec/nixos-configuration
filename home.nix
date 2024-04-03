@@ -19,7 +19,7 @@
     pv
     anytype
     qrencode
-    (discord.override { commandLineArgs = [ "--enable-wayland-ime" ]; })
+    discord
     ripgrep
     dpkg
     yaml-language-server
