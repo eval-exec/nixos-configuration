@@ -111,6 +111,8 @@
           fcitx5-configtool
           fcitx5-gtk
           libsForQt5.fcitx5-qt
+          nur.repos.xddxdd.rime-dict
+          nur.repos.xddxdd.rime-zhwiki
         ];
       };
     };
@@ -461,6 +463,7 @@
       allowUnfree = true;
       permittedInsecurePackages = [
         "openssl-1.1.1w"
+        "electron-11.5.0"
         "electron-24.8.6"
         "electron-25.9.0"
         "electron-19.1.9"
