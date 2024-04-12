@@ -12,6 +12,7 @@
   # };
 
   home.packages = with pkgs; [
+    nur.repos.xddxdd.wechat-uos
     btop
     cpulimit
     bc
