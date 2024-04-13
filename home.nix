@@ -167,7 +167,7 @@
     neovide
     nil
     ninja
-    nixfmt
+    nixfmt-rfc-style
     nodePackages.pyright
     nodePackages.typescript-language-server
     nodePackages.bash-language-server

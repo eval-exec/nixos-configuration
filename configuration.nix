@@ -184,6 +184,20 @@
       enable = false;
       fallbackDns = [ "1.1.1.1" "8.8.8.8" ];
     };
+    displayManager = {
+
+      defaultSession = "plasma";
+
+      sddm = {
+        enable = true;
+        enableHidpi = true;
+        wayland.enable = true;
+      };
+      autoLogin = {
+        enable = false;
+        user = "exec";
+      };
+    };
 
     # Configure keymap in X11
     xserver = {
@@ -261,22 +275,12 @@
 
       # Enable the KDE Plasma Desktop Environment.
       displayManager = {
-        defaultSession = "plasma";
-        sddm = {
-          enable = true;
-          enableHidpi = true;
-          wayland.enable = true;
-        };
         gdm.enable = false;
         # xserverArgs = [ "-verbose" "-logverbose" ];
         # setupCommands = "";
         # sessionCommands run before setupCommands
         # sessionCommands =
         #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout us-mine";
-        autoLogin = {
-          enable = false;
-          user = "exec";
-        };
       };
     };
 
@@ -329,7 +333,7 @@
     virtualbox = {
       host = {
         enable = true;
-        enableExtensionPack = true;
+        # enableExtensionPack = true;
       };
       guest.enable = false;
     };
