@@ -5,14 +5,31 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
-    flake-utils = { url = "github:numtide/flake-utils"; };
-    sops-nix = { url = "github:Mic92/sops-nix"; };
-    home-manager = { url = "github:nix-community/home-manager"; };
-    emacs-overlay = { url = "github:nix-community/emacs-overlay"; };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+    };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+    };
   };
 
   outputs =
-    { self, nixpkgs, nur, home-manager, emacs-overlay, sops-nix, ... }: {
+    {
+      self,
+      nixpkgs,
+      nur,
+      home-manager,
+      emacs-overlay,
+      sops-nix,
+      ...
+    }:
+    {
       # packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
       # packages.x86_64-linux = [
@@ -23,7 +40,13 @@
       nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit nixpkgs home-manager emacs-overlay sops-nix nur;
+          inherit
+            nixpkgs
+            home-manager
+            emacs-overlay
+            sops-nix
+            nur
+            ;
         };
         modules = [
           ./hardware-configuration.nix
@@ -36,7 +59,10 @@
             home-manager.useUserPackages = true;
             home-manager.users.exec = import ./home.nix;
             # home-manager.extraSpecialArgs = { inherit config; };
-            nixpkgs.overlays = [ nur.overlay emacs-overlay.overlay ];
+            nixpkgs.overlays = [
+              nur.overlay
+              emacs-overlay.overlay
+            ];
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix

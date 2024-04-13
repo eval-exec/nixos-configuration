@@ -2,7 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 # test suda sudoa
-{ config, pkgs, inputs, lib, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     # ./hardware-configuration.nix
@@ -67,7 +74,10 @@
       enable = true;
       dns = "none";
     };
-    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
     firewall = {
       enable = false;
       # allowedTCPPortRanges = [{
@@ -116,7 +126,6 @@
         ];
       };
     };
-
   };
   # specialisation = {
   #   internal_nvidia = {
@@ -125,7 +134,9 @@
   # };
 
   services = {
-    desktopManager = { plasma6.enable = true; };
+    desktopManager = {
+      plasma6.enable = true;
+    };
 
     samba = {
       enable = true;
@@ -139,9 +150,15 @@
         };
       };
     };
-    flatpak = { enable = true; };
-    guix = { enable = false; };
-    fprintd = { enable = false; };
+    flatpak = {
+      enable = true;
+    };
+    guix = {
+      enable = false;
+    };
+    fprintd = {
+      enable = false;
+    };
     keyd = {
       enable = false;
       keyboards.default.settings = {
@@ -158,7 +175,6 @@
     # };
     touchegg = {
       enable = true;
-
     };
 
     acpid = {
@@ -182,7 +198,10 @@
 
     resolved = {
       enable = false;
-      fallbackDns = [ "1.1.1.1" "8.8.8.8" ];
+      fallbackDns = [
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
     };
     displayManager = {
 
@@ -299,7 +318,6 @@
       # no need to redefine it in your config for now)
       #media-session.enable = true;
     };
-
   };
 
   # Enable sound with pipewire.
@@ -313,7 +331,6 @@
       name = "kdewallet";
       enableKwallet = true;
     };
-
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -321,8 +338,16 @@
     isNormalUser = true;
     description = "exec";
     useDefaultShell = true;
-    extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" ];
-    packages = with pkgs; [ firefox kate ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "vboxusers"
+    ];
+    packages = with pkgs; [
+      firefox
+      kate
+    ];
   };
   users.defaultUserShell = pkgs.zsh;
   virtualisation = {
@@ -337,14 +362,15 @@
       };
       guest.enable = false;
     };
-    docker = { enable = true; };
+    docker = {
+      enable = true;
+    };
     vmware = {
       host = {
         enable = false;
         extraPackages = [ pkgs.pcsclite ];
       };
     };
-
   };
 
   users.extraUsers.exec.extraGroups = [ "libvirtd" ];
@@ -439,7 +465,6 @@
         emoji = [ "Noto Color Emoji" ];
       };
     };
-
   };
 
   environment = {
@@ -553,7 +578,10 @@
 
     settings = {
       auto-optimise-store = true;
-      trusted-users = [ "root" "exec" ];
+      trusted-users = [
+        "root"
+        "exec"
+      ];
 
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -567,7 +595,10 @@
         "https://nix-community.cachix.org"
         "https://devenv.cachix.org"
       ];
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 
@@ -600,14 +631,24 @@
 
   programs.wayfire = {
     enable = false;
-    plugins =
-      (with pkgs.wayfirePlugins; [ wcm wf-shell wayfire-plugins-extra ]);
+    plugins = (
+      with pkgs.wayfirePlugins;
+      [
+        wcm
+        wf-shell
+        wayfire-plugins-extra
+      ]
+    );
   };
 
   programs.steam = {
     enable = true;
     package = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [ wqy_zenhei wqy_microhei ];
+      extraPkgs =
+        pkgs: with pkgs; [
+          wqy_zenhei
+          wqy_microhei
+        ];
 
       extraProfile = "export STEAM_FORCE_DESKTOPUI_SCALING=2";
     };
@@ -703,16 +744,12 @@
         serviceConfig = {
           Type = "oneshot";
           User = "root";
-          ExecStart = ''
-            /bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
-          ExecStop = ''
-            /bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+          ExecStart = ''/bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+          ExecStop = ''/bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
           RemainAfterExit = true;
-
         };
       };
     };
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
-
 }

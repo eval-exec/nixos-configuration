@@ -1,6 +1,14 @@
-{ config, pkgs, lib, ... }:
-let cfg = config.services.g810-led;
-in with lib; {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  cfg = config.services.g810-led;
+in
+with lib;
+{
   options.services.g810-led = {
     enable = mkEnableOption "g810-led";
 

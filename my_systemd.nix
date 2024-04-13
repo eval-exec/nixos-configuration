@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 lib.mkIf (config.networking.hostName == "Mufasa") {
   systemd.services.clash = {
     wantedBy = [ "multi-user.target" ];
@@ -7,8 +12,7 @@ lib.mkIf (config.networking.hostName == "Mufasa") {
     serviceConfig = {
       Type = "simple";
       User = "root";
-      ExecStart =
-        "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
+      ExecStart = "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
     };
   };
 
@@ -18,10 +22,8 @@ lib.mkIf (config.networking.hostName == "Mufasa") {
     serviceConfig = {
       Type = "oneshot";
       User = "root";
-      ExecStart =
-        ''/bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
-      ExecStop =
-        ''/bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+      ExecStart = ''/bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+      ExecStop = ''/bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
       RemainAfterExit = true;
     };
   };
