@@ -1,4 +1,13 @@
-{ config, pkgs, inputs, lib, fetchFromGitHub, rustPlatform, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  fetchFromGitHub,
+  rustPlatform,
+  ...
+}:
+{
   # home config example
 
   home.username = "exec";
@@ -47,7 +56,13 @@
     pprof
     jemalloc
     amdgpu_top
-    (aspellWithDicts (ds: with ds; [ en en-computers en-science ]))
+    (aspellWithDicts (
+      ds: with ds; [
+        en
+        en-computers
+        en-science
+      ]
+    ))
     shfmt
     zls
     go2tv
@@ -245,7 +260,9 @@
   # home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
   # home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
 
-  home.sessionVariables = { EMACS_TELEGA_SERVER_LIB_PREFIX = "${pkgs.tdlib}"; };
+  home.sessionVariables = {
+    EMACS_TELEGA_SERVER_LIB_PREFIX = "${pkgs.tdlib}";
+  };
 
   home.sessionPath = [
 
@@ -267,22 +284,27 @@
             sent = "Sent";
             trash = "Trash";
           };
-          gpg = { key = "4B453CE70F2646044171BACE0F0272C0D3AC91F7"; };
+          gpg = {
+            key = "4B453CE70F2646044171BACE0F0272C0D3AC91F7";
+          };
           passwordCommand = "cat /home/exec/pass/gapp.txt";
           imap = {
             host = "imap.gmail.com";
             port = 993;
-            tls = { enable = true; };
+            tls = {
+              enable = true;
+            };
           };
           imapnotify = {
             enable = true;
             boxes = [ "INBOX" ];
-            extraConfig = { wait = 0; };
+            extraConfig = {
+              wait = 0;
+            };
             onNotify = ''
               ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --pull "execvy-inbox"
             '';
-            onNotifyPost =
-              "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
+            onNotifyPost = "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
           };
 
           mbsync = {
@@ -293,10 +315,11 @@
               account = {
 
               };
-              channel = { MaxMessages = 20000; };
+              channel = {
+                MaxMessages = 20000;
+              };
               local = { };
               remote = { };
-
             };
             groups = {
               execvy = {
@@ -312,17 +335,23 @@
                   sent = {
                     farPattern = "[Gmail]/Sent Mail";
                     nearPattern = "sent";
-                    extraConfig = { Create = "Both"; };
+                    extraConfig = {
+                      Create = "Both";
+                    };
                   };
                   trash = {
                     farPattern = "[Gmail]/Trash";
                     nearPattern = "trash";
-                    extraConfig = { Create = "Both"; };
+                    extraConfig = {
+                      Create = "Both";
+                    };
                   };
                   spam = {
                     farPattern = "[Gmail]/Spam";
                     nearPattern = "spam";
-                    extraConfig = { Create = "Both"; };
+                    extraConfig = {
+                      Create = "Both";
+                    };
                   };
                 };
               };
@@ -331,14 +360,15 @@
             remove = "both";
             subFolders = "Verbatim";
           };
-          msmtp = { enable = true; };
+          msmtp = {
+            enable = true;
+          };
           # smtp = { host = "gmail.com"; };
-          mu = { enable = true; };
-
+          mu = {
+            enable = true;
+          };
         };
-
       };
-
     };
   };
 
@@ -353,7 +383,6 @@
           name "My PipeWire Output"
         }
       '';
-
     };
     sxhkd = {
       enable = true;
@@ -362,9 +391,10 @@
         "super + f" = "/home/exec/Scripts/apps/terminal.sh";
         "super + s" = "/home/exec/Scripts/apps/emacs.sh";
       };
-
     };
-    imapnotify = { enable = false; };
+    imapnotify = {
+      enable = false;
+    };
     kdeconnect = {
       enable = true;
       indicator = true;
@@ -374,8 +404,7 @@
       # frequency = "*-*-* *:*:00,20,40";
       # preExec =
       #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
-      postExec =
-        "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
+      postExec = "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       verbose = true;
     };
   };
@@ -392,16 +421,26 @@
 
     vscode = {
       enable = true;
-      package = pkgs.vscode.fhsWithPackages
-        (ps: with ps; [ rustup zlib openssl.dev pkg-config ]);
+      package = pkgs.vscode.fhsWithPackages (
+        ps: with ps; [
+          rustup
+          zlib
+          openssl.dev
+          pkg-config
+        ]
+      );
     };
 
     mbsync = {
       enable = true;
       extraConfig = "";
     };
-    msmtp = { enable = true; };
-    chromium = { enable = true; };
+    msmtp = {
+      enable = true;
+    };
+    chromium = {
+      enable = true;
+    };
     google-chrome = {
       enable = true;
       commandLineArgs = [ "--enable-wayland-ime" ];
@@ -413,11 +452,14 @@
     };
     thunderbird = {
       enable = true;
-      profiles = { exec = { isDefault = true; }; };
+      profiles = {
+        exec = {
+          isDefault = true;
+        };
+      };
     };
     go = {
       enable = true;
-
     };
     eza = {
       enable = true;
@@ -477,6 +519,7 @@
       enableCompletion = true;
       defaultKeymap = "emacs";
       envExtra = ''
+        export FZF_HOME=${pkgs.fzf}/share/fzf;
         export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
         export NIXPKGS_ALLOW_UNFREE=1;
         # Preview file content using bat (https://github.com/sharkdp/bat)
@@ -510,11 +553,9 @@
         cat = "bat -p";
         vim = "nvim";
         goland = "~/.local/share/JetBrains/Toolbox/apps/goland/bin/goland.sh";
-        rustrover =
-          "~/.local/share/JetBrains/Toolbox/apps/rustrover/bin/rustrover.sh";
+        rustrover = "~/.local/share/JetBrains/Toolbox/apps/rustrover/bin/rustrover.sh";
         clion = "~/.local/share/JetBrains/Toolbox/apps/clion-nova/bin/clion.sh";
-        idea =
-          "~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea.sh";
+        idea = "~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea.sh";
         update = "sudo nixos-rebuild switch";
         emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
         magit = ''
@@ -529,8 +570,15 @@
       };
       oh-my-zsh = {
         enable = true;
-        plugins =
-          [ "git" "fzf" "man" "warhol" "zsh-wakatime" "fzf-tab" "nix-shell" ];
+        plugins = [
+          "git"
+          "fzf"
+          "man"
+          "warhol"
+          "zsh-wakatime"
+          "fzf-tab"
+          "nix-shell"
+        ];
         # theme = "mlh";
         custom = "/home/exec/.oh-my-zsh/custom";
       };
@@ -567,8 +615,12 @@
       settings = {
         add_newline = false;
         command_timeout = 200;
-        git_status = { disabled = true; };
-        battery = { disabled = true; };
+        git_status = {
+          disabled = true;
+        };
+        battery = {
+          disabled = true;
+        };
       };
     };
   };
@@ -606,10 +658,11 @@
           Description = "clash";
           After = [ "network-online.target" ];
         };
-        Install = { WantedBy = [ "default.target" ]; };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
         Service = {
-          ExecStart =
-            "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
+          ExecStart = "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
         };
       };
 
@@ -618,7 +671,9 @@
           Description = "alacritty daemon";
           After = [ "graphical-session.target" ];
         };
-        Install = { WantedBy = [ "graphical-session.target" ]; };
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
         Service = {
           Restart = "always";
           RestartSec = 0;
@@ -631,14 +686,15 @@
           Description = "tmux";
           After = [ "graphical-session.target" ];
         };
-        Install = { WantedBy = [ "graphical-session.target" ]; };
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
         Service = {
           Type = "forking";
           ExecStart = "${pkgs.tmux}/bin/tmux new-session -d";
           ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
         };
       };
-
     };
   };
 }
