@@ -110,7 +110,6 @@
     flameshot
     fuse
     fuse3
-    fzf
     gdb
     gf
     gh
@@ -512,6 +511,7 @@
         }
       ];
     };
+
     zsh = {
       enable = true;
       autosuggestion.enable = true;
@@ -519,7 +519,8 @@
       enableCompletion = true;
       defaultKeymap = "emacs";
       envExtra = ''
-        export FZF_HOME=${pkgs.fzf}/share/fzf;
+        export FZF_BASE="/home/exec/Projects/github.com/junegunn/fzf";
+        # export FZF_BASE=${pkgs.fzf}/share/fzf;
         export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
         export NIXPKGS_ALLOW_UNFREE=1;
         # Preview file content using bat (https://github.com/sharkdp/bat)
