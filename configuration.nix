@@ -121,8 +121,9 @@
           fcitx5-configtool
           fcitx5-gtk
           libsForQt5.fcitx5-qt
-          nur.repos.xddxdd.rime-dict
-          nur.repos.xddxdd.rime-zhwiki
+          nur.repos.linyinfeng.rimePackages.rime-ice
+          # nur.repos.xddxdd.rime-dict
+          # nur.repos.xddxdd.rime-zhwiki
         ];
       };
     };
