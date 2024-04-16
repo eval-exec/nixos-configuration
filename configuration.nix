@@ -115,7 +115,7 @@
         waylandFrontend = true;
 
         addons = with pkgs; [
-          (fcitx5-rime.override {rimeDataPkgs = [nur.repos.linyinfeng.rimePackages.rime-ice]})
+          (fcitx5-rime.override { rimeDataPkgs = [ nur.repos.linyinfeng.rimePackages.rime-ice ]; })
           fcitx5-chinese-addons
           fcitx5-with-addons
           fcitx5-configtool
