@@ -46,6 +46,7 @@
     obs-studio-plugins.wlrobs
     wl-clipboard
     sunshine
+    moonlight-qt
     # tigervnc
     nil
     aileron
