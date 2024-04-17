@@ -29,6 +29,7 @@
     btop
     cpulimit
     bc
+    inkscape-with-extensions
     p7zip
     pv
     anytype
