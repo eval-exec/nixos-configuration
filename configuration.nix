@@ -115,15 +115,12 @@
         waylandFrontend = true;
 
         addons = with pkgs; [
-          (fcitx5-rime.override { rimeDataPkgs = [ nur.repos.linyinfeng.rimePackages.rime-ice ]; })
+          fcitx5-rime
           fcitx5-chinese-addons
           fcitx5-with-addons
           fcitx5-configtool
           fcitx5-gtk
           libsForQt5.fcitx5-qt
-          # nur.repos.linyinfeng.rimePackages.rime-ice
-          # nur.repos.xddxdd.rime-dict
-          # nur.repos.xddxdd.rime-zhwiki
         ];
       };
     };
