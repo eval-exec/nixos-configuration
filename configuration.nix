@@ -672,6 +672,7 @@
 
       fuse3
       fuse
+      libgccjit
       libgit2
       boost
       libevent
@@ -737,6 +738,13 @@
 
   systemd = {
     services = {
+      sunshine = {
+        wantedBy = [ "graphical-session.target" ];
+        serviceConfig = {
+          User = "root";
+          ExecStart = "${pkgs.sunshine}/bin/sunshine";
+        };
+      };
       disable_cpu_turbo = {
         wantedBy = [ "sysinit.target" ];
         serviceConfig = {
