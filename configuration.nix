@@ -137,7 +137,7 @@
     };
 
     xrdp = {
-      enable = false;
+      enable = true;
       defaultWindowManager = "startplasma-wayland";
       audio = {
         enable = true;
