@@ -351,7 +351,7 @@
   virtualisation = {
     libvirtd.enable = true;
     xen.enable = false;
-    waydroid.enable = true;
+    waydroid.enable = false;
 
     virtualbox = {
       host = {
