@@ -45,6 +45,7 @@
     android-tools
     obs-studio-plugins.wlrobs
     wl-clipboard
+    tigervnc
     nil
     aileron
     alacritty

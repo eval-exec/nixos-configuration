@@ -136,6 +136,14 @@
       plasma6.enable = true;
     };
 
+    xrdp = {
+      enable = false;
+      defaultWindowManager = "startplasma-wayland";
+      audio = {
+        enable = true;
+      };
+    };
+
     samba = {
       enable = true;
       shares = {
