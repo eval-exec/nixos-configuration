@@ -386,6 +386,8 @@
     enableDefaultPackages = false;
     fontDir.enable = true;
     packages = with pkgs; [
+      noto-fonts-color-emoji
+      noto-fonts-emoji-blob-bin
       anonymousPro
       dejavu_fonts
       dina-font
@@ -406,8 +408,6 @@
       noto-fonts-cjk
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-color-emoji
-      noto-fonts-emoji-blob-bin
       noto-fonts-extra
       open-sans
       proggyfonts
@@ -422,40 +422,40 @@
       wqy_zenhei
     ];
     fontconfig = {
-      localConf = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-        <fontconfig>
-         <alias>
-           <family>sans-serif</family>
-           <prefer>
-             <family>Noto Sans</family>
-             <family>Noto Color Emoji</family>
-             <family>Noto Emoji</family>
-             <family>DejaVu Sans</family>
-           </prefer> 
-         </alias>
+      # localConf = ''
+      #   <?xml version="1.0"?>
+      #   <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+      #   <fontconfig>
+      #    <alias>
+      #      <family>sans-serif</family>
+      #      <prefer>
+      #        <family>Noto Sans</family>
+      #        <family>Noto Color Emoji</family>
+      #        <family>Noto Emoji</family>
+      #        <family>DejaVu Sans</family>
+      #      </prefer> 
+      #    </alias>
 
-         <alias>
-           <family>serif</family>
-           <prefer>
-             <family>Noto Serif</family>
-             <family>Noto Color Emoji</family>
-             <family>Noto Emoji</family>
-             <family>DejaVu Serif</family>
-           </prefer>
-         </alias>
+      #    <alias>
+      #      <family>serif</family>
+      #      <prefer>
+      #        <family>Noto Serif</family>
+      #        <family>Noto Color Emoji</family>
+      #        <family>Noto Emoji</family>
+      #        <family>DejaVu Serif</family>
+      #      </prefer>
+      #    </alias>
 
-         <alias>
-          <family>monospace</family>
-          <prefer>
-            <family>Noto Mono</family>
-            <family>Noto Color Emoji</family>
-            <family>Noto Emoji</family>
-           </prefer>
-         </alias>
-        </fontconfig>
-      '';
+      #    <alias>
+      #     <family>monospace</family>
+      #     <prefer>
+      #       <family>Noto Mono</family>
+      #       <family>Noto Color Emoji</family>
+      #       <family>Noto Emoji</family>
+      #      </prefer>
+      #    </alias>
+      #   </fontconfig>
+      # '';
       defaultFonts = {
         serif = [ "Serif" ];
         sansSerif = [ "Sans Serif" ];
