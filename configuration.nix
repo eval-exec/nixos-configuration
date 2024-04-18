@@ -431,6 +431,7 @@
            <prefer>
              <family>Noto Sans</family>
              <family>Noto Color Emoji</family>
+             <family>Noto Emoji</family>
              <family>DejaVu Sans</family>
            </prefer> 
          </alias>
@@ -440,6 +441,7 @@
            <prefer>
              <family>Noto Serif</family>
              <family>Noto Color Emoji</family>
+             <family>Noto Emoji</family>
              <family>DejaVu Serif</family>
            </prefer>
          </alias>
@@ -449,6 +451,7 @@
           <prefer>
             <family>Noto Mono</family>
             <family>Noto Color Emoji</family>
+            <family>Noto Emoji</family>
            </prefer>
          </alias>
         </fontconfig>
