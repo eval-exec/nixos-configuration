@@ -386,8 +386,6 @@
     enableDefaultPackages = false;
     fontDir.enable = true;
     packages = with pkgs; [
-      noto-fonts-color-emoji
-      noto-fonts-emoji-blob-bin
       anonymousPro
       dejavu_fonts
       dina-font
@@ -409,6 +407,8 @@
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-extra
+      noto-fonts-color-emoji
+      noto-fonts-emoji-blob-bin
       open-sans
       proggyfonts
       sarasa-gothic
