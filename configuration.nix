@@ -406,9 +406,9 @@
       noto-fonts-cjk
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-extra
       noto-fonts-color-emoji
       noto-fonts-emoji-blob-bin
+      noto-fonts-extra
       open-sans
       proggyfonts
       sarasa-gothic
