@@ -423,37 +423,41 @@
     ];
     fontconfig = {
       localConf = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+        <?xml version='1.0' encoding='UTF-8'?>
+        <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
         <fontconfig>
          <alias>
-           <family>sans-serif</family>
-           <prefer>
-             <family>Noto Sans</family>
-             <family>Noto Color Emoji</family>
-             <family>Noto Emoji</family>
-             <family>DejaVu Sans</family>
-           </prefer> 
+          <family>serif</family>
+          <prefer>
+           <family>Noto Sans</family>
+           <family>Noto Color Emoji</family>
+          </prefer>
          </alias>
-
          <alias>
-           <family>serif</family>
-           <prefer>
-             <family>Noto Serif</family>
-             <family>Noto Color Emoji</family>
-             <family>Noto Emoji</family>
-             <family>DejaVu Serif</family>
-           </prefer>
+          <family>sans-serif</family>
+          <prefer>
+           <family>Noto Sans</family>
+           <family>Noto Color Emoji</family>
+          </prefer>
          </alias>
-
          <alias>
           <family>monospace</family>
           <prefer>
-            <family>Noto Mono</family>
-            <family>Noto Color Emoji</family>
-            <family>Noto Emoji</family>
-           </prefer>
+           <family>Noto Sans</family>
+           <family>Noto Color Emoji</family>
+          </prefer>
          </alias>
+         <dir>~/.fonts</dir>
+         <match target="font">
+          <edit name="hinting" mode="assign">
+           <bool>true</bool>
+          </edit>
+         </match>
+         <match target="font">
+          <edit name="hintstyle" mode="assign">
+           <const>hintslight</const>
+          </edit>
+         </match>
         </fontconfig>
       '';
       defaultFonts = {
