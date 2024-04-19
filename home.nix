@@ -482,6 +482,7 @@
       # package = pkgs.emacs-git;
 
       extraPackages = epkgs: [
+        pkgs.noto-fonts-color-emoji
         pkgs.emacsPackages.jinx
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.rime
