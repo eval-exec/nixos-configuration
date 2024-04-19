@@ -406,8 +406,7 @@
       noto-fonts-cjk
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-color-emoji
-      noto-fonts-emoji-blob-bin
+      # noto-fonts-color-emoji
       noto-fonts-extra
       open-sans
       proggyfonts
@@ -422,47 +421,47 @@
       wqy_zenhei
     ];
     fontconfig = {
-      localConf = ''
-        <?xml version='1.0' encoding='UTF-8'?>
-        <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
-        <fontconfig>
-         <alias>
-          <family>serif</family>
-          <prefer>
-           <family>Noto Sans</family>
-           <family>Noto Color Emoji</family>
-          </prefer>
-         </alias>
-         <alias>
-          <family>sans-serif</family>
-          <prefer>
-           <family>Noto Sans</family>
-           <family>Noto Color Emoji</family>
-          </prefer>
-         </alias>
-         <alias>
-          <family>monospace</family>
-          <prefer>
-           <family>Noto Sans</family>
-           <family>Noto Color Emoji</family>
-          </prefer>
-         </alias>
-         <dir>~/.fonts</dir>
-         <match target="font">
-          <edit name="hinting" mode="assign">
-           <bool>true</bool>
-          </edit>
-         </match>
-         <match target="font">
-          <edit name="hintstyle" mode="assign">
-           <const>hintslight</const>
-          </edit>
-         </match>
-        </fontconfig>
-      '';
+      # localConf = ''
+      #   <?xml version='1.0' encoding='UTF-8'?>
+      #   <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+      #   <fontconfig>
+      #    <alias>
+      #     <family>serif</family>
+      #     <prefer>
+      #      <family>Noto Sans</family>
+      #      <family>Noto Color Emoji</family>
+      #     </prefer>
+      #    </alias>
+      #    <alias>
+      #     <family>sans-serif</family>
+      #     <prefer>
+      #      <family>Noto Sans</family>
+      #      <family>Noto Color Emoji</family>
+      #     </prefer>
+      #    </alias>
+      #    <alias>
+      #     <family>monospace</family>
+      #     <prefer>
+      #      <family>Noto Sans</family>
+      #      <family>Noto Color Emoji</family>
+      #     </prefer>
+      #    </alias>
+      #    <dir>~/.fonts</dir>
+      #    <match target="font">
+      #     <edit name="hinting" mode="assign">
+      #      <bool>true</bool>
+      #     </edit>
+      #    </match>
+      #    <match target="font">
+      #     <edit name="hintstyle" mode="assign">
+      #      <const>hintslight</const>
+      #     </edit>
+      #    </match>
+      #   </fontconfig>
+      # '';
       defaultFonts = {
-        serif = [ "Serif" ];
-        sansSerif = [ "Sans Serif" ];
+        serif = [ "Noto Sans" ];
+        sansSerif = [ "Noto Sans Serif" ];
         monospace = [ "Noto Sans Mono" ];
         emoji = [ "Noto Color Emoji" ];
       };
