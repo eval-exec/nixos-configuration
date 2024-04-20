@@ -366,11 +366,14 @@
     vmware = {
       host = {
         enable = true;
-        extraPackages = [ pkgs.pcsclite ];
+        extraPackages = [
+          pkgs.pcsclite
+          pkgs.libaio
+        ];
       };
-      guest = {
-        enable = true;
-      };
+      # guest = {
+      #   enable = true;
+      # };
     };
   };
 
