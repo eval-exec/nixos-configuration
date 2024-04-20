@@ -349,9 +349,9 @@
   };
   users.defaultUserShell = pkgs.zsh;
   virtualisation = {
-    libvirtd.enable = true;
-    xen.enable = false;
-    waydroid.enable = false;
+    # libvirtd.enable = true;
+    # xen.enable = false;
+    # waydroid.enable = false;
 
     virtualbox = {
       host = {
@@ -367,9 +367,6 @@
       host = {
         enable = true;
       };
-      # guest = {
-      #   enable = true;
-      # };
     };
   };
 
@@ -476,7 +473,7 @@
     variables = {
       # XKB_DEFAULT_LAYOUT = "us";
       NIXOS_OZONE_WL = "1";
-      GDK_BACKEND = "wayland";
+      # GDK_BACKEND = "wayland";
       GTK_IM_MODULE = lib.mkForce "";
       QT_IM_MODULE = lib.mkForce "";
       EDITOR = "nvim";
