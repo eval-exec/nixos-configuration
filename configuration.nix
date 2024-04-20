@@ -368,6 +368,9 @@
         enable = true;
         extraPackages = [ pkgs.pcsclite ];
       };
+      guest = {
+        enable = true;
+      };
     };
   };
 
