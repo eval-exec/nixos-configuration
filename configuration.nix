@@ -365,7 +365,7 @@
     };
     vmware = {
       host = {
-        enable = false;
+        enable = true;
         extraPackages = [ pkgs.pcsclite ];
       };
     };
