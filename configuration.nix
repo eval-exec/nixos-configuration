@@ -384,26 +384,26 @@
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
-    # packages = with pkgs; [
-    #   iosevka
-    #   jetbrains-mono
-    #   julia-mono
-    #   powerline-fonts
-    #   powerline-symbols
-    #   liberation_ttf
-    #   nerdfonts
-    #   noto-fonts
-    #   noto-fonts-cjk
-    #   noto-fonts-cjk-sans
-    #   noto-fonts-cjk-serif
-    #   noto-fonts-extra
-    #   sarasa-gothic
-    #   source-han-sans
-    #   source-han-serif
-    #   symbola
-    #   unifont
-    #   vistafonts-chs
-    # ];
+    packages = with pkgs; [
+      #   iosevka
+      jetbrains-mono
+      #   julia-mono
+      #   powerline-fonts
+      #   powerline-symbols
+      #   liberation_ttf
+      #   nerdfonts
+      #   noto-fonts
+      #   noto-fonts-cjk
+      #   noto-fonts-cjk-sans
+      #   noto-fonts-cjk-serif
+      #   noto-fonts-extra
+      sarasa-gothic
+      #   source-han-sans
+      #   source-han-serif
+      #   symbola
+      #   unifont
+      #   vistafonts-chs
+    ];
     # fontconfig = {
     # localConf = ''
     #   <?xml version='1.0' encoding='UTF-8'?>
