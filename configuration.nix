@@ -366,10 +366,6 @@
     vmware = {
       host = {
         enable = true;
-        extraPackages = [
-          pkgs.pcsclite
-          pkgs.libaio
-        ];
       };
       # guest = {
       #   enable = true;
@@ -514,6 +510,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    linuxHeaders
     libsForQt5.xdg-desktop-portal-kde
     xdg-desktop-portal
     xdg-desktop-portal-wlr
@@ -676,7 +673,7 @@
     libraries = with pkgs; [
       stdenv.cc.cc.lib
       sqlite
-
+      libaio
       pcsclite
 
       fuse3
