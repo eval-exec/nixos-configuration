@@ -382,8 +382,8 @@
 
   # Allow unfree packages
   fonts = {
+    fontDir.enable = true;
     enableDefaultPackages = true;
-    # fontDir.enable = true;
     # packages = with pkgs; [
     #   iosevka
     #   jetbrains-mono
