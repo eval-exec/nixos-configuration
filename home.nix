@@ -83,7 +83,7 @@
     # beets
     bitcoin
     browsh
-    calibre
+    # calibre
     chromaprint
     clinfo
     clj-kondo
@@ -185,6 +185,7 @@
     ncurses
     ncurses
     neovide
+    chafa
     nil
     ninja
     nixfmt-rfc-style
@@ -448,7 +449,7 @@
     };
     google-chrome = {
       enable = true;
-      commandLineArgs = [ "--enable-wayland-ime" ];
+      # commandLineArgs = [ "--enable-wayland-ime" ];
     };
     nix-index = {
       enable = true;
@@ -483,7 +484,6 @@
       # package = pkgs.emacs-git;
 
       extraPackages = epkgs: [
-        pkgs.noto-fonts-color-emoji
         pkgs.emacsPackages.jinx
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.rime
@@ -497,7 +497,6 @@
         pkgs.emacsPackages.forge
         pkgs.librime
         pkgs.mu
-        pkgs.noto-fonts-color-emoji
         pkgs.tdlib
       ];
     };

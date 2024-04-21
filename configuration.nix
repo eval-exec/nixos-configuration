@@ -251,7 +251,7 @@
         };
       };
 
-      videoDrivers = [ "amdgpu" ];
+      # videoDrivers = [ "amdgpu" ];
       #   config = lib.mkAfter ''
       #     Section "Module"
       #         Load           "modesetting"
@@ -385,24 +385,26 @@
     fontDir.enable = true;
     enableDefaultPackages = true;
     packages = with pkgs; [
-      #   iosevka
+      iosevka
       jetbrains-mono
-      #   julia-mono
-      #   powerline-fonts
-      #   powerline-symbols
-      #   liberation_ttf
-      #   nerdfonts
-      #   noto-fonts
+      julia-mono
+      powerline-fonts
+      powerline-symbols
+      liberation_ttf
+      nerdfonts
+      noto-fonts
       noto-fonts-cjk
-      #   noto-fonts-cjk-sans
-      #   noto-fonts-cjk-serif
-      #   noto-fonts-extra
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-extra
       sarasa-gothic
-      #   source-han-sans
-      #   source-han-serif
-      #   symbola
-      #   unifont
-      #   vistafonts-chs
+      source-han-sans
+      source-han-serif
+      symbola
+      unifont
+      vistafonts-chs
+      vistafonts-chs
+      vistafonts
     ];
     # fontconfig = {
     # localConf = ''
@@ -457,7 +459,7 @@
     # };
     variables = {
       # XKB_DEFAULT_LAYOUT = "us";
-      NIXOS_OZONE_WL = "1";
+      # NIXOS_OZONE_WL = "1";
       # GDK_BACKEND = "wayland";
       GTK_IM_MODULE = lib.mkForce "";
       QT_IM_MODULE = lib.mkForce "";
@@ -494,6 +496,7 @@
   environment.systemPackages = with pkgs; [
     linuxHeaders
     libsForQt5.xdg-desktop-portal-kde
+    kdePackages.kde-gtk-config
     xdg-desktop-portal
     xdg-desktop-portal-wlr
     appimage-run

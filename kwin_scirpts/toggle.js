@@ -92,7 +92,7 @@ function toggleEmacs() {
 }
 
 function toggleChrome() {
-  toggleClient("chrome");
+  toggleClient("google-chrome");
 }
 
 {
