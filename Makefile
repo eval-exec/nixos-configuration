@@ -8,7 +8,7 @@ dry-build: fmt
 	git diff --exit-code
 	sudo -S nixos-rebuild dry-build --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose
 
-switch: fmt
+switch🔄: fmt
 	git diff --exit-code
 	sudo -S nixos-rebuild switch --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace
 

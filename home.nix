@@ -160,6 +160,9 @@
     libsForQt5.khotkeys
     libstdcxx5
     llvmPackages.libcxx
+    fontforge
+    fontforge-fonttools
+    fontforge-gtk
     llvmPackages.libcxxClang
     lm_sensors
     logseq
