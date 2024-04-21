@@ -676,7 +676,7 @@
       alacritty-daemon = {
         Unit = {
           Description = "alacritty daemon";
-          After = [ "graphical-session.target" ];
+          After = [ "tmux.target" ];
         };
         Install = {
           WantedBy = [ "graphical-session.target" ];

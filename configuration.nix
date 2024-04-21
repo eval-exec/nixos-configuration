@@ -383,7 +383,7 @@
   # Allow unfree packages
   fonts = {
     fontDir.enable = true;
-    enableDefaultPackages = true;
+    enableDefaultPackages = false;
     packages = with pkgs; [
       iosevka
       jetbrains-mono
@@ -396,6 +396,11 @@
       noto-fonts-cjk
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
+      noto-fonts-lgc-plus
+      noto-fonts-color-emoji
+      twemoji-color-font
+      twitter-color-emoji
+      unicode-emoji
       noto-fonts-extra
       sarasa-gothic
       source-han-sans
