@@ -86,6 +86,7 @@
     # calibre
     chromaprint
     clinfo
+    m4
     clj-kondo
     clojure
     clojure-lsp
@@ -169,6 +170,7 @@
     lshw
     micro
     lsof
+    scrot
     mudlet
     tintin
     lynx
@@ -193,6 +195,7 @@
     ninja
     nixfmt-rfc-style
     nodePackages.pyright
+    nodePackages.prettier
     nodePackages.typescript-language-server
     nodePackages.bash-language-server
     nuclear

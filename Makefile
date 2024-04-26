@@ -3,6 +3,7 @@ fmt:
 
 flake-update:
 	nix flake update
+	notify-send "NixOS: \"nix flake update\" finished"
 
 dry-build: fmt
 	git diff --exit-code
@@ -11,7 +12,9 @@ dry-build: fmt
 switch🔄: fmt
 	git diff --exit-code
 	sudo -S nixos-rebuild switch --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace
+	notify-send "NixOS: make switch finished"
 
 boot: fmt
 	git diff --exit-code
 	sudo -S nixos-rebuild boot --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace
+	notify-send "NixOS: make book finished"

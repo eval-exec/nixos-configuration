@@ -251,7 +251,7 @@
         };
       };
 
-      # videoDrivers = [ "amdgpu" ];
+      videoDrivers = [ "amdgpu" ];
       #   config = lib.mkAfter ''
       #     Section "Module"
       #         Load           "modesetting"
