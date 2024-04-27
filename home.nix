@@ -83,7 +83,7 @@
     # beets
     bitcoin
     browsh
-    # calibre
+    calibre
     chromaprint
     clinfo
     m4
