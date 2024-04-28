@@ -30,6 +30,7 @@
     cpulimit
     bc
     inkscape-with-extensions
+    ripgrep-all
     cljfmt
     p7zip
     pv
