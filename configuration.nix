@@ -382,7 +382,10 @@
 
   # Allow unfree packages
   fonts = {
-    fontDir.enable = true;
+    # fontDir = {
+    #   enable = false;
+    #   decompressFonts = true;
+    # };
     enableDefaultPackages = false;
     packages = with pkgs; [
       iosevka
@@ -392,16 +395,17 @@
       powerline-symbols
       liberation_ttf
       nerdfonts
-      noto-fonts
+      # noto-fonts
+      # google-fonts
       noto-fonts-cjk
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-lgc-plus
+      # noto-fonts-lgc-plus
       noto-fonts-color-emoji
       twemoji-color-font
       twitter-color-emoji
-      unicode-emoji
-      noto-fonts-extra
+      # unicode-emoji
+      # noto-fonts-extra
       sarasa-gothic
       source-han-sans
       source-han-serif
@@ -410,52 +414,70 @@
       vistafonts-chs
       vistafonts-chs
       vistafonts
+      material-icons
+      # material-design-icons
     ];
     fontconfig = {
-      localConf = ''
-        <?xml version='1.0' encoding='UTF-8'?>
-        <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
-        <fontconfig>
-         <alias>
-          <family>serif</family>
-          <prefer>
-           <family>Noto Sans</family>
-           <family>Noto Color Emoji</family>
-          </prefer>
-         </alias>
-         <alias>
-          <family>sans-serif</family>
-          <prefer>
-           <family>Noto Sans</family>
-           <family>Noto Color Emoji</family>
-          </prefer>
-         </alias>
-         <alias>
-          <family>monospace</family>
-          <prefer>
-           <family>Noto Sans</family>
-           <family>Noto Color Emoji</family>
-          </prefer>
-         </alias>
-         <dir>~/.fonts</dir>
-         <match target="font">
-          <edit name="hinting" mode="assign">
-           <bool>true</bool>
-          </edit>
-         </match>
-         <match target="font">
-          <edit name="hintstyle" mode="assign">
-           <const>hintslight</const>
-          </edit>
-         </match>
-        </fontconfig>
-      '';
-      # defaultFonts = {
-      #   serif = [ "Noto Sans" ];
-      #   sansSerif = [ "Noto Sans Serif" ];
-      #   monospace = [ "Noto Sans Mono" ];
-      #   emoji = [ "Noto Color Emoji" ];
-      # };
+      enable = true;
+      defaultFonts = {
+        serif = [
+          "Noto Serif"
+          "Noto Color Emoji"
+          "Twitter Color Emoji"
+        ];
+        sansSerif = [
+          "Noto Sans"
+          "Noto Color Emoji"
+          "Twitter Color Emoji"
+        ];
+        monospace = [
+          "JetBrainsMono Nerd Font"
+          "Noto Color Emoji"
+          "Twitter Color Emoji"
+        ];
+        emoji = [
+          "Noto Color Emoji"
+          "Twitter Color Emoji"
+        ];
+      };
+      # localConf = ''
+      #   <?xml version='1.0' encoding='UTF-8'?>
+      #   <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+      #   <fontconfig>
+      #    <alias>
+      #     <family>serif</family>
+      #     <prefer>
+      #      <family>Noto Sans</family>
+      #      <family>Noto Color Emoji</family>
+      #     </prefer>
+      #    </alias>
+      #    <alias>
+      #     <family>sans-serif</family>
+      #     <prefer>
+      #      <family>Noto Sans</family>
+      #      <family>Noto Color Emoji</family>
+      #     </prefer>
+      #    </alias>
+      #    <alias>
+      #     <family>monospace</family>
+      #     <prefer>
+      #      <family>Noto Sans</family>
+      #      <family>Noto Color Emoji</family>
+      #     </prefer>
+      #    </alias>
+      #    <dir>~/.fonts</dir>
+      #    <match target="font">
+      #     <edit name="hinting" mode="assign">
+      #      <bool>true</bool>
+      #     </edit>
+      #    </match>
+      #    <match target="font">
+      #     <edit name="hintstyle" mode="assign">
+      #      <const>hintslight</const>
+      #     </edit>
+      #    </match>
+      #   </fontconfig>
+      # '';
     };
   };
 
