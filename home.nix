@@ -244,6 +244,8 @@
     unzip
     vagrant
     variety
+    inotify-tools
+    inotify-info
     vimpager
     vlc
     w3m
