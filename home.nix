@@ -98,6 +98,7 @@
     copyq
     coreutils-full
     cpupower-gui
+    powertop
     crate2nix
     ddcui
     ddcutil
@@ -139,7 +140,6 @@
     gst_all_1.gst-plugins-ugly
     gst_all_1.gstreamer
     helix
-    htop
     httpie
     hugo
     iftop
@@ -212,7 +212,6 @@
     pipenv
     pkg-config
     powershell
-    powertop
     protobuf
     qbittorrent
     qrcp
@@ -497,14 +496,8 @@
         pkgs.emacsPackages.jinx
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.rime
-        pkgs.emacsPackages.sqlite3
         pkgs.emacsPackages.vterm
         pkgs.emacsPackages.w3m
-        pkgs.emacsPackages.xwidgets-reuse
-        pkgs.emacsPackages.evil
-        pkgs.emacsPackages.evil-collection
-        pkgs.emacsPackages.magit
-        pkgs.emacsPackages.forge
         pkgs.librime
         pkgs.mu
         pkgs.tdlib

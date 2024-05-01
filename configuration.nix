@@ -184,8 +184,10 @@
       RuntimeDirectorySize=16G
     '';
 
+    thermald.enable = false;
+    thermald.debug = true;
+
     # Enable the X11 windowing system.
-    thermald.enable = true;
 
     # services.nix-serve = {
     #   enable = true;
@@ -215,6 +217,12 @@
         user = "exec";
       };
     };
+
+    libinput.enable = true;
+    libinput.touchpad.naturalScrolling = true;
+    libinput.touchpad.scrollMethod = "twofinger";
+    libinput.touchpad.disableWhileTyping = true;
+    libinput.touchpad.accelSpeed = "0.5"; # null
 
     # Configure keymap in X11
     xserver = {
@@ -284,11 +292,6 @@
       #   '';
 
       # Enable touchpad support (enabled default in most desktopManager).
-      libinput.enable = true;
-      libinput.touchpad.naturalScrolling = true;
-      libinput.touchpad.scrollMethod = "twofinger";
-      libinput.touchpad.disableWhileTyping = true;
-      libinput.touchpad.accelSpeed = "0.5"; # null
 
       # Enable the KDE Plasma Desktop Environment.
       displayManager = {
@@ -421,12 +424,13 @@
       enable = true;
       defaultFonts = {
         serif = [
+          "Noto Serif CJK SC"
           "Noto Serif"
           "Noto Color Emoji"
           "Twitter Color Emoji"
         ];
         sansSerif = [
-          "Noto Sans"
+          "Noto Sans CJK SC"
           "Noto Color Emoji"
           "Twitter Color Emoji"
         ];
@@ -753,6 +757,7 @@
       zlib
     ];
   };
+  programs.htop.enable = true;
   programs.mosh.enable = true;
 
   systemd = {
@@ -764,16 +769,16 @@
           ExecStart = "${pkgs.sunshine}/bin/sunshine";
         };
       };
-      disable_cpu_turbo = {
-        wantedBy = [ "sysinit.target" ];
-        serviceConfig = {
-          Type = "oneshot";
-          User = "root";
-          ExecStart = ''/bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
-          ExecStop = ''/bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
-          RemainAfterExit = true;
-        };
-      };
+      # disable_cpu_turbo = {
+      #   wantedBy = [ "sysinit.target" ];
+      #   serviceConfig = {
+      #     Type = "oneshot";
+      #     User = "root";
+      #     ExecStart = ''/bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+      #     ExecStop = ''/bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+      #     RemainAfterExit = true;
+      #   };
+      # };
     };
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
