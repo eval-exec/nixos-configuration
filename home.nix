@@ -224,7 +224,7 @@
     semgrep
     semgrep
     semgrep-core
-    shell_gpt
+    # shell_gpt
     silver-searcher
     simplescreenrecorder
     sioyek
