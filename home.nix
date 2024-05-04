@@ -311,7 +311,7 @@
             };
           };
           imapnotify = {
-            enable = true;
+            enable = false;
             boxes = [ "INBOX" ];
             extraConfig = {
               wait = 0;
