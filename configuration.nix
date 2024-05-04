@@ -529,6 +529,7 @@
     linuxHeaders
     libsForQt5.xdg-desktop-portal-kde
     kdePackages.kde-gtk-config
+    kdePackages.discover
     xdg-desktop-portal
     xdg-desktop-portal-wlr
     appimage-run
