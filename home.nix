@@ -447,18 +447,17 @@
     };
 
     mbsync = {
-      enable = true;
+      enable = false;
       extraConfig = "";
     };
     msmtp = {
-      enable = true;
+      enable = false;
     };
     chromium = {
       enable = true;
     };
     google-chrome = {
       enable = true;
-      # commandLineArgs = [ "--enable-wayland-ime" ];
     };
     nix-index = {
       enable = true;
