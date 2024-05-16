@@ -7,6 +7,9 @@
   pkgs,
   inputs,
   lib,
+  fetchurl,
+  pkgs-stable,
+  pkgs-vmware,
   ...
 }:
 {
@@ -370,6 +373,7 @@
     vmware = {
       host = {
         enable = false;
+        package = pkgs-vmware.vmware-workstation;
       };
     };
   };

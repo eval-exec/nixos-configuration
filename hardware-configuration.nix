@@ -21,8 +21,11 @@
     "rtsx_pci_sdmmc"
   ];
   boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [
+    "amdgpu"
+    "kvm-intel"
+  ];
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.resumeDevice = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
   boot.kernelParams = [
@@ -33,8 +36,17 @@
     # "i915.fastboot=1"
     # "i915.enable_guc=3"
     "intel_idle.max_cstate=1"
-    # "amdgpu.ppfeaturemask=0xffffffff"
-    # "amdgpu.aspm=0"
+
+    "amdgpu.ppfeaturemask=0xffffffff"
+    # "amdgpu.aspm=1"
+    # "amdgpu.dc=0"
+    # "amdgpu.dpm=0"
+    # "amdgpu.gpu_recovery=1"
+    "amdgpu.exp_hw_support=1"
+    # "amdgpu.halt_if_hws_hang=1"
+
+    # "radeon.si_support=0"
+    # "amdgpu.si_support=1"
   ];
   boot.extraModulePackages = [ ];
   boot.kernel.sysctl = {
@@ -74,8 +86,8 @@
   # networking.interfaces.wlp59s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = "powersave";
-  powerManagement.powertop.enable = true;
+  # powerManagement.cpuFreqGovernor = "powersave";
+  # powerManagement.powertop.enable = true;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.bluetooth = {
@@ -97,8 +109,8 @@
   # # nixpkgs.config.packageOverrides = pkgs: {
   # #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
   # # };
-  # hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
-  # hardware.opengl.extraPackages32 = with pkgs; [ intel-media-driver ];
+  hardware.opengl.extraPackages = with pkgs; [ pkgs.amdvlk ];
+  hardware.opengl.extraPackages32 = with pkgs; [ pkgs.driversi686Linux.amdvlk ];
   # hardware.nvidia = {
   #   package = config.boot.kernelPackages.nvidiaPackages.stable;
   #   modesetting.enable = true;
