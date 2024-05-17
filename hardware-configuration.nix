@@ -20,12 +20,9 @@
     "sd_mod"
     "rtsx_pci_sdmmc"
   ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [
-    "amdgpu"
-    "kvm-intel"
-  ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.resumeDevice = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
   boot.kernelParams = [
@@ -37,12 +34,12 @@
     # "i915.enable_guc=3"
     "intel_idle.max_cstate=1"
 
-    "amdgpu.ppfeaturemask=0xffffffff"
+    # "amdgpu.ppfeaturemask=0xffffffff"
     # "amdgpu.aspm=1"
     # "amdgpu.dc=0"
     # "amdgpu.dpm=0"
     # "amdgpu.gpu_recovery=1"
-    "amdgpu.exp_hw_support=1"
+    # "amdgpu.exp_hw_support=1"
     # "amdgpu.halt_if_hws_hang=1"
 
     # "radeon.si_support=0"
