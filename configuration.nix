@@ -362,8 +362,9 @@
 
     virtualbox = {
       host = {
-        enable = true;
-        # enableExtensionPack = true;
+        enable = false;
+        # package = pkgs-stable.virtualbox;
+        enableExtensionPack = true;
       };
       guest.enable = false;
     };

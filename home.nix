@@ -33,6 +33,8 @@
     inkscape-with-extensions
     ripgrep-all
     cljfmt
+    at
+    droidcam
     p7zip
     pv
     anytype
