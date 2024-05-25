@@ -700,6 +700,7 @@
       libaio
       pcsclite
 
+      libxml2
       fuse3
       fuse
       libgccjit
