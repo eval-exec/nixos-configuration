@@ -25,7 +25,7 @@
     nur.repos.xddxdd.baidunetdisk
     nur.repos.xddxdd.netease-cloud-music
     nur.repos.xddxdd.qqmusic
-    nur.repos.linyinfeng.wemeet
+    # nur.repos.linyinfeng.wemeet
 
     btop
     cpulimit
