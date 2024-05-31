@@ -34,6 +34,7 @@
     ripgrep-all
     cljfmt
     at
+    rocksdb
     droidcam
     p7zip
     pv
