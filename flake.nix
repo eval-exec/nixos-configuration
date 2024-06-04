@@ -3,7 +3,7 @@
 
   inputs = rec {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-vmware.url = "github:nixos/nixpkgs?rev=69906365e06c43d5b5fe9e63a0477c8686fe6b34";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
