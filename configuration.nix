@@ -675,6 +675,7 @@
       extraPkgs =
         pkgs: with pkgs; [
           wqy_zenhei
+          liberation_ttf
           wqy_microhei
         ];
 
