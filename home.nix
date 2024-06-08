@@ -58,6 +58,7 @@
     nil
     aileron
     alacritty
+    cloudflared
     pstree
     zerotierone
     alejandra
