@@ -35,6 +35,7 @@
     cljfmt
     at
     rocksdb
+    dwarf-fortress
     droidcam
     p7zip
     pv
