@@ -201,7 +201,7 @@
     nil
     ninja
     nixfmt-rfc-style
-    nodePackages.pyright
+    pyright
     nodePackages.prettier
     nodePackages.typescript-language-server
     nodePackages.bash-language-server
