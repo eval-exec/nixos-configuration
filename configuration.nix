@@ -175,7 +175,7 @@
     #   enableUdevRules = false;
     # };
     touchegg = {
-      enable = true;
+      enable = false;
     };
 
     acpid = {
