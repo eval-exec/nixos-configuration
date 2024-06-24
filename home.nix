@@ -21,7 +21,7 @@
   # };
 
   home.packages = with pkgs; [
-    nur.repos.xddxdd.wechat-uos
+    # nur.repos.xddxdd.wechat-uos
     nur.repos.xddxdd.baidunetdisk
     nur.repos.xddxdd.netease-cloud-music
     nur.repos.xddxdd.qqmusic
@@ -32,6 +32,7 @@
     bc
     inkscape-with-extensions
     ripgrep-all
+    waypipe
     cljfmt
     at
     rocksdb

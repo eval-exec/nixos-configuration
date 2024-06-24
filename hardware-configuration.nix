@@ -106,25 +106,29 @@
   # # nixpkgs.config.packageOverrides = pkgs: {
   # #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
   # # };
-  hardware.opengl.extraPackages = with pkgs; [ pkgs.amdvlk ];
-  hardware.opengl.extraPackages32 = with pkgs; [ pkgs.driversi686Linux.amdvlk ];
-  # hardware.nvidia = {
-  #   # package = config.boot.kernelPackages.nvidiaPackages.stable;
-  #   modesetting.enable = true;
-  #   powerManagement = {
-  #     enable = true;
-  #     # finegrained = true;
-  #   };
-  #   nvidiaPersistenced = true;
-  #   prime = {
-  #     sync.enable = true;
-  #
-  #     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-  #     nvidiaBusId = "PCI:1:0:0";
-  #
-  #     # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-  #     intelBusId = "PCI:0:2:0";
-  #   };
-  # };
+  hardware.opengl.extraPackages = with pkgs; [
+    intel-media-driver # LIBVA_DRIVER_NAME=iHD
+    intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+    libvdpau-va-gl
+  ];
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
+  hardware.nvidia = {
+    # package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    powerManagement = {
+      enable = true;
+      # finegrained = true;
+    };
+    nvidiaPersistenced = true;
+    prime = {
+      sync.enable = true;
+
+      # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+      nvidiaBusId = "PCI:1:0:0";
+
+      # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+      intelBusId = "PCI:0:2:0";
+    };
+  };
   hardware.i2c.enable = true;
 }

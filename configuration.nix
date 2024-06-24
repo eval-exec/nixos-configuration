@@ -262,7 +262,7 @@
         };
       };
 
-      # videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "nvidia" ];
 
       #   config = lib.mkAfter ''
       #     Section "Module"
@@ -391,10 +391,10 @@
 
   # Allow unfree packages
   fonts = {
-    # fontDir = {
-    #   enable = false;
-    #   decompressFonts = true;
-    # };
+    fontDir = {
+      enable = true;
+      decompressFonts = true;
+    };
     enableDefaultPackages = false;
     packages = with pkgs; [
       iosevka
@@ -410,8 +410,7 @@
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       # noto-fonts-lgc-plus
-      noto-fonts-color-emoji
-      twemoji-color-font
+      noto-fonts-emoji
       twitter-color-emoji
       # unicode-emoji
       # noto-fonts-extra
