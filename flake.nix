@@ -17,7 +17,7 @@
       url = "github:nix-community/home-manager";
     };
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
+      url = "github:nix-community/emacs-overlay?rev=e3e9ef4c9904fddbd8c00f3288e6a3be26a6bf0b";
     };
   };
 
