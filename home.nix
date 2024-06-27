@@ -29,24 +29,14 @@
 
     btop
     cpulimit
-    bc
-    inkscape-with-extensions
-    ripgrep-all
-    waypipe
-    cljfmt
-    at
-    rocksdb
-    dwarf-fortress
-    droidcam
-    p7zip
-    pv
-    anytype
-    qrencode
+    unison
     discord
     ripgrep
     dpkg
     yaml-language-server
     ascii
+    awscli2
+    waypipe
     gimp
     readability-cli
     magic-wormhole
@@ -85,6 +75,8 @@
     autoconf
     automake
     babashka
+    gtest
+    gmock
     bat
     bear
     # graalvm-ce
@@ -494,8 +486,8 @@
     };
     emacs = {
       enable = true;
-      # package = pkgs.emacs-git.override { withGTK3 = true; };
-      package = pkgs.emacs-git;
+      package = pkgs.emacs-git.override { withGTK3 = true; };
+      # package = pkgs.emacs-git;
 
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx

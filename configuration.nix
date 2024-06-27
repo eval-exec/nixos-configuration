@@ -262,7 +262,7 @@
         };
       };
 
-      videoDrivers = [ "nvidia" ];
+      # videoDrivers = [ "nvidia" ];
 
       #   config = lib.mkAfter ''
       #     Section "Module"
@@ -519,6 +519,7 @@
         "electron-24.8.6"
         "electron-25.9.0"
         "electron-19.1.9"
+        "electron-28.3.3"
       ];
       vivaldi = {
         proprietaryCodecs = true;
