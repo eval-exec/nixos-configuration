@@ -495,6 +495,7 @@
         pkgs.emacsPackages.rime
         pkgs.emacsPackages.vterm
         pkgs.emacsPackages.w3m
+        pkgs.emacsPackages.org
         pkgs.librime
         pkgs.mu
         pkgs.tdlib
