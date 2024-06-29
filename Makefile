@@ -11,7 +11,7 @@ dry-build: fmt
 
 switch🔄: fmt
 	git diff --exit-code
-	sudo -S nixos-rebuild switch --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace
+	sudo -S nixos-rebuild switch --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace --print-build-logs
 	notify-send "NixOS: make switch finished"
 
 boot: fmt

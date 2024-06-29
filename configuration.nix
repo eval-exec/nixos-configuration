@@ -8,8 +8,6 @@
   inputs,
   lib,
   fetchurl,
-  pkgs-stable,
-  pkgs-vmware,
   ...
 }:
 {
@@ -307,6 +305,32 @@
         #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout us-mine";
       };
     };
+    wyoming = {
+
+      faster-whisper = {
+
+        servers = {
+          "default" = {
+            enable = true;
+            model = "medium.en";
+            uri = "tcp://0.0.0.0:10300";
+            language = "en";
+          };
+        };
+      };
+      piper = {
+        servers = {
+          "default" = {
+            enable = true;
+            # see https://github.com/rhasspy/rhasspy3/blob/master/programs/tts/piper/script/download.py
+            # or en_US-arctic-medium speaker=14
+            voice = "en_US-bryce-medium";
+            uri = "tcp://0.0.0.0:10200";
+            speaker = 0;
+          };
+        };
+      };
+    };
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -373,8 +397,7 @@
     };
     vmware = {
       host = {
-        enable = false;
-        package = pkgs-vmware.vmware-workstation;
+        enable = true;
       };
     };
   };
@@ -520,11 +543,19 @@
         "electron-25.9.0"
         "electron-19.1.9"
         "electron-28.3.3"
+        "electron-27.3.11"
       ];
       vivaldi = {
         proprietaryCodecs = true;
         enableWideVine = true;
       };
+      # packageOverrides = pkgs: {
+      #   "bazel-build-jaxlib-0.4.28" = pkgs."bazel-build-jaxlib-0.4.28".overrideAttrs (oldAttrs: rec {
+      #     fetchAttrs = {
+      #       sha256 = "sha256-R5Bm+0GYN1zJ1aEUBW76907MxYKAIawHHJoIb1RdsKE=";
+      #     };
+      #   });
+      # };
     };
 
     # overlays = [ emacs-overlay.overlay ];
