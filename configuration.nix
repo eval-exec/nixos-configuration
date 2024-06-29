@@ -540,6 +540,13 @@
     appimage-run
     cachix
     clang
+    (aspellWithDicts (
+      ds: with ds; [
+        en
+        en-computers
+        en-science
+      ]
+    ))
     docker-compose
     dua
     duf
