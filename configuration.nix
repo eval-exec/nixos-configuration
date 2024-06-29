@@ -324,7 +324,8 @@
             enable = true;
             # see https://github.com/rhasspy/rhasspy3/blob/master/programs/tts/piper/script/download.py
             # or en_US-arctic-medium speaker=14
-            voice = "en_US-bryce-medium";
+            voice = "en-us-ryan-medium";
+            # voice = "en-us-bryce-medium";
             uri = "tcp://0.0.0.0:10200";
             speaker = 0;
           };
@@ -397,7 +398,7 @@
     };
     vmware = {
       host = {
-        enable = true;
+        # enable = true;
       };
     };
   };
@@ -685,7 +686,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
   programs.xwayland.enable = true;
   programs.neovim.enable = true;

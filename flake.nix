@@ -15,7 +15,7 @@
       url = "github:Mic92/sops-nix";
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.05";
     };
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
