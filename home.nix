@@ -28,7 +28,9 @@
     # nur.repos.linyinfeng.wemeet
 
     btop
+    piper-tts
     cpulimit
+    nixd
     unison
     discord
     ripgrep
@@ -40,9 +42,7 @@
     gimp
     readability-cli
     magic-wormhole
-    obs-studio
     android-tools
-    obs-studio-plugins.wlrobs
     wl-clipboard
     sunshine
     moonlight-qt
@@ -60,6 +60,7 @@
     pprof
     jemalloc
     amdgpu_top
+    python311Packages.argostranslate
     shfmt
     zls
     go2tv
@@ -215,7 +216,7 @@
     semgrep
     semgrep
     semgrep-core
-    # shell_gpt
+    shell-gpt
     silver-searcher
     simplescreenrecorder
     sioyek
@@ -425,6 +426,10 @@
   programs = {
     home-manager.enable = true;
 
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [ obs-backgroundremoval ];
+    };
     vscode = {
       enable = true;
       package = pkgs.vscode.fhsWithPackages (
