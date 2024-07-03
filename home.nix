@@ -37,6 +37,7 @@
     dpkg
     yaml-language-server
     ascii
+    nyxt
     awscli2
     waypipe
     gimp
@@ -262,6 +263,7 @@
     zsh-nix-shell
     nix-zsh-completions
     zulip
+    scrcpy
   ];
   # home.file.".Xmodmap" = { source = ./Xmodmap; };
   # home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };

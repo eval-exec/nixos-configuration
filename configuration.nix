@@ -407,6 +407,7 @@
 
   users.extraGroups.vboxusers.members = [ "exec" ];
 
+  home-manager.backupFileExtension = "hm-backup";
   # home-manager = {
   #   useGlobalPkgs = true;
   #   useUserPackages = true;
