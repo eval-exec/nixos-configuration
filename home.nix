@@ -31,6 +31,7 @@
     piper-tts
     cpulimit
     nixd
+    gnutls
     unison
     discord
     ripgrep
@@ -305,7 +306,7 @@
             };
           };
           imapnotify = {
-            enable = false;
+            enable = true;
             boxes = [ "INBOX" ];
             extraConfig = {
               wait = 0;
@@ -372,7 +373,9 @@
           msmtp = {
             enable = true;
           };
-          # smtp = { host = "gmail.com"; };
+          # smtp = {
+          #   host = "smtp.gmail.com";
+          # };
           mu = {
             enable = true;
           };
@@ -402,14 +405,14 @@
       };
     };
     imapnotify = {
-      enable = false;
+      enable = true;
     };
     kdeconnect = {
       enable = true;
       indicator = true;
     };
     mbsync = {
-      enable = false;
+      enable = true;
       # frequency = "*-*-* *:*:00,20,40";
       # preExec =
       #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
@@ -445,7 +448,7 @@
     };
 
     mbsync = {
-      enable = false;
+      enable = true;
       extraConfig = "";
     };
     msmtp = {
