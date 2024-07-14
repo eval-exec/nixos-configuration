@@ -38,6 +38,7 @@
     dpkg
     yaml-language-server
     ascii
+    sqlite
     nyxt
     awscli2
     waypipe
