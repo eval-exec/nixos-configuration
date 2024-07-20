@@ -440,6 +440,7 @@
       # unicode-emoji
       # noto-fonts-extra
       sarasa-gothic
+      source-code-pro
       source-han-sans
       source-han-serif
       symbola

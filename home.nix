@@ -39,6 +39,7 @@
     yaml-language-server
     ascii
     sqlite
+    ollama
     nyxt
     awscli2
     waypipe
@@ -315,7 +316,7 @@
             onNotify = ''
               ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --pull "execvy-inbox"
             '';
-            onNotifyPost = "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
+            # onNotifyPost = "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
           };
 
           mbsync = {
@@ -417,7 +418,7 @@
       # frequency = "*-*-* *:*:00,20,40";
       # preExec =
       #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
-      postExec = "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
+      # postExec = "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
       verbose = true;
     };
   };
