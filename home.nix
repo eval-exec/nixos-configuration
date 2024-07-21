@@ -33,6 +33,7 @@
     nixd
     gnutls
     unison
+    sshfs
     discord
     ripgrep
     dpkg
