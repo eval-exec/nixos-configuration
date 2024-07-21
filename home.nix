@@ -682,6 +682,19 @@
         };
       };
 
+      ollama_port_forward = {
+        Unit = {
+          Description = "ollama port formward";
+          After = [ "network-online.target" ];
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
+        Service = {
+          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 11434:127.0.0.1:11434 matrix_wan";
+        };
+      };
+
       alacritty-daemon = {
         Unit = {
           Description = "alacritty daemon";
