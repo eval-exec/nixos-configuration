@@ -691,6 +691,8 @@
           WantedBy = [ "default.target" ];
         };
         Service = {
+          Restart = "always";
+          RestartSec = 1;
           ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 11434:127.0.0.1:11434 matrix_wan";
         };
       };
