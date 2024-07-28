@@ -223,7 +223,7 @@
     libinput.touchpad.naturalScrolling = true;
     libinput.touchpad.scrollMethod = "twofinger";
     libinput.touchpad.disableWhileTyping = true;
-    libinput.touchpad.accelSpeed = "0.5"; # null
+    libinput.touchpad.accelSpeed = "0.6"; # null
 
     # Configure keymap in X11
     xserver = {
@@ -569,9 +569,11 @@
     linuxHeaders
     libsForQt5.xdg-desktop-portal-kde
     kdePackages.kde-gtk-config
+    libinput
     kdePackages.qtvirtualkeyboard
     kdePackages.discover
     xdg-desktop-portal
+    xdg-utils
     xdg-desktop-portal-wlr
     appimage-run
     cachix
@@ -811,6 +813,7 @@
   };
   programs.htop.enable = true;
   programs.mosh.enable = true;
+  xdg.portal.xdgOpenUsePortal = true;
 
   systemd = {
     services = {
