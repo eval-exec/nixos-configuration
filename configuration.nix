@@ -399,7 +399,7 @@
     };
     vmware = {
       host = {
-        # enable = true;
+        enable = true;
       };
     };
   };
