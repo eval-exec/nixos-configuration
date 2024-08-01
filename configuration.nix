@@ -47,8 +47,8 @@
     '';
 
     tmp = {
-      useTmpfs = false;
-      # tmpfsSize = "50%";
+      useTmpfs = true;
+      tmpfsSize = "24G";
       cleanOnBoot = true;
     };
   };
@@ -219,15 +219,16 @@
       };
     };
 
-    libinput.enable = true;
-    libinput.touchpad.naturalScrolling = true;
-    libinput.touchpad.scrollMethod = "twofinger";
-    libinput.touchpad.disableWhileTyping = true;
-    libinput.touchpad.accelSpeed = "0.6"; # null
+    libinput.enable = false;
+    # libinput.touchpad.naturalScrolling = true;
+    # libinput.touchpad.scrollMethod = "twofinger";
+    # libinput.touchpad.disableWhileTyping = true;
+    # libinput.touchpad.accelSpeed = "0.6"; # null
 
     # Configure keymap in X11
     xserver = {
       enable = true;
+      # synaptics.enable = true;
       xkb = {
         model = "pc104";
         layout = "us";
@@ -569,7 +570,7 @@
     linuxHeaders
     libsForQt5.xdg-desktop-portal-kde
     kdePackages.kde-gtk-config
-    libinput
+    # libinput
     kdePackages.qtvirtualkeyboard
     kdePackages.discover
     xdg-desktop-portal
