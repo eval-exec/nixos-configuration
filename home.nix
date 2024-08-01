@@ -35,6 +35,7 @@
     unison
     sshfs
     discord
+    zed-editor
     ripgrep
     dpkg
     yaml-language-server
