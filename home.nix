@@ -492,7 +492,7 @@
       package = pkgs.jdk21;
     };
     emacs = {
-      enable = true;
+      enable = false;
       package = pkgs.emacs-git.override { withGTK3 = true; };
       # package = pkgs.emacs-git;
 
@@ -574,7 +574,7 @@
         clion = "~/.local/share/JetBrains/Toolbox/apps/clion-nova/bin/clion.sh";
         idea = "~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea.sh";
         update = "sudo nixos-rebuild switch";
-        emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
+        # emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
         magit = ''
           \emacs -Q -nw -l ~/.emacs.d/init-nw.el --funcall magit
         '';
