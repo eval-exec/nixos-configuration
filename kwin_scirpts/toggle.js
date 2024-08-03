@@ -26,7 +26,7 @@ function toggleClient(app_name) {
       break;
     }
     if (app_name == "emacs") {
-      if (resource_name == "emacs-30.0.50") {
+      if (resource_name == "emacs-31.0.50") {
         client = clients[i];
         break;
       }
