@@ -312,7 +312,7 @@
 
         servers = {
           "default" = {
-            enable = true;
+            enable = false;
             model = "medium.en";
             uri = "tcp://0.0.0.0:10300";
             language = "en";
@@ -322,7 +322,7 @@
       piper = {
         servers = {
           "default" = {
-            enable = true;
+            enable = false;
             # see https://github.com/rhasspy/rhasspy3/blob/master/programs/tts/piper/script/download.py
             # or en_US-arctic-medium speaker=14
             voice = "en-us-ryan-medium";
@@ -343,7 +343,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
-      jack.enable = true;
+      jack.enable = false;
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)

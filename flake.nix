@@ -28,6 +28,7 @@
       nur,
       home-manager,
       emacs-overlay,
+      nixpkgs-unstable,
       sops-nix,
       ...
     }:
@@ -47,6 +48,7 @@
             nixpkgs
             home-manager
             emacs-overlay
+            nixpkgs-unstable
             sops-nix
             nur
             ;
