@@ -33,6 +33,9 @@
     nixd
     gnutls
     unison
+    inotify-info
+    inotify-tools
+    ccls
     sshfs
     discord
     zed-editor
@@ -204,6 +207,7 @@
     pandoc
     pastebinit
     patchelf
+    fpp
     peek
     pharo
     picard
@@ -674,6 +678,7 @@
         Unit = {
           Description = "clash";
           After = [ "network-online.target" ];
+          Wants = [ "network-online.target" ];
         };
         Install = {
           WantedBy = [ "default.target" ];
