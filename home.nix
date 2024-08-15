@@ -74,6 +74,7 @@
     zls
     go2tv
     gopls
+    lutris
     atool
     autoconf
     automake
