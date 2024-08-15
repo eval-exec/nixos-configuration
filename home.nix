@@ -207,6 +207,7 @@
     osdlyrics
     pandoc
     pastebinit
+    distcc
     patchelf
     fpp
     peek
