@@ -705,6 +705,36 @@
         };
       };
 
+      distccd_forward = {
+        Unit = {
+          Description = "distccd formward";
+          After = [ "network-online.target" ];
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
+        Service = {
+          Restart = "always";
+          RestartSec = 1;
+          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 3632:127.0.0.1:3632 matrix_wan";
+        };
+      };
+
+      distccd_stats_forward = {
+        Unit = {
+          Description = "distccd stats formward";
+          After = [ "network-online.target" ];
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
+        Service = {
+          Restart = "always";
+          RestartSec = 1;
+          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 3633:127.0.0.1:3633 matrix_wan";
+        };
+      };
+
       alacritty-daemon = {
         Unit = {
           Description = "alacritty daemon";
