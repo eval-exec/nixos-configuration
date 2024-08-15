@@ -11,6 +11,7 @@ dry-build: fmt
 
 switch🔄: fmt
 	git diff --exit-code
+	rm /home/exec/.config/fontconfig/conf.d/10-hm-fonts.conf
 	sudo -S nixos-rebuild switch --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace --print-build-logs
 	notify-send "NixOS: make switch finished"
 
