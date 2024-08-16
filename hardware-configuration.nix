@@ -93,9 +93,9 @@
     settings = {
       General = {
         # Enable = "Source,Sink,Media,Socket";
-        ControllerMode = "bredr";
+        # ControllerMode = "bredr";
         Experimental = true;
-        FastConnectable = true;
+        # FastConnectable = true;
       };
     };
   };
