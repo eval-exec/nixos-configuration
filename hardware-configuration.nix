@@ -95,7 +95,7 @@
         # Enable = "Source,Sink,Media,Socket";
         # ControllerMode = "bredr";
         Experimental = true;
-        # FastConnectable = true;
+        FastConnectable = true;
       };
     };
   };
