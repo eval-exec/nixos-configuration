@@ -390,7 +390,7 @@
       host = {
         enable = true;
         # package = pkgs-stable.virtualbox;
-        enableExtensionPack = true;
+        # enableExtensionPack = true;
       };
       guest.enable = false;
     };
@@ -399,7 +399,7 @@
     };
     vmware = {
       host = {
-        enable = true;
+        enable = false;
       };
     };
   };
