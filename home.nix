@@ -750,6 +750,21 @@
         };
       };
 
+      sccache_server_forward = {
+        Unit = {
+          Description = "sccache server formward";
+          After = [ "network-online.target" ];
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
+        Service = {
+          Restart = "always";
+          RestartSec = 1;
+          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 10601:127.0.0.1:10601 matrix_wan";
+        };
+      };
+
       alacritty-daemon = {
         Unit = {
           Description = "alacritty daemon";
