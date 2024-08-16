@@ -3,8 +3,9 @@
 
   inputs = rec {
     # nixpkgs.url = "github:eval-exec/nixpkgs/exec";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";;
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
     nur.url = "github:nix-community/NUR";
     flake-utils = {
@@ -28,7 +29,7 @@
       nur,
       home-manager,
       emacs-overlay,
-      nixpkgs-unstable,
+      # nixpkgs-unstable,
       sops-nix,
       ...
     }:
@@ -48,7 +49,7 @@
             nixpkgs
             home-manager
             emacs-overlay
-            nixpkgs-unstable
+            # nixpkgs-unstable
             sops-nix
             nur
             ;
