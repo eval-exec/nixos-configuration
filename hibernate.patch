@@ -1,7 +1,15 @@
 diff --git a/kernel/power/swap.c b/kernel/power/swap.c
-index 277434b6c..c09304ce4 100644
 --- a/kernel/power/swap.c
 +++ b/kernel/power/swap.c
+@@ -517,7 +517,7 @@ static int swap_writer_finish(struct swap_map_handle *handle,
+ #define LZO_HEADER	sizeof(size_t)
+ 
+ /* Number of pages/bytes we'll compress at one time. */
+-#define LZO_UNC_PAGES	32
++#define LZO_UNC_PAGES	320
+ #define LZO_UNC_SIZE	(LZO_UNC_PAGES * PAGE_SIZE)
+ 
+ /* Number of pages/bytes we need for compressed data (worst case). */
 @@ -526,7 +526,7 @@ static int swap_writer_finish(struct swap_map_handle *handle,
  #define LZO_CMP_SIZE	(LZO_CMP_PAGES * PAGE_SIZE)
  
