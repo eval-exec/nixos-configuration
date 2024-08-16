@@ -143,6 +143,7 @@
     gst_all_1.gstreamer
     helix
     httpie
+    cask
     hugo
     iftop
     imagemagick

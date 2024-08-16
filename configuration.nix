@@ -382,7 +382,7 @@
   };
   users.defaultUserShell = pkgs.zsh;
   virtualisation = {
-    # libvirtd.enable = true;
+    libvirtd.enable = true;
     # xen.enable = false;
     # waydroid.enable = false;
 
@@ -632,6 +632,7 @@
     xdotool
     xfsprogs
     xorg.libxcb
+    xorg.xhost
     xorg.xcbutil
     xorg.xcbutilimage
     xorg.xcbutilwm

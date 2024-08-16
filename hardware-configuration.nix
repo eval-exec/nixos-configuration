@@ -47,7 +47,7 @@
   ];
   boot.extraModulePackages = [ ];
   boot.extraModprobeConfig = ''
-    options snd-intel-dspcfg dsp_driver=3
+    options snd-intel-dspcfg dsp_driver=1
   '';
   boot.kernel.sysctl = {
     "kernel.sysrq" = 1;
