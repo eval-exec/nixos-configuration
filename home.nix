@@ -104,7 +104,7 @@
     crate2nix
     ddcui
     ddcutil
-    # delta
+    delta
     deno
     difftastic
     dig
@@ -135,7 +135,7 @@
     # vivaldi
     # vivaldi-ffmpeg-codecs
     google-cloud-sdk
-    # gptcommit
+    gptcommit
     graphviz
     grc
     gst_all_1.gst-plugins-good
