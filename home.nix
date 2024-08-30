@@ -30,6 +30,7 @@
     btop
     piper-tts
     cpulimit
+    watchman
     nixd
     gnutls
     unison
@@ -112,7 +113,7 @@
     dmidecode
     dolphin
     du-dust
-    element-desktop-wayland
+    element-desktop
     epubcheck
     evtest
     exercism
@@ -401,6 +402,7 @@
       # extraArgs = [ "" ];
       musicDirectory = "~/Music";
       extraConfig = ''
+        auto_update "yes"
         audio_output {
           type "pipewire"
           name "My PipeWire Output"
@@ -688,6 +690,21 @@
         };
         Service = {
           ExecStart = "/home/exec/.config/clash/clash-premium -d /home/exec/.config/clash";
+        };
+      };
+
+      ra-mutiplex_port_forward = {
+        Unit = {
+          Description = "ra-mutiplex port formward";
+          After = [ "network-online.target" ];
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
+        Service = {
+          Restart = "always";
+          RestartSec = 1;
+          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 27631:127.0.0.1:27631 matrix_wan";
         };
       };
 

@@ -25,12 +25,12 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.resumeDevice = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
-  boot.kernelPatches = [
-    {
-      name = "max-hibernate-compress-speed";
-      patch = ./hibernate.patch;
-    }
-  ];
+  # boot.kernelPatches = [
+  #   {
+  #     name = "max-hibernate-compress-speed";
+  #     patch = ./hibernate.patch;
+  #   }
+  # ];
   boot.kernelParams = [
     "resume_offset=196851712"
     "maxcpus=20"
