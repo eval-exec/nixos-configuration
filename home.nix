@@ -704,7 +704,7 @@
         Service = {
           Restart = "always";
           RestartSec = 1;
-          ExecStart = "${pkgs.openssh}/bin/ssh -vvv -N -T -L 27631:127.0.0.1:27631 matrix_wan";
+          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 27631:127.0.0.1:27631 matrix_wan";
         };
       };
 
