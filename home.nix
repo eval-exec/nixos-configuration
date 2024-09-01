@@ -589,6 +589,7 @@
         '';
         gpt = "sgpt";
         psgrep = "ps -eF | head -n1 && ps -eF | grep";
+        cg = "cd $(git rev-parse --show-toplevel)";
       };
       history = {
         size = 10000000;
