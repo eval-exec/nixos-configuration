@@ -465,7 +465,7 @@
       extraConfig = "";
     };
     msmtp = {
-      enable = false;
+      enable = true;
     };
     chromium = {
       enable = true;
