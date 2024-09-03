@@ -26,6 +26,7 @@
     nur.repos.xddxdd.netease-cloud-music
     nur.repos.xddxdd.qqmusic
     # nur.repos.linyinfeng.wemeet
+    mailutils
 
     btop
     piper-tts
