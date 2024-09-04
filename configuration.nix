@@ -312,7 +312,7 @@
 
         servers = {
           "default" = {
-            enable = false;
+            enable = true;
             model = "medium.en";
             uri = "tcp://0.0.0.0:10300";
             language = "en";
@@ -322,7 +322,7 @@
       piper = {
         servers = {
           "default" = {
-            enable = false;
+            enable = true;
             # see https://github.com/rhasspy/rhasspy3/blob/master/programs/tts/piper/script/download.py
             # or en_US-arctic-medium speaker=14
             voice = "en-us-ryan-medium";
