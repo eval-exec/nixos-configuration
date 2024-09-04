@@ -327,7 +327,7 @@
             onNotify = ''
               ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --verbose --pull "execvy-inbox"
             '';
-            onNotifyPost = "/home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy))'";
+            onNotifyPost = "/home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t)) (mu4e-update-index-nonlazy)(message \"imapnotify received new mail.\"))'";
           };
 
           mbsync = {
