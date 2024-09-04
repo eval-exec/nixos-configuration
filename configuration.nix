@@ -425,6 +425,7 @@
     packages = with pkgs; [
       iosevka
       jetbrains-mono
+      libre-caslon
       julia-mono
       powerline-fonts
       powerline-symbols
