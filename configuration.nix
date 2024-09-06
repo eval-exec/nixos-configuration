@@ -325,7 +325,8 @@
             enable = true;
             # see https://github.com/rhasspy/rhasspy3/blob/master/programs/tts/piper/script/download.py
             # or en_US-arctic-medium speaker=14
-            voice = "en-us-ryan-medium";
+            # voice = "en-us-ryan-medium";
+            voice = "en-us-arctic-medium";
             # voice = "en-us-bryce-medium";
             uri = "tcp://0.0.0.0:10200";
             speaker = 0;
@@ -425,7 +426,6 @@
     packages = with pkgs; [
       iosevka
       jetbrains-mono
-      aegyptus
       libre-caslon
       julia-mono
       powerline-fonts
@@ -476,6 +476,7 @@
         emoji = [
           "Noto Color Emoji"
           "Twitter Color Emoji"
+          "Noto Sans Egyptian Hieroglyphs"
         ];
       };
       # localConf = ''
