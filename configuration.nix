@@ -425,6 +425,7 @@
     packages = with pkgs; [
       iosevka
       jetbrains-mono
+      aegyptus
       libre-caslon
       julia-mono
       powerline-fonts
