@@ -42,6 +42,7 @@
     sshfs
     discord
     zed-editor
+    slack
     ripgrep
     dpkg
     yaml-language-server
