@@ -56,7 +56,7 @@
             nixpkgs
             home-manager
             emacs-overlay
-            # nixpkgs-unstable
+            nixpkgs-unstable
             sops-nix
             nur
             ;
