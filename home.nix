@@ -330,7 +330,9 @@
             onNotify = ''
               ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --verbose --pull "execvy-inbox"
             '';
-            onNotifyPost = "/home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e '(progn (unless (boundp 'mu4e--server-process) (mu4e t)) (mu4e-update-index-nonlazy)(message \"imapnotify received new mail.\"))'";
+            onNotifyPost = ''
+              /home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e "(progn (unless (boundp 'mu4e--server-process) (mu4e t)) (mu4e-update-index-nonlazy)(message "imapnotify received new mail."))
+            '';
           };
 
           mbsync = {
@@ -431,9 +433,9 @@
     mbsync = {
       enable = true;
       # frequency = "*-*-* *:*:00,20,40";
-      # preExec =
-      #   "${pkgs.emacs-git}/bin/emacsclient -e '(progn (unless mu4e--server-process (mu4e t))(mu4e-update-index-nonlazy))'";
-      postExec = "/home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e '(progn (unless (boundp 'mu4e--server-process) (mu4e t))(mu4e-update-index-nonlazy))'";
+      postExec = ''
+        /home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e "(progn (unless (boundp 'mu4e--server-process) (mu4e t))(mu4e-update-index-nonlazy))";
+      '';
       verbose = true;
     };
   };

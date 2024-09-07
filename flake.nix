@@ -30,7 +30,7 @@
       nur,
       home-manager,
       emacs-overlay,
-      # nixpkgs-unstable,
+      nixpkgs-unstable,
       sops-nix,
       ...
     }:
@@ -45,6 +45,12 @@
       nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config = {
+              allowUnfree = true;
+            };
+          };
 
           inherit
             nixpkgs

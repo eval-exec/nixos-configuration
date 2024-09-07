@@ -7,6 +7,7 @@
   pkgs,
   inputs,
   lib,
+  pkgs-unstable,
   fetchurl,
   ...
 }:
@@ -306,6 +307,16 @@
         #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout us-mine";
       };
     };
+    ollama = {
+      enable = true;
+      package = pkgs-unstable.ollama;
+      sandbox = false;
+      listenAddress = "127.0.0.1:11435";
+      writablePaths = [ "/home/exec/.ollama" ];
+      models = "/home/exec/.ollama/models";
+
+    };
+
     wyoming = {
 
       faster-whisper = {
@@ -544,6 +555,7 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
+      cudaSupport = true;
       permittedInsecurePackages = [
         "openssl-1.1.1w"
         "electron-11.5.0"
