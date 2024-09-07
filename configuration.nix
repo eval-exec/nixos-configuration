@@ -555,7 +555,7 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      cudaSupport = true;
+      cudaSupport = false;
       permittedInsecurePackages = [
         "openssl-1.1.1w"
         "electron-11.5.0"

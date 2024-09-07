@@ -24,7 +24,7 @@
     # nur.repos.xddxdd.wechat-uos
     nur.repos.xddxdd.baidunetdisk
     nur.repos.xddxdd.netease-cloud-music
-    nur.repos.xddxdd.qqmusic
+    # nur.repos.xddxdd.qqmusic
     # nur.repos.linyinfeng.wemeet
     alsa-utils
     mailutils
@@ -41,7 +41,7 @@
     ccls
     sshfs
     discord
-    zed-editor
+    # zed-editor
     slack
     ripgrep
     dpkg
