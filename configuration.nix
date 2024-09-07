@@ -314,7 +314,7 @@
       listenAddress = "127.0.0.1:11435";
       writablePaths = [ "/home/exec/.ollama" ];
       models = "/home/exec/.ollama/models";
-
+      acceleration = "cuda";
     };
 
     wyoming = {
@@ -555,7 +555,7 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
-      cudaSupport = false;
+      cudaSupport = true;
       permittedInsecurePackages = [
         "openssl-1.1.1w"
         "electron-11.5.0"
