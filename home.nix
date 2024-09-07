@@ -52,6 +52,7 @@
     nyxt
     awscli2
     waypipe
+    lua
     gimp
     readability-cli
     magic-wormhole
