@@ -42,6 +42,7 @@
     sshfs
     discord
     # zed-editor
+    syncthing
     slack
     ripgrep
     dpkg
@@ -333,7 +334,7 @@
               ${pkgs.retry}/bin/retry --until=success -- ${pkgs.isync}/bin/mbsync --verbose --pull "execvy-inbox"
             '';
             onNotifyPost = ''
-              /home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e "(progn (unless (boundp 'mu4e--server-process) (mu4e t)) (mu4e-update-index-nonlazy)(message "imapnotify received new mail."))
+              /home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e "(progn (unless (boundp 'mu4e--server-process) (mu4e t)) (mu4e-update-index-nonlazy)(message \"imapnotify received new mail.\"))"
             '';
           };
 
@@ -436,7 +437,7 @@
       enable = true;
       # frequency = "*-*-* *:*:00,20,40";
       postExec = ''
-        /home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e "(progn (unless (boundp 'mu4e--server-process) (mu4e t))(mu4e-update-index-nonlazy))";
+        /home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e "(progn (unless (boundp 'mu4e--server-process) (mu4e t)) (mu4e-update-index-nonlazy)(message \"mbsync executed.\"))"
       '';
       verbose = true;
     };
