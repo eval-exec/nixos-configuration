@@ -116,12 +116,14 @@
     direnv
     dmidecode
     dolphin
+    bc
     du-dust
     element-desktop
     epubcheck
     evtest
     exercism
     fd
+    lazygit
     ffmpeg-full
     fftw
     flameshot
