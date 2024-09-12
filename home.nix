@@ -4,6 +4,7 @@
   inputs,
   lib,
   fetchFromGitHub,
+  pkgs-unstable,
   rustPlatform,
   ...
 }:
@@ -41,8 +42,8 @@
     ccls
     sshfs
     discord
-    # zed-editor
     syncthing
+    pkgs-unstable.zed-editor
     slack
     ripgrep
     dpkg

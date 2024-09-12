@@ -71,7 +71,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.exec = import ./home.nix;
-            # home-manager.extraSpecialArgs = { inherit config; };
+            home-manager.extraSpecialArgs = specialArgs;
             nixpkgs.overlays = [
               nur.overlay
               emacs-overlay.overlay
