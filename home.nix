@@ -99,6 +99,7 @@
     clinfo
     m4
     clj-kondo
+    cljfmt
     clojure
     clojure-lsp
     cmake
