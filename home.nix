@@ -721,6 +721,19 @@
         };
       };
 
+      watchman = {
+        Unit = {
+          Description = "Watchman for user %i";
+        };
+        Service = {
+          ExecStart = "${pkgs.watchman}/bin/watchman --foreground --log-level=1";
+          ExecStop = "${pkgs.watchman}/bin/watchman shutdown-server";
+        };
+        Install = {
+          WantedBy = [ "multi-user.target" ];
+        };
+      };
+
       # distccd_forward = {
       #   Unit = {
       #     Description = "distccd formward";
