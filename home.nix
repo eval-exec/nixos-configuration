@@ -705,24 +705,10 @@
         };
       };
 
-      ra-mutiplex_port_forward = {
-        Unit = {
-          Description = "ra-mutiplex port formward";
-          After = [ "network-online.target" ];
-        };
-        Install = {
-          WantedBy = [ "default.target" ];
-        };
-        Service = {
-          Restart = "always";
-          RestartSec = 1;
-          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 27631:127.0.0.1:27631 matrix_wan";
-        };
-      };
-
-      ollama_port_forward = {
+      matrix_port_forward = {
         Unit = {
           Description = "ollama port formward";
+          Wants = [ "network-online.target" ];
           After = [ "network-online.target" ];
         };
         Install = {
@@ -730,70 +716,70 @@
         };
         Service = {
           Restart = "always";
-          RestartSec = 1;
-          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 11434:127.0.0.1:11434 matrix_wan";
+          RestartSec = 3;
+          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 11434:127.0.0.1:11434 -L 27631:127.0.0.1:27631 matrix_wan";
         };
       };
 
-      distccd_forward = {
-        Unit = {
-          Description = "distccd formward";
-          After = [ "network-online.target" ];
-        };
-        Install = {
-          WantedBy = [ "default.target" ];
-        };
-        Service = {
-          Restart = "always";
-          RestartSec = 1;
-          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 3632:127.0.0.1:3632 matrix_wan";
-        };
-      };
+      # distccd_forward = {
+      #   Unit = {
+      #     Description = "distccd formward";
+      #     After = [ "network-online.target" ];
+      #   };
+      #   Install = {
+      #     WantedBy = [ "default.target" ];
+      #   };
+      #   Service = {
+      #     Restart = "always";
+      #     RestartSec = 1;
+      #     ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 3632:127.0.0.1:3632 matrix_wan";
+      #   };
+      # };
 
-      distccd_stats_forward = {
-        Unit = {
-          Description = "distccd stats formward";
-          After = [ "network-online.target" ];
-        };
-        Install = {
-          WantedBy = [ "default.target" ];
-        };
-        Service = {
-          Restart = "always";
-          RestartSec = 1;
-          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 3633:127.0.0.1:3633 matrix_wan";
-        };
-      };
+      # distccd_stats_forward = {
+      #   Unit = {
+      #     Description = "distccd stats formward";
+      #     After = [ "network-online.target" ];
+      #   };
+      #   Install = {
+      #     WantedBy = [ "default.target" ];
+      #   };
+      #   Service = {
+      #     Restart = "always";
+      #     RestartSec = 1;
+      #     ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 3633:127.0.0.1:3633 matrix_wan";
+      #   };
+      # };
 
-      sccache_scheduler_forward = {
-        Unit = {
-          Description = "sccache scheduler formward";
-          After = [ "network-online.target" ];
-        };
-        Install = {
-          WantedBy = [ "default.target" ];
-        };
-        Service = {
-          Restart = "always";
-          RestartSec = 1;
-          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 10600:127.0.0.1:10600 matrix_wan";
-        };
-      };
+      # sccache_scheduler_forward = {
+      #   Unit = {
+      #     Description = "sccache scheduler formward";
+      #     After = [ "network-online.target" ];
+      #   };
+      #   Install = {
+      #     WantedBy = [ "default.target" ];
+      #   };
+      #   Service = {
+      #     Restart = "always";
+      #     RestartSec = 1;
+      #     ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 10600:127.0.0.1:10600 matrix_wan";
+      #   };
+      # };
 
-      sccache_server_forward = {
-        Unit = {
-          Description = "sccache server formward";
-          After = [ "network-online.target" ];
-        };
-        Install = {
-          WantedBy = [ "default.target" ];
-        };
-        Service = {
-          Restart = "always";
-          RestartSec = 1;
-          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 10601:127.0.0.1:10601 matrix_wan";
-        };
-      };
+      # sccache_server_forward = {
+      #   Unit = {
+      #     Description = "sccache server formward";
+      #     After = [ "network-online.target" ];
+      #   };
+      #   Install = {
+      #     WantedBy = [ "default.target" ];
+      #   };
+      #   Service = {
+      #     Restart = "always";
+      #     RestartSec = 1;
+      #     ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 10601:127.0.0.1:10601 matrix_wan";
+      #   };
+      # };
 
       alacritty-daemon = {
         Unit = {

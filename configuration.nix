@@ -75,6 +75,13 @@
     networkmanager = {
       enable = true;
       dns = "none";
+      dispatcherScripts = [
+        {
+          source = ./scripts/network-dispatcher.sh;
+          type = "basic";
+        }
+
+      ];
     };
     nameservers = [
       "1.1.1.1"
@@ -835,6 +842,7 @@
 
   systemd = {
     services = {
+      NetworkManager-dispatcher.enable = lib.mkForce false;
       sunshine = {
         wantedBy = [ "graphical-session.target" ];
         serviceConfig = {
