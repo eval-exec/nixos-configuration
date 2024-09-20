@@ -28,8 +28,8 @@
     # nur.repos.xddxdd.qqmusic
     # nur.repos.linyinfeng.wemeet
     alsa-utils
+    bun
     mailutils
-
     btop
     piper-tts
     cpulimit
