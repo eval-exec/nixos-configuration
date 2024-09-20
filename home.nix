@@ -616,6 +616,7 @@
           "zsh-wakatime"
           "fzf-tab"
           "nix-shell"
+          "colored-man-pages"
         ];
         # theme = "mlh";
         custom = "/home/exec/.oh-my-zsh/custom";
