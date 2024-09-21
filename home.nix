@@ -49,6 +49,7 @@
     dpkg
     yaml-language-server
     ascii
+    ruff
     sqlite
     ollama
     nyxt
