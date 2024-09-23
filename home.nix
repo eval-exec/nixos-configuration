@@ -250,6 +250,7 @@
     sysstat
     tmux
     tor
+    torsocks
     tor-browser
     tree-sitter
     tree-sitter-grammars.tree-sitter-markdown
