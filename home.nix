@@ -29,6 +29,7 @@
     # nur.repos.linyinfeng.wemeet
     alsa-utils
     bun
+    obfs4proxy
     mailutils
     btop
     piper-tts
