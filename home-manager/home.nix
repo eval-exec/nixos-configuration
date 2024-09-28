@@ -2,14 +2,58 @@
   config,
   pkgs,
   inputs,
+  # outputs,
   lib,
   fetchFromGitHub,
-  pkgs-unstable,
+  # pkgs-unstable,
   rustPlatform,
   ...
 }:
 {
+  # You can import other home-manager modules here
+  imports = [
+    # If you want to use modules your own flake exports (from modules/home-manager):
+    # outputs.homeManagerModules.example
+
+    # Or modules exported from other flakes (such as nix-colors):
+    # inputs.nix-colors.homeManagerModules.default
+
+    # You can also split up your configuration and import pieces of it here:
+    # ./nvim.nix
+  ];
+
+  # nixpkgs = {
+  #   # You can add overlays here
+  #   overlays = [
+  #     # Add overlays your own flake exports (from overlays and pkgs dir):
+  #     # outputs.overlays.additions
+  #     # outputs.overlays.modifications
+  #     # outputs.overlays.unstable-packages
+  #     # outputs.overlays.nur-packages
+
+  #     # You can also add overlays exported from other flakes:
+  #     # neovim-nightly-overlay.overlays.default
+
+  #     # Or define it inline, for example:
+  #     # (final: prev: {
+  #     #   hi = final.hello.overrideAttrs (oldAttrs: {
+  #     #     patches = [ ./change-hello-to-hi.patch ];
+  #     #   });
+  #     # })
+  #   ];
+  #   # Configure your nixpkgs instance
+  #   config = {
+  #     # Disable if you don't want unfree packages
+  #     allowUnfree = true;
+  #     permittedInsecurePackages = [
+  #       "electron-27.3.11"
+  #     ];
+  #   };
+  # };
+
   # home config example
+
+  # home-manager.backupFileExtension = "hm-backup";
 
   home.username = "exec";
   home.homeDirectory = "/home/exec";
@@ -23,8 +67,8 @@
 
   home.packages = with pkgs; [
     # nur.repos.xddxdd.wechat-uos
-    nur.repos.xddxdd.baidunetdisk
-    nur.repos.xddxdd.netease-cloud-music
+    # nur.repos.xddxdd.baidunetdisk
+    # nur.repos.xddxdd.netease-cloud-music
     # nur.repos.xddxdd.qqmusic
     # nur.repos.linyinfeng.wemeet
     alsa-utils
@@ -44,7 +88,7 @@
     sshfs
     discord
     syncthing
-    pkgs-unstable.zed-editor
+    unstable.zed-editor
     slack
     ripgrep
     dpkg
@@ -52,7 +96,7 @@
     ascii
     ruff
     sqlite
-    ollama
+    unstable.ollama
     nyxt
     awscli2
     waypipe

@@ -93,6 +93,10 @@
   # networking.interfaces.wlp59s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  # # nixpkgs.config.packageOverrides = pkgs: {
+  # #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
+  # # };
+
   powerManagement.cpuFreqGovernor = "powersave";
   powerManagement.powertop.enable = true;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -114,9 +118,6 @@
   hardware.opengl.enable = true;
   # hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
-  # # nixpkgs.config.packageOverrides = pkgs: {
-  # #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
-  # # };
   hardware.opengl.extraPackages = with pkgs; [
     intel-media-driver # LIBVA_DRIVER_NAME=iHD
     intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)

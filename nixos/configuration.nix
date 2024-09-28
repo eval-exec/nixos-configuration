@@ -6,8 +6,8 @@
   config,
   pkgs,
   inputs,
+  outputs,
   lib,
-  pkgs-unstable,
   fetchurl,
   ...
 }:
@@ -18,6 +18,7 @@
     # <home-manager/nixos>
     ./cachix.nix
     ./g810-led.nix
+    ./hardware-configuration.nix
   ];
 
   # sops = {
@@ -316,7 +317,7 @@
     };
     ollama = {
       enable = true;
-      package = pkgs-unstable.ollama;
+      package = pkgs.unstable.ollama;
       sandbox = false;
       listenAddress = "127.0.0.1:11435";
       writablePaths = [ "/home/exec/.ollama" ];
@@ -427,7 +428,6 @@
 
   users.extraGroups.vboxusers.members = [ "exec" ];
 
-  home-manager.backupFileExtension = "hm-backup";
   # home-manager = {
   #   useGlobalPkgs = true;
   #   useUserPackages = true;
@@ -560,6 +560,23 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+
+      # You can also add overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
     config = {
       allowUnfree = true;
       cudaSupport = false;
@@ -593,6 +610,7 @@
     libsForQt5.xdg-desktop-portal-kde
     kdePackages.kde-gtk-config
     # libinput
+    home-manager
     kdePackages.qtvirtualkeyboard
     kdePackages.discover
     xdg-desktop-portal
