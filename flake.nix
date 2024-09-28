@@ -64,9 +64,6 @@
       # Reusable home-manager modules you might want to export
       # These are usually stuff you would upstream into home-manager
       # homeManagerModules = import ./modules/home-manager;
-
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         # FIXME replace with your hostname
         Mufasa = nixpkgs.lib.nixosSystem {
@@ -86,47 +83,5 @@
           ];
         };
       };
-
-      # nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
-      #   specialArgs = {
-      #     inherit inputs outputs;
-      #   };
-      # system = "x86_64-linux";
-      # specialArgs = {
-      #   pkgs-unstable = import nixpkgs-unstable {
-      #     inherit system;
-      #     config = {
-      #       allowUnfree = true;
-      #     };
-      #   };
-      #   inherit
-      #     nixpkgs
-      #     home-manager
-      #     emacs-overlay
-      #     nixpkgs-unstable
-      #     sops-nix
-      #     nur
-      #     ;
-      # };
-      # modules = [
-      #   ./nixos/hardware-configuration.nix
-      # nur.nixosModules.nur
-      # sops-nix.nixosModules.sops
-      # home-manager.nixosModules.home-manager
-      # {
-      #   home-manager.useGlobalPkgs = true;
-      #   home-manager.useUserPackages = true;
-      #   home-manager.users.exec = import ./home.nix;
-      #   home-manager.extraSpecialArgs = specialArgs;
-      #   nixpkgs.overlays = [
-      #     nur.overlay
-      #     emacs-overlay.overlay
-      #   ];
-
-      #   # Optionally, use home-manager.extraSpecialArgs to pass
-      #   # arguments to home.nix
-      # }
-      # ];
-      # };
     };
 }
