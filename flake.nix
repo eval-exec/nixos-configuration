@@ -55,7 +55,7 @@
       packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
       # packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+      # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };
@@ -68,6 +68,7 @@
       nixosConfigurations = {
         # FIXME replace with your hostname
         Mufasa = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
 
           specialArgs = {
             inherit inputs outputs;
