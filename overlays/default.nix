@@ -1,5 +1,6 @@
 # This file defines overlays
-{inputs, ...}: {
+{ inputs, ... }:
+{
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs final.pkgs;
 
@@ -10,6 +11,14 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+    # Add -O3 -mtune=native -march=native to CFLAGS for emacs-git
+    emacs-git = prev.emacs-git.overrideAttrs (old: {
+      configureFlags = old.configureFlags ++ [
+        "-O3"
+        "-mtune=native"
+        "-march=native"
+      ];
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

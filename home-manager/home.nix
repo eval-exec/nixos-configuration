@@ -199,7 +199,6 @@
     gst_all_1.gstreamer
     helix
     httpie
-    cask
     hugo
     iftop
     imagemagick
@@ -559,19 +558,17 @@
       package = pkgs.jdk21;
     };
     emacs = {
-      enable = false;
+      enable = true;
       package = pkgs.emacs-git.override { withGTK3 = true; };
-      # package = pkgs.emacs-git;
-
       extraPackages = epkgs: [
         pkgs.emacsPackages.jinx
         pkgs.emacsPackages.mu4e
         pkgs.emacsPackages.rime
         pkgs.emacsPackages.vterm
         pkgs.emacsPackages.w3m
-        (pkgs.emacsPackages.org.overrideAttrs (old: {
-          patches = [ ];
-        }))
+        # (pkgs.emacsPackages.org.overrideAttrs (old: {
+        #   patches = [ ];
+        # }))
         pkgs.librime
         pkgs.mu
         pkgs.tdlib

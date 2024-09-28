@@ -578,6 +578,7 @@
       # })
     ];
     config = {
+      enableParallelBuildingByDefault = true;
       allowUnfree = true;
       cudaSupport = false;
       permittedInsecurePackages = [
