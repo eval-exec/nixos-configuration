@@ -656,6 +656,7 @@
     pkg-config
     polkit
     proxychains-ng
+    age
     python3
     qemu
     scheme-manpages
