@@ -21,7 +21,7 @@
     # ./nvim.nix
   ];
 
-  home-manager.backupFileExtension = "hm-backup";
+  # home-manager.backupFileExtension = "hm-backup";
 
   nixpkgs = {
     # You can add overlays here
@@ -45,6 +45,10 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "electron-27.3.11"
+      ];
+
     };
   };
   # Nicely reload system units when changing configs
@@ -62,8 +66,8 @@
 
   home.packages = with pkgs; [
     # nur.repos.xddxdd.wechat-uos
-    nur.repos.xddxdd.baidunetdisk
-    nur.repos.xddxdd.netease-cloud-music
+    # nur.repos.xddxdd.baidunetdisk
+    # nur.repos.xddxdd.netease-cloud-music
     # nur.repos.xddxdd.qqmusic
     # nur.repos.linyinfeng.wemeet
     alsa-utils
@@ -83,7 +87,7 @@
     sshfs
     discord
     syncthing
-    pkgs-unstable.zed-editor
+    unstable.zed-editor
     slack
     ripgrep
     dpkg
