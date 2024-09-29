@@ -787,6 +787,7 @@
     libraries = with pkgs; [
       stdenv.cc.cc.lib
       # cudaPackages.cuda_cudart
+      mpv
       sqlite
       libaio
       pcsclite
