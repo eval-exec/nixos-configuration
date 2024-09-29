@@ -12,7 +12,7 @@
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
+    outputs.homeManagerModules.bacon
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
@@ -45,9 +45,7 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      permittedInsecurePackages = [
-        "electron-27.3.11"
-      ];
+      permittedInsecurePackages = [ "electron-27.3.11" ];
 
     };
   };
@@ -76,6 +74,7 @@
     mailutils
     btop
     piper-tts
+    tokei
     cpulimit
     watchman
     nixd
@@ -476,10 +475,6 @@
     };
     imapnotify = {
       enable = true;
-    };
-    kdeconnect = {
-      enable = true;
-      indicator = true;
     };
     mbsync = {
       enable = true;

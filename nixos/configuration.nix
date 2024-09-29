@@ -778,6 +778,10 @@
     enableExtraSocket = true;
   };
 
+  programs.kdeconnect = {
+    enable = true;
+  };
+
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
