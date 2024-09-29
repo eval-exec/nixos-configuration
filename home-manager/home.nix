@@ -13,6 +13,8 @@
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
     outputs.homeManagerModules.bacon
+    outputs.homeManagerModules.tmux
+
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
@@ -68,6 +70,7 @@
     # nur.repos.xddxdd.netease-cloud-music
     # nur.repos.xddxdd.qqmusic
     # nur.repos.linyinfeng.wemeet
+    inputs.amber.packages.${pkgs.system}.default
     alsa-utils
     bun
     obfs4

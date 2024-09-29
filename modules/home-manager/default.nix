@@ -3,4 +3,5 @@
 {
   # List your module files here
   bacon = import ./bacon.nix;
+  tmux = import ./tmux.nix;
 }
