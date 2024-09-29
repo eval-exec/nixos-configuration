@@ -21,6 +21,8 @@
     # ./nvim.nix
   ];
 
+  home-manager.backupFileExtension = "hm-backup";
+
   nixpkgs = {
     # You can add overlays here
     overlays = [

@@ -397,7 +397,7 @@
     };
     ollama = {
       enable = true;
-      package = pkgs-unstable.ollama;
+      package = pkgs.unstable.ollama;
       sandbox = false;
       listenAddress = "127.0.0.1:11435";
       writablePaths = [ "/home/exec/.ollama" ];
@@ -507,8 +507,6 @@
   users.extraUsers.exec.extraGroups = [ "libvirtd" ];
 
   users.extraGroups.vboxusers.members = [ "exec" ];
-
-  home-manager.backupFileExtension = "hm-backup";
   # home-manager = {
   #   useGlobalPkgs = true;
   #   useUserPackages = true;
