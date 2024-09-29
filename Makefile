@@ -16,8 +16,8 @@ switch-os: fmt
 	notify-send "NixOS: make switch finished"
 
 switch-hm: fmt
-  git diff --exit-code
-  home-manager switch --flake .#exec@Mufasa --verbose --show-trace --print-build-logs
+	git diff --exit-code
+	home-manager switch --flake .#exec@Mufasa --verbose --show-trace --print-build-logs
 
 boot: fmt
 	git diff --exit-code
