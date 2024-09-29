@@ -87,7 +87,7 @@
           modules = [
             # > Our main home-manager configuration file <
             ./home-manager/home.nix
-            sops-nix.nixosModules.sops
+            # sops-nix.nixosModules.sops
           ];
         };
       };
