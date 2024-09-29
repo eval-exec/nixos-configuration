@@ -71,6 +71,7 @@
     # nur.repos.xddxdd.qqmusic
     # nur.repos.linyinfeng.wemeet
     inputs.amber.packages.${pkgs.system}.default
+    age
     alsa-utils
     bun
     obfs4
@@ -340,7 +341,7 @@
   # home.file.".emacs.d/init.el" = { source = ./emacs-init.el; };
 
   home.sessionVariables = {
-    EMACS_TELEGA_SERVER_LIB_PREFIX = "${pkgs.tdlib}";
+    EMACS_TELEGA_SERVER_LIB_PREFIX = "${pkgs.unstable.tdlib}";
   };
 
   home.sessionPath = [
