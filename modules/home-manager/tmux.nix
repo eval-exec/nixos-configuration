@@ -6,6 +6,6 @@
 
   home.file.".tmux.conf.local" = {
     enable = true;
-    source = ./tmux/tmux.conf.nix;
+    source = ./tmux/tmux.conf.local.nix;
   };
 }

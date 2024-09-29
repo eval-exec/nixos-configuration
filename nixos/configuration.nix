@@ -8,6 +8,88 @@
   pkgs,
   ...
 }:
+let
+  wallpaper-engine-kde-plugin =
+    with pkgs;
+    stdenv.mkDerivation rec {
+      pname = "wallpaperEngineKde";
+      version = "066813c4309faf1a86b5bc54bdaa69b4d7e511ed";
+      src = fetchFromGitHub {
+        owner = "catsout";
+        repo = "wallpaper-engine-kde-plugin";
+        rev = version;
+        hash = "sha256-KFTYZM82tQOQ+EKcPZPcsv0I9opqR2ahUTFjeKXmcVc=";
+        fetchSubmodules = true;
+      };
+      nativeBuildInputs = with kdePackages; [
+        cmake
+        extra-cmake-modules
+        glslang
+        pkg-config
+        qt6.full
+        gst_all_1.gst-libav
+        shaderc
+        ninja # qwrapQtAppsHook
+      ];
+      buildInputs =
+        [
+          mpv
+          lz4
+          vulkan-headers
+          vulkan-tools
+          vulkan-loader
+        ]
+        ++ (
+          with kdePackages;
+          with qt6Packages;
+          [
+            qtbase
+            # plasma-sdk
+            kpackage
+            kdeclarative
+            # libplasma
+            # plasma-workspace
+            # kde-dev-utils
+            plasma5support
+            qt5compat
+            qtwebsockets
+            qtwebengine
+            qtwebchannel
+            qtmultimedia
+            qtdeclarative
+          ]
+        )
+        ++ [ (python3.withPackages (python-pkgs: [ python-pkgs.websockets ])) ];
+      cmakeFlags = [ "-DUSE_PLASMAPKG=OFF" ]; # "-DCMAKE_BUILD_TYPE=Release" "-DBUILD_QML=ON" "-DQT_MAJOR_VERSION=6" ];
+      dontWrapQtApps = true;
+      postPatch = ''
+        rm -rf src/backend_scene/third_party/glslang
+        ln -s ${glslang.src} src/backend_scene/third_party/glslang
+      '';
+      #Optional informations
+      meta = with lib; {
+        description = "Wallpaper Engine KDE plasma plugin";
+        homepage = "https://github.com/Jelgnum/wallpaper-engine-kde-plugin";
+        license = licenses.gpl2Plus;
+        platforms = platforms.linux;
+      };
+      # Not work yet
+      # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/development/libraries/applet-window-buttons/default.nix#L20
+      # applet-window-buttons6 =
+      #   with pkgs;
+      #   libsForQt5.applet-window-buttons.overrideAttrs (old: rec {
+      #     version = "a7b95da32717b90a1d9478db429d6fa8a6c4605f";
+      #     # https://github.com/moodyhunter/applet-window-buttons6
+      #     src = fetchFromGitHub {
+      #       owner = "moodyhunter";
+      #       repo = "applet-window-buttons6";
+      #       rev = version;
+      #       hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      #     };
+      #     patches = [ ];
+      #   });
+    };
+in
 {
   # You can import other NixOS modules here
   imports = [
@@ -639,6 +721,7 @@
   environment.systemPackages = with pkgs; [
     linuxHeaders
     libsForQt5.xdg-desktop-portal-kde
+    nvtop
     kdePackages.kde-gtk-config
     # libinput
     kdePackages.qtvirtualkeyboard
@@ -657,6 +740,12 @@
       ]
     ))
     docker-compose
+    # wallpaper-engine-kde-plugin
+    # qt6.qtwebsockets
+    # kdePackages.qtwebsockets
+    # kdePackages.qtmultimedia
+    # gst_all_1.gst-libav
+    # (python3.withPackages (python-pkgs: [ python-pkgs.websockets ]))
     dua
     duf
     file
@@ -884,4 +973,10 @@
     };
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+  # system.activationScripts = {
+  #   wallpaper-engine-kde-plugin.text = ''
+  #     wallpaperenginetarget=share/plasma/wallpapers/com.github.catsout.wallpaperEngineKde
+  #     ln -s ${wallpaper-engine-kde-plugin}/$wallpaperenginetarget /home/exec/.local/$wallpaperenginetarget
+  #   '';
+  # };
 }
