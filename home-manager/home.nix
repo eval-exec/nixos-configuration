@@ -73,6 +73,7 @@
     inputs.amber.packages.${pkgs.system}.default
     age
     alsa-utils
+    ytmdl
     bun
     obfs4
     mailutils
