@@ -293,6 +293,7 @@
     semgrep-core
     shell-gpt
     silver-searcher
+    rig
     simplescreenrecorder
     sioyek
     sops
