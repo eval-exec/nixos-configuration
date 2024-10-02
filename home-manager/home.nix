@@ -134,7 +134,7 @@
     lutris
     atool
     autoconf
-    poppler-utils
+    poppler_utils
     automake
     babashka
     gtest
@@ -350,7 +350,7 @@
   };
 
   home.sessionPath = [
-
+    "/home/exec/.npm-global/bin"
     "/home/exec/.cargo/bin"
   ];
 
