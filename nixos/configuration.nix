@@ -741,10 +741,14 @@ in
     ))
     docker-compose
     # wallpaper-engine-kde-plugin
-    # qt6.qtwebsockets
-    # kdePackages.qtwebsockets
-    # kdePackages.qtmultimedia
-    # gst_all_1.gst-libav
+        inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
+
+    qt6.qtwebsockets
+    kdePackages.qtwebsockets
+    wayland-utils
+    vulkan-tools
+    kdePackages.qtmultimedia
+    gst_all_1.gst-libav
     # (python3.withPackages (python-pkgs: [ python-pkgs.websockets ]))
     dua
     duf

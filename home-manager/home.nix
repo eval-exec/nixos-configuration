@@ -75,6 +75,7 @@
     ytmdl
     bun
     obfs4
+    lf
     mailutils
     btop
     piper-tts
@@ -106,6 +107,7 @@
     gimp
     readability-cli
     magic-wormhole
+    brave
     android-tools
     wl-clipboard
     sunshine
@@ -132,6 +134,7 @@
     lutris
     atool
     autoconf
+    poppler-utils
     automake
     babashka
     gtest
@@ -141,6 +144,7 @@
     # graalvm-ce
     # beets
     bitcoin
+    ripgrep-all
     browsh
     calibre
     chromaprint
@@ -322,7 +326,7 @@
     wmctrl
     wofi
     yesplaymusic
-    youtube-music
+    unstable.youtube-music
     yq
     yt-dlp
     zig
