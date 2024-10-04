@@ -141,7 +141,7 @@
     gmock
     bat
     bear
-    # graalvm-ce
+    graalvm-ce
     # beets
     bitcoin
     ripgrep-all
