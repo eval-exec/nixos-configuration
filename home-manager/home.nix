@@ -228,6 +228,7 @@
     libsForQt5.khotkeys
     libstdcxx5
     llvmPackages.libcxx
+    libllvm
     fontforge
     fontforge-fonttools
     fontforge-gtk
