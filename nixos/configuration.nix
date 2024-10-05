@@ -356,7 +356,7 @@ in
       RuntimeDirectorySize=16G
     '';
 
-    thermald.enable = false;
+    thermald.enable = true;
     thermald.debug = true;
 
     # Enable the X11 windowing system.
@@ -701,6 +701,7 @@ in
 
   environment = {
     # sessionVariables = {
+    #   LIBVA_DRIVER_NAME = "iHD";
     # };
     variables = {
       # XKB_DEFAULT_LAYOUT = "us";
@@ -741,7 +742,7 @@ in
     ))
     docker-compose
     # wallpaper-engine-kde-plugin
-        inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
+    inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
 
     qt6.qtwebsockets
     kdePackages.qtwebsockets

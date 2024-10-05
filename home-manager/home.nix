@@ -358,6 +358,12 @@
   fonts = {
     fontconfig = {
       enable = true;
+      defaultFonts = {
+        emoji = [ "Noto Sans Emoji" ];
+        monospace = [ "JetBrainsMono Nerd Font" ];
+        sansSerif = [ "Noto Sans" ];
+        serif = [ "Noto Serif" ];
+      };
     };
   };
 
