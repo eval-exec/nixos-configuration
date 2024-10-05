@@ -141,7 +141,7 @@
     gmock
     bat
     bear
-    graalvm-ce
+    # graalvm-ce
     # beets
     bitcoin
     ripgrep-all
@@ -354,6 +354,12 @@
     "/home/exec/.npm-global/bin"
     "/home/exec/.cargo/bin"
   ];
+
+  fonts = {
+    fontconfig = {
+      enable = true;
+    };
+  };
 
   accounts = {
     email = {
