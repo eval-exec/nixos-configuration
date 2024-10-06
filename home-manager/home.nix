@@ -229,6 +229,7 @@
     libstdcxx5
     llvmPackages.libcxx
     libllvm
+    ast-grep
     fontforge
     fontforge-fonttools
     fontforge-gtk
@@ -890,6 +891,26 @@
           Type = "forking";
           ExecStart = "${pkgs.tmux}/bin/tmux new-session -d";
           ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
+        };
+      };
+
+      emacs = {
+        Unit = {
+          Description = "emacs";
+          After = [ "graphical-session.target" ];
+        };
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
+        Service = {
+          Type = "simple";
+          Restart = "always";
+          RestartSec = 3;
+          ExecStart = "${pkgs.nix}/bin/nix-shell /home/exec/.config/emacs/default.nix --run /home/exec/.local/bin/emacs";
+          # ExecStart = "/home/exec/.local/bin/emacs";
+          # StandardInput = "tty";
+          StandardOutput = "file:/tmp/debug.log";
+          StandardError = "file:/tmp/error.log";
         };
       };
     };
