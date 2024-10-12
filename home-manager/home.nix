@@ -107,6 +107,7 @@
     gimp
     readability-cli
     magic-wormhole
+    lrzsz
     brave
     android-tools
     wl-clipboard
