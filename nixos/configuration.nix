@@ -722,7 +722,6 @@ in
   environment.systemPackages = with pkgs; [
     linuxHeaders
     libsForQt5.xdg-desktop-portal-kde
-    nvtop
     kdePackages.kde-gtk-config
     # libinput
     kdePackages.qtvirtualkeyboard

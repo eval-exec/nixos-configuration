@@ -230,6 +230,8 @@
     libstdcxx5
     llvmPackages.libcxx
     libllvm
+    ipfs
+    nvtopPackages.full
     ast-grep
     fontforge
     fontforge-fonttools
