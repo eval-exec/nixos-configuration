@@ -666,7 +666,7 @@
         magit = ''
           \emacs -Q -nw -l ~/.emacs.d/init-nw.el --funcall magit
         '';
-        gpt = "sgpt";
+        gpt = "OPENAI_API_KEY=$(cat ~/.config/openai_api_key/key.private) sgpt";
         psgrep = "ps -eF | head -n1 && ps -eF | grep";
         cg = "cd $(git rev-parse --show-toplevel)";
       };
