@@ -828,6 +828,7 @@ in
   system.stateVersion = "24.05"; # Did you read the comment?
 
   programs.xwayland.enable = true;
+  programs.noisetorch.enable = true;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
   programs.fish.enable = false;
