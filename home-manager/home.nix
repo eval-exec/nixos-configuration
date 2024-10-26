@@ -916,6 +916,38 @@
           StandardError = "file:/tmp/error.log";
         };
       };
+
+      slack = {
+        Unit = {
+          Description = "slack";
+          After = [ "graphical-session.target" ];
+        };
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
+        Service = {
+          Type = "simple";
+          Restart = "always";
+          RestartSec = 3;
+          ExecStart = "${pkgs.slack}/bin/slack";
+        };
+      };
+
+      thunderbird = {
+        Unit = {
+          Description = "thunderbird";
+          After = [ "graphical-session.target" ];
+        };
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
+        Service = {
+          Type = "simple";
+          Restart = "always";
+          RestartSec = 3;
+          ExecStart = "${pkgs.thunderbird}/bin/thunderbird";
+        };
+      };
     };
   };
 
