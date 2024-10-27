@@ -933,6 +933,22 @@
         };
       };
 
+      discord = {
+        Unit = {
+          Description = "discord";
+          After = [ "graphical-session.target" ];
+        };
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
+        Service = {
+          Type = "simple";
+          Restart = "always";
+          RestartSec = 3;
+          ExecStart = "${pkgs.discord}/bin/discord";
+        };
+      };
+
       thunderbird = {
         Unit = {
           Description = "thunderbird";
