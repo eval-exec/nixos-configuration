@@ -52,9 +52,9 @@
     # "amdgpu.si_support=1"
   ];
   boot.extraModulePackages = [ ];
-  boot.extraModprobeConfig = ''
-    options snd-intel-dspcfg dsp_driver=1
-  '';
+  # boot.extraModprobeConfig = ''
+  #   options snd-intel-dspcfg dsp_driver=1
+  # '';
   boot.kernel.sysctl = {
     "kernel.sysrq" = 1;
     "fs.inotify.max_user_watches" = 524288;

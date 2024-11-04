@@ -95,6 +95,7 @@
     slack
     ripgrep
     dpkg
+    whisper-ctranslate2
     yaml-language-server
     ascii
     ruff
@@ -529,14 +530,19 @@
     };
     vscode = {
       enable = true;
-      package = pkgs.vscode.fhsWithPackages (
-        ps: with ps; [
-          rustup
-          zlib
-          openssl.dev
-          pkg-config
-        ]
-      );
+      package = pkgs.vscode.fhs.overrideAttrs (oldAttrs: rec {
+        version = "1.95.0";
+        sha256sum = "";
+      });
+
+      # .fhsWithPackages (
+      #   ps: with ps; [
+      #     rustup
+      #     zlib
+      #     openssl.dev
+      #     pkg-config
+      #   ]
+      # );
     };
 
     mbsync = {
@@ -942,7 +948,7 @@
           WantedBy = [ "graphical-session.target" ];
         };
         Service = {
-          Type = "simple";
+          Type = "forking";
           Restart = "always";
           RestartSec = 3;
           ExecStart = "${pkgs.discord}/bin/discord";
