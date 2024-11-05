@@ -89,6 +89,7 @@
     inotify-tools
     ccls
     sshfs
+    unstable.warp-terminal
     discord
     syncthing
     unstable.zed-editor
