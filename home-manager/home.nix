@@ -90,6 +90,7 @@
     ccls
     sshfs
     unstable.warp-terminal
+    unstable.obsidian
     discord
     syncthing
     unstable.zed-editor
@@ -531,19 +532,7 @@
     };
     vscode = {
       enable = true;
-      package = pkgs.vscode.fhs.overrideAttrs (oldAttrs: rec {
-        version = "1.95.0";
-        sha256sum = "";
-      });
-
-      # .fhsWithPackages (
-      #   ps: with ps; [
-      #     rustup
-      #     zlib
-      #     openssl.dev
-      #     pkg-config
-      #   ]
-      # );
+      package = pkgs.unstable.vscode.fhs;
     };
 
     mbsync = {
