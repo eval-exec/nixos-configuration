@@ -288,7 +288,7 @@
     pkg-config
     powershell
     protobuf
-    qbittorrent
+    unstable.qbittorrent
     qrcp
     retry
     roswell
