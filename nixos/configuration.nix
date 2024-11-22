@@ -544,6 +544,19 @@ in
       name = "kdewallet";
       enableKwallet = true;
     };
+    sudo = {
+      extraRules = [
+        {
+          commands = [
+            {
+              command = "/run/current-system/sw/bin/renice";
+              options = [ "NOPASSWD" ];
+            }
+          ];
+          groups = [ "wheel" ];
+        }
+      ];
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

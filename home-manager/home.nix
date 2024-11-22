@@ -93,7 +93,6 @@
     unstable.obsidian
     discord
     syncthing
-    unstable.zed-editor
     slack
     ripgrep
     dpkg
