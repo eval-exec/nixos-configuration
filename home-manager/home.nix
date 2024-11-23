@@ -769,6 +769,21 @@
         };
       };
 
+      matrix = {
+        Unit = {
+          Description = "matrix";
+          After = [ "network-online.target" ];
+          Wants = [ "network-online.target" ];
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
+        Service = {
+          ExecStart = "${pkgs.openssh}/bin/ssh -n matrix_wan uptime";
+          Type = "oneshot";
+        };
+      };
+
       matrix_port_forward = {
         Unit = {
           Description = "ollama port formward";
