@@ -20,25 +20,25 @@
     "rtsx_pci_sdmmc"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-intel" ];
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.resumeDevice = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
   # boot.kernelPatches = [
   #   {
   #     name = "max-hibernate-compress-speed";
-  #     patch = ./hibernate.patch;
+  #     patch = ./0001-Hack-hibernate-speedup.patch ;
   #   }
   # ];
   boot.kernelParams = [
+    # "mem_sleep_default=deep"
     "resume_offset=196851712"
     "maxcpus=20"
     # "video=eDP-1:3456x2160@60"
-    "mem_sleep_default=deep"
     # "i915.enable_psr=0"
     # "i915.fastboot=1"
     # "i915.enable_guc=3"
-    "intel_idle.max_cstate=1"
+    "intel_idle.max_cstate=6"
 
     # "amdgpu.ppfeaturemask=0xffffffff"
     # "amdgpu.aspm=1"
@@ -122,24 +122,24 @@
     libvdpau-va-gl
   ];
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
-  hardware.nvidia = {
-    # package = config.boot.kernelPackages.nvidiaPackages.stable;
-    modesetting.enable = true;
-    powerManagement = {
-      enable = true;
-      # finegrained = true;
-    };
-    nvidiaPersistenced = true;
-    prime = {
-      sync.enable = true;
+  # hardware.nvidia = {
+  #   # package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #   modesetting.enable = true;
+  #   powerManagement = {
+  #     enable = true;
+  #     # finegrained = true;
+  #   };
+  #   nvidiaPersistenced = true;
+  #   prime = {
+  #     sync.enable = true;
 
-      # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-      nvidiaBusId = "PCI:1:0:0";
+  #     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+  #     nvidiaBusId = "PCI:1:0:0";
 
-      # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-      intelBusId = "PCI:0:2:0";
-    };
-  };
+  #     # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+  #     intelBusId = "PCI:0:2:0";
+  #   };
+  # };
   hardware.i2c.enable = true;
 
 }

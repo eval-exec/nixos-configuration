@@ -304,6 +304,7 @@ in
   # };
 
   services = {
+    fwupd.enable = true;
     desktopManager = {
       plasma6.enable = true;
     };
@@ -432,7 +433,7 @@ in
         };
       };
 
-      videoDrivers = [ "nvidia" ];
+      # videoDrivers = [ "nvidia" ];
 
       #   config = lib.mkAfter ''
       #     Section "Module"

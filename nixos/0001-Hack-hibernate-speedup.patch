@@ -1,0 +1,35 @@
+From 3bd1103a4c2f8b9f223ef49b763f5fb9b9f9fc4a Mon Sep 17 00:00:00 2001
+From: Eval EXEC <execvy@gmail.com>
+Date: Fri, 29 Nov 2024 08:56:29 +0800
+Subject: [PATCH] Hack hibernate speedup
+
+Signed-off-by: Eval EXEC <execvy@gmail.com>
+---
+ kernel/power/swap.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/kernel/power/swap.c b/kernel/power/swap.c
+index 82b884b67152..b11a5118c23f 100644
+--- a/kernel/power/swap.c
++++ b/kernel/power/swap.c
+@@ -525,7 +525,7 @@ static int swap_writer_finish(struct swap_map_handle *handle,
+ #define CMP_HEADER	sizeof(size_t)
+ 
+ /* Number of pages/bytes we'll compress at one time. */
+-#define UNC_PAGES	32
++#define UNC_PAGES	320
+ #define UNC_SIZE	(UNC_PAGES * PAGE_SIZE)
+ 
+ /* Number of pages we need for compressed data (worst case). */
+@@ -534,7 +534,7 @@ static int swap_writer_finish(struct swap_map_handle *handle,
+ #define CMP_SIZE	(CMP_PAGES * PAGE_SIZE)
+ 
+ /* Maximum number of threads for compression/decompression. */
+-#define CMP_THREADS	3
++#define CMP_THREADS	20
+ 
+ /* Minimum/maximum number of pages for read buffering. */
+ #define CMP_MIN_RD_PAGES	1024
+-- 
+2.44.2
+
