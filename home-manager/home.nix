@@ -55,7 +55,7 @@
 
   home.username = "exec";
   home.homeDirectory = "/home/exec";
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
   # home.pointerCursor = {
   #   package = pkgs.gnome.gnome-themes-extra;
   #   name = "Breeze";
