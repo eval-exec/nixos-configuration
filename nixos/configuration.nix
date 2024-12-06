@@ -131,7 +131,6 @@ in
       allowUnfree = true;
       cudaSupport = false;
       permittedInsecurePackages = [
-        "openssl-1.1.1w"
         "electron-11.5.0"
         "electron-24.8.6"
         "electron-25.9.0"
@@ -401,37 +400,37 @@ in
     xserver = {
       enable = true;
       # synaptics.enable = true;
-      xkb = {
-        model = "pc104";
-        layout = "us";
-        variant = "";
-        options = "ctrl:nocaps";
-        extraLayouts = {
-          ctrl = {
-            description = "Caps as Ctrl, Ctrl as Hyper as Mod3";
-            languages = [ "eng" ];
-            symbolsFile = pkgs.writeText "ctrl" ''
-              // Eliminate CapsLock, making it another Ctrl.
-              partial modifier_keys
-              xkb_symbols "nocaps" {
-                  replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
-                  modifier_map Control { <CAPS> };
-
-                  modifier_map Mod4 { Super_L, Super_R };
-
-                  key <SUPR> {    [ NoSymbol, Super_L ]   };
-                  modifier_map Mod4   { <SUPR> };
-
-                  replace key <LCTL> { [ Hyper_L ] };
-                  modifier_map Mod3    { <LCTL> };
-
-                  key <HYPR> {    [ NoSymbol, Hyper_L ]   };
-                  modifier_map Mod3   { <HYPR> };
-              };
-            '';
-          };
-        };
-      };
+#       xkb = {
+#         model = "pc104";
+#         layout = "us";
+#         variant = "";
+#         options = "ctrl:nocaps";
+#         extraLayouts = {
+#           ctrl = {
+#             description = "Caps as Ctrl, Ctrl as Hyper as Mod3";
+#             languages = [ "eng" ];
+#             symbolsFile = pkgs.writeText "ctrl" ''
+#               // Eliminate CapsLock, making it another Ctrl.
+#               partial modifier_keys
+#               xkb_symbols "nocaps" {
+#                   replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
+#                   modifier_map Control { <CAPS> };
+# 
+#                   modifier_map Mod4 { Super_L, Super_R };
+# 
+#                   key <SUPR> {    [ NoSymbol, Super_L ]   };
+#                   modifier_map Mod4   { <SUPR> };
+# 
+#                   replace key <LCTL> { [ Hyper_L ] };
+#                   modifier_map Mod3    { <LCTL> };
+# 
+#                   key <HYPR> {    [ NoSymbol, Hyper_L ]   };
+#                   modifier_map Mod3   { <HYPR> };
+#               };
+#             '';
+#           };
+#         };
+#       };
 
       # videoDrivers = [ "nvidia" ];
 
@@ -479,11 +478,12 @@ in
       };
     };
     ollama = {
-      enable = true;
+      enable = false;
       package = pkgs.unstable.ollama;
-      sandbox = false;
-      listenAddress = "127.0.0.1:11435";
-      writablePaths = [ "/home/exec/.ollama" ];
+      # sandbox = false;
+      host = "127.0.0.1";
+      port = 11435;
+      # writablePaths = [ "/home/exec/.ollama" ];
       models = "/home/exec/.ollama/models";
       acceleration = "cuda";
     };
@@ -627,7 +627,6 @@ in
       nerdfonts
       # noto-fonts
       # google-fonts
-      noto-fonts-cjk
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       # noto-fonts-lgc-plus
@@ -768,7 +767,7 @@ in
     duf
     file
     git
-    gnome3.gnome-tweaks
+    gnome.gnome-tweaks
     glibcInfo
     gnumake
     interception-tools
@@ -784,7 +783,6 @@ in
     neovim
     nodejs
     openssl
-    openssl_1_1
     pciutils
     pinentry-curses
     pinentry-emacs
@@ -939,7 +937,6 @@ in
       systemd
       icu
       openssl
-      openssl_1_1
       xcb-util-cursor
       xorg.libX11
       xorg.libxcb

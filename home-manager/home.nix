@@ -141,7 +141,6 @@
     automake
     babashka
     gtest
-    gmock
     bat
     bear
     # graalvm-ce
@@ -318,7 +317,7 @@
     zip
     gh-dash
     unzip
-    vagrant
+    # unstable.vagrant
     variety
     inotify-tools
     inotify-info
@@ -566,7 +565,7 @@
     eza = {
       enable = true;
       # enableBashIntegration = true;
-      icons = true;
+      icons = "auto";
       # extraOptions = [];
     };
 
