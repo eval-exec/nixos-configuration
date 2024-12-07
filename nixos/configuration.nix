@@ -432,7 +432,7 @@ in
       #         };
       #       };
 
-      # videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "nvidia" ];
 
       #   config = lib.mkAfter ''
       #     Section "Module"
