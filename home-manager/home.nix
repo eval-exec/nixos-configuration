@@ -778,14 +778,15 @@
           WantedBy = [ "default.target" ];
         };
         Service = {
-          ExecStart = "${pkgs.openssh}/bin/ssh -n matrix_wan uptime";
-          Type = "oneshot";
+          ExecStartPre = "${pkgs.bash}/bin/bash -c  'until ping -c1 bing.com; do sleep 1; done;'";
+          ExecStart = "${pkgs.openssh}/bin/ssh -n matrix_wan 'sleep 600'";
+          Type = "always";
         };
       };
 
       matrix_port_forward = {
         Unit = {
-          Description = "ollama port formward";
+          Description = "matrix port formward";
           Wants = [ "network-online.target" ];
           After = [ "network-online.target" ];
         };
@@ -794,8 +795,7 @@
         };
         Service = {
           Restart = "always";
-          RestartSec = 3;
-          ExecStart = "${pkgs.openssh}/bin/ssh -N -T -L 11434:127.0.0.1:11434 -L 27631:127.0.0.1:27631 matrix_wan";
+          ExecStart = "${pkgs.openssh}/bin/ssh -S none -N -T -L 11434:127.0.0.1:11434 -L 27631:127.0.0.1:27631 matrix_wan";
         };
       };
 
@@ -938,25 +938,26 @@
           Type = "simple";
           Restart = "always";
           RestartSec = 3;
-          ExecStart = "${pkgs.slack}/bin/slack";
+          ExecStart = "${pkgs.slack}/bin/slack --silent";
         };
       };
 
-      discord = {
-        Unit = {
-          Description = "discord";
-          After = [ "graphical-session.target" ];
-        };
-        Install = {
-          WantedBy = [ "graphical-session.target" ];
-        };
-        Service = {
-          Type = "forking";
-          Restart = "always";
-          RestartSec = 3;
-          ExecStart = "${pkgs.discord}/bin/discord";
-        };
-      };
+      # discord = {
+      #   Unit = {
+      #     Description = "discord";
+      #     After = [ "graphical-session.target" ];
+      #   };
+      #   Install = {
+      #     WantedBy = [ "graphical-session.target" ];
+      #   };
+      #   Service = {
+      #     Type = "oneshot";
+      #     RemainAfterExit = "yes";
+      #     # Restart = "always";
+      #     # RestartSec = 3;
+      #     ExecStart = "${pkgs.discord}/bin/discord";
+      #   };
+      # };
 
       thunderbird = {
         Unit = {
