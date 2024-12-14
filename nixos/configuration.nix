@@ -220,6 +220,7 @@ in
   documentation = {
     enable = true;
     dev.enable = true;
+    man.generateCaches = false;
   };
 
   networking = {
