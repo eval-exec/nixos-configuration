@@ -79,6 +79,7 @@
     mailutils
     btop
     piper-tts
+    unstable.qemu
     tokei
     cpulimit
     watchman
