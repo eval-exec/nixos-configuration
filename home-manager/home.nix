@@ -79,7 +79,7 @@
     mailutils
     btop
     piper-tts
-    unstable.qemu
+    unstable.quickemu
     tokei
     cpulimit
     watchman
@@ -220,6 +220,9 @@
     # jetbrains.idea-ultimate
     joker
     jq
+    golangci-lint
+    errcheck
+    unconvert
     keyd
     kitty
     kitty-themes
@@ -360,6 +363,7 @@
   home.sessionPath = [
     "/home/exec/.npm-global/bin"
     "/home/exec/.cargo/bin"
+    "/home/exec/go/bin"
   ];
 
   fonts = {
