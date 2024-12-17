@@ -800,6 +800,7 @@
         };
         Service = {
           Restart = "always";
+	  RestartSec = 3;
           ExecStart = "${pkgs.openssh}/bin/ssh -S none -N -T -L 11434:127.0.0.1:11434 -L 27631:127.0.0.1:27631 matrix_wan";
         };
       };
