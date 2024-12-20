@@ -10,11 +10,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1734426368,
-        "narHash": "sha256-UOkhaecgmda3j5krZAfKkAmNm0ljSZ7zLzi+jDW+VDc=",
+        "lastModified": 1734606412,
+        "narHash": "sha256-6i6CN59oTAm19g9CDcrql/+d2VgsuUXE1zluk1H/5DE=",
         "owner": "Ph0enixKM",
         "repo": "Amber",
-        "rev": "2d89f1e427e1aaa1fd21b4a3654d3e53c03755f5",
+        "rev": "ba8ad13c06d3ab9ed494babccd86050792c6f009",
         "type": "github"
       },
       "original": {
@@ -52,11 +52,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1733586715,
-        "narHash": "sha256-qRwBwL6bI3ZIDHHaFgpOSYWhcVN102rsSvueHbyfxFs=",
+        "lastModified": 1734633330,
+        "narHash": "sha256-a/rtRetM6+D18qOurAsXg9q0o04G72zQLF1jIo+Xs+c=",
         "owner": "taj-ny",
         "repo": "kwin-effects-forceblur",
-        "rev": "6c5705e8f96d5d0cdd1fcbd48007740921fa7313",
+        "rev": "2167a3f368731a5c7147a80427c41b34300f8386",
         "type": "github"
       },
       "original": {
@@ -157,11 +157,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733965552,
-        "narHash": "sha256-GZ4YtqkfyTjJFVCub5yAFWsHknG1nS/zfk7MuHht4Fs=",
+        "lastModified": 1734546875,
+        "narHash": "sha256-6OvJbqQ6qPpNw3CA+W8Myo5aaLhIJY/nNFDk3zMXLfM=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "2d73fc6ac4eba4b9a83d3cb8275096fbb7ab4004",
+        "rev": "ed091321f4dd88afc28b5b4456e0a15bd8374b4d",
         "type": "github"
       },
       "original": {

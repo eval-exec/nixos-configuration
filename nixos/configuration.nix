@@ -256,7 +256,7 @@
       enable = false;
     };
     fprintd = {
-      enable = false;
+      enable = true;
       tod.enable = false;
     };
     keyd = {
