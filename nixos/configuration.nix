@@ -8,88 +8,6 @@
   pkgs,
   ...
 }:
-let
-  wallpaper-engine-kde-plugin =
-    with pkgs;
-    stdenv.mkDerivation rec {
-      pname = "wallpaperEngineKde";
-      version = "066813c4309faf1a86b5bc54bdaa69b4d7e511ed";
-      src = fetchFromGitHub {
-        owner = "catsout";
-        repo = "wallpaper-engine-kde-plugin";
-        rev = version;
-        hash = "sha256-KFTYZM82tQOQ+EKcPZPcsv0I9opqR2ahUTFjeKXmcVc=";
-        fetchSubmodules = true;
-      };
-      nativeBuildInputs = with kdePackages; [
-        cmake
-        extra-cmake-modules
-        glslang
-        pkg-config
-        qt6.full
-        gst_all_1.gst-libav
-        shaderc
-        ninja # qwrapQtAppsHook
-      ];
-      buildInputs =
-        [
-          mpv
-          lz4
-          vulkan-headers
-          vulkan-tools
-          vulkan-loader
-        ]
-        ++ (
-          with kdePackages;
-          with qt6Packages;
-          [
-            qtbase
-            # plasma-sdk
-            kpackage
-            kdeclarative
-            # libplasma
-            # plasma-workspace
-            # kde-dev-utils
-            plasma5support
-            qt5compat
-            qtwebsockets
-            qtwebengine
-            qtwebchannel
-            qtmultimedia
-            qtdeclarative
-          ]
-        )
-        ++ [ (python3.withPackages (python-pkgs: [ python-pkgs.websockets ])) ];
-      cmakeFlags = [ "-DUSE_PLASMAPKG=OFF" ]; # "-DCMAKE_BUILD_TYPE=Release" "-DBUILD_QML=ON" "-DQT_MAJOR_VERSION=6" ];
-      dontWrapQtApps = true;
-      postPatch = ''
-        rm -rf src/backend_scene/third_party/glslang
-        ln -s ${glslang.src} src/backend_scene/third_party/glslang
-      '';
-      #Optional informations
-      meta = with lib; {
-        description = "Wallpaper Engine KDE plasma plugin";
-        homepage = "https://github.com/Jelgnum/wallpaper-engine-kde-plugin";
-        license = licenses.gpl2Plus;
-        platforms = platforms.linux;
-      };
-      # Not work yet
-      # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/development/libraries/applet-window-buttons/default.nix#L20
-      # applet-window-buttons6 =
-      #   with pkgs;
-      #   libsForQt5.applet-window-buttons.overrideAttrs (old: rec {
-      #     version = "a7b95da32717b90a1d9478db429d6fa8a6c4605f";
-      #     # https://github.com/moodyhunter/applet-window-buttons6
-      #     src = fetchFromGitHub {
-      #       owner = "moodyhunter";
-      #       repo = "applet-window-buttons6";
-      #       rev = version;
-      #       hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-      #     };
-      #     patches = [ ];
-      #   });
-    };
-in
 {
   # You can import other NixOS modules here
   imports = [
@@ -215,7 +133,12 @@ in
       cleanOnBoot = true;
     };
   };
-  console.useXkbConfig = true;
+  console = {
+    useXkbConfig = true;
+    earlySetup = true;
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
+    packages = with pkgs; [ terminus_font ];
+  };
 
   documentation = {
     enable = true;
@@ -304,6 +227,11 @@ in
   # };
 
   services = {
+    kmscon = {
+      enable = false;
+      useXkbConfig = true;
+    };
+
     fwupd.enable = true;
     desktopManager = {
       plasma6.enable = true;
@@ -329,6 +257,7 @@ in
     };
     fprintd = {
       enable = false;
+      tod.enable = false;
     };
     keyd = {
       enable = false;
@@ -400,38 +329,9 @@ in
     # Configure keymap in X11
     xserver = {
       enable = true;
-      # synaptics.enable = true;
-      #       xkb = {
-      #         model = "pc104";
-      #         layout = "us";
-      #         variant = "";
-      #         options = "ctrl:nocaps";
-      #         extraLayouts = {
-      #           ctrl = {
-      #             description = "Caps as Ctrl, Ctrl as Hyper as Mod3";
-      #             languages = [ "eng" ];
-      #             symbolsFile = pkgs.writeText "ctrl" ''
-      #               // Eliminate CapsLock, making it another Ctrl.
-      #               partial modifier_keys
-      #               xkb_symbols "nocaps" {
-      #                   replace key <CAPS> { [ Control_L ], type[group1] = "ONE_LEVEL" };
-      #                   modifier_map Control { <CAPS> };
-      #
-      #                   modifier_map Mod4 { Super_L, Super_R };
-      #
-      #                   key <SUPR> {    [ NoSymbol, Super_L ]   };
-      #                   modifier_map Mod4   { <SUPR> };
-      #
-      #                   replace key <LCTL> { [ Hyper_L ] };
-      #                   modifier_map Mod3    { <LCTL> };
-      #
-      #                   key <HYPR> {    [ NoSymbol, Hyper_L ]   };
-      #                   modifier_map Mod3   { <HYPR> };
-      #               };
-      #             '';
-      #           };
-      #         };
-      #       };
+      xkb = {
+        options = "ctrl:hyper_capscontrol";
+      };
 
       videoDrivers = [ "nvidia" ];
 
@@ -745,6 +645,8 @@ in
     xdg-desktop-portal-wlr
     appimage-run
     cachix
+    gpu-screen-recorder # CLI
+    gpu-screen-recorder-gtk # GUI
     clang
     (aspellWithDicts (
       ds: with ds; [
@@ -754,8 +656,7 @@ in
       ]
     ))
     docker-compose
-    # wallpaper-engine-kde-plugin
-    inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
+    # inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
 
     qt6.qtwebsockets
     kdePackages.qtwebsockets
