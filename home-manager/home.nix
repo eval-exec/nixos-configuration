@@ -110,6 +110,7 @@
     gimp
     readability-cli
     magic-wormhole
+    gitstatus
     lrzsz
     brave
     android-tools
