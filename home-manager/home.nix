@@ -82,7 +82,14 @@
     unstable.quickemu
     tokei
     cpulimit
-    watchman
+    (pkgs.symlinkJoin {
+      name = "watchman";
+      paths = [ pkgs.watchman ];
+      nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
+      postBuild = ''
+        wrapProgram "$out/bin/watchman" --set TMPDIR /tmp/watchman_tmp
+      '';
+    })
     nixd
     gnutls
     unison
@@ -801,7 +808,7 @@
         };
         Service = {
           Restart = "always";
-	  RestartSec = 3;
+          RestartSec = 3;
           ExecStart = "${pkgs.openssh}/bin/ssh -S none -N -T -L 11434:127.0.0.1:11434 -L 27631:127.0.0.1:27631 matrix_wan";
         };
       };
@@ -813,7 +820,9 @@
           After = [ "network-online.target" ];
         };
         Service = {
-          ExecStart = "${pkgs.watchman}/bin/watchman --foreground --log-level=1";
+          Environment = "TMPDIR=/tmp/watchman_tmp";
+          ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /tmp/watchman_tmp";
+          ExecStart = "${pkgs.watchman}/bin/watchman --foreground --log-level=2";
           ExecStop = "${pkgs.watchman}/bin/watchman shutdown-server";
           Restart = "always";
           RestartSec = 3;
