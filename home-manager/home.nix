@@ -142,7 +142,7 @@
     shfmt
     zls
     go2tv
-    gopls
+    unstable.gopls
     lutris
     atool
     autoconf
