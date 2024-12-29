@@ -22,6 +22,10 @@
       url = "github:taj-ny/kwin-effects-forceblur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -30,6 +34,7 @@
       nixpkgs,
       home-manager,
       sops-nix,
+      ghostty,
       ...
     }@inputs:
     let

@@ -72,6 +72,7 @@
     inputs.amber.packages.${pkgs.system}.default
     age
     alsa-utils
+# inputs.ghostty.packages.x86_64-linux.default
     ytmdl
     bun
     obfs4
@@ -338,7 +339,7 @@
     w3m
     wakatime
     wev
-    wezterm
+    unstable.wezterm
     winetricks
     wine64Packages.stagingFull
     bottles
