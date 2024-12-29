@@ -112,6 +112,7 @@
     sqlite
     ollama
     nyxt
+    unstable.nix-search-cli
     awscli2
     waypipe
     lua
