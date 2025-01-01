@@ -635,9 +635,10 @@
 
   environment.systemPackages = with pkgs; [
     linuxHeaders
-    libsForQt5.xdg-desktop-portal-kde
-    kdePackages.kde-gtk-config
+    # libsForQt5.xdg-desktop-portal-kde
     # libinput
+    kdePackages.xdg-desktop-portal-kde
+    kdePackages.kde-gtk-config
     kdePackages.qtvirtualkeyboard
     kdePackages.discover
     xdg-desktop-portal

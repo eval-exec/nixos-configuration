@@ -72,7 +72,7 @@
     inputs.amber.packages.${pkgs.system}.default
     age
     alsa-utils
-# inputs.ghostty.packages.x86_64-linux.default
+    # inputs.ghostty.packages.x86_64-linux.default
     ytmdl
     bun
     obfs4
@@ -80,7 +80,7 @@
     mailutils
     btop
     piper-tts
-    unstable.quickemu
+    # unstable.quickemu
     tokei
     cpulimit
     (pkgs.symlinkJoin {
@@ -417,9 +417,9 @@
           imapnotify = {
             enable = true;
             boxes = [ "INBOX" ];
-            extraConfig = {
-              wait = 0;
-            };
+            # extraConfig = {
+            # wait = 0;
+            # };
             onNotify = ''
               systemctl --user start mbsync
             '';
