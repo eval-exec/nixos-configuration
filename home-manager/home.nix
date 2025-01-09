@@ -155,6 +155,7 @@
     gtest
     bat
     bear
+    criu
     # graalvm-ce
     # beets
     bitcoin
