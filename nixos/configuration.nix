@@ -743,6 +743,7 @@
   system.stateVersion = "24.11"; # Did you read the comment?
 
   programs.xwayland.enable = true;
+  programs.criu.enable = true;
   programs.noisetorch.enable = true;
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
