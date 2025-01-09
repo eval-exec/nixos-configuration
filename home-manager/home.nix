@@ -110,6 +110,7 @@
     ascii
     ruff
     sqlite
+    shellcheck
     ollama
     nyxt
     unstable.nix-search-cli
@@ -664,6 +665,7 @@
       '';
 
       shellAliases = {
+        ding = "mpv ~/Music/notifications/ding-1-14705.mp3 &> /dev/null";
         cat = "bat -p";
         vim = "nvim";
         goland = "~/.local/share/JetBrains/Toolbox/apps/goland/bin/goland.sh";
