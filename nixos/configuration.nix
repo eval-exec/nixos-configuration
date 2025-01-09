@@ -396,7 +396,7 @@
         servers = {
           "default" = {
             enable = true;
-            model = "medium.en";
+            model = "small.en";
             uri = "tcp://0.0.0.0:10300";
             language = "en";
           };
