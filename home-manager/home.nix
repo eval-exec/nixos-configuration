@@ -275,6 +275,7 @@
     mu
     nacelle
     ncmpcpp
+    cppcheck
     ncurses
     ncurses
     neovide

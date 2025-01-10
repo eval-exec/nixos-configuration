@@ -440,6 +440,15 @@
   hardware.pulseaudio.enable = false;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   security = {
+    wrappers = {
+      criu = {
+        setuid = true;
+        owner = "root";
+        group = "root";
+        capabilities = "cap_checkpoint_restore+eip";
+        source = "${pkgs.criu}/bin/criu";
+      };
+    };
     rtkit.enable = true;
     pam.services.sddm.enableKwallet = true;
     pam.services.kdewallet = {
