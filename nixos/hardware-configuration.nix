@@ -22,7 +22,7 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+  boot.extraModulePackages = [ pkgs.linuxPackages_latest.v4l2loopback ];
   boot.kernelModules = [
     "kvm-intel"
     "v4l2loopback"
