@@ -442,9 +442,8 @@
   security = {
     wrappers = {
       criu = {
-        setuid = true;
-        owner = "root";
-        group = "root";
+        owner = "exec";
+        group = "users";
         capabilities = "cap_checkpoint_restore+eip";
         source = "${pkgs.criu}/bin/criu";
       };
