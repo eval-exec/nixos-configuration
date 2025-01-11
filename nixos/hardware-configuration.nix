@@ -11,7 +11,7 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.consoleLogLevel = 7;
-  boot.binfmt.emulatedSystems = [  "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -22,7 +22,12 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "v4l2loopback"
+    "snd_aloop"
+  ];
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.resumeDevice = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
   # boot.kernelPatches = [
@@ -52,7 +57,6 @@
     # "radeon.si_support=0"
     # "amdgpu.si_support=1"
   ];
-  boot.extraModulePackages = [ ];
   # boot.extraModprobeConfig = ''
   #   options snd-intel-dspcfg dsp_driver=1
   # '';

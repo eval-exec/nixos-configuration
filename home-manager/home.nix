@@ -124,6 +124,7 @@
     lrzsz
     brave
     android-tools
+    droidcam
     wl-clipboard
     sunshine
     moonlight-qt
