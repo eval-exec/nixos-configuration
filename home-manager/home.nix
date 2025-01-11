@@ -283,6 +283,8 @@
     nil
     ninja
     nixfmt-rfc-style
+    asciidoc
+    spotify-player
     pyright
     nodePackages.prettier
     nodePackages.typescript-language-server
