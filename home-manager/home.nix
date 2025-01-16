@@ -152,7 +152,7 @@
     autoconf
     poppler_utils
     automake
-    babashka
+    unstable.babashka
     gtest
     bat
     bear
