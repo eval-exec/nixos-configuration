@@ -287,7 +287,7 @@
     '';
 
     thermald.enable = true;
-    thermald.debug = true;
+    thermald.debug = false;
 
     # Enable the X11 windowing system.
 
