@@ -99,6 +99,7 @@
     ccls
     sshfs
     unstable.warp-terminal
+    unstable.ddgr
     unstable.obsidian
     discord
     syncthing
