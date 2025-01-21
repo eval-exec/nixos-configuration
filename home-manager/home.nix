@@ -315,7 +315,6 @@
     sccache
     sdcv
     semgrep
-    semgrep
     semgrep-core
     unstable.shell-gpt
     silver-searcher
