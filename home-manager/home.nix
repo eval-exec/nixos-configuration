@@ -317,7 +317,7 @@
     semgrep
     semgrep
     semgrep-core
-    shell-gpt
+    unstable.shell-gpt
     silver-searcher
     rig
     simplescreenrecorder
