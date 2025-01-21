@@ -64,25 +64,6 @@
   # };
 
   home.packages = with pkgs; [
-    # nur.repos.xddxdd.wechat-uos
-    # nur.repos.xddxdd.baidunetdisk
-    # nur.repos.xddxdd.netease-cloud-music
-    # nur.repos.xddxdd.qqmusic
-    # nur.repos.linyinfeng.wemeet
-    inputs.amber.packages.${pkgs.system}.default
-    age
-    alsa-utils
-    # inputs.ghostty.packages.x86_64-linux.default
-    ytmdl
-    bun
-    obfs4
-    lf
-    mailutils
-    btop
-    piper-tts
-    # unstable.quickemu
-    tokei
-    cpulimit
     (pkgs.symlinkJoin {
       name = "watchman";
       paths = [ pkgs.watchman ];
@@ -91,92 +72,68 @@
         wrapProgram "$out/bin/watchman" --set TMPDIR /tmp/watchman_tmp
       '';
     })
-    nixd
-    gnutls
-    unison
-    inotify-info
-    inotify-tools
-    ccls
-    sshfs
-    unstable.warp-terminal
-    unstable.ddgr
-    unstable.obsidian
-    discord
-    syncthing
-    slack
-    ripgrep
-    dpkg
-    whisper-ctranslate2
-    yaml-language-server
-    ascii
-    ruff
-    sqlite
-    shellcheck
-    ollama
-    nyxt
-    unstable.nix-search-cli
-    awscli2
-    waypipe
-    lua
-    gimp
-    readability-cli
-    magic-wormhole
-    gitstatus
-    lrzsz
-    brave
-    android-tools
-    droidcam
-    wl-clipboard
-    sunshine
-    moonlight-qt
+    # beets
+    # github-copilot-cli
+    # github-desktop
+    # graalvm-ce
+    # inputs.ghostty.packages.x86_64-linux.default
+    # ionshare
+    # jetbrains.clion
+    # jetbrains.goland
+    # jetbrains.idea-ultimate
+    # microsoft-edge-dev
+    # nur.repos.linyinfeng.wemeet
+    # nur.repos.xddxdd.baidunetdisk
+    # nur.repos.xddxdd.netease-cloud-music
+    # nur.repos.xddxdd.qqmusic
+    # nur.repos.xddxdd.wechat-uos
+    # spotdl
     # tigervnc
-    nil
+    # unstable.quickemu
+    # unstable.vagrant
+    # vivaldi
+    # vivaldi-ffmpeg-codecs
+    age
     aileron
     alacritty
-    cloudflared
-    pstree
-    zerotierone
     alejandra
-    fastfetch
-    kodi
-    zoxide
-    pprof
-    jemalloc
+    alsa-utils
     amdgpu_top
-    python311Packages.argostranslate
-    shfmt
-    zls
-    go2tv
-    unstable.gopls
-    lutris
+    android-tools
+    ascii
+    asciidoc
+    ast-grep
     atool
     autoconf
-    poppler_utils
     automake
-    unstable.babashka
-    gtest
+    awscli2
     bat
+    bc
     bear
-    # graalvm-ce
-    # beets
     bitcoin
-    ripgrep-all
+    bottles
+    brave
     browsh
+    btop
+    bun
     calibre
+    cask
+    ccls
+    chafa
     chromaprint
     clinfo
-    m4
     clj-kondo
     cljfmt
     clojure
     clojure-lsp
+    cloudflared
     cmake
-    extra-cmake-modules
     cool-retro-term
     copyq
     coreutils-full
+    cppcheck
+    cpulimit
     cpupower-gui
-    powertop
     crate2nix
     ddcui
     ddcutil
@@ -185,33 +142,45 @@
     difftastic
     dig
     direnv
+    discord
+    distcc
     dmidecode
     dolphin
-    bc
+    dpkg
+    droidcam
     du-dust
     element-desktop
     epubcheck
+    errcheck
     evtest
     exercism
+    extra-cmake-modules
+    fastfetch
     fd
-    lazygit
     ffmpeg-full
     fftw
+    fish
     flameshot
+    fontforge
+    fontforge-fonttools
+    fontforge-gtk
+    fpp
     fuse
     fuse3
     gdb
     gf
     gh
+    gh-dash
     ghostie
     gifski
-    # github-copilot-cli
-    # github-desktop
+    gimp
+    gitstatus
     glxinfo
+    gnutls
     go-ethereum
+    go2tv
     goimapnotify
-    # vivaldi
-    # vivaldi-ffmpeg-codecs
+    golangci-lint
     google-cloud-sdk
     gptcommit
     graphviz
@@ -219,153 +188,184 @@
     gst_all_1.gst-plugins-good
     gst_all_1.gst-plugins-ugly
     gst_all_1.gstreamer
+    gtest
     helix
     httpie
-    cask
     hugo
     iftop
     imagemagick
     inetutils
+    inotify-info
+    inotify-info
+    inotify-tools
+    inotify-tools
+    inputs.amber.packages.${pkgs.system}.default
     intel-gpu-tools
+    ipfs
     isync
-    # jetbrains.clion
-    # jetbrains.goland
-    # jetbrains.idea-ultimate
+    jemalloc
     joker
     jq
-    golangci-lint
-    errcheck
-    unconvert
     keyd
     kitty
     kitty-themes
+    kodi
+    lazygit
     leiningen
+    lf
     libcamera
     libfaketime
+    libllvm
     libnotify
     libressl
     libsForQt5.khotkeys
     libstdcxx5
     llvmPackages.libcxx
-    libllvm
-    ipfs
-    nvtopPackages.full
-    ast-grep
-    fontforge
-    fontforge-fonttools
-    fontforge-gtk
     llvmPackages.libcxxClang
     lm_sensors
     logseq
+    lrzsz
     lshw
-    micro
     lsof
-    scrot
-    mudlet
-    tintin
+    lua
+    lutris
     lynx
+    m4
+    magic-wormhole
+    mailutils
     mercurial
     mermaid-cli
     meson
-    # microsoft-edge-dev
+    micro
     mlocate
     mold
+    moonlight-qt
     moreutils
     most
     mpc-cli
     mpv
     mu
+    mudlet
     nacelle
     ncmpcpp
-    cppcheck
     ncurses
     ncurses
     neovide
-    chafa
+    nil
     nil
     ninja
+    nix-zsh-completions
+    nixd
     nixfmt-rfc-style
-    asciidoc
-    spotify-player
-    pyright
+    nodePackages.bash-language-server
     nodePackages.prettier
     nodePackages.typescript-language-server
-    nodePackages.bash-language-server
     nuclear
-    # ionshare
+    nvtopPackages.full
+    nyxt
+    obfs4
+    ollama
     osdlyrics
     pandoc
     pastebinit
-    distcc
     patchelf
-    fpp
     peek
     pharo
     picard
     pipenv
+    piper-tts
     pkg-config
+    poppler_utils
     powershell
+    powertop
+    pprof
     protobuf
-    unstable.qbittorrent
+    pstree
+    pyright
+    python311Packages.argostranslate
     qrcp
+    readability-cli
     retry
+    rig
+    ripgrep
+    ripgrep-all
     roswell
+    ruff
     sbcl
     sbclPackages.qlot
     sccache
+    scrcpy
+    scrot
     sdcv
     semgrep
     semgrep-core
-    unstable.shell-gpt
+    shellcheck
+    shfmt
     silver-searcher
-    rig
     simplescreenrecorder
     sioyek
+    slack
     sops
     spotdl
-    # spotdl
     spotify
+    spotify-player
+    sqlite
+    sshfs
+    sunshine
+    syncthing
     sysstat
+    tintin
     tmux
+    tokei
     tor
-    torsocks
     tor-browser
+    torsocks
     tree-sitter
     tree-sitter-grammars.tree-sitter-markdown
     typos
-    zip
-    gh-dash
+    unconvert
+    unison
+    unstable.babashka
+    unstable.ddgr
+    unstable.gopls
+    unstable.nix-search-cli
+    unstable.obsidian
+    unstable.qbittorrent
+    unstable.shell-gpt
+    unstable.warp-terminal
+    unstable.wezterm
+    unstable.youtube-music
     unzip
-    # unstable.vagrant
     variety
-    inotify-tools
-    inotify-info
     vimpager
     vlc
     w3m
     wakatime
+    waypipe
     wev
-    unstable.wezterm
-    winetricks
+    whisper-ctranslate2
     wine64Packages.stagingFull
-    bottles
+    winetricks
+    wl-clipboard
     wmctrl
     wofi
+    yaml-language-server
     yesplaymusic
-    unstable.youtube-music
     yq
     yt-dlp
+    ytmdl
+    zerotierone
     zig
+    zip
     zlib
+    zls
+    zoxide
     zsh
-    fish
     zsh-autosuggestions
-    zsh-powerlevel10k
     zsh-fzf-tab
     zsh-nix-shell
-    nix-zsh-completions
+    zsh-powerlevel10k
     zulip
-    scrcpy
   ];
   # home.file.".Xmodmap" = { source = ./Xmodmap; };
   # home.file.".emacs.d/early-init.el" = { source = ./emacs-early-init.el; };
