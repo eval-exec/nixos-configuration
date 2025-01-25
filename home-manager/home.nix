@@ -94,7 +94,7 @@
     # vivaldi
     # vivaldi-ffmpeg-codecs
     age
-    aider-chat
+    unstable.aider-chat
     aileron
     alacritty
     alejandra
