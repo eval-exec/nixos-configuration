@@ -47,7 +47,7 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      cudaSupport = false;
+      cudaSupport = true;
       permittedInsecurePackages = [
         "electron-11.5.0"
         "electron-24.8.6"
@@ -667,6 +667,7 @@
     docker-compose
     # inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
 
+    qt6.full
     qt6.qtwebsockets
     kdePackages.qtwebsockets
     wayland-utils
