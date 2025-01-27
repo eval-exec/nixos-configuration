@@ -44,8 +44,10 @@
     ];
     # Configure your nixpkgs instance
     config = {
+      nvidia.acceptLicense = true;
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      cudaSupport = false;
       permittedInsecurePackages = [ "electron-27.3.11" ];
 
     };
@@ -344,7 +346,7 @@
     wakatime
     waypipe
     wev
-    whisper-ctranslate2
+    unstable.whisper-ctranslate2
     wine64Packages.stagingFull
     winetricks
     wl-clipboard
@@ -356,10 +358,10 @@
     yt-dlp
     ytmdl
     zerotierone
-    zig
     zip
+    unstable.zig
     zlib
-    zls
+    unstable.zls
     zoxide
     zsh
     zsh-autosuggestions
@@ -546,7 +548,7 @@
     home-manager.enable = true;
 
     obs-studio = {
-      enable = true;
+      enable = false;
       plugins = with pkgs.obs-studio-plugins; [ obs-backgroundremoval ];
     };
     vscode = {

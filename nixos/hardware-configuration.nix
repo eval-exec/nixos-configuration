@@ -27,6 +27,7 @@
     "kvm-intel"
     "v4l2loopback"
     "snd_aloop"
+    "nvidia_uvm"
   ];
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.resumeDevice = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
@@ -116,7 +117,6 @@
 
   hardware.enableAllFirmware = true;
   hardware.opengl.enable = true;
-  # hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
   # # nixpkgs.config.packageOverrides = pkgs: {
   # #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};

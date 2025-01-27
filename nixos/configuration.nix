@@ -60,6 +60,8 @@
         proprietaryCodecs = true;
         enableWideVine = true;
       };
+      nvidia.acceptLicense = true;
+
 
     };
   };
@@ -396,6 +398,7 @@
         servers = {
           "default" = {
             enable = true;
+            device = "cuda";
             model = "small.en";
             uri = "tcp://0.0.0.0:10300";
             language = "en";
