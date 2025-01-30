@@ -548,7 +548,7 @@
     home-manager.enable = true;
 
     obs-studio = {
-      enable = false;
+      enable = true;
       plugins = with pkgs.obs-studio-plugins; [ obs-backgroundremoval ];
     };
     vscode = {

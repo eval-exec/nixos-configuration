@@ -47,7 +47,7 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      cudaSupport = true;
+      cudaSupport = false;
       permittedInsecurePackages = [
         "electron-11.5.0"
         "electron-24.8.6"
@@ -682,7 +682,6 @@
     duf
     file
     git
-    gnome.gnome-tweaks
     glibcInfo
     gnumake
     interception-tools
