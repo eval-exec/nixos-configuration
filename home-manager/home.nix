@@ -558,6 +558,7 @@
 
     mbsync = {
       enable = true;
+      package = unstable.isync;
       extraConfig = "";
     };
     msmtp = {
