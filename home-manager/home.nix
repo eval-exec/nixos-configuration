@@ -709,10 +709,14 @@
       };
     };
     bash = {
-      enable = false;
+      enable = true;
       enableCompletion = false;
       enableVteIntegration = true;
       historyFile = "/home/exec/.bash_history";
+
+      shellAliases = {
+        ding = "mpv ~/Music/notifications/ding-1-14705.mp3 &> /dev/null";
+      };
       initExtra = ''
         # Preview file content using bat (https://github.com/sharkdp/bat)
         export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
