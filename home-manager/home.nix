@@ -205,7 +205,6 @@
     inputs.amber.packages.${pkgs.system}.default
     intel-gpu-tools
     ipfs
-    isync
     jemalloc
     joker
     jq
@@ -401,7 +400,7 @@
       accounts = {
         execvy = {
           primary = true;
-          realName = "Eval EXEC";
+          realName = "Eval Exec";
           address = "execvy@gmail.com";
           userName = "execvy@gmail.com";
           flavor = "gmail.com";
@@ -447,44 +446,44 @@
               channel = {
                 MaxMessages = 20000;
               };
-              local = { };
-              remote = { };
+              # local = { };
+              # remote = { };
             };
-            groups = {
-              execvy = {
-                channels = {
-                  inbox = {
-                    farPattern = "INBOX";
-                    nearPattern = "inbox";
-                    extraConfig = {
-                      Create = "Both";
-                      MaxMessages = 20000;
-                    };
-                  };
-                  sent = {
-                    farPattern = "[Gmail]/Sent Mail";
-                    nearPattern = "sent";
-                    extraConfig = {
-                      Create = "Both";
-                    };
-                  };
-                  trash = {
-                    farPattern = "[Gmail]/Trash";
-                    nearPattern = "trash";
-                    extraConfig = {
-                      Create = "Both";
-                    };
-                  };
-                  spam = {
-                    farPattern = "[Gmail]/Spam";
-                    nearPattern = "spam";
-                    extraConfig = {
-                      Create = "Both";
-                    };
-                  };
-                };
-              };
-            };
+            # groups = {
+            #   execvy = {
+            #     channels = {
+            #       inbox = {
+            #         farPattern = "INBOX";
+            #         nearPattern = "inbox";
+            #         extraConfig = {
+            #           Create = "Both";
+            #           MaxMessages = 20000;
+            #         };
+            #       };
+            #       sent = {
+            #         farPattern = "[Gmail]/Sent Mail";
+            #         nearPattern = "sent";
+            #         extraConfig = {
+            #           Create = "Both";
+            #         };
+            #       };
+            #       trash = {
+            #         farPattern = "[Gmail]/Trash";
+            #         nearPattern = "trash";
+            #         extraConfig = {
+            #           Create = "Both";
+            #         };
+            #       };
+            #       spam = {
+            #         farPattern = "[Gmail]/Spam";
+            #         nearPattern = "spam";
+            #         extraConfig = {
+            #           Create = "Both";
+            #         };
+            #       };
+            #     };
+            #   };
+            # };
             patterns = [ "*" ];
             remove = "both";
             subFolders = "Verbatim";
@@ -496,7 +495,7 @@
           #   host = "smtp.gmail.com";
           # };
           mu = {
-            enable = true;
+            enable = false;
           };
         };
       };
@@ -530,9 +529,9 @@
     mbsync = {
       enable = true;
       # frequency = "*-*-* *:*:00,20,40";
-      postExec = ''
-        /home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e "(progn (unless (boundp 'mu4e--server-process) (mu4e t)) (mu4e-update-index-nonlazy)(message \"mbsync executed.\"))"
-      '';
+      # postExec = ''
+      #   /home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e "(progn (unless (boundp 'mu4e--server-process) (mu4e t)) (mu4e-update-index-nonlazy)(message \"mbsync executed.\"))"
+      # '';
       verbose = true;
     };
   };
@@ -558,7 +557,7 @@
 
     mbsync = {
       enable = true;
-      package = unstable.isync;
+      package = pkgs.unstable.isync;
       extraConfig = "";
     };
     msmtp = {
