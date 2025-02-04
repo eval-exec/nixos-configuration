@@ -641,6 +641,7 @@
       enableCompletion = true;
       defaultKeymap = "emacs";
       envExtra = ''
+        export LESS='-R -j7';
         export FZF_BASE="/home/exec/Projects/github.com/junegunn/fzf";
         # export FZF_BASE=${pkgs.fzf}/share/fzf;
         export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
