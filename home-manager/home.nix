@@ -107,6 +107,7 @@
     asciidoc
     ast-grep
     atool
+    unstable.zed-editor
     autoconf
     automake
     awscli2

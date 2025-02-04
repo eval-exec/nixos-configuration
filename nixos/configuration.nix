@@ -807,6 +807,8 @@
     enable = true;
     libraries = with pkgs; [
       stdenv.cc.cc.lib
+      wayland
+      vulkan-loader
       # cudaPackages.cuda_cudart
       mpv
       sqlite
