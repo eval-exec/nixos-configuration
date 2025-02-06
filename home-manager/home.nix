@@ -737,6 +737,7 @@
     };
     fzf = {
       enable = true;
+	  package = pkgs.unstable.fzf;
       enableBashIntegration = true;
       enableFishIntegration = true;
       enableZshIntegration = true;
