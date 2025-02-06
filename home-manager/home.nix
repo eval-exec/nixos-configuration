@@ -331,6 +331,7 @@
     unconvert
     unison
     unstable.babashka
+    unstable.ghostty
     unstable.ddgr
     unstable.gopls
     unstable.nix-search-cli
