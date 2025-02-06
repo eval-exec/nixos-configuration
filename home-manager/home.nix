@@ -108,6 +108,7 @@
     ast-grep
     atool
     unstable.zed-editor
+	unstable.jdt-language-server
     autoconf
     automake
     awscli2
@@ -134,6 +135,7 @@
     cmake
     cool-retro-term
     copyq
+    maven
     coreutils-full
     cppcheck
     cpulimit
