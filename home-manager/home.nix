@@ -824,7 +824,7 @@
         Unit = {
           Description = "matrix port formward";
           Wants = [ "network-online.target" ];
-          After = [ "network-online.target" ];
+          After = [ "network-online.target" "matrix.service" ];
         };
         Install = {
           WantedBy = [ "default.target" ];
