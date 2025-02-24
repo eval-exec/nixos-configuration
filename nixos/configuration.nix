@@ -166,7 +166,7 @@
       logLevel = "INFO";
       dispatcherScripts = [
         {
-          source = /home/exec/Projects/github.com/eval-exec/nixos-configuration/nixos/scripts/network-dispatcher.sh;
+          source = ./nixos/scripts/network-dispatcher.sh;
           type = "basic";
         }
 
