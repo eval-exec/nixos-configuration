@@ -814,7 +814,7 @@
         };
         Service = {
           ExecStartPre = "${pkgs.bash}/bin/bash -c 'until ${pkgs.iputils}/bin/ping -c1 bing.com; do ${pkgs.coreutils}/bin/sleep 1; done;'";
-          ExecStart = "${pkgs.openssh}/bin/ssh -n matrix_wan 'sleep 600'";
+          ExecStart = "${pkgs.openssh}/bin/ssh -n matrix_wan 'tail -f /dev/null'";
           RestartSec = 3;
           Restart = "always";
         };
