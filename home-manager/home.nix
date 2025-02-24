@@ -91,7 +91,7 @@
     # nur.repos.xddxdd.wechat-uos
     # spotdl
     # tigervnc
-    # unstable.quickemu
+    unstable.quickemu
     # unstable.vagrant
     # vivaldi
     # vivaldi-ffmpeg-codecs
@@ -108,7 +108,7 @@
     ast-grep
     atool
     unstable.zed-editor
-	unstable.jdt-language-server
+    unstable.jdt-language-server
     autoconf
     automake
     awscli2
@@ -695,7 +695,7 @@
       };
       history = {
         size = 10000000;
-		save = 10000000;
+        save = 10000000;
         path = "${config.xdg.dataHome}/zsh/history";
       };
       oh-my-zsh = {
@@ -737,7 +737,7 @@
     };
     fzf = {
       enable = true;
-	  package = pkgs.unstable.fzf;
+      package = pkgs.unstable.fzf;
       enableBashIntegration = true;
       enableFishIntegration = true;
       enableZshIntegration = true;
@@ -815,6 +815,7 @@
         Service = {
           ExecStartPre = "${pkgs.bash}/bin/bash -c 'until ${pkgs.iputils}/bin/ping -c1 bing.com; do ${pkgs.coreutils}/bin/sleep 1; done;'";
           ExecStart = "${pkgs.openssh}/bin/ssh -n matrix_wan 'sleep 600'";
+          RestartSec = 3;
           Type = "always";
         };
       };
