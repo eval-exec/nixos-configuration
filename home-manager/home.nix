@@ -107,7 +107,7 @@
     asciidoc
     ast-grep
     atool
-    unstable.zed-editor
+    # unstable.zed-editor
     unstable.jdt-language-server
     autoconf
     automake
