@@ -166,7 +166,7 @@
       logLevel = "INFO";
       dispatcherScripts = [
         {
-          source = ./nixos/scripts/network-dispatcher.sh;
+          source = ./scripts/network-dispatcher.sh;
           type = "basic";
         }
 
