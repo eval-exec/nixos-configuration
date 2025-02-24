@@ -62,7 +62,6 @@
       };
       nvidia.acceptLicense = true;
 
-
     };
   };
 
@@ -163,9 +162,11 @@
     networkmanager = {
       enable = true;
       dns = "none";
+      wifi.powersave = true;
+      logLevel = "INFO";
       dispatcherScripts = [
         {
-          source = ./scripts/network-dispatcher.sh;
+          source = /home/exec/Projects/github.com/eval-exec/nixos-configuration/nixos/scripts/network-dispatcher.sh;
           type = "basic";
         }
 

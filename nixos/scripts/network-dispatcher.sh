@@ -1,7 +1,7 @@
 #!/bin/sh
 
-printf "network dispathcer:[%s], [%s]" $1 $2
+logger -t network_dispatcher $(printf "network dispathcer: [%s], [%s]\n" $1 $2)
 
-systemctl --user restart ollama_port_forward
-systemctl --user restart ra-mutiplex_port_forward
-systemctl --user restart clash
+# systemctl --user restart clash
+systemctl --user restart matrix
+systemctl --user restart matrix_port_forward
