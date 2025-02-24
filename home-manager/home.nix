@@ -816,7 +816,7 @@
           ExecStartPre = "${pkgs.bash}/bin/bash -c 'until ${pkgs.iputils}/bin/ping -c1 bing.com; do ${pkgs.coreutils}/bin/sleep 1; done;'";
           ExecStart = "${pkgs.openssh}/bin/ssh -n matrix_wan 'sleep 600'";
           RestartSec = 3;
-          Type = "always";
+          Restart = "always";
         };
       };
 
