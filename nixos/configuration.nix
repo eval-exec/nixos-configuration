@@ -336,7 +336,9 @@
         options = "ctrl:hyper_capscontrol";
       };
 
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = [ 
+      # "nvidia"
+      ];
 
       #   config = lib.mkAfter ''
       #     Section "Module"
