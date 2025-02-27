@@ -814,7 +814,7 @@
         };
         Service = {
           ExecStartPre = "${pkgs.bash}/bin/bash -c 'until ${pkgs.iputils}/bin/ping -c1 bing.com; do ${pkgs.coreutils}/bin/sleep 1; done;'";
-          ExecStart = "${pkgs.openssh}/bin/ssh -n matrix_wan 'tail -f /dev/null'";
+          ExecStart = "${pkgs.openssh}/bin/ssh -n matrix_wan_exe uptime; ${pkgs.openssh}/bin/ssh -n matrix_wan 'tail -f /dev/null'";
           RestartSec = 3;
           Restart = "always";
         };
@@ -956,7 +956,7 @@
         Service = {
           Type = "simple";
           Restart = "always";
-          RestartSec = 3;
+          # RestartSec = 0;
           ExecStart = "${pkgs.nix}/bin/nix-shell /home/exec/.config/emacs/default.nix --run /home/exec/.local/bin/emacs";
           # ExecStart = "/home/exec/.local/bin/emacs";
           # StandardInput = "tty";
