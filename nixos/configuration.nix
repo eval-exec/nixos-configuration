@@ -654,6 +654,7 @@
     kdePackages.xdg-desktop-portal-kde
     kdePackages.kde-gtk-config
     kdePackages.qtvirtualkeyboard
+    kdePackages.plasma-sdk
     kdePackages.discover
     xdg-desktop-portal
     xdg-utils
