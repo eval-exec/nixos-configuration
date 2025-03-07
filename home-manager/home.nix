@@ -78,7 +78,7 @@
     # github-copilot-cli
     # github-desktop
     # graalvm-ce
-    # inputs.ghostty.packages.x86_64-linux.default
+    inputs.ghostty.packages.x86_64-linux.default
     # ionshare
     # jetbrains.clion
     # jetbrains.goland
@@ -122,7 +122,6 @@
     btop
     bun
     calibre
-    cask
     ccls
     chafa
     chromaprint
@@ -331,7 +330,7 @@
     unconvert
     unison
     unstable.babashka
-    unstable.ghostty
+    # unstable.ghostty
     unstable.ddgr
     unstable.gopls
     unstable.nix-search-cli
@@ -600,25 +599,25 @@
       enable = true;
       package = pkgs.jdk21;
     };
-    emacs = {
-      enable = false;
-      package = pkgs.emacs-git.override { withGTK3 = true; };
-      # package = pkgs.emacs-git;
-
-      extraPackages = epkgs: [
-        pkgs.emacsPackages.jinx
-        pkgs.emacsPackages.mu4e
-        pkgs.emacsPackages.rime
-        pkgs.emacsPackages.vterm
-        pkgs.emacsPackages.w3m
-        (pkgs.emacsPackages.org.overrideAttrs (old: {
-          patches = [ ];
-        }))
-        pkgs.librime
-        pkgs.mu
-        pkgs.tdlib
-      ];
-    };
+    # emacs = {
+    #   enable = false;
+    #   package = pkgs.emacs-git.override { withGTK3 = true; };
+    #   # package = pkgs.emacs-git;
+    #
+    #   extraPackages = epkgs: [
+    #     pkgs.emacsPackages.jinx
+    #     pkgs.emacsPackages.mu4e
+    #     pkgs.emacsPackages.rime
+    #     pkgs.emacsPackages.vterm
+    #     pkgs.emacsPackages.w3m
+    #     (pkgs.emacsPackages.org.overrideAttrs (old: {
+    #       patches = [ ];
+    #     }))
+    #     pkgs.librime
+    #     pkgs.mu
+    #     pkgs.tdlib
+    #   ];
+    # };
 
     fish = {
       enable = false;
@@ -824,7 +823,10 @@
         Unit = {
           Description = "matrix port formward";
           Wants = [ "network-online.target" ];
-          After = [ "network-online.target" "matrix.service" ];
+          After = [
+            "network-online.target"
+            "matrix.service"
+          ];
         };
         Install = {
           WantedBy = [ "default.target" ];
@@ -915,10 +917,10 @@
       #   };
       # };
 
-      alacritty-daemon = {
+      terminal-daemon = {
         Unit = {
-          Description = "alacritty daemon";
           After = [ "tmux.target" ];
+          Description = "terminal daemon";
         };
         Install = {
           WantedBy = [ "graphical-session.target" ];
@@ -926,7 +928,7 @@
         Service = {
           Restart = "always";
           RestartSec = 0;
-          ExecStart = "${pkgs.alacritty}/bin/alacritty";
+          ExecStart = "${inputs.ghostty.packages.x86_64-linux.default}/bin/ghostty";
         };
       };
 

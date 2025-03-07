@@ -83,8 +83,8 @@ function toggleClient(app_name) {
   }
 }
 
-function toggleAlacritty() {
-  toggleClient("alacritty");
+function toggleGhostty() {
+  toggleClient("ghostty");
 }
 
 function toggleEmacs() {
@@ -97,10 +97,10 @@ function toggleChrome() {
 
 {
   let registed = registerShortcut(
-    "ToggleAlacrittyWindow",
-    "ToggleAlacrittyWindow",
+    "ToggleGhosttyWindow",
+    "ToggleGhosttyWindow",
     "Meta+F",
-    toggleAlacritty,
+    toggleGhostty,
   );
   if (registed) {
     console.log("registed alacritty");
