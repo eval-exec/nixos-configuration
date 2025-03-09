@@ -122,10 +122,12 @@
       };
     };
     # Bootloader.
+    # https://www.reddit.com/r/Lofree/comments/16vg1qa/lofree_flow_good_with_some_issues/
     extraModprobeConfig = ''
       options kvm_intel nested=1
       options kvm_intel emulate_invalid_guest_state=0
       options kvm ignore_msrs=1
+      options hid_apple fnmode=2 swap_opt_cmd=1
     '';
 
     tmp = {
