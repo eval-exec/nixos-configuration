@@ -219,12 +219,12 @@
     lf
     libcamera
     libfaketime
-    libllvm
     libnotify
     libressl
     libsForQt5.khotkeys
     libstdcxx5
     llvmPackages.libcxx
+    llvmPackages.libllvm
     llvmPackages.libcxxClang
     lm_sensors
     logseq
