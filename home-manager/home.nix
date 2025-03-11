@@ -119,6 +119,8 @@
     bottles
     brave
     browsh
+    gnuplot_qt
+    gnuplot
     btop
     bun
     calibre
