@@ -813,7 +813,7 @@
         };
         Service = {
           ExecStartPre = "${pkgs.bash}/bin/bash -c 'until ${pkgs.iputils}/bin/ping -c1 bing.com; do ${pkgs.coreutils}/bin/sleep 1; done;'";
-          ExecStart = "${pkgs.openssh}/bin/ssh -ConnectTimeout=2 -n matrix_wan_exec uptime && sleep infinity";
+          ExecStart = "${pkgs.openssh}/bin/ssh -o ConnectTimeout=2 -n matrix_wan_exec uptime && sleep infinity";
           RestartSec = 3;
           Restart = "always";
         };
