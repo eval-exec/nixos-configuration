@@ -232,6 +232,14 @@
   # };
 
   services = {
+    dictd = {
+      enable = true;
+      DBs = with pkgs.dictdDBs; [
+        wiktionary
+        wordnet
+      ];
+
+    };
     kmscon = {
       enable = false;
       useXkbConfig = true;
@@ -338,8 +346,8 @@
         options = "ctrl:hyper_capscontrol";
       };
 
-      videoDrivers = [ 
-      # "nvidia"
+      videoDrivers = [
+        # "nvidia"
       ];
 
       #   config = lib.mkAfter ''
