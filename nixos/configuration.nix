@@ -266,7 +266,7 @@
       enable = true;
     };
     guix = {
-      enable = false;
+      enable = true;
     };
     fprintd = {
       enable = false;
@@ -638,6 +638,7 @@
   };
 
   environment = {
+    wordlist.enable = true;
     # sessionVariables = {
     #   LIBVA_DRIVER_NAME = "iHD";
     # };
