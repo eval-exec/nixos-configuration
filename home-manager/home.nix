@@ -94,6 +94,7 @@
     # spotdl
     # tigervnc
     unstable.quickemu
+    unstable.open-webui
     # unstable.vagrant
     # vivaldi
     # vivaldi-ffmpeg-codecs
