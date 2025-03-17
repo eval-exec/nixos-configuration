@@ -79,6 +79,7 @@
     # github-desktop
     # graalvm-ce
     inputs.ghostty.packages.x86_64-linux.default
+    inputs.quickshell.packages.x86_64-linux.default
     # ionshare
     # jetbrains.clion
     # jetbrains.goland
@@ -119,7 +120,6 @@
     bottles
     brave
     browsh
-    gnuplot_qt
     gnuplot
     btop
     bun
@@ -930,7 +930,7 @@
         Service = {
           Restart = "always";
           RestartSec = 0;
-          ExecStart = "${inputs.ghostty.packages.x86_64-linux.default}/bin/ghostty";
+          ExecStart = "${pkgs.kitty}/bin/kitty";
         };
       };
 

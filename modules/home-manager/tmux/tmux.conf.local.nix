@@ -13,6 +13,10 @@
 #   - disabled (do not modify new-session bindings)
 tmux_conf_new_session_prompt=true
 
+# set -s extended-keys on
+# set -as terminal-features 'xterm*:extkeys'
+
+
 
 # -- windows & pane creation ---------------------------------------------------
 

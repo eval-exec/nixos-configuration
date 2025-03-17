@@ -9,6 +9,14 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+
+      # THIS IS IMPORTANT
+      # Mismatched system dependencies will lead to crashes and other issues.
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     amber.url = "github:Ph0enixKM/Amber";
     amber.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -35,6 +43,7 @@
       home-manager,
       sops-nix,
       ghostty,
+      quickshell,
       ...
     }@inputs:
     let
