@@ -17,6 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
+    claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
+    claude-desktop.inputs.flake-utils.follows = "flake-utils";
+
     amber.url = "github:Ph0enixKM/Amber";
     amber.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -44,6 +48,7 @@
       sops-nix,
       ghostty,
       quickshell,
+      claude-desktop,
       ...
     }@inputs:
     let

@@ -79,6 +79,7 @@
     # github-desktop
     # graalvm-ce
     inputs.ghostty.packages.x86_64-linux.default
+    inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
     inputs.quickshell.packages.x86_64-linux.default
     # ionshare
     # jetbrains.clion
@@ -102,6 +103,7 @@
     alacritty
     alejandra
     alsa-utils
+
     amdgpu_top
     android-tools
     ascii
