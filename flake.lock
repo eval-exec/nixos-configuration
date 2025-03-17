@@ -23,6 +23,29 @@
         "type": "github"
       }
     },
+    "claude-desktop": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1742152592,
+        "narHash": "sha256-3W8yzvFHwIJWfuOjuFgIAerv19iTWfFijQ9runIZfrY=",
+        "owner": "k3d3",
+        "repo": "claude-desktop-linux-flake",
+        "rev": "f80fc70dd41bd0b62f718744e89d9c50396e3bc8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "k3d3",
+        "repo": "claude-desktop-linux-flake",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -40,6 +63,26 @@
       }
     },
     "flake-utils": {
+      "inputs": {
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
       "inputs": {
         "systems": "systems_2"
       },
@@ -60,7 +103,7 @@
     "ghostty": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "zig": "zig",
@@ -231,13 +274,16 @@
     "root": {
       "inputs": {
         "amber": "amber",
+        "claude-desktop": "claude-desktop",
+        "flake-utils": "flake-utils",
         "ghostty": "ghostty",
         "home-manager": "home-manager",
         "kwin-effects-forceblur": "kwin-effects-forceblur",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable_2",
         "quickshell": "quickshell",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "systems": "systems_4"
       }
     },
     "rust-overlay": {
@@ -323,6 +369,21 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_4": {
+      "locked": {
+        "lastModified": 1680978846,
+        "narHash": "sha256-Gtqg8b/v49BFDpDetjclCYXm8mAnTrUzR0JnE2nv5aw=",
+        "owner": "nix-systems",
+        "repo": "x86_64-linux",
+        "rev": "2ecfcac5e15790ba6ce360ceccddb15ad16d08a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "x86_64-linux",
         "type": "github"
       }
     },

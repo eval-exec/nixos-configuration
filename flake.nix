@@ -9,6 +9,12 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
+    systems.url = "github:nix-systems/x86_64-linux";
+
+    flake-utils.url = "github:numtide/flake-utils";
+    # 2. Override the flake-utils default to your version
+    flake-utils.inputs.systems.follows = "systems";
+
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
 
