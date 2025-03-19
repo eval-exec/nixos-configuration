@@ -406,18 +406,18 @@
 
     wyoming = {
 
-      faster-whisper = {
-
-        servers = {
-          "default" = {
-            enable = true;
-            device = "cuda";
-            model = "small.en";
-            uri = "tcp://0.0.0.0:10300";
-            language = "en";
-          };
-        };
-      };
+      # faster-whisper = {
+      #
+      #   servers = {
+      #     "default" = {
+      #       enable = true;
+      #       device = "cuda";
+      #       model = "small.en";
+      #       uri = "tcp://0.0.0.0:10300";
+      #       language = "en";
+      #     };
+      #   };
+      # };
       piper = {
         servers = {
           "default" = {
