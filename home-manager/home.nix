@@ -48,7 +48,11 @@
       # Disable if you don't want unfree packages
       allowUnfree = true;
       cudaSupport = false;
-      permittedInsecurePackages = [ "electron-27.3.11" ];
+      permittedInsecurePackages = [
+       "electron-27.3.11"
+       "electron-32.3.3"
+       ];
+
 
     };
   };
@@ -80,7 +84,7 @@
     # graalvm-ce
     # inputs.ghostty.packages.x86_64-linux.default
     inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
-    inputs.quickshell.packages.x86_64-linux.default
+    # inputs.quickshell.packages.x86_64-linux.default
     # ionshare
     # jetbrains.clion
     # jetbrains.goland
