@@ -12,7 +12,7 @@ dry-build: fmt
 switch-os: fmt
 	git diff --exit-code
 	rm /home/exec/.config/fontconfig/conf.d/10-hm-fonts.conf || true
-	sudo -S nixos-rebuild switch --max-jobs 20 --cores 20 --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace --print-build-logs
+	sudo -S nixos-rebuild switch --max-jobs 20 --cores 20 --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace --print-build-logs --option substituters "https://mirrors.ustc.edu.cn/nix-channels/store"
 	notify-send "NixOS: make switch finished"
 
 switch-hm: fmt

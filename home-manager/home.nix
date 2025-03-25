@@ -220,6 +220,7 @@
     jemalloc
     joker
     jq
+    just
     keyd
     kitty
     kitty-themes
