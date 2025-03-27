@@ -793,16 +793,13 @@
 
   programs.steam = {
     enable = true;
-    package = pkgs.steam.override {
-      extraPkgs =
-        pkgs: with pkgs; [
-          wqy_zenhei
-          liberation_ttf
-          wqy_microhei
-        ];
+    # fontPackages = with pkgs; [
+    #   wqy_zenhei
+    #   liberation_ttf
+    #   wqy_microhei
+    # ];
 
-      extraProfile = "export STEAM_FORCE_DESKTOPUI_SCALING=2";
-    };
+    # extraProfile = "export STEAM_FORCE_DESKTOPUI_SCALING=2";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
