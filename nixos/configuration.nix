@@ -466,7 +466,7 @@
 
   # Enable sound with pipewire.
   # hardware.pulseaudio.enable = false;
-  # hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
   security = {
     wrappers = {
       criu = {
