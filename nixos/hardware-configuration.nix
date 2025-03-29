@@ -107,7 +107,6 @@
     enable = true;
     # package = pkgs.unstable.bluez;
     powerOnBoot = true;
-    hsphfpd.enable = true;
     settings = {
       General = {
         ControllerMode = "bredr";
