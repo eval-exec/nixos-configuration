@@ -348,7 +348,7 @@
       };
 
       videoDrivers = [
-        # "nvidia"
+        "nvidia"
       ];
 
       #   config = lib.mkAfter ''

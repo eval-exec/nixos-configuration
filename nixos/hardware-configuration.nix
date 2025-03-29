@@ -109,7 +109,7 @@
     powerOnBoot = true;
     settings = {
       General = {
-        Enable = "Source,Sink,Media,Socket";
+        # Enable = "Source,Sink,Media,Socket";
         #   ControllerMode = "bredr";
         FastConnectable = true;
         Experimental = true;
