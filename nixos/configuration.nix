@@ -233,6 +233,7 @@
   # };
 
   services = {
+    blueman.enable = true;
     dictd = {
       enable = true;
       DBs = with pkgs.dictdDBs; [
@@ -464,9 +465,6 @@
     };
   };
 
-  # Enable sound with pipewire.
-  # hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.package = pkgs.unstable.pulseaudioFull;
   security = {
     wrappers = {
       criu = {

@@ -107,16 +107,21 @@
     enable = true;
     # package = pkgs.unstable.bluez;
     powerOnBoot = true;
+    hsphfpd.enable = true;
     settings = {
       General = {
-        # Enable = "Source,Sink,Media,Socket";
-        #   ControllerMode = "bredr";
+        ControllerMode = "bredr";
+# Enable = "Source,Sink,Media,Socket";
         FastConnectable = true;
         Experimental = true;
         KernelExperimental = true;
       };
     };
   };
+    # hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.package = pkgs.unstable.pulseaudioFull;
+  hardware.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
+
 
   hardware.enableAllFirmware = true;
   hardware.opengl.enable = true;
