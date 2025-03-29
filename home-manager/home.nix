@@ -232,7 +232,6 @@
     libfaketime
     libnotify
     libressl
-    libsForQt5.khotkeys
     libstdcxx5
     llvmPackages.libcxx
     llvmPackages.libllvm

@@ -221,7 +221,7 @@
           fcitx5-with-addons
           fcitx5-configtool
           fcitx5-gtk
-          libsForQt5.fcitx5-qt
+          kdePackages.fcitx5-qt
         ];
       };
     };
@@ -348,7 +348,7 @@
       };
 
       videoDrivers = [
-        "nvidia"
+        # "nvidia"
       ];
 
       #   config = lib.mkAfter ''
@@ -449,13 +449,24 @@
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)
       #media-session.enable = true;
+      # wireplumber.extraConfig."10-bluez" = {
+      #   "monitor.bluez.properties" = {
+      #     "bluez5.enable-sbc-xq" = true;
+      #     "bluez5.enable-msbc" = true;
+      #     "bluez5.enable-hw-volume" = true; # ## <<< Enables touch slider on headphones for fader gain, pause, and unpause functionality
+      #     "bluez5.auto-connect" = [ "a2dp_sink" ]; # ## <<< Autoconnect to HD 48khz mode on connect
+      #     "bluez5.roles" = [
+      #       "a2dp_sink"
+      #       "a2dp_source"
+      #     ]; # ## <<< This  sets the BT driver role to a2dp sink and source, which are the HD 44.1khz and 48khz module modesets but doesnt load the modules for hsp, which is the handset driver that enables the mic.
+      #   };
+      # };
     };
   };
 
   # Enable sound with pipewire.
-  # sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  # hardware.pulseaudio.enable = false;
+  # hardware.pulseaudio.package = pkgs.pulseaudioFull;
   security = {
     wrappers = {
       criu = {
@@ -499,7 +510,7 @@
     ];
     packages = with pkgs; [
       firefox
-      kate
+      # kate
     ];
   };
   users.defaultUserShell = pkgs.zsh;

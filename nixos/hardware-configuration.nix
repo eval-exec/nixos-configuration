@@ -22,13 +22,12 @@
   ];
   boot.initrd.kernelModules = [ ];
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [ 
- # pkgs.linuxPackages_latest.v4l2loopback 
+  boot.extraModulePackages = [
+    # pkgs.linuxPackages_latest.v4l2loopback
   ];
   boot.kernelModules = [
     "kvm-intel"
-    "v4l2loopback"
-    "snd_aloop"
+    # "snd_aloop"
     "nvidia_uvm"
   ];
   boot.blacklistedKernelModules = [ "nouveau" ];
@@ -106,13 +105,15 @@
   # high-resolution display
   hardware.bluetooth = {
     enable = true;
+    # package = pkgs.unstable.bluez;
     powerOnBoot = true;
     settings = {
       General = {
-        # Enable = "Source,Sink,Media,Socket";
-        # ControllerMode = "bredr";
-        Experimental = true;
+        #     # Enable = "Source,Sink,Media,Socket";
+        #   ControllerMode = "bredr";
         FastConnectable = true;
+        Experimental = true;
+        KernelExperimental = true;
       };
     };
   };
@@ -130,9 +131,9 @@
   ];
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
   hardware.nvidia = {
-    open = false;
-    nvidiaSettings = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.beta;
+    open = true;
+    # nvidiaSettings = false;
+    # package = config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
     powerManagement = {
       enable = true;
