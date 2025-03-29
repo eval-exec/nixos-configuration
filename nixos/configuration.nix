@@ -510,7 +510,7 @@
 
     virtualbox = {
       host = {
-        enable = true;
+        enable = false;
         # package = pkgs-stable.virtualbox;
         # enableExtensionPack = true;
       };
