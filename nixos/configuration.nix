@@ -440,8 +440,8 @@
 
     pipewire = {
       enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
+      alsa.enable = false;
+      alsa.support32Bit = false;
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
       jack.enable = false;
@@ -466,7 +466,7 @@
 
   # Enable sound with pipewire.
   # hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.pulseaudio.package = pkgs.unstable.pulseaudioFull;
   security = {
     wrappers = {
       criu = {
