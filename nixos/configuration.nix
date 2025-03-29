@@ -233,7 +233,7 @@
   # };
 
   services = {
-    blueman.enable = true;
+    blueman.enable = false;
     dictd = {
       enable = true;
       DBs = with pkgs.dictdDBs; [
