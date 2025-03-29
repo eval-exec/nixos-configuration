@@ -15,14 +15,6 @@
     # 2. Override the flake-utils default to your version
     flake-utils.inputs.systems.follows = "systems";
 
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-
-      # THIS IS IMPORTANT
-      # Mismatched system dependencies will lead to crashes and other issues.
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
     claude-desktop.inputs.flake-utils.follows = "flake-utils";
@@ -40,10 +32,6 @@
       url = "github:taj-ny/kwin-effects-forceblur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
   };
 
   outputs =
@@ -52,8 +40,6 @@
       nixpkgs,
       home-manager,
       sops-nix,
-      ghostty,
-      quickshell,
       claude-desktop,
       ...
     }@inputs:
