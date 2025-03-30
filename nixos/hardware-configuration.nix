@@ -39,7 +39,7 @@
   #   }
   # ];
   boot.kernelParams = [
-    # "mem_sleep_default=deep"
+    "mem_sleep_default=deep"
     "resume_offset=196851712"
     "maxcpus=20"
     # "video=eDP-1:3456x2160@60"
@@ -59,9 +59,9 @@
     # "radeon.si_support=0"
     # "amdgpu.si_support=1"
   ];
-  # boot.extraModprobeConfig = ''
-  #   options snd-intel-dspcfg dsp_driver=1
-  # '';
+  # options snd-intel-dspcfg dsp_driver=1
+  # options snd-hda-intel model=generic
+  boot.extraModprobeConfig = '''';
   boot.kernel.sysctl = {
     "kernel.sysrq" = 1;
     "fs.inotify.max_user_watches" = 524288;
@@ -105,22 +105,21 @@
   # high-resolution display
   hardware.bluetooth = {
     enable = true;
-    # package = pkgs.unstable.bluez;
+    package = pkgs.bluez-experimental; # This will now use our custom bluez from the overlay
     powerOnBoot = true;
     settings = {
       General = {
-        # ControllerMode = "bredr";
-# Enable = "Source,Sink,Media,Socket";
+        ControllerMode = "dual";
+        # Enable = "Source,Sink,Media,Socket";
         FastConnectable = true;
         Experimental = true;
         # KernelExperimental = true;
       };
     };
   };
-    # hardware.pulseaudio.enable = false;
+  # hardware.pulseaudio.enable = false;
   hardware.pulseaudio.package = pkgs.unstable.pulseaudioFull;
   hardware.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
-
 
   hardware.enableAllFirmware = true;
   hardware.opengl.enable = true;
