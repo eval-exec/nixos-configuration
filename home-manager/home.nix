@@ -103,7 +103,6 @@
     # vivaldi
     # vivaldi-ffmpeg-codecs
     age
-    unstable.aider-chat
     aileron
     alacritty
     alejandra
