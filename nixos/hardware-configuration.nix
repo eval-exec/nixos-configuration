@@ -109,11 +109,11 @@
     powerOnBoot = true;
     settings = {
       General = {
-        ControllerMode = "bredr";
+        # ControllerMode = "bredr";
 # Enable = "Source,Sink,Media,Socket";
         FastConnectable = true;
         Experimental = true;
-        KernelExperimental = true;
+        # KernelExperimental = true;
       };
     };
   };

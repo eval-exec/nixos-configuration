@@ -515,11 +515,11 @@
   virtualisation = {
     libvirtd.enable = true;
     # xen.enable = false;
-    # waydroid.enable = false;
+    waydroid.enable = true;
 
     virtualbox = {
       host = {
-        enable = false;
+        enable = true;
         # package = pkgs-stable.virtualbox;
         # enableExtensionPack = true;
       };
