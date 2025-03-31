@@ -111,8 +111,8 @@
       General = {
         ControllerMode = "dual";
         # Enable = "Source,Sink,Media,Socket";
-        FastConnectable = true;
-        Experimental = true;
+        # FastConnectable = true;
+        # Experimental = true;
         # KernelExperimental = true;
       };
     };
