@@ -11,6 +11,8 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.consoleLogLevel = 7;
+  # boot.supportedFilesystems = [ "ntfs" ];
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.initrd.availableKernelModules = [
     "xhci_pci"
@@ -105,17 +107,17 @@
   # high-resolution display
   hardware.bluetooth = {
     enable = true;
-    package = pkgs.bluez-experimental; # This will now use our custom bluez from the overlay
-    powerOnBoot = true;
-    settings = {
-      General = {
-        ControllerMode = "dual";
-        # Enable = "Source,Sink,Media,Socket";
-        FastConnectable = true;
-        Experimental = true;
-        KernelExperimental = "6fbaf188-05e0-496a-9885-d6ddfdb4e03e";
-      };
-    };
+    # package = pkgs.bluez-experimental; # This will now use our custom bluez from the overlay
+    # powerOnBoot = true;
+    # settings = {
+    #   General = {
+    #     ControllerMode = "dual";
+    #     # Enable = "Source,Sink,Media,Socket";
+    #     FastConnectable = true;
+    #     Experimental = true;
+    #     KernelExperimental = "6fbaf188-05e0-496a-9885-d6ddfdb4e03e";
+    #   };
+    # };
   };
   # hardware.pulseaudio.enable = false;
   hardware.pulseaudio.package = pkgs.unstable.pulseaudioFull;
