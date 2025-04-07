@@ -587,7 +587,7 @@
       enableFishIntegration = true;
     };
     thunderbird = {
-      enable = true;
+      enable = false;
       profiles = {
         exec = {
           isDefault = true;

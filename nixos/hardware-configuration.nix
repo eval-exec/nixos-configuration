@@ -11,7 +11,7 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.consoleLogLevel = 7;
-  # boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = [ "ntfs" ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.initrd.availableKernelModules = [
