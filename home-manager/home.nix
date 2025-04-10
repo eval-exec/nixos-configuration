@@ -104,6 +104,7 @@
     # vivaldi-ffmpeg-codecs
     age
     aileron
+    uv
     alacritty
     alejandra
     alsa-utils
