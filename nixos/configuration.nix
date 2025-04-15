@@ -442,8 +442,8 @@
 
     pipewire = {
       enable = true;
-      alsa.enable = false;
-      alsa.support32Bit = false;
+      alsa.enable = true;
+      alsa.support32Bit = true;
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
       jack.enable = false;

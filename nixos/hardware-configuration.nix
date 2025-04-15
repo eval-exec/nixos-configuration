@@ -108,20 +108,19 @@
   hardware.bluetooth = {
     enable = true;
     # package = pkgs.bluez-experimental; # This will now use our custom bluez from the overlay
-    # powerOnBoot = true;
-    # settings = {
-    #   General = {
-    #     ControllerMode = "dual";
-    #     # Enable = "Source,Sink,Media,Socket";
-    #     FastConnectable = true;
-    #     Experimental = true;
-    #     KernelExperimental = "6fbaf188-05e0-496a-9885-d6ddfdb4e03e";
-    #   };
-    # };
+    powerOnBoot = true;
+    settings = {
+      General = {
+        ControllerMode = "dual";
+        # Enable = "Source,Sink,Media,Socket";
+        FastConnectable = true;
+        Experimental = true;
+      };
+    };
   };
   # hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.package = pkgs.unstable.pulseaudioFull;
-  hardware.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  # hardware.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
 
   hardware.enableAllFirmware = true;
   hardware.opengl.enable = true;

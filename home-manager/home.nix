@@ -134,6 +134,7 @@
     calibre
     ccls
     chafa
+    iotop
     chromaprint
     clinfo
     clj-kondo
@@ -517,15 +518,15 @@
 
   services = {
     mpd = {
-      enable = true;
+      enable = false;
       # extraArgs = [ "" ];
       musicDirectory = "~/Music";
       extraConfig = ''
-        auto_update "yes"
-        audio_output {
-          type "pipewire"
-          name "My PipeWire Output"
-        }
+        # auto_update "yes"
+        # audio_output {
+        #   type "pipewire"
+        #   name "My PipeWire Output"
+        # }
       '';
     };
     sxhkd = {
