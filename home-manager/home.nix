@@ -108,6 +108,7 @@
     alacritty
     alejandra
     alsa-utils
+    thunderbird
 
     amdgpu_top
     android-tools
@@ -587,14 +588,6 @@
       enable = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
-    };
-    thunderbird = {
-      enable = false;
-      profiles = {
-        exec = {
-          isDefault = true;
-        };
-      };
     };
     go = {
       enable = true;
