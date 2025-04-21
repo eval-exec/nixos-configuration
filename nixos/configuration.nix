@@ -686,6 +686,7 @@
     gpu-screen-recorder # CLI
     gpu-screen-recorder-gtk # GUI
     clang
+    gcc
     (aspellWithDicts (
       ds: with ds; [
         en
