@@ -390,6 +390,8 @@
 
   home.sessionVariables = {
     EMACS_TELEGA_SERVER_LIB_PREFIX = "${pkgs.unstable.tdlib}";
+    CGO_ENABLED="1";
+    GO111MODULE="auto";
   };
 
   home.sessionPath = [
