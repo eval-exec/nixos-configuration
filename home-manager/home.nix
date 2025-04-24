@@ -98,6 +98,7 @@
     # spotdl
     # tigervnc
     unstable.quickemu
+    unstable.windsurf
     unstable.open-webui
     # unstable.vagrant
     # vivaldi
