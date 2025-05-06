@@ -174,6 +174,7 @@
     extra-cmake-modules
     fastfetch
     fd
+    at
     ffmpeg-full
     fftw
     fish
