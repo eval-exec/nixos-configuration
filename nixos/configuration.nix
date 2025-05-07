@@ -234,6 +234,7 @@
   # };
 
   services = {
+    atd.enable = true;
     blueman.enable = false;
     dictd = {
       enable = true;
