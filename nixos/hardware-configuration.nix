@@ -107,7 +107,7 @@
   # high-resolution display
   hardware.bluetooth = {
     enable = true;
-    package = pkgs.bluez-experimental; # This will now use our custom bluez from the overlay
+    # package = pkgs.bluez-experimental; # This will now use our custom bluez from the overlay
     powerOnBoot = true;
     settings = {
       General = {
