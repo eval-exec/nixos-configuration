@@ -178,9 +178,6 @@
     fftw
     fish
     flameshot
-    fontforge
-    fontforge-fonttools
-    fontforge-gtk
     fpp
     fuse
     fuse3
