@@ -297,7 +297,6 @@
     protobuf
     pstree
     pyright
-    python311Packages.argostranslate
     qrcp
     readability-cli
     retry
