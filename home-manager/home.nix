@@ -235,7 +235,6 @@
     libfaketime
     libnotify
     libressl
-    libstdcxx5
     llvmPackages.libcxx
     llvmPackages.libllvm
     llvmPackages.libcxxClang
