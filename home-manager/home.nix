@@ -367,7 +367,6 @@
     wmctrl
     wofi
     yaml-language-server
-    yesplaymusic
     yq
     yt-dlp
     ytmdl
