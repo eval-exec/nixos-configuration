@@ -162,7 +162,7 @@
     discord
     distcc
     dmidecode
-    dolphin
+    kdePackages.dolphin
     dpkg
     droidcam
     du-dust
