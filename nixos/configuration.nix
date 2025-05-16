@@ -561,7 +561,7 @@
       powerline-fonts
       powerline-symbols
       liberation_ttf
-      nerdfonts
+      nerd-fonts.jetbrains-mono
       # noto-fonts
       # google-fonts
       noto-fonts-cjk-sans
