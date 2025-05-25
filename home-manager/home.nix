@@ -106,6 +106,7 @@
     uv
     alacritty
     alejandra
+    psmisc
     alsa-utils
     thunderbird
 
