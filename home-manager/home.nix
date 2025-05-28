@@ -293,7 +293,6 @@
     powertop
     pprof
     protobuf
-    pstree
     pyright
     qrcp
     readability-cli
