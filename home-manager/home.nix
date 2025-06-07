@@ -134,6 +134,7 @@
     bun
     calibre
     ccls
+    lolcat
     chafa
     iotop
     chromaprint
@@ -295,6 +296,8 @@
     protobuf
     pyright
     qrcp
+    qrscan
+    qrencode
     readability-cli
     retry
     rig
