@@ -646,6 +646,7 @@
       enableCompletion = true;
       defaultKeymap = "emacs";
       envExtra = ''
+        export SPACESHIP_EXIT_CODE_SHOW=true;
         export LESS='-R -j7';
         export FZF_BASE="/home/exec/Projects/github.com/junegunn/fzf";
         # export FZF_BASE=${pkgs.fzf}/share/fzf;
@@ -758,9 +759,6 @@
         };
         battery = {
           disabled = true;
-        };
-        exit_code = {
-          show = true;
         };
       };
     };
