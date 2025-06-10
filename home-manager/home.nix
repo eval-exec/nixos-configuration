@@ -675,7 +675,6 @@
       '';
       initExtra = ''
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh;
-        SPACESHIP_EXIT_CODE_SHOW=true
         if [[ "$ALACRITTY_SOCKET" != "" && "$TMUX" = "" ]]; then tmux a; fi
       '';
 
@@ -759,6 +758,9 @@
         };
         battery = {
           disabled = true;
+        };
+        exit_code = {
+          show = true;
         };
       };
     };
