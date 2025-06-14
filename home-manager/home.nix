@@ -392,6 +392,7 @@
   };
 
   home.sessionPath = [
+    "/home/exec/.exec/bin"
     "/home/exec/.npm-global/bin"
     "/home/exec/.cargo/bin"
     "/home/exec/go/bin"
