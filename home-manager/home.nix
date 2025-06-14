@@ -675,7 +675,7 @@
 
         setopt NO_HUP
       '';
-      initExtra = ''
+      initContent = ''
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh;
         if [[ "$ALACRITTY_SOCKET" != "" && "$TMUX" = "" ]]; then tmux a; fi
       '';
