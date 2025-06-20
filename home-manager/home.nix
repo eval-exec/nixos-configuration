@@ -276,7 +276,7 @@
     nodePackages.typescript-language-server
     nuclear
     nvtopPackages.full
-    unstable.nyxt
+    # unstable.nyxt
     obfs4
     ollama
     osdlyrics
