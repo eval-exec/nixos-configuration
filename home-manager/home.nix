@@ -558,6 +558,13 @@
     #   ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
     # '';
   };
+  programs.nh = {
+	  enable = true;
+	  clean.enable = true;
+	  clean.extraArgs = "--keep-since 4d --keep 3";
+	  flake = "/home/exec/Projects/github.com/nixos-configuration";
+  };
+
 
   programs = {
     home-manager.enable = true;
@@ -973,21 +980,21 @@
         };
       };
 
-      slack = {
-        Unit = {
-          Description = "slack";
-          After = [ "graphical-session.target" ];
-        };
-        Install = {
-          WantedBy = [ "graphical-session.target" ];
-        };
-        Service = {
-          Type = "simple";
-          Restart = "always";
-          RestartSec = 3;
-          ExecStart = "${pkgs.slack}/bin/slack --silent";
-        };
-      };
+      # slack = {
+      #   Unit = {
+      #     Description = "slack";
+      #     After = [ "graphical-session.target" ];
+      #   };
+      #   Install = {
+      #     WantedBy = [ "graphical-session.target" ];
+      #   };
+      #   Service = {
+      #     Type = "simple";
+      #     Restart = "always";
+      #     RestartSec = 3;
+      #     ExecStart = "${pkgs.slack}/bin/slack --silent";
+      #   };
+      # };
 
       # discord = {
       #   Unit = {
@@ -1006,21 +1013,21 @@
       #   };
       # };
 
-      thunderbird = {
-        Unit = {
-          Description = "thunderbird";
-          After = [ "graphical-session.target" ];
-        };
-        Install = {
-          WantedBy = [ "graphical-session.target" ];
-        };
-        Service = {
-          Type = "simple";
-          Restart = "always";
-          RestartSec = 3;
-          ExecStart = "${pkgs.thunderbird}/bin/thunderbird";
-        };
-      };
+      # thunderbird = {
+      #   Unit = {
+      #     Description = "thunderbird";
+      #     After = [ "graphical-session.target" ];
+      #   };
+      #   Install = {
+      #     WantedBy = [ "graphical-session.target" ];
+      #   };
+      #   Service = {
+      #     Type = "simple";
+      #     Restart = "always";
+      #     RestartSec = 3;
+      #     ExecStart = "${pkgs.thunderbird}/bin/thunderbird";
+      #   };
+      # };
     };
   };
 
