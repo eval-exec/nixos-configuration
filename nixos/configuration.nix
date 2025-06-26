@@ -336,12 +336,13 @@
     displayManager = {
 
       defaultSession = "plasma";
-      ly.enable = true;
+      ly.enable = false;
 
       sddm = {
         enable = true;
         enableHidpi = true;
         wayland.enable = true;
+        wayland.compositor = "kwin";
       };
       autoLogin = {
         enable = false;
