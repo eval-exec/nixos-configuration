@@ -233,6 +233,7 @@
   #   };
   # };
 
+  services.system76-scheduler.enable = true;
   services = {
     atd.enable = true;
     blueman.enable = false;
