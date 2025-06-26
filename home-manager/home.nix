@@ -123,6 +123,8 @@
     unstable.zed-editor
     unstable.jdt-language-server
     autoconf
+    nvme-cli
+    smartmontools
     automake
     awscli2
     bat
