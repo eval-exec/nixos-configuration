@@ -41,6 +41,7 @@
   #   }
   # ];
   boot.kernelParams = [
+    "nowatchdog"
     "mem_sleep_default=deep"
     "resume_offset=196851712"
     "maxcpus=20"
@@ -65,6 +66,7 @@
   # options snd-hda-intel model=generic
   boot.extraModprobeConfig = '''';
   boot.kernel.sysctl = {
+    "vm.laptop_mode" = 5;
     "kernel.sysrq" = 1;
     "fs.inotify.max_user_watches" = 524288;
   };

@@ -28,6 +28,8 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    envycontrol.url = "github:bayasdev/envycontrol";
+
   };
 
   outputs =
@@ -36,6 +38,7 @@
       nixpkgs,
       home-manager,
       sops-nix,
+      envycontrol,
       claude-desktop,
       ...
     }@inputs:
