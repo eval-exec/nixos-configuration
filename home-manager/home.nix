@@ -567,7 +567,12 @@
     flake = "/home/exec/Projects/github.com/nixos-configuration";
   };
 
-  programs.hyperland.enable = true;
+  wayland.windowManager.hyprland = {
+	  enable = true;
+	  package = pkgs.hyprland;
+	  xwayland.enable = true;
+	  systemd.enable = true;
+  };
 
   programs = {
     home-manager.enable = true;

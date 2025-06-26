@@ -260,7 +260,7 @@
       useXkbConfig = true;
     };
 
-    fwupd.enable = true;
+    fwupd.enable = false;
     desktopManager = {
       plasma6.enable = true;
     };
