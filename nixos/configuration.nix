@@ -351,6 +351,7 @@
       };
 
       videoDrivers = [
+        "modesetting"
         "nvidia"
       ];
 
