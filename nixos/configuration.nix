@@ -227,11 +227,14 @@
       };
     };
   };
-  # specialisation = {
-  #   internal_nvidia = {
-  #     configuration = { services.xserver.videoDrivers = [ "nvidia" ]; };
-  #   };
-  # };
+  specialisation = {
+    tty = {
+      configuration = {
+        services.displayManager.sddm.enable = false;
+        # services.xserver.videoDrivers = [ "nvidia" ];
+      };
+    };
+  };
 
   services.system76-scheduler.enable = true;
   services = {
