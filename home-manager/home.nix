@@ -49,10 +49,9 @@
       allowUnfree = true;
       cudaSupport = false;
       permittedInsecurePackages = [
-       "electron-27.3.11"
-       "electron-32.3.3"
-       ];
-
+        "electron-27.3.11"
+        "electron-32.3.3"
+      ];
 
     };
   };
@@ -392,8 +391,8 @@
 
   home.sessionVariables = {
     EMACS_TELEGA_SERVER_LIB_PREFIX = "${pkgs.unstable.tdlib}";
-    CGO_ENABLED="1";
-    GO111MODULE="auto";
+    CGO_ENABLED = "1";
+    GO111MODULE = "auto";
   };
 
   home.sessionPath = [
@@ -563,12 +562,11 @@
     # '';
   };
   programs.nh = {
-	  enable = true;
-	  clean.enable = true;
-	  clean.extraArgs = "--keep-since 4d --keep 3";
-	  flake = "/home/exec/Projects/github.com/nixos-configuration";
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/exec/Projects/github.com/nixos-configuration";
   };
-
 
   programs = {
     home-manager.enable = true;
@@ -592,9 +590,12 @@
     };
     chromium = {
       enable = true;
-    };
-    google-chrome = {
-      enable = true;
+      package = pkgs.google-chrome;
+      commandLineArgs = [
+        "--disable-crash-reporter"
+        "--disable-crashpad-for-testing"
+        "--disable-crashpad-forwarding"
+      ];
     };
     nix-index = {
       enable = true;
