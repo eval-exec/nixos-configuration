@@ -284,8 +284,8 @@
       enable = true;
     };
     fprintd = {
-      enable = false;
-      tod.enable = false;
+      enable = true;
+      # tod.enable = false;
     };
     keyd = {
       enable = false;
