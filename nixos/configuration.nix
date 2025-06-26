@@ -230,8 +230,15 @@
   specialisation = {
     tty = {
       configuration = {
-        services.displayManager.sddm.enable = false;
-        # services.xserver.videoDrivers = [ "nvidia" ];
+        services.displayManager.sddm.enable = lib.mkForce false;
+        services.desktopManager = {
+          plasma6.enable = lib.mkForce false;
+        };
+        services.flatpak.enable = lib.mkForce false;
+
+        services.xserver = {
+          enable = lib.mkForce false;
+        };
       };
     };
   };

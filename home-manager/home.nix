@@ -591,11 +591,11 @@
     chromium = {
       enable = true;
       package = pkgs.google-chrome;
-      commandLineArgs = [
-        "--disable-crash-reporter"
-        "--disable-crashpad-for-testing"
-        "--disable-crashpad-forwarding"
-      ];
+      # commandLineArgs = [
+      #   "--disable-crash-reporter"
+      #   "--disable-crashpad-for-testing"
+      #   "--disable-crashpad-forwarding"
+      # ];
     };
     nix-index = {
       enable = true;
