@@ -46,21 +46,10 @@
     "resume_offset=196851712"
     "maxcpus=20"
     # "video=eDP-1:3456x2160@60"
-    # "i915.enable_psr=0"
-    # "i915.fastboot=1"
+    "i915.enable_psr=1"
+    "i915.enable_psr2_sel_fetch=1"
     # "i915.enable_guc=3"
     "intel_idle.max_cstate=6"
-
-    # "amdgpu.ppfeaturemask=0xffffffff"
-    # "amdgpu.aspm=1"
-    # "amdgpu.dc=0"
-    # "amdgpu.dpm=0"
-    # "amdgpu.gpu_recovery=1"
-    # "amdgpu.exp_hw_support=1"
-    # "amdgpu.halt_if_hws_hang=1"
-
-    # "radeon.si_support=0"
-    # "amdgpu.si_support=1"
   ];
   # options snd-intel-dspcfg dsp_driver=1
   # options snd-hda-intel model=generic
