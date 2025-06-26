@@ -83,7 +83,6 @@
     # graalvm-ce
     # inputs.ghostty.packages.x86_64-linux.default
     inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
-    inputs.envycontrol.packages.x86_64-linux.default
     powerstat
     # inputs.quickshell.packages.x86_64-linux.default
     # ionshare
@@ -567,6 +566,8 @@
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/exec/Projects/github.com/nixos-configuration";
   };
+
+  programs.hyperland.enable = true;
 
   programs = {
     home-manager.enable = true;

@@ -336,6 +336,7 @@
     displayManager = {
 
       defaultSession = "plasma";
+      ly.enable = true;
 
       sddm = {
         enable = true;
