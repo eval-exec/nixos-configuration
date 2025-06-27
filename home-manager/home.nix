@@ -521,7 +521,7 @@
   };
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.kdeApplications.xdg-desktop-portal-kde ];
+  xdg.portal.extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
 
   services = {
     mpd = {
