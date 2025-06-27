@@ -520,6 +520,9 @@
     };
   };
 
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.kdeApplications.xdg-desktop-portal-kde ];
+
   services = {
     mpd = {
       enable = false;
@@ -568,10 +571,10 @@
   };
 
   wayland.windowManager.hyprland = {
-	  enable = true;
-	  package = pkgs.hyprland;
-	  xwayland.enable = true;
-	  systemd.enable = true;
+    enable = true;
+    package = pkgs.hyprland;
+    xwayland.enable = true;
+    systemd.enable = true;
   };
 
   programs = {

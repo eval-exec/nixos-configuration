@@ -285,7 +285,8 @@
     };
     fprintd = {
       enable = true;
-      # tod.enable = false;
+      tod.enable = true;
+      tod.driver = pkgs.libfprint-2-tod1-goodix;
     };
     keyd = {
       enable = false;
