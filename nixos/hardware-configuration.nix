@@ -110,22 +110,22 @@
       };
     };
   };
-  # hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
-  # hardware.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
+  # services.pulseaudio.enable = false;
+  services.pulseaudio.package = pkgs.pulseaudioFull;
+  # services.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
 
   hardware.enableAllFirmware = true;
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable = true;
+  hardware.graphics.driSupport32Bit = true;
   # # nixpkgs.config.packageOverrides = pkgs: {
   # #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
   # # };
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     intel-media-driver # LIBVA_DRIVER_NAME=iHD
     intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
     libvdpau-va-gl
   ];
-  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
+  hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
   hardware.nvidia = {
     open = true;
     # nvidiaSettings = false;

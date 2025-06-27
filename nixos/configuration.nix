@@ -267,7 +267,7 @@
 
     samba = {
       enable = true;
-      shares = {
+      settings = {
         public = {
           path = "/home/exec/Temp/samba";
           browseable = true;
