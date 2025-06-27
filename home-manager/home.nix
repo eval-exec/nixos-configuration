@@ -521,6 +521,7 @@
   };
 
   xdg.portal.enable = true;
+  xdg.portal.configPackages = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
   xdg.portal.extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
 
   services = {
@@ -568,13 +569,6 @@
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/exec/Projects/github.com/nixos-configuration";
-  };
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-    package = pkgs.hyprland;
-    xwayland.enable = true;
-    systemd.enable = true;
   };
 
   programs = {

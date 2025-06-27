@@ -567,7 +567,7 @@
       enable = true;
       decompressFonts = true;
     };
-    enableDefaultPackages = false;
+    enableDefaultPackages = true;
     packages = with pkgs; [
       iosevka
       nerd-fonts.jetbrains-mono
@@ -577,7 +577,13 @@
       sarasa-gothic
       source-han-sans
       source-han-serif
-      # material-design-icons
+      liberation_ttf
+      ubuntu_font_family
+      fira-code
+      fira-code-symbols
+      mplus-outline-fonts.githubRelease
+      dina-font
+      proggyfonts
     ];
     fontconfig = {
       enable = true;
