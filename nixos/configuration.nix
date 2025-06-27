@@ -663,6 +663,7 @@
     qt6.qtwebsockets
     kdePackages.qtwebsockets
     wayland-utils
+    rnnoise-plugin
     vulkan-tools
     kdePackages.qtmultimedia
     gst_all_1.gst-libav
