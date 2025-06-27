@@ -463,20 +463,56 @@
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
       jack.enable = false;
-
-      # use the example session manager (no others are packaged yet so this is enabled by default,
-      # no need to redefine it in your config for now)
-      #media-session.enable = true;
-      # wireplumber.extraConfig."10-bluez" = {
-      #   "monitor.bluez.properties" = {
-      #     "bluez5.enable-sbc-xq" = true;
-      #     "bluez5.enable-msbc" = true;
-      #     "bluez5.enable-hw-volume" = true; # ## <<< Enables touch slider on headphones for fader gain, pause, and unpause functionality
-      #     "bluez5.auto-connect" = [ "a2dp_sink" ]; # ## <<< Autoconnect to HD 48khz mode on connect
-      #     "bluez5.roles" = [
-      #       "a2dp_sink"
-      #       "a2dp_source"
-      #     ]; # ## <<< This  sets the BT driver role to a2dp sink and source, which are the HD 44.1khz and 48khz module modesets but doesnt load the modules for hsp, which is the handset driver that enables the mic.
+      extraLv2Packages = with pkgs; [
+        lsp-plugins
+        rnnoise-plugin
+      ];
+      # extraConfig.pipewire = {
+      #   "20-noise-cancel" = {
+      #     "context.modules" = [
+      #       {
+      #         # https://github.com/werman/noise-suppression-for-voice
+      #         "name" = "libpipewire-module-filter-chain";
+      #         "flags" = [
+      #           "ifexists"
+      #           "nofail"
+      #         ];
+      #         "args" = {
+      #           "node.description" = "Noise Canceling Source";
+      #           "media.name" = "Noise Canceling Source";
+      #           "filter.graph" = {
+      #             "nodes" = [
+      #               {
+      #                 "type" = "ladspa";
+      #                 "name" = "rnnoise";
+      #                 "plugin" = "${pkgs.rnnoise-plugin}/lib/ladspa/librnnoise_ladspa.so";
+      #                 "label" = "noise_suppressor_mono";
+      #                 "control" = {
+      #                   "VAD Threshold (%)" = 35.0;
+      #                   "VAD Grace Period (ms)" = 500;
+      #                   "Retroactive VAD Grace (ms)" = 30;
+      #                 };
+      #               }
+      #             ];
+      #           };
+      #           "capture.props" = {
+      #             # "node.name" = "capture.rnnoise_source";
+      #             "node.passive" = true;
+      #             "audio.rate" = 48000;
+      #             "node.name" = "noise_cancel.cancel";
+      #             "node.description" = "Noise Cancel Capture";
+      #             "target.object" = "echo_cancel.echoless";
+      #           };
+      #           "playback.props" = {
+      #             "node.name" = "noise_cancel.playback";
+      #             "node.description" = "Noise Cancel Playback";
+      #             "media.class" = "Audio/Source";
+      #             "audio.rate" = 48000;
+      #             "node.autoconnect" = false;
+      #           };
+      #         };
+      #       }
+      #     ];
       #   };
       # };
     };
@@ -663,8 +699,8 @@
     qt6.qtwebsockets
     kdePackages.qtwebsockets
     wayland-utils
-    rnnoise-plugin
     vulkan-tools
+    easyeffects
     kdePackages.qtmultimedia
     gst_all_1.gst-libav
     # (python3.withPackages (python-pkgs: [ python-pkgs.websockets ]))
@@ -837,7 +873,6 @@
       nspr
       nss
       pango
-      pipewire
       systemd
       icu
       openssl
@@ -893,10 +928,4 @@
     };
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
-  # system.activationScripts = {
-  #   wallpaper-engine-kde-plugin.text = ''
-  #     wallpaperenginetarget=share/plasma/wallpapers/com.github.catsout.wallpaperEngineKde
-  #     ln -s ${wallpaper-engine-kde-plugin}/$wallpaperenginetarget /home/exec/.local/$wallpaperenginetarget
-  #   '';
-  # };
 }

@@ -568,7 +568,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/exec/Projects/github.com/nixos-configuration";
+    flake = "/home/exec/Projects/github.com/eval-exec/nixos-configuration";
   };
 
   programs = {
