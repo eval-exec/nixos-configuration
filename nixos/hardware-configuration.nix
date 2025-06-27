@@ -116,7 +116,7 @@
 
   hardware.enableAllFirmware = true;
   hardware.graphics.enable = true;
-  hardware.graphics.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
   # # nixpkgs.config.packageOverrides = pkgs: {
   # #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
   # # };
