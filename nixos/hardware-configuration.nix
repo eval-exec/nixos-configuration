@@ -50,7 +50,7 @@
     "i915.enable_fbc=1"
     "i915.enable_psr2_sel_fetch=1"
     # "i915.enable_guc=3"
-    "intel_idle.max_cstate=6"
+    "intel_idle.max_cstate=9"
   ];
   # options snd-intel-dspcfg dsp_driver=1
   # options snd-hda-intel model=generic
