@@ -43,7 +43,7 @@
   boot.kernelParams = [
     "nowatchdog"
     "mem_sleep_default=deep"
-    "resume_offset=196851712"
+    "resume_offset=89067520"
     "maxcpus=20"
     # "video=eDP-1:3456x2160@60"
     "i915.enable_psr=1"
@@ -80,7 +80,7 @@
     # { device = "/dev/disk/by-uuid/5dd32dc4-e574-41b8-b0e0-3a6385924b79"; }
     {
       device = "/var/lib/swapfile";
-      size = 96 * 1024;
+      size = 128 * 1024;
     }
   ];
 
