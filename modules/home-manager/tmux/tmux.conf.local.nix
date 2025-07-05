@@ -387,7 +387,7 @@ bind -n C-b send-keys C-b \;
 
 bind -n C-MouseDown1Pane  {
   setw -g word-separators ' "=()[],'
-    run-shell '/home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient --eval "(alacritty-open \"#{mouse_word}\" \"#{pane_current_path}\" )" &> /dev/null & '
+    run-shell 'emacsclient --eval "(alacritty-open \"#{mouse_word}\" \"#{pane_current_path}\" )" &> /dev/null & '
 }
 
 
