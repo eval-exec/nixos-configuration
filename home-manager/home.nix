@@ -99,6 +99,7 @@
     # tigervnc
     unstable.quickemu
     unstable.davinci-resolve
+    unstable.clash-meta
     # unstable.vagrant
     # vivaldi
     # vivaldi-ffmpeg-codecs
