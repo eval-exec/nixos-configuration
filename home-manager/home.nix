@@ -98,7 +98,7 @@
     # spotdl
     # tigervnc
     unstable.quickemu
-    unstable.davinci-resolve
+    # unstable.davinci-resolve
     unstable.clash-meta
     # unstable.vagrant
     # vivaldi
@@ -813,6 +813,7 @@
       clash = {
         Unit = {
           Description = "clash";
+          X-SwitchMethod = "keep-old";
           After = [ "network-online.target" ];
           Wants = [ "network-online.target" ];
         };
@@ -827,6 +828,7 @@
       matrix = {
         Unit = {
           Description = "matrix";
+          X-SwitchMethod = "keep-old";
           After = [ "network-online.target" ];
           Wants = [ "network-online.target" ];
         };
@@ -844,6 +846,7 @@
       matrix_port_forward = {
         Unit = {
           Description = "matrix port formward";
+          X-SwitchMethod = "keep-old";
           Wants = [ "network-online.target" ];
           After = [
             "network-online.target"
@@ -863,6 +866,7 @@
       watchman = {
         Unit = {
           Description = "Watchman for user %i";
+          X-SwitchMethod = "keep-old";
           Wants = [ "network-online.target" ];
           After = [ "network-online.target" ];
         };
@@ -942,6 +946,7 @@
       terminal-daemon = {
         Unit = {
           After = [ "tmux.target" ];
+          X-SwitchMethod = "keep-old";
           Description = "terminal daemon";
         };
         Install = {
@@ -957,6 +962,7 @@
       tmux = {
         Unit = {
           Description = "tmux";
+          X-SwitchMethod = "keep-old";
           After = [ "graphical-session.target" ];
         };
         Install = {
@@ -972,6 +978,7 @@
       emacs = {
         Unit = {
           Description = "emacs";
+          X-SwitchMethod = "keep-old";
           After = [ "graphical-session.target" ];
         };
         Install = {
