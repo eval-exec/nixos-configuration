@@ -686,6 +686,7 @@
     gpu-screen-recorder-gtk # GUI
     clang
     gcc
+    libgcc
     (aspellWithDicts (
       ds: with ds; [
         en
@@ -842,6 +843,7 @@
       libxml2
       fuse3
       fuse
+      libgcc
       libgccjit
       libgit2
       boost
