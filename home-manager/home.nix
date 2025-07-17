@@ -114,16 +114,18 @@
 
     amdgpu_top
     android-tools
+    watchexec
     ascii
     asciidoc
     ast-grep
     guile
     atool
-    unstable.zed-editor
+    # unstable.zed-editor # I installed zed by https://zed.dev/install.sh | ZED_CHANNEL=preivew sh
     unstable.jdt-language-server
     autoconf
     nvme-cli
     smartmontools
+    autotools-language-server
     automake
     awscli2
     bat

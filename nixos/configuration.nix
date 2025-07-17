@@ -245,6 +245,12 @@
   };
 
   services.system76-scheduler.enable = true;
+
+  services.scx = {
+    enable = true;
+    scheduler = "scx_bpfland";
+  };
+
   services = {
     atd.enable = true;
     blueman.enable = false;
@@ -710,6 +716,7 @@
     duf
     file
     git
+    git-lfs
     glibcInfo
     gnumake
     interception-tools
@@ -832,6 +839,7 @@
     enable = true;
     libraries = with pkgs; [
       stdenv.cc.cc.lib
+      glibc
       wayland
       vulkan-loader
       # cudaPackages.cuda_cudart

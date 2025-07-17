@@ -41,6 +41,8 @@
   #   }
   # ];
   boot.kernelParams = [
+    "rcu_nocbs=all"
+    "rcutree.enable_rcu_lazy=1"
     "nowatchdog"
     "mem_sleep_default=deep"
     "resume_offset=89067520"
