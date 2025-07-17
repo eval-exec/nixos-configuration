@@ -41,6 +41,8 @@
   #   }
   # ];
   boot.kernelParams = [
+    "nvme.noacpi=1"
+    "laptop_mode=1"
     "rcu_nocbs=all"
     "rcutree.enable_rcu_lazy=1"
     "nowatchdog"
