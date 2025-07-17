@@ -251,6 +251,10 @@
     scheduler = "scx_bpfland";
   };
 
+  services.journald.extraConfig = ''
+    Storage=volatile
+  '';
+
   services = {
     atd.enable = true;
     blueman.enable = false;
