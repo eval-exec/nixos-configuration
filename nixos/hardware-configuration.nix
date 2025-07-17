@@ -23,7 +23,7 @@
     "rtsx_pci_sdmmc"
   ];
   boot.initrd.kernelModules = [ ];
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
   boot.extraModulePackages = [
     # pkgs.linuxPackages_latest.v4l2loopback
   ];
