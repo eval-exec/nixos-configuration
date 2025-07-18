@@ -585,8 +585,9 @@
 
     virtualbox = {
       host = {
-        enable = true;
-        # package = pkgs-stable.virtualbox;
+        enable = false;
+        package = pkgs.linuxKernel.packages.linux_6_15.virtualbox;
+        enableHardening = false;
         # enableExtensionPack = true;
       };
       guest.enable = false;

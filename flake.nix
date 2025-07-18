@@ -40,6 +40,7 @@
       home-manager,
       sops-nix,
       claude-desktop,
+      chaotic,
       ...
     }@inputs:
     let
@@ -85,6 +86,7 @@
             # > Our main nixos configuration file <
             ./nixos/configuration.nix
             sops-nix.nixosModules.sops
+            chaotic.nixosModules.default # IMPORTANT
           ];
         };
       };
