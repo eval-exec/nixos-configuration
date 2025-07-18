@@ -594,6 +594,9 @@
     };
     docker = {
       enable = true;
+      daemon.settings = {
+        bridge = "none";
+      };
     };
     vmware = {
       host = {
