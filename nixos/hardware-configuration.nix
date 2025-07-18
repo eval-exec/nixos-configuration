@@ -62,7 +62,7 @@
   # options snd-hda-intel model=generic
   boot.extraModprobeConfig = ''
     options iwlwifi power_save=Y power_level=5 disable_11ac=1 disable_11ax=1 uapsd_disable=1
-    options iwlmvm power_scheme=1
+    options iwlmvm power_scheme=3
   '';
   boot.kernel.sysctl = {
     "vm.laptop_mode" = 5;

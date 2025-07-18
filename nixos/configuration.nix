@@ -167,7 +167,8 @@
     networkmanager = {
       enable = true;
       dns = "none";
-      wifi.powersave = true;
+      wifi.powersave = false;
+      wifi.backend = "iwd";
       logLevel = "INFO";
       dispatcherScripts = [
         {
