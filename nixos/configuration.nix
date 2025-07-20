@@ -247,7 +247,7 @@
     };
   };
 
-  services.system76-scheduler.enable = true;
+  # services.system76-scheduler.enable = true;
 
   services.scx = {
     enable = true;
@@ -468,7 +468,7 @@
     };
 
     # Enable CUPS to print documents.
-    printing.enable = true;
+    printing.enable = false;
 
     pipewire = {
       enable = true;
@@ -477,10 +477,18 @@
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
       jack.enable = false;
-      extraLv2Packages = with pkgs; [
-        lsp-plugins
-        rnnoise-plugin
-      ];
+      wireplumber.extraConfig."10-disable-camera" = {
+        "wireplumber.profiles" = {
+          main = {
+            "monitor.libcamera" = "disabled";
+          };
+        };
+
+      };
+      # extraLv2Packages = with pkgs; [
+      #   lsp-plugins
+      #   rnnoise-plugin
+      # ];
       # extraConfig.pipewire = {
       #   "20-noise-cancel" = {
       #     "context.modules" = [
