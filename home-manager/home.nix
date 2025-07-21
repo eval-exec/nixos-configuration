@@ -707,7 +707,6 @@
         rustrover = "~/.local/share/JetBrains/Toolbox/apps/rustrover/bin/rustrover.sh";
         clion = "~/.local/share/JetBrains/Toolbox/apps/clion-nova/bin/clion.sh";
         idea = "~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea.sh";
-        update = "sudo nixos-rebuild switch";
         # emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
         magit = ''
           \emacs -Q -nw -l ~/.emacs.d/init-nw.el --funcall magit
