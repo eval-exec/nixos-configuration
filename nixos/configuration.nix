@@ -168,7 +168,7 @@
       enable = true;
       dns = "none";
       wifi.powersave = false;
-      wifi.backend = "iwd";
+      wifi.backend = "wpa_supplicant";
       logLevel = "INFO";
       dispatcherScripts = [
         {
@@ -748,6 +748,7 @@
     man-pages-posix
     wireplumber
     ncurses
+    ncurses5
     neovim
     nodejs
     openssl
