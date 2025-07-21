@@ -130,6 +130,7 @@
     awscli2
     bat
     bc
+    discord
     bear
     bitcoin
     bottles
@@ -166,7 +167,6 @@
     difftastic
     dig
     direnv
-    discord
     distcc
     dmidecode
     kdePackages.dolphin
@@ -1047,5 +1047,12 @@
       # };
     };
   };
+#   wayland.windowManager.hyprland.enable = true; # enable Hyprland
+# #   hyprland.systemd.enable = true;
+#
+#   wayland.windowManager.hyprland.plugins = [
+#     inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+#     # "/absolute/path/to/plugin.so"
+#   ];
 
 }

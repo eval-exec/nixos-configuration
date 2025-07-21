@@ -688,6 +688,7 @@
       VISUAL = "nvim";
       MOZ_ENABLE_WAYLAND = "1";
       LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
     };
     localBinInPath = true;
     pathsToLink = [ ];
@@ -935,10 +936,10 @@
   programs.htop.enable = true;
   programs.mosh.enable = true;
   xdg.portal.xdgOpenUsePortal = true;
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  # };
 
   systemd = {
     services = {
@@ -964,9 +965,4 @@
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true; # recommended for most users
-    xwayland.enable = true; # Xwayland can be disabled.
-  };
 }

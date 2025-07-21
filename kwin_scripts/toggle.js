@@ -1,4 +1,4 @@
-function toggleClient(app_name) {
+function toggleClient(p_app_name, p_caption) {
   const getMethods = (obj) => {
     let properties = new Set();
     let currentObj = obj;
@@ -12,21 +12,27 @@ function toggleClient(app_name) {
     );
   };
 
-  // console.log("in toggle client", app_name);
   let clients = workspace.windowList();
 
   let client = null;
 
   for (var i = 0; i < clients.length; i++) {
     let resource_name = clients[i].resourceName;
-    // console.log("resource name: ", resource_name);
+    let caption = clients[i].caption;
+    // console.log(
+    //   "iter: resouce: ",
+    //   resource_name.padEnd(20),
+    //   "caption: ",
+    //   caption,
+    // );
 
-    if (resource_name == app_name) {
-      client = clients[i];
-      break;
-    }
-    if (app_name == "emacs") {
-      if (resource_name == "emacs-31.0.50") {
+    if (p_caption) {
+      if (caption && caption.includes(p_caption)) {
+        client = clients[i];
+        break;
+      }
+    } else {
+      if (resource_name == p_app_name) {
         client = clients[i];
         break;
       }
@@ -43,7 +49,7 @@ function toggleClient(app_name) {
       }
     }
   } else {
-    console.log("not found target client, we theses:", app_name);
+    console.log("not found target client, we theses:", p_app_name);
     for (var i = 0; i < clients.length; i++) {
       let resource_name = clients[i].resourceName;
       console.log("we have ", resource_name);
@@ -60,11 +66,11 @@ function toggleEmacs() {
 }
 
 function toggleChrome() {
-  toggleClient("google-chrome");
+  toggleClient("chrome");
 }
 
 function toggleChatGPT() {
-  toggleClient("crx_cadlkienfkclaiaibeoongdcgmdikeeg");
+  toggleClient("chrome", "ChatGPT");
 }
 
 {
