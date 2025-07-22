@@ -712,6 +712,7 @@
     gpu-screen-recorder-gtk # GUI
     clang
     gcc
+    gcc-unwrapped
     libgcc
     (aspellWithDicts (
       ds: with ds; [
@@ -868,11 +869,11 @@
       sqlite
       libaio
       pcsclite
-
       libxml2
       fuse3
       fuse
       libgcc
+      gcc-unwrapped.lib
       libgccjit
       libgit2
       boost

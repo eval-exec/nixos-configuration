@@ -32,7 +32,7 @@ function toggleClient(p_app_name, p_caption) {
         break;
       }
     } else {
-      if (resource_name == p_app_name) {
+      if (resource_name == p_app_name && !caption.includes("ChatGPT")) {
         client = clients[i];
         break;
       }

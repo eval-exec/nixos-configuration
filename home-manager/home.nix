@@ -24,6 +24,7 @@
 
   # home-manager.backupFileExtension = "hm-backup";
 
+
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -166,7 +167,9 @@
     deno
     difftastic
     dig
-    direnv
+    unstable.direnv
+    unstable.nix-direnv
+    unstable.devenv
     distcc
     dmidecode
     kdePackages.dolphin
