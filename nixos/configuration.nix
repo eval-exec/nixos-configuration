@@ -226,6 +226,7 @@
           fcitx5-with-addons
           fcitx5-configtool
           fcitx5-gtk
+          fcitx5-pinyin-zhwiki
           kdePackages.fcitx5-qt
         ];
       };
