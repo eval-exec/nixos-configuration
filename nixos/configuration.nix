@@ -973,16 +973,16 @@
           ExecStart = "${pkgs.sunshine}/bin/sunshine";
         };
       };
-      disable_cpu_turbo = {
-        wantedBy = [ "sysinit.target" ];
-        serviceConfig = {
-          Type = "oneshot";
-          User = "root";
-          ExecStart = ''/bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
-          ExecStop = ''/bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
-          RemainAfterExit = true;
-        };
-      };
+      # disable_cpu_turbo = {
+      #   wantedBy = [ "sysinit.target" ];
+      #   serviceConfig = {
+      #     Type = "oneshot";
+      #     User = "root";
+      #     ExecStart = ''/bin/sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+      #     ExecStop = ''/bin/sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"'';
+      #     RemainAfterExit = true;
+      #   };
+      # };
     };
   };
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
