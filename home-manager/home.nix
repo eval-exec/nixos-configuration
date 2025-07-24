@@ -256,6 +256,7 @@
     m4
     magic-wormhole
     mailutils
+    new-mailspring
     mercurial
     mermaid-cli
     meson

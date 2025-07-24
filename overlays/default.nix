@@ -1,5 +1,5 @@
 # This file defines overlays
-{ inputs, ... }:
+{inputs, ... }:
 {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs final.pkgs;
@@ -11,6 +11,14 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+
+    new-mailspring = prev.mailspring.overrideAttrs (oldAttrs: {
+      src = final.fetchurl {
+        url = "https://github.com/Foundry376/Mailspring/releases/download/1.16.0/mailspring-1.16.0-amd64.deb";
+        hash = "sha256-iJ6VzwvNTIRqUq9OWNOWOSuLbqhx+Lqx584kuyIslyA=";
+      };
+
+    });
 
     # # Use the master branch of bluez/bluez
     # unstable.bluez = prev.bluez.overrideAttrs (oldAttrs: {
