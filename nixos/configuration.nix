@@ -701,8 +701,8 @@
     # };
     variables = {
       # XKB_DEFAULT_LAYOUT = "us";
-      # NIXOS_OZONE_WL = "1";
-      # GDK_BACKEND = "wayland";
+      NIXOS_OZONE_WL = "1";
+      GDK_BACKEND = "wayland";
       OLLAMA_HOST = "http://127.0.0.1:11434";
       GTK_IM_MODULE = lib.mkForce "";
       QT_IM_MODULE = lib.mkForce "";

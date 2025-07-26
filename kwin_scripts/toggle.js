@@ -1,4 +1,5 @@
-function toggleClient(p_app_name, p_caption) {
+function toggleClient(p_app_name, p_caption) {	
+	console.log("try to toggle", p_app_name, p_caption)
   const getMethods = (obj) => {
     let properties = new Set();
     let currentObj = obj;
@@ -19,21 +20,23 @@ function toggleClient(p_app_name, p_caption) {
   for (var i = 0; i < clients.length; i++) {
     let resource_name = clients[i].resourceName;
     let caption = clients[i].caption;
-    console.log(
-      "iter: resouce: ",
-      resource_name.padEnd(20),
-      "caption: ",
-      caption,
-    );
+    // console.log(
+    //   "iter: resouce: ",
+    //   resource_name.padEnd(20),
+    //   "caption: ",
+    //   caption,
+    // );
 
     if (p_caption) {
-      if (caption && caption.includes(p_caption)) {
+      if (resource_name == p_app_name && caption && caption.includes(p_caption)) {
         client = clients[i];
+	console.log("found", resource_name, ", caption:" , caption)
         break;
       }
     } else {
-      if (resource_name == p_app_name && !caption.startsWith("ChatGPT - ")) {
+      if (resource_name == p_app_name && !caption.startsWith("ChatGPT")) {
         client = clients[i];
+	console.log("found", resource_name, ", caption:" , caption)
         break;
       }
     }
@@ -52,7 +55,8 @@ function toggleClient(p_app_name, p_caption) {
     console.log("not found target client ",p_app_name, p_caption, ", we theses:", p_app_name);
     for (var i = 0; i < clients.length; i++) {
       let resource_name = clients[i].resourceName;
-      console.log("we have ", resource_name);
+    let caption = clients[i].caption;
+      console.log("we have: ", resource_name.padEnd(20), ", caption: ", caption);
     }
   }
 }
@@ -70,7 +74,7 @@ function toggleChrome() {
 }
 
 function toggleChatGPT() {
-  toggleClient("chrome", "ChatGPT - ");
+  toggleClient("chrome", "ChatGPT");
 }
 
 {
@@ -119,7 +123,7 @@ function toggleChatGPT() {
   let registed = registerShortcut(
     "ToggleChatGPT",
     "ToggleChatGPT",
-    "Meta+C",
+    "Meta+9",
     toggleChatGPT,
   );
 
