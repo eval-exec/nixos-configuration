@@ -652,6 +652,7 @@
     };
     enableDefaultPackages = true;
     packages = with pkgs; [
+    symbola
       iosevka
       nerd-fonts.jetbrains-mono
       noto-fonts-cjk-sans

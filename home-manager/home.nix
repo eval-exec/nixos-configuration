@@ -24,7 +24,6 @@
 
   # home-manager.backupFileExtension = "hm-backup";
 
-
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -89,6 +88,7 @@
     # ionshare
     # jetbrains.clion
     # jetbrains.goland
+    chromium
     # jetbrains.idea-ultimate
     # microsoft-edge-dev
     # nur.repos.linyinfeng.wemeet
@@ -137,6 +137,7 @@
     bottles
     brave
     browsh
+    libva-utils
     gnuplot
     btop
     bun
@@ -355,6 +356,7 @@
     unstable.gopls
     unstable.nix-search-cli
     unstable.obsidian
+    obs-cmd
     unstable.qbittorrent
     unstable.shell-gpt
     unstable.warp-terminal
@@ -583,6 +585,11 @@
 
     obs-studio = {
       enable = true;
+      package = (
+        pkgs.obs-studio.override {
+          cudaSupport = true;
+        }
+      );
       plugins = with pkgs.obs-studio-plugins; [ obs-backgroundremoval ];
     };
     vscode = {
@@ -1051,12 +1058,12 @@
       # };
     };
   };
-#   wayland.windowManager.hyprland.enable = true; # enable Hyprland
-# #   hyprland.systemd.enable = true;
-#
-#   wayland.windowManager.hyprland.plugins = [
-#     inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
-#     # "/absolute/path/to/plugin.so"
-#   ];
+  #   wayland.windowManager.hyprland.enable = true; # enable Hyprland
+  # #   hyprland.systemd.enable = true;
+  #
+  #   wayland.windowManager.hyprland.plugins = [
+  #     inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+  #     # "/absolute/path/to/plugin.so"
+  #   ];
 
 }

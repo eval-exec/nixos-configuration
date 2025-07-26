@@ -19,12 +19,12 @@ function toggleClient(p_app_name, p_caption) {
   for (var i = 0; i < clients.length; i++) {
     let resource_name = clients[i].resourceName;
     let caption = clients[i].caption;
-    // console.log(
-    //   "iter: resouce: ",
-    //   resource_name.padEnd(20),
-    //   "caption: ",
-    //   caption,
-    // );
+    console.log(
+      "iter: resouce: ",
+      resource_name.padEnd(20),
+      "caption: ",
+      caption,
+    );
 
     if (p_caption) {
       if (caption && caption.includes(p_caption)) {
@@ -32,7 +32,7 @@ function toggleClient(p_app_name, p_caption) {
         break;
       }
     } else {
-      if (resource_name == p_app_name && !caption.includes("ChatGPT")) {
+      if (resource_name == p_app_name && !caption.startsWith("ChatGPT - ")) {
         client = clients[i];
         break;
       }
@@ -49,7 +49,7 @@ function toggleClient(p_app_name, p_caption) {
       }
     }
   } else {
-    console.log("not found target client, we theses:", p_app_name);
+    console.log("not found target client ",p_app_name, p_caption, ", we theses:", p_app_name);
     for (var i = 0; i < clients.length; i++) {
       let resource_name = clients[i].resourceName;
       console.log("we have ", resource_name);
@@ -70,7 +70,7 @@ function toggleChrome() {
 }
 
 function toggleChatGPT() {
-  toggleClient("chrome", "ChatGPT");
+  toggleClient("chrome", "ChatGPT - ");
 }
 
 {
