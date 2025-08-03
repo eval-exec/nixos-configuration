@@ -276,6 +276,7 @@
         energy_performance_preference = "performance";
         turbo = "auto"; # Or "always", "never"
         energy_perf_bias = "balance_performance";
+        scaling_max_freq = 5400000;
       };
 
     };
@@ -721,6 +722,7 @@
     # libsForQt5.xdg-desktop-portal-kde
     # libinput
     kdePackages.xdg-desktop-portal-kde
+    linuxKernel.packages.linux_6_15.perf
     kdePackages.kde-gtk-config
     kdePackages.qtvirtualkeyboard
     kdePackages.plasma-sdk

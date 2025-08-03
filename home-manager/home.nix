@@ -95,6 +95,7 @@
     # nur.repos.xddxdd.baidunetdisk
     # nur.repos.xddxdd.netease-cloud-music
     # nur.repos.xddxdd.qqmusic
+    stress-ng
     # nur.repos.xddxdd.wechat-uos
     # spotdl
     # tigervnc
