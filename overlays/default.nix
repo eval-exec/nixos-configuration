@@ -1,5 +1,5 @@
 # This file defines overlays
-{inputs, ... }:
+{ inputs, ... }:
 {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs final.pkgs;
@@ -12,7 +12,12 @@
     # ...
     # });
 
-    new-mailspring = prev.mailspring.overrideAttrs (oldAttrs: {
+    tmux = prev.tmux.overrideAttrs (oldAttrs: {
+      NIX_CFLAGS_COMPILE = "-v";
+      CFLAGS = (oldAttrs.CFLAGS or "") + " -O3 -flto -march=native";
+    });
+
+    mailspring = prev.mailspring.overrideAttrs (oldAttrs: {
       src = final.fetchurl {
         url = "https://github.com/Foundry376/Mailspring/releases/download/1.16.0/mailspring-1.16.0-amd64.deb";
         hash = "sha256-iJ6VzwvNTIRqUq9OWNOWOSuLbqhx+Lqx584kuyIslyA=";

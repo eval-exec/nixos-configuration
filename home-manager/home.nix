@@ -258,7 +258,8 @@
     m4
     magic-wormhole
     mailutils
-    new-mailspring
+    mailspring
+    desktop-file-utils
     mercurial
     mermaid-cli
     meson
@@ -384,7 +385,7 @@
     zerotierone
     zip
     unstable.zig
-    zlib
+    zlib-ng
     unstable.zls
     zoxide
     zsh

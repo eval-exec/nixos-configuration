@@ -812,7 +812,7 @@
     xorg.xkbcomp
     xorg.xmodmap
     xorg.xwininfo
-    zlib
+    zlib-ng
     # nvidia-vaapi-driver
   ];
 
@@ -957,7 +957,7 @@
       xorg.xcbutilerrors
       xorg.xcbutil
 
-      zlib
+      zlib-ng
     ];
   };
   programs.htop.enable = true;

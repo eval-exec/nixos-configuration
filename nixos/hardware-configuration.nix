@@ -23,7 +23,7 @@
     "rtsx_pci_sdmmc"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto.cachyOverride { mArch = "GENERIC_V4"; };
   boot.extraModulePackages = [
     # pkgs.linuxPackages_latest.v4l2loopback
   ];
@@ -136,7 +136,7 @@
     libvdpau-va-gl
     intel-ocl
     nvidia-vaapi-driver
-    intel-compute-runtime 
+    intel-compute-runtime
     onevpl-intel-gpu
     mesa
   ];
