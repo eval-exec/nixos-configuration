@@ -82,7 +82,7 @@
     # github-desktop
     # graalvm-ce
     # inputs.ghostty.packages.x86_64-linux.default
-    inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
+    # inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
     powerstat
     # inputs.quickshell.packages.x86_64-linux.default
     # ionshare
@@ -261,6 +261,7 @@
     mailspring
     desktop-file-utils
     mercurial
+    # linux-manual
     mermaid-cli
     meson
     micro
@@ -592,8 +593,9 @@
           cudaSupport = true;
         }
       );
-      plugins = with pkgs.obs-studio-plugins; [ obs-backgroundremoval 
-	      obs-websocket 
+      plugins = with pkgs.obs-studio-plugins; [
+        obs-backgroundremoval
+        obs-websocket
       ];
     };
     vscode = {

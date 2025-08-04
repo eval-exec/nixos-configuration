@@ -769,7 +769,6 @@
     libclang
     libcxx
     libvterm
-    linux-manual
     lldb
     man-pages-posix
     man-pages-posix
@@ -887,6 +886,7 @@
       stdenv.cc.cc.lib
       glibc
       glibc_multi
+      pkgsi686Linux.glibc
       wayland
       vulkan-loader
       # cudaPackages.cuda_cudart
