@@ -653,7 +653,7 @@
     };
     enableDefaultPackages = true;
     packages = with pkgs; [
-    symbola
+      symbola
       iosevka
       nerd-fonts.jetbrains-mono
       noto-fonts-cjk-sans
@@ -722,6 +722,7 @@
     # libsForQt5.xdg-desktop-portal-kde
     # libinput
     kdePackages.xdg-desktop-portal-kde
+    pkgsi686Linux.glibc
     linuxKernel.packages.linux_6_15.perf
     kdePackages.kde-gtk-config
     kdePackages.qtvirtualkeyboard
@@ -886,6 +887,7 @@
     libraries = with pkgs; [
       stdenv.cc.cc.lib
       glibc
+      glibc_multi
       wayland
       vulkan-loader
       # cudaPackages.cuda_cudart
