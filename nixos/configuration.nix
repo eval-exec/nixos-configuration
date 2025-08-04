@@ -617,7 +617,7 @@
     virtualbox = {
       host = {
         enable = false;
-        package = pkgs.linuxKernel.packages.linux_6_15.virtualbox;
+        package = pkgs.linuxKernel.packages.linux_6_16.virtualbox;
         enableHardening = false;
         # enableExtensionPack = true;
       };
@@ -723,7 +723,7 @@
     # libinput
     kdePackages.xdg-desktop-portal-kde
     pkgsi686Linux.glibc
-    linuxKernel.packages.linux_6_15.perf
+    linuxKernel.packages.linux_6_16.perf
     kdePackages.kde-gtk-config
     kdePackages.qtvirtualkeyboard
     kdePackages.plasma-sdk
