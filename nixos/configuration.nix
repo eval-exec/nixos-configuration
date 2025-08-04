@@ -789,7 +789,6 @@
     python3
     qemu
     scheme-manpages
-    stdman
     stdmanpages
     steam-run
     sysfsutils

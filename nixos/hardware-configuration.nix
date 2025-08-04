@@ -137,7 +137,7 @@
     intel-ocl
     nvidia-vaapi-driver
     intel-compute-runtime
-    onevpl-intel-gpu
+    vpl-gpu-rt
     mesa
   ];
   hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
