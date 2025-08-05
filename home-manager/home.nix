@@ -137,6 +137,7 @@
     bitcoin
     bottles
     brave
+    bats
     browsh
     libva-utils
     gnuplot
@@ -303,6 +304,7 @@
     pipenv
     piper-tts
     pkg-config
+    glibc_multi
     poppler_utils
     powershell
     powertop

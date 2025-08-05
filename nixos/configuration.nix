@@ -387,9 +387,12 @@
       };
     };
 
-    libinput.enable = false;
+    libinput.enable = true;
+    libinput.touchpad.accelProfile = "flat";
+    libinput.touchpad.accelSpeed = "null";
     # libinput.touchpad.naturalScrolling = true;
     # libinput.touchpad.scrollMethod = "twofinger";
+    # libinput.touchpad.tappingButtonMap = "lrm";
     # libinput.touchpad.disableWhileTyping = true;
     # libinput.touchpad.accelSpeed = "0.6"; # null
 
@@ -722,7 +725,6 @@
     # libsForQt5.xdg-desktop-portal-kde
     # libinput
     kdePackages.xdg-desktop-portal-kde
-    pkgsi686Linux.glibc
     linuxKernel.packages.linux_6_16.perf
     kdePackages.kde-gtk-config
     kdePackages.qtvirtualkeyboard
@@ -736,8 +738,10 @@
     gpu-screen-recorder # CLI
     gpu-screen-recorder-gtk # GUI
     clang
+    clang_multi
+    glibc
+    glibc_multi
     gcc
-    gcc-unwrapped
     libgcc
     (aspellWithDicts (
       ds: with ds; [
@@ -886,7 +890,6 @@
       stdenv.cc.cc.lib
       glibc
       glibc_multi
-      pkgsi686Linux.glibc
       wayland
       vulkan-loader
       # cudaPackages.cuda_cudart
