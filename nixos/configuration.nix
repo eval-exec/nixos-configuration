@@ -389,7 +389,7 @@
 
     libinput.enable = true;
     libinput.touchpad.accelProfile = "flat";
-    libinput.touchpad.accelSpeed = "null";
+    libinput.touchpad.accelSpeed = "0.5";
     # libinput.touchpad.naturalScrolling = true;
     # libinput.touchpad.scrollMethod = "twofinger";
     # libinput.touchpad.tappingButtonMap = "lrm";

@@ -82,12 +82,13 @@
     # github-desktop
     # graalvm-ce
     # inputs.ghostty.packages.x86_64-linux.default
-    # inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
+    inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
     powerstat
     # inputs.quickshell.packages.x86_64-linux.default
     # ionshare
     # jetbrains.clion
     # jetbrains.goland
+    gthumb
     chromium
     # jetbrains.idea-ultimate
     # microsoft-edge-dev
@@ -96,6 +97,7 @@
     # nur.repos.xddxdd.netease-cloud-music
     # nur.repos.xddxdd.qqmusic
     stress-ng
+    min
     # nur.repos.xddxdd.wechat-uos
     # spotdl
     # tigervnc
