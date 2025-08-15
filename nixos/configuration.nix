@@ -967,7 +967,6 @@
   xdg.portal.xdgOpenUsePortal = true;
   # xdg.portal = {
   #   enable = true;
-  #   extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   # };
 
   systemd = {

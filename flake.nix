@@ -30,12 +30,6 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/Hyprland-Plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -43,8 +37,6 @@
       self,
       nixpkgs,
       home-manager,
-      hyprland,
-      hyprland-plugins,
       sops-nix,
       claude-desktop,
       chaotic,
