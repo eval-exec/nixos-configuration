@@ -229,7 +229,6 @@
     inotify-info
     inotify-tools
     inotify-tools
-    inputs.amber.packages.${pkgs.system}.default
     intel-gpu-tools
     ipfs
     jemalloc
