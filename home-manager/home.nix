@@ -164,7 +164,6 @@
     coreutils-full
     cppcheck
     cpulimit
-    cpupower-gui
     crate2nix
     ddcui
     ddcutil

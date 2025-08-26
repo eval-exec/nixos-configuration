@@ -270,12 +270,13 @@
         turbo = "never"; # Or "auto", "always"
         energy_perf_bias = "balance_power";
         scaling_min_freq = 100000;
+        scaling_max_freq = 1900000;
       };
       charger = {
         governor = "performance"; # Or "powersave", "conservative", etc.
         energy_performance_preference = "performance";
         turbo = "auto"; # Or "always", "never"
-        energy_perf_bias = "balance_performance";
+        energy_perf_bias = "performance";
         scaling_max_freq = 5400000;
       };
 
