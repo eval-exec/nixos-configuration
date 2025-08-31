@@ -13,6 +13,9 @@
   boot.consoleLogLevel = 7;
   boot.supportedFilesystems = [ "ntfs" ];
 
+  system.modulesTree = [ (lib.getOutput "modules" pkgs.linuxPackages_cachyos-lto.kernel) ];
+
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.initrd.availableKernelModules = [
     "xhci_pci"
