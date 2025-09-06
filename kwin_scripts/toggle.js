@@ -73,6 +73,10 @@ function toggleChrome() {
   toggleClient("chrome");
 }
 
+function toggleOkular() {
+  toggleClient("okular");
+}
+
 function toggleChatGPT() {
   toggleClient("chrome", "ChatGPT");
 }
@@ -131,5 +135,20 @@ function toggleChatGPT() {
     console.log("registed ChatGPT");
   } else {
     console.log("failed to registed ChatGPT");
+  }
+}
+
+{
+  let registed = registerShortcut(
+    "ToggleOkularWindow",
+    "ToggleOkularWindow",
+    "Meta+U",
+    toggleOkular,
+  );
+
+  if (registed) {
+    console.log("registed okular");
+  } else {
+    console.log("failed to registed okular");
   }
 }

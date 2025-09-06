@@ -83,6 +83,7 @@
     # graalvm-ce
     # inputs.ghostty.packages.x86_64-linux.default
     # inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
+    comma
     powerstat
     # inputs.quickshell.packages.x86_64-linux.default
     # ionshare
@@ -102,12 +103,16 @@
     # spotdl
     # tigervnc
     unstable.quickemu
-    # unstable.davinci-resolve
+    unstable.davinci-resolve
+    shotcut
+    blender
     unstable.clash-meta
     # unstable.vagrant
     # vivaldi
     # vivaldi-ffmpeg-codecs
     age
+    log4cxx
+    flatpak-builder
     aileron
     uv
     alacritty
@@ -117,11 +122,15 @@
     thunderbird
 
     amdgpu_top
+    podman-tui
+    distrobox
+    dive
     android-tools
     watchexec
     ascii
     asciidoc
     ast-grep
+    unstable.rfc
     guile
     atool
     # unstable.zed-editor # I installed zed by https://zed.dev/install.sh | ZED_CHANNEL=preivew sh

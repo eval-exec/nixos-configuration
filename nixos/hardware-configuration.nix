@@ -15,8 +15,11 @@
 
   system.modulesTree = [ (lib.getOutput "modules" pkgs.linuxPackages_cachyos-lto.kernel) ];
 
+hardware.nvidia-container-toolkit.enable = true;
+
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -146,7 +149,7 @@
   hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
   hardware.nvidia = {
     open = true;
-    # nvidiaSettings = false;
+    nvidiaSettings = true;
     # package = config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
     powerManagement = {

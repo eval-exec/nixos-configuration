@@ -604,6 +604,8 @@
       "wheel"
       "docker"
       "vboxusers"
+      "video"
+      "render"
     ];
     packages = with pkgs; [
       firefox
@@ -627,12 +629,25 @@
     };
     docker = {
       enable = true;
+      enableNvidia = true;
+
       daemon.settings = {
         bridge = "none";
       };
     };
+    podman = {
+	    enable = true;
+
+# Create a `docker` alias for podman, to use it as a drop-in replacement
+	    dockerCompat = false;
+
+      enableNvidia = true;
+
+# Required for containers under podman-compose to be able to talk to each other.
+	    defaultNetwork.settings.dns_enabled = true;
+    };
     vmware = {
-      host = {
+	    host = {
         enable = false;
       };
     };
@@ -750,6 +765,9 @@
       ]
     ))
     docker-compose
+    nvidia-container-toolkit
+    nvidia-container-toolkit.tools
+    libnvidia-container
     # inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
 
     qt6.full
