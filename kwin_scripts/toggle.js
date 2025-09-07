@@ -81,6 +81,10 @@ function toggleChatGPT() {
   toggleClient("chrome", "ChatGPT");
 }
 
+function toggleClaude() {
+  toggleClient("chrome", "Claude");
+}
+
 {
   let registed = registerShortcut(
     "ToggleTermWindow",
@@ -123,6 +127,20 @@ function toggleChatGPT() {
   }
 }
 
+{
+  let registed = registerShortcut(
+    "ToggleClaude",
+    "ToggleClaude",
+    "Meta+8",
+    toggleClaude,
+  );
+
+  if (registed) {
+    console.log("registed ChatGPT");
+  } else {
+    console.log("failed to registed ChatGPT");
+  }
+}
 {
   let registed = registerShortcut(
     "ToggleChatGPT",
