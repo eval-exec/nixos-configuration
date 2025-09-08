@@ -1,5 +1,5 @@
-function toggleClient(p_app_name, p_caption) {	
-	console.log("try to toggle", p_app_name, p_caption)
+function toggleClient(p_app_name, p_desktopFileName) {	
+	console.log("try to toggle", p_app_name, p_desktopFileName)
   const getMethods = (obj) => {
     let properties = new Set();
     let currentObj = obj;
@@ -20,23 +20,18 @@ function toggleClient(p_app_name, p_caption) {
   for (var i = 0; i < clients.length; i++) {
     let resource_name = clients[i].resourceName;
     let caption = clients[i].caption;
-    // console.log(
-    //   "iter: resouce: ",
-    //   resource_name.padEnd(20),
-    //   "caption: ",
-    //   caption,
-    // );
-
-    if (p_caption) {
-      if (resource_name == p_app_name && caption && caption.includes(p_caption)) {
+    let desktopFileName = clients[i].desktopFileName;
+	
+    if (p_desktopFileName) {
+      if (resource_name == p_app_name && desktopFileName.startsWith(p_desktopFileName)) {
         client = clients[i];
-	console.log("found", resource_name, ", caption:" , caption)
+	    console.log("found", resource_name, ", caption:" , caption, ", desktopFileName: ", desktopFileName);
         break;
       }
     } else {
-      if (resource_name == p_app_name && !caption.startsWith("ChatGPT")) {
+      if (resource_name == p_app_name) {
         client = clients[i];
-	console.log("found", resource_name, ", caption:" , caption)
+	    console.log("found", resource_name, ", caption:" , caption, ", desktopFileName: ", desktopFileName);
         break;
       }
     }
@@ -69,20 +64,20 @@ function toggleEmacs() {
   toggleClient("emacs");
 }
 
-function toggleChrome() {
-  toggleClient("chrome");
-}
-
 function toggleOkular() {
   toggleClient("okular");
 }
 
+function toggleChrome() {
+  toggleClient("chrome", "google-chrome");
+}
+
 function toggleChatGPT() {
-  toggleClient("chrome", "ChatGPT");
+  toggleClient("chrome", "chrome-cadlk");
 }
 
 function toggleClaude() {
-  toggleClient("chrome", "Claude");
+  toggleClient("chrome", "chrome-fmpnliohjhemenmnlpbfagaolkdacoja-Default");
 }
 
 {
