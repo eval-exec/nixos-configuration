@@ -130,7 +130,7 @@ hardware.nvidia-container-toolkit.enable = true;
   # services.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
 
   hardware.enableAllFirmware = true;
-  hardware.xpadneo.enable = true;
+  # hardware.xpadneo.enable = true;
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
   # # nixpkgs.config.packageOverrides = pkgs: {
