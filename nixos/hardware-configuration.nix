@@ -156,7 +156,7 @@ hardware.nvidia-container-toolkit.enable = true;
       enable = false;
       finegrained = true;
     };
-    nvidiaPersistenced = true;
+    nvidiaPersistenced = false;
     prime = {
       # sync.enable = true;
 
