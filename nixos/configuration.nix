@@ -863,6 +863,7 @@
   programs.zsh.enable = true;
   programs.wshowkeys.enable = true;
   programs.virt-manager.enable = true;
+  programs.niri.enable = true;
 
   programs.wayfire = {
     enable = false;
