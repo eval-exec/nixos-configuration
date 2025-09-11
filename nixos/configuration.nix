@@ -297,7 +297,7 @@
 
     fwupd.enable = false;
     desktopManager = {
-      plasma6.enable = true;
+      plasma6.enable = false;
     };
 
     samba = {
@@ -375,7 +375,7 @@
       ly.enable = false;
 
       sddm = {
-        enable = true;
+        enable = false;
         enableHidpi = true;
         wayland.enable = true;
         wayland.compositor = "kwin";

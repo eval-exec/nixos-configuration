@@ -107,7 +107,10 @@
     shotcut
     blender
     unstable.clash-meta
+    brightnessctl
     # unstable.vagrant
+    fuzzel
+    swaylock
     # vivaldi
     # vivaldi-ffmpeg-codecs
     age
@@ -116,6 +119,7 @@
     aileron
     uv
     alacritty
+    unstable.niriswitcher
     alejandra
     psmisc
     alsa-utils
@@ -399,6 +403,7 @@
     unstable.zig
     zlib-ng
     unstable.zls
+    swaybg
     zoxide
     zsh
     zsh-autosuggestions
@@ -587,6 +592,10 @@
     #   ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
     # '';
   };
+  services.mako.enable = true;
+
+  programs.waybar.enable = false;
+  services.swayidle.enable = true;
   programs.nh = {
     enable = true;
     clean.enable = true;
