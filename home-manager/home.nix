@@ -594,7 +594,7 @@
   };
   services.mako.enable = true;
 
-  programs.waybar.enable = false;
+  programs.waybar.enable = true;
   services.swayidle.enable = true;
   programs.nh = {
     enable = true;

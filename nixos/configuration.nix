@@ -370,9 +370,10 @@
       ];
     };
     displayManager = {
+      enable = true;
 
-      defaultSession = "plasma";
-      ly.enable = false;
+      defaultSession = "ly";
+      ly.enable = true;
 
       sddm = {
         enable = false;
