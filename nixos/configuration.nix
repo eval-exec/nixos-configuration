@@ -746,6 +746,7 @@
     xdg-desktop-portal
     xdg-utils
     xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
     appimage-run
     cachix
     gpu-screen-recorder # CLI
