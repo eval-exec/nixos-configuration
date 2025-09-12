@@ -98,6 +98,7 @@
     # nur.repos.xddxdd.netease-cloud-music
     # nur.repos.xddxdd.qqmusic
     stress-ng
+    wlrctl
     min
     # nur.repos.xddxdd.wechat-uos
     # spotdl
@@ -111,6 +112,8 @@
     # unstable.vagrant
     fuzzel
     swaylock
+    unstable.labwc-tweaks-gtk
+    unstable.labwc-menu-generator
     # vivaldi
     # vivaldi-ffmpeg-codecs
     age
@@ -119,13 +122,16 @@
     aileron
     uv
     alacritty
+    wlr-randr
     unstable.niriswitcher
+    kanshi
     alejandra
     psmisc
     alsa-utils
     thunderbird
 
     amdgpu_top
+    xfce.xfce4-panel
     podman-tui
     distrobox
     dive
@@ -134,6 +140,7 @@
     ascii
     asciidoc
     ast-grep
+    xwayland-satellite
     unstable.rfc
     guile
     atool
@@ -237,6 +244,7 @@
     iftop
     imagemagick
     inetutils
+    pavucontrol
     inotify-info
     inotify-info
     inotify-tools
@@ -549,8 +557,22 @@
   };
 
   xdg.portal.enable = true;
-  xdg.portal.configPackages = [ pkgs.xdg-desktop-portal-gtk ];
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.configPackages = [
+    pkgs.xdg-desktop-portal-wlr
+    # pkgs.kdePackages.xdg-desktop-portal-kde
+  ];
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-wlr
+    pkgs.xdg-desktop-portal-gtk
+    # pkgs.kdePackages.xdg-desktop-portal-kde
+  ];
+
+  gtk.enable = true;
+  gtk.cursorTheme.package = pkgs.vanilla-dmz;
+  gtk.cursorTheme.name = "Vanilla-DMZ";
+  gtk.cursorTheme.size = 24;
+  gtk.theme.package = pkgs.fluent-gtk-theme;
+  gtk.theme.name = "Fluent";
 
   services = {
     mpd = {
@@ -593,7 +615,6 @@
     # '';
   };
   services.mako.enable = true;
-
   programs.waybar.enable = true;
   services.swayidle.enable = true;
   programs.nh = {

@@ -370,10 +370,11 @@
       ];
     };
     displayManager = {
+      defaultSession = "labwc";
       enable = true;
-
-      defaultSession = "ly";
-      ly.enable = true;
+      ly = {
+        enable = true;
+      };
 
       sddm = {
         enable = false;
@@ -443,7 +444,7 @@
 
       # Enable the KDE Plasma Desktop Environment.
       displayManager = {
-        gdm.enable = false;
+        # lightdm.enable = true;
         # xserverArgs = [ "-verbose" "-logverbose" ];
         # setupCommands = "";
         # sessionCommands run before setupCommands
@@ -636,17 +637,16 @@
       };
     };
     podman = {
-	    enable = true;
+      enable = true;
 
-# Create a `docker` alias for podman, to use it as a drop-in replacement
-	    dockerCompat = false;
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = false;
 
-
-# Required for containers under podman-compose to be able to talk to each other.
-	    defaultNetwork.settings.dns_enabled = true;
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
     };
     vmware = {
-	    host = {
+      host = {
         enable = false;
       };
     };
@@ -721,8 +721,8 @@
       NIXOS_OZONE_WL = "1";
       GDK_BACKEND = "wayland";
       OLLAMA_HOST = "http://127.0.0.1:11434";
-      GTK_IM_MODULE = lib.mkForce "";
-      QT_IM_MODULE = lib.mkForce "";
+      GTK_IM_MODULE = "wayland";
+      QT_IM_MODULE = "wayland";
       EDITOR = "nvim";
       VISUAL = "nvim";
       MOZ_ENABLE_WAYLAND = "1";
@@ -854,6 +854,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
+  programs.labwc.enable = true;
+  programs.labwc.package = pkgs.unstable.labwc;
   programs.xwayland.enable = true;
   programs.criu.enable = true;
   programs.noisetorch.enable = true;
@@ -863,7 +865,6 @@
   programs.zsh.enable = true;
   programs.wshowkeys.enable = true;
   programs.virt-manager.enable = true;
-  programs.niri.enable = true;
 
   programs.wayfire = {
     enable = false;
