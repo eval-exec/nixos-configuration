@@ -98,7 +98,6 @@
     # nur.repos.xddxdd.netease-cloud-music
     # nur.repos.xddxdd.qqmusic
     stress-ng
-    wlrctl
     min
     # nur.repos.xddxdd.wechat-uos
     # spotdl
@@ -558,13 +557,10 @@
 
   xdg.portal.enable = true;
   xdg.portal.configPackages = [
-    pkgs.xdg-desktop-portal-wlr
-    # pkgs.kdePackages.xdg-desktop-portal-kde
+    pkgs.kdePackages.xdg-desktop-portal-kde
   ];
   xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-wlr
-    pkgs.xdg-desktop-portal-gtk
-    # pkgs.kdePackages.xdg-desktop-portal-kde
+    pkgs.kdePackages.xdg-desktop-portal-kde
   ];
 
   gtk.enable = true;
@@ -614,9 +610,9 @@
     #   ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
     # '';
   };
-  services.mako.enable = true;
-  programs.waybar.enable = true;
-  services.swayidle.enable = true;
+  services.mako.enable = false;
+  programs.waybar.enable = false;
+  services.swayidle.enable = false;
   programs.nh = {
     enable = true;
     clean.enable = true;

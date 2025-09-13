@@ -297,7 +297,7 @@
 
     fwupd.enable = false;
     desktopManager = {
-      plasma6.enable = false;
+      plasma6.enable = true;
     };
 
     samba = {
@@ -350,7 +350,7 @@
       RuntimeDirectorySize=16G
     '';
 
-    thermald.enable = true;
+    thermald.enable = false;
     thermald.debug = false;
 
     # Enable the X11 windowing system.
@@ -370,14 +370,14 @@
       ];
     };
     displayManager = {
-      defaultSession = "labwc";
+      defaultSession = "plasma";
       enable = true;
       ly = {
-        enable = true;
+        enable = false;
       };
 
       sddm = {
-        enable = false;
+        enable = true;
         enableHidpi = true;
         wayland.enable = true;
         wayland.compositor = "kwin";
@@ -753,6 +753,7 @@
     gpu-screen-recorder-gtk # GUI
     clang
     clang_multi
+    wlrctl
     glibc
     glibc_multi
     gcc
@@ -855,6 +856,7 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
   programs.labwc.enable = true;
+  programs.niri.enable = true;
   programs.labwc.package = pkgs.unstable.labwc;
   programs.xwayland.enable = true;
   programs.criu.enable = true;
