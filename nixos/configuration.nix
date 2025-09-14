@@ -263,7 +263,7 @@
   services = {
     power-profiles-daemon.enable = false;
 
-    auto-cpufreq.enable = true;
+    auto-cpufreq.enable = false;
     auto-cpufreq.settings = {
       battery = {
         governor = "powersave"; # Or "conservative", "ondemand", etc.

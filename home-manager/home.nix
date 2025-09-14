@@ -610,9 +610,6 @@
     #   ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
     # '';
   };
-  services.mako.enable = false;
-  programs.waybar.enable = false;
-  services.swayidle.enable = false;
   programs.nh = {
     enable = true;
     clean.enable = true;
