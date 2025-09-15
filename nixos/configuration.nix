@@ -721,8 +721,6 @@
       NIXOS_OZONE_WL = "1";
       GDK_BACKEND = "wayland";
       OLLAMA_HOST = "http://127.0.0.1:11434";
-      GTK_IM_MODULE = "wayland";
-      QT_IM_MODULE = "wayland";
       EDITOR = "nvim";
       VISUAL = "nvim";
       MOZ_ENABLE_WAYLAND = "1";
