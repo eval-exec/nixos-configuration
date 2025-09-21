@@ -15,8 +15,7 @@
 
   system.modulesTree = [ (lib.getOutput "modules" pkgs.linuxPackages_cachyos-lto.kernel) ];
 
-hardware.nvidia-container-toolkit.enable = true;
-
+  hardware.nvidia-container-toolkit.enable = true;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 

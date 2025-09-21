@@ -69,15 +69,15 @@ function toggleOkular() {
 }
 
 function toggleChrome() {
-  toggleClient("chrome", "google-chrome");
+  toggleClient("firefox", "firefox");
 }
 
 function toggleChatGPT() {
-  toggleClient("chrome", "chrome-cadlk");
+  toggleClient("firefox", "FFPWA-01K5JXKTFA7SD1BQZ5589PVZYF");
 }
 
 function toggleClaude() {
-  toggleClient("chrome", "chrome-fmpnliohjhemenmnlpbfagaolkdacoja-Default");
+  toggleClient("firefox", "FFPWA-01K5JXB6YPK5EBDRXECMKD0Z7X");
 }
 
 {

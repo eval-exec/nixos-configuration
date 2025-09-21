@@ -104,6 +104,7 @@
     # tigervnc
     unstable.quickemu
     unstable.davinci-resolve
+    qtcreator
     shotcut
     blender
     unstable.clash-meta
@@ -138,6 +139,8 @@
     watchexec
     ascii
     asciidoc
+    mupdf
+    firefoxpwa
     ast-grep
     xwayland-satellite
     unstable.rfc
@@ -164,6 +167,7 @@
     gnuplot
     btop
     bun
+    yazi
     calibre
     ccls
     lolcat
@@ -227,6 +231,7 @@
     gnutls
     go-ethereum
     go2tv
+    unstable.quickshell
     goimapnotify
     golangci-lint
     google-cloud-sdk
@@ -247,6 +252,8 @@
     inotify-info
     inotify-info
     inotify-tools
+    dwarf-fortress
+    openttd
     inotify-tools
     intel-gpu-tools
     ipfs
@@ -407,7 +414,6 @@
     ytmdl
     zerotierone
     zip
-    unstable.zig
     zlib-ng
     unstable.zls
     swaybg
@@ -433,6 +439,7 @@
     "/home/exec/.exec/bin"
     "/home/exec/.npm-global/bin"
     "/home/exec/.cargo/bin"
+    "/home/exec/.zvm/bin"
     "/home/exec/go/bin"
   ];
 
@@ -610,6 +617,12 @@
     #   ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
     # '';
   };
+  
+  programs.firefox = {
+	  enable = true;
+	  package = pkgs.unstable.firefox;
+	  nativeMessagingHosts= [ pkgs.unstable.firefoxpwa ];
+  };
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -647,7 +660,7 @@
     };
     chromium = {
       enable = true;
-      package = pkgs.google-chrome;
+      package = pkgs.unstable.google-chrome;
       # commandLineArgs = [
       #   "--disable-crash-reporter"
       #   "--disable-crashpad-for-testing"
@@ -911,7 +924,7 @@
         Service = {
           Restart = "always";
           RestartSec = 3;
-          ExecStart = "${pkgs.openssh}/bin/ssh -S none -N -T -L 48080:127.0.0.1:48080 -L 58080:127.0.0.1:8080 -L 11434:127.0.0.1:11434 -L 27631:127.0.0.1:27631 matrix_wan";
+          ExecStart = "${pkgs.openssh}/bin/ssh -S none -N -T -L 8899:127.0.0.1:8899 48080:127.0.0.1:48080 -L 58080:127.0.0.1:8080 -L 11434:127.0.0.1:11434 -L 27631:127.0.0.1:27631 matrix_wan";
         };
       };
 
