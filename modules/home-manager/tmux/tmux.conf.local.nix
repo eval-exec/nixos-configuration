@@ -258,7 +258,8 @@ tmux_conf_theme_right_separator_sub="|"
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
 tmux_conf_theme_status_left=" ❐ #S "
 # tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{net_speed}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} ,%T ,%a, %d %b| #{username}#{root} | #{hostname} "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{net_speed} ,%T ,%a, %d %b "
+# tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{net_speed} ,%T ,%a, %d %b "
+tmux_conf_theme_status_right=" #{prefix}"
 
 # status left style
 tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
@@ -396,7 +397,7 @@ bind s choose-tree -Zs -O name
 # move status line to top
 set -g status-position top
 
-set-option -g status-interval 1
+set-option -g status-interval 3
 set-option -g automatic-rename-format '#(basename "#{pane_current_path}")'
 
 # -- tpm -----------------------------------------------------------------------
