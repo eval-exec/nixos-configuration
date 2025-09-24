@@ -924,7 +924,7 @@
         Service = {
           Restart = "always";
           RestartSec = 3;
-          ExecStart = "${pkgs.openssh}/bin/ssh -S none -N -T -L 8899:127.0.0.1:8899 48080:127.0.0.1:48080 -L 58080:127.0.0.1:8080 -L 11434:127.0.0.1:11434 -L 27631:127.0.0.1:27631 matrix_wan";
+          ExecStart = "${pkgs.openssh}/bin/ssh -S none -N -T -L 8899:127.0.0.1:8899 -L 48080:127.0.0.1:48080 -L 58080:127.0.0.1:8080 -L 11434:127.0.0.1:11434 -L 27631:127.0.0.1:27631 matrix_wan";
         };
       };
 

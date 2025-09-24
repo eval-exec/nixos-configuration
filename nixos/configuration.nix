@@ -344,6 +344,27 @@
     acpid = {
       enable = true;
       logEvents = true;
+      # Define AC adapter event handlers
+      acEventCommands = ''
+        echo AC adapter event: $1
+        vals=($1)  # space separated string to array of multiple values
+        case ''${vals[3]} in
+          00000001)
+            echo plugged in
+            ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -g performance
+            ${pkgs.linuxPackages.cpupower}/bin/cpupower set -b 0 --epp performance
+            ;;
+          00000000)
+            # AC unplugged - add your commands here
+            echo unplugged
+            ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -g powersave
+            ${pkgs.linuxPackages.cpupower}/bin/cpupower set -b 15 --epp power
+            ;;
+          *)
+            echo unknown acpi event
+            ;;
+        esac
+      '';
     };
 
     logind.extraConfig = ''
@@ -685,6 +706,8 @@
       mplus-outline-fonts.githubRelease
       dina-font
       proggyfonts
+      wqy_zenhei
+      wqy_microhei
     ];
     fontconfig = {
       enable = true;
@@ -884,6 +907,8 @@
     #   wqy_zenhei
     #   liberation_ttf
     #   wqy_microhei
+    #   noto-fonts-cjk-sans
+    #   noto-fonts-cjk-serif
     # ];
 
     # extraProfile = "export STEAM_FORCE_DESKTOPUI_SCALING=2";
