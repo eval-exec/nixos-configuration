@@ -570,12 +570,12 @@
     pkgs.kdePackages.xdg-desktop-portal-kde
   ];
 
-  gtk.enable = true;
-  gtk.cursorTheme.package = pkgs.vanilla-dmz;
-  gtk.cursorTheme.name = "Vanilla-DMZ";
-  gtk.cursorTheme.size = 24;
-  gtk.theme.package = pkgs.fluent-gtk-theme;
-  gtk.theme.name = "Fluent";
+  # gtk.enable = true;
+  # gtk.cursorTheme.package = pkgs.vanilla-dmz;
+  # gtk.cursorTheme.name = "Vanilla-DMZ";
+  # gtk.cursorTheme.size = 24;
+  # gtk.theme.package = pkgs.fluent-gtk-theme;
+  # gtk.theme.name = "Fluent";
 
   services = {
     mpd = {
