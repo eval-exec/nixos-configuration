@@ -626,6 +626,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "kvm"
       "vboxusers"
       "video"
       "render"
@@ -643,7 +644,7 @@
 
     virtualbox = {
       host = {
-        enable = false;
+        enable = true;
         package = pkgs.linuxKernel.packages.linux_6_16.virtualbox;
         enableHardening = false;
         # enableExtensionPack = true;
@@ -668,7 +669,7 @@
     };
     vmware = {
       host = {
-        enable = false;
+        enable = true;
       };
     };
   };
