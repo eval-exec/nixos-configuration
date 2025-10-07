@@ -3,4 +3,5 @@
 pkgs: {
   # example = pkgs.callPackage ./example { };
   min = pkgs.callPackage ./min-browser { };
+  wpewebkit = pkgs.callPackage ./wpewebkit { };
 }

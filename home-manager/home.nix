@@ -99,6 +99,7 @@
     # nur.repos.xddxdd.qqmusic
     stress-ng
     min
+    # wpewebkit
     # nur.repos.xddxdd.wechat-uos
     # spotdl
     # tigervnc
