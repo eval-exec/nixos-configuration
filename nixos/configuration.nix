@@ -75,7 +75,11 @@
         dates = "weekly";
       };
 
+      distributedBuilds = true;
       settings = {
+
+        # let remote build machines fetch substitutes from their own caches
+        builders-use-substitutes = true;
 
         auto-optimise-store = true;
         trusted-users = [
@@ -359,6 +363,9 @@
             echo unplugged
             ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -g powersave
             ${pkgs.linuxPackages.cpupower}/bin/cpupower set -b 15 --epp power
+            echo disable turbo...
+            echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo
+            echo disable turbo done
             ;;
           *)
             echo unknown acpi event
