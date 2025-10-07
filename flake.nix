@@ -73,6 +73,14 @@
       # These are usually stuff you would upstream into home-manager
       homeManagerModules = import ./modules/home-manager;
 
+      nix = {
+        distributedBuilds = true;
+        settings = {
+          # let remote build machines fetch substitutes from their own caches
+          builders-use-substitutes = true;
+        };
+      };
+
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
