@@ -245,6 +245,7 @@
     gst_all_1.gst-libav
     gst_all_1.gst-vaapi
     gst_all_1.gstreamer
+    cog
     gtest
     helix
     httpie
