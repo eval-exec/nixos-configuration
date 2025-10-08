@@ -651,7 +651,7 @@
 
     virtualbox = {
       host = {
-        enable = true;
+        enable = false;
         # package = pkgs.linuxKernel.packages.linux_6_16.virtualbox;
         # enableHardening = false;
         # enableExtensionPack = true;
@@ -676,7 +676,7 @@
     };
     vmware = {
       host = {
-        enable = true;
+        enable = false;
       };
     };
   };
@@ -767,7 +767,7 @@
     # libsForQt5.xdg-desktop-portal-kde
     # libinput
     kdePackages.xdg-desktop-portal-kde
-    linuxKernel.packages.linux_6_16.perf
+    linuxKernel.packages.linux_6_17.perf
     kdePackages.kde-gtk-config
     kdePackages.qtvirtualkeyboard
     kdePackages.plasma-sdk

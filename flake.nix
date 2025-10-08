@@ -20,9 +20,6 @@
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
     claude-desktop.inputs.flake-utils.follows = "flake-utils";
 
-    amber.url = "github:Ph0enixKM/Amber";
-    amber.inputs.nixpkgs.follows = "nixpkgs";
-
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +27,15 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    chaotic.inputs.nixpkgs.follows = "nixpkgs";
+    chaotic.inputs.rust-overlay.follows = "rust-overlay";
+    chaotic.inputs.home-manager.follows = "home-manager";
+
   };
 
   outputs =
