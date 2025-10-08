@@ -32,9 +32,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    chaotic.inputs.nixpkgs.follows = "nixpkgs";
-    chaotic.inputs.rust-overlay.follows = "rust-overlay";
-    chaotic.inputs.home-manager.follows = "home-manager";
+    # chaotic.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # chaotic.inputs.rust-overlay.follows = "rust-overlay";
+    # chaotic.inputs.home-manager.follows = "home-manager";
 
   };
 

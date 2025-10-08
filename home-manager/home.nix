@@ -82,7 +82,7 @@
     # github-desktop
     # graalvm-ce
     # inputs.ghostty.packages.x86_64-linux.default
-    inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
+    # inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
     comma
     powerstat
     # inputs.quickshell.packages.x86_64-linux.default
@@ -99,14 +99,15 @@
     # nur.repos.xddxdd.qqmusic
     stress-ng
     min
-    wpewebkit
+    # wpewebkit
     # nur.repos.xddxdd.wechat-uos
     # spotdl
     # tigervnc
     unstable.quickemu
-    unstable.davinci-resolve
+    # unstable.davinci-resolve
     qtcreator
     shotcut
+    devbox
     blender
     unstable.clash-meta
     brightnessctl
@@ -408,7 +409,7 @@
     wakatime
     waypipe
     wev
-    unstable.whisper-ctranslate2
+    # unstable.whisper-ctranslate2
     wine64Packages.stagingFull
     winetricks
     wl-clipboard
@@ -1059,7 +1060,7 @@
           Type = "simple";
           Restart = "always";
           # RestartSec = 0;
-          ExecStart = "${pkgs.nix}/bin/nix-shell /home/exec/.config/emacs/default.nix --run /home/exec/.local/bin/emacs";
+          ExecStart = "${pkgs.nix}/bin/nix develop --impure /home/exec/Projects/github.com/emacs-mirror/emacs -c /home/exec/.local/bin/emacs";
           StandardOutput = "journal";
           StandardError = "journal";
         };
