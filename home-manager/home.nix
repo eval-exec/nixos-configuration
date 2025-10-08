@@ -1060,10 +1060,8 @@
           Restart = "always";
           # RestartSec = 0;
           ExecStart = "${pkgs.nix}/bin/nix-shell /home/exec/.config/emacs/default.nix --run /home/exec/.local/bin/emacs";
-          # ExecStart = "/home/exec/.local/bin/emacs";
-          # StandardInput = "tty";
-          StandardOutput = "file:/tmp/debug.log";
-          StandardError = "file:/tmp/error.log";
+          StandardOutput = "journal";
+          StandardError = "journal";
         };
       };
 

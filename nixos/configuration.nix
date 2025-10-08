@@ -651,9 +651,9 @@
 
     virtualbox = {
       host = {
-        enable = false;
-        package = pkgs.linuxKernel.packages.linux_6_16.virtualbox;
-        enableHardening = false;
+        enable = true;
+        # package = pkgs.linuxKernel.packages.linux_6_16.virtualbox;
+        # enableHardening = false;
         # enableExtensionPack = true;
       };
       guest.enable = false;
@@ -676,7 +676,7 @@
     };
     vmware = {
       host = {
-        enable = false;
+        enable = true;
       };
     };
   };
