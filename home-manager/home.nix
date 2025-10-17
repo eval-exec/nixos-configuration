@@ -1026,8 +1026,8 @@
         };
         Service = {
           Restart = "always";
-          RestartSec = 0;
-          ExecStart = "${pkgs.kitty}/bin/kitty";
+          RestartSec = 1;
+          ExecStart = "${pkgs.kitty}/bin/kitty --title=main";
         };
       };
 
