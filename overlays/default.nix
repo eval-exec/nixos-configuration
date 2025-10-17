@@ -38,6 +38,18 @@
 
     });
 
+    webkitgtk = prev.webkitgtk.overrideAttrs (oldAttrs: {
+      version = "2.41.91";
+      src = final.fetchurl {
+        url = "https://webkitgtk.org/releases/webkitgtk-2.41.91.tar.xz";
+        hash = "sha256-8o9rlbk5w/0gutIbGqni6s2jYhYl31tIAURRfMoCj0Y=";
+      };
+      buildInputs = oldAttrs.buildInputs ++ [
+        final.libwpe
+        final.libwpe-fdo
+      ];
+    });
+
     # # Use the master branch of bluez/bluez
     # unstable.bluez = prev.bluez.overrideAttrs (oldAttrs: {
     #   src = final.fetchFromGitHub {

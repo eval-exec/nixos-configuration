@@ -99,7 +99,8 @@
     # nur.repos.xddxdd.qqmusic
     stress-ng
     min
-    wpewebkit
+    # wpewebkit
+    # webkitgtk
     # nur.repos.xddxdd.wechat-uos
     # spotdl
     # tigervnc
@@ -314,11 +315,10 @@
     ncurses
     ncurses
     neovide
-    nil
-    nil
+    unstable.nil
     ninja
     nix-zsh-completions
-    nixd
+    unstable.nixd
     nixfmt-rfc-style
     nodePackages.bash-language-server
     nodePackages.prettier
@@ -624,11 +624,11 @@
     #   ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add mod3 = Hyper_L";
     # '';
   };
-  
+
   programs.firefox = {
-	  enable = true;
-	  package = pkgs.unstable.firefox;
-	  nativeMessagingHosts= [ pkgs.unstable.firefoxpwa ];
+    enable = true;
+    package = pkgs.unstable.firefox;
+    nativeMessagingHosts = [ pkgs.unstable.firefoxpwa ];
   };
   programs.nh = {
     enable = true;
