@@ -13,7 +13,7 @@
   boot.consoleLogLevel = 7;
   boot.supportedFilesystems = [ "ntfs" ];
 
-  system.modulesTree = [ (lib.getOutput "modules" pkgs.linuxPackages_cachyos-lto.kernel) ];
+  system.modulesTree = [ (lib.getOutput "modules" pkgs.linuxPackages_cachyos.kernel) ];
 
   hardware.nvidia-container-toolkit.enable = true;
 
@@ -28,7 +28,7 @@
     "rtsx_pci_sdmmc"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
   boot.extraModulePackages = [
     # pkgs.linuxPackages_latest.v4l2loopback
   ];
