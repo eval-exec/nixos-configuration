@@ -586,15 +586,15 @@
 
   services = {
     mpd = {
-      enable = false;
+      enable = true;
       # extraArgs = [ "" ];
       musicDirectory = "~/Music";
       extraConfig = ''
-        # auto_update "yes"
-        # audio_output {
-        #   type "pipewire"
-        #   name "My PipeWire Output"
-        # }
+        auto_update "yes"
+        audio_output {
+          type "pipewire"
+          name "My PipeWire Output"
+        }
       '';
     };
     sxhkd = {
