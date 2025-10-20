@@ -182,6 +182,9 @@
     clj-kondo
     cljfmt
     clojure
+    bison
+    gettext
+    gperf
     clojure-lsp
     cloudflared
     cmake
