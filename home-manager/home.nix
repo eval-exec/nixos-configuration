@@ -492,7 +492,7 @@
             };
           };
           imapnotify = {
-            enable = false;
+            enable = true;
             boxes = [ "INBOX" ];
             # extraConfig = {
             # wait = 0;
@@ -661,7 +661,7 @@
     };
 
     mbsync = {
-      enable = false;
+      enable = true;
       package = pkgs.unstable.isync;
       extraConfig = "";
     };
