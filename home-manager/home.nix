@@ -117,6 +117,7 @@
     swaylock
     unstable.labwc-tweaks-gtk
     unstable.labwc-menu-generator
+    unstable.isync
     # vivaldi
     # vivaldi-ffmpeg-codecs
     age
@@ -195,6 +196,7 @@
     cppcheck
     cpulimit
     crate2nix
+    pnpm
     ddcui
     ddcutil
     delta
@@ -483,7 +485,7 @@
           gpg = {
             key = "4B453CE70F2646044171BACE0F0272C0D3AC91F7";
           };
-          passwordCommand = "cat /home/exec/pass/gapp.txt";
+          passwordCommand = "${pkgs.coreutils}/bin/cat /home/exec/pass/gapp.txt";
           imap = {
             host = "imap.gmail.com";
             port = 993;
@@ -494,70 +496,27 @@
           imapnotify = {
             enable = true;
             boxes = [ "INBOX" ];
-            # extraConfig = {
-            # wait = 0;
-            # };
+            extraArgs = [
+              "-wait 1"
+              "-log-level debug"
+            ];
+            extraConfig = {
+              enableIDCommand = true;
+            };
             onNotify = ''
-              systemctl --user start mbsync
+              ${pkgs.unstable.isync}/bin/mbsync --verbose --new execvy:INBOX
             '';
             onNotifyPost = ''
-              /home/exec/Projects/git.savannah.gnu.org/git/emacs-build/emacs/bin/emacsclient -e "(progn (unless (boundp 'mu4e--server-process) (mu4e t)) (mu4e-update-index-nonlazy)(message \"imapnotify received new mail.\"))"
+              ${pkgs.libnotify}/bin/notify-send 'goimapnotify received new emails'
+              /home/exec/.local/bin/emacsclient -e "
+              (progn
+                (unless (boundp 'mu4e--server-process)
+                  (mu4e t))
+                (mu4e-update-index-nonlazy)
+                (message \"imapnotify received new mail.\"))"
             '';
           };
 
-          mbsync = {
-            enable = false;
-            create = "both";
-            expunge = "both";
-            extraConfig = {
-              account = {
-
-              };
-              channel = {
-                MaxMessages = 20000;
-              };
-              # local = { };
-              # remote = { };
-            };
-            # groups = {
-            #   execvy = {
-            #     channels = {
-            #       inbox = {
-            #         farPattern = "INBOX";
-            #         nearPattern = "inbox";
-            #         extraConfig = {
-            #           Create = "Both";
-            #           MaxMessages = 20000;
-            #         };
-            #       };
-            #       sent = {
-            #         farPattern = "[Gmail]/Sent Mail";
-            #         nearPattern = "sent";
-            #         extraConfig = {
-            #           Create = "Both";
-            #         };
-            #       };
-            #       trash = {
-            #         farPattern = "[Gmail]/Trash";
-            #         nearPattern = "trash";
-            #         extraConfig = {
-            #           Create = "Both";
-            #         };
-            #       };
-            #       spam = {
-            #         farPattern = "[Gmail]/Spam";
-            #         nearPattern = "spam";
-            #         extraConfig = {
-            #           Create = "Both";
-            #         };
-            #       };
-            #     };
-            #   };
-            # };
-            patterns = [ "*" ];
-            remove = "both";
-            subFolders = "Verbatim";
-          };
           msmtp = {
             enable = true;
           };
@@ -658,12 +617,6 @@
     vscode = {
       enable = true;
       package = pkgs.unstable.vscode.fhs;
-    };
-
-    mbsync = {
-      enable = true;
-      package = pkgs.unstable.isync;
-      extraConfig = "";
     };
     msmtp = {
       enable = true;
@@ -912,7 +865,7 @@
         };
         Service = {
           ExecStartPre = "${pkgs.bash}/bin/bash -c 'until ${pkgs.iputils}/bin/ping -c1 bing.com; do ${pkgs.coreutils}/bin/sleep 1; done;'";
-          ExecStart = "${pkgs.openssh}/bin/ssh -o ConnectTimeout=2 -n matrix_wan_exec uptime && sleep infinity";
+          ExecStart = "${pkgs.openssh}/bin/ssh -o ConnectTimeout=2 -n matrix_wan uptime && sleep infinity";
           RestartSec = 3;
           Restart = "always";
         };
