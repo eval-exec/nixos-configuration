@@ -111,6 +111,7 @@
     devbox
     blender
     unstable.clash-meta
+    geoip
     brightnessctl
     # unstable.vagrant
     fuzzel

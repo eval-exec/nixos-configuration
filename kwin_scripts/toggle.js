@@ -69,16 +69,17 @@ function toggleOkular() {
 }
 
 function toggleChrome() {
-  toggleClient("firefox", "firefox");
+  toggleClient("chrome");
 }
 
-function toggleChatGPT() {
-  toggleClient("firefox", "FFPWA-01K5JXKTFA7SD1BQZ5589PVZYF");
-}
-
-function toggleClaude() {
-  toggleClient("firefox", "FFPWA-01K5JXB6YPK5EBDRXECMKD0Z7X");
-}
+ function toggleChatGPT() {
+-  toggleClient("chrome", "chrome-cadlk");
+ }
+ 
+ function toggleClaude() {
+-  toggleClient("chrome", "chrome-fmpnliohjhemenmnlpbfagaolkdacoja-Default");
+ }
+ 
 
 {
   let registed = registerShortcut(
