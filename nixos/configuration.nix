@@ -661,9 +661,9 @@
     docker = {
       enable = true;
 
-      daemon.settings = {
-        bridge = "none";
-      };
+      # daemon.settings = {
+      #   bridge = "none";
+      # };
     };
     podman = {
       enable = true;
