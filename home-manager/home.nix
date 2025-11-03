@@ -111,7 +111,7 @@
     devbox
     blender
     unstable.clash-meta
-    geoip
+    unstable.geoipWithDatabase
     brightnessctl
     # unstable.vagrant
     fuzzel
@@ -141,6 +141,7 @@
     distrobox
     dive
     android-tools
+    nethogs
     watchexec
     ascii
     asciidoc
