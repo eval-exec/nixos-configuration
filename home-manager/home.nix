@@ -81,139 +81,98 @@
     # github-copilot-cli
     # github-desktop
     # graalvm-ce
-    # inputs.ghostty.packages.x86_64-linux.default
     # inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
-    comma
-    powerstat
+    # inputs.ghostty.packages.x86_64-linux.default
     # inputs.quickshell.packages.x86_64-linux.default
     # ionshare
     # jetbrains.clion
     # jetbrains.goland
-    gthumb
-    chromium
     # jetbrains.idea-ultimate
+    # linux-manual
     # microsoft-edge-dev
     # nur.repos.linyinfeng.wemeet
     # nur.repos.xddxdd.baidunetdisk
     # nur.repos.xddxdd.netease-cloud-music
     # nur.repos.xddxdd.qqmusic
-    stress-ng
-    min
-    # wpewebkit
-    # webkitgtk
     # nur.repos.xddxdd.wechat-uos
     # spotdl
     # tigervnc
-    unstable.quickemu
     # unstable.davinci-resolve
-    qtcreator
-    shotcut
-    devbox
-    blender
-    unstable.clash-meta
-    unstable.geoipWithDatabase
-    brightnessctl
+    # unstable.ghostty
+    # unstable.nyxt
     # unstable.vagrant
-    fuzzel
-    swaylock
-    unstable.labwc-tweaks-gtk
-    unstable.labwc-menu-generator
-    unstable.isync
+    # unstable.whisper-ctranslate2
+    # unstable.zed-editor # I installed zed by https://zed.dev/install.sh | ZED_CHANNEL=preivew sh
     # vivaldi
     # vivaldi-ffmpeg-codecs
+    # webkitgtk
+    # wpewebkit
     age
-    log4cxx
-    flatpak-builder
     aileron
-    uv
     alacritty
-    wlr-randr
-    unstable.niriswitcher
-    kanshi
     alejandra
-    psmisc
     alsa-utils
-    thunderbird
-
     amdgpu_top
-    xfce.xfce4-panel
-    podman-tui
-    distrobox
-    dive
     android-tools
-    nethogs
-    watchexec
     ascii
     asciidoc
-    lzip
-    mupdf
-    firefoxpwa
     ast-grep
-    xwayland-satellite
-    unstable.rfc
-    guile
+    at
     atool
-    # unstable.zed-editor # I installed zed by https://zed.dev/install.sh | ZED_CHANNEL=preivew sh
-    unstable.jdt-language-server
     autoconf
-    nvme-cli
-    smartmontools
-    autotools-language-server
     automake
+    autotools-language-server
     awscli2
     bat
+    bats
     bc
-    discord
     bear
+    bison
     bitcoin
+    blender
     bottles
     brave
-    bats
+    brightnessctl
     browsh
-    libva-utils
-    gnuplot
     btop
     bun
-    yazi
     calibre
     ccls
-    lolcat
     chafa
-    iotop
     chromaprint
+    chromium
     clinfo
     clj-kondo
     cljfmt
     clojure
-    bison
-    gettext
-    gperf
     clojure-lsp
     cloudflared
     cmake
+    cog
+    comma
     cool-retro-term
     copyq
-    maven
     coreutils-full
     cppcheck
     cpulimit
     crate2nix
-    pnpm
     ddcui
     ddcutil
     delta
     deno
+    desktop-file-utils
+    devbox
     difftastic
     dig
-    unstable.direnv
-    unstable.nix-direnv
-    unstable.devenv
+    discord
     distcc
+    distrobox
+    dive
     dmidecode
-    kdePackages.dolphin
     dpkg
     droidcam
     du-dust
+    dwarf-fortress
     element-desktop
     epubcheck
     errcheck
@@ -222,15 +181,18 @@
     extra-cmake-modules
     fastfetch
     fd
-    at
     ffmpeg-full
     fftw
+    firefoxpwa
     fish
     flameshot
+    flatpak-builder
     fpp
     fuse
     fuse3
+    fuzzel
     gdb
+    gettext
     gf
     gh
     gh-dash
@@ -238,44 +200,48 @@
     gifski
     gimp
     gitstatus
+    glibc_multi
     glxinfo
+    gnuplot
     gnutls
     go-ethereum
     go2tv
-    unstable.quickshell
     goimapnotify
     golangci-lint
     google-cloud-sdk
+    gperf
     gptcommit
     graphviz
     grc
+    gst_all_1.gst-libav
+    gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
     gst_all_1.gst-plugins-ugly
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-libav
     gst_all_1.gst-vaapi
     gst_all_1.gstreamer
-    cog
     gtest
+    gthumb
+    guile
     helix
     httpie
     hugo
     iftop
     imagemagick
     inetutils
-    pavucontrol
     inotify-info
     inotify-info
     inotify-tools
-    dwarf-fortress
-    openttd
     inotify-tools
     intel-gpu-tools
+    iotop
     ipfs
     jemalloc
     joker
     jq
     just
+    kanshi
+    kdePackages.dolphin
+    kew
     keyd
     kitty
     kitty-themes
@@ -287,27 +253,31 @@
     libfaketime
     libnotify
     libressl
+    libva-utils
     llvmPackages.libcxx
-    llvmPackages.libllvm
     llvmPackages.libcxxClang
+    llvmPackages.libllvm
     lm_sensors
+    log4cxx
     logseq
+    lolcat
     lrzsz
     lshw
     lsof
     lua
     lutris
     lynx
+    lzip
     m4
     magic-wormhole
-    mailutils
     mailspring
-    desktop-file-utils
+    mailutils
+    maven
     mercurial
-    # linux-manual
     mermaid-cli
     meson
     micro
+    min
     mlocate
     mold
     moonlight-qt
@@ -317,44 +287,51 @@
     mpv
     mu
     mudlet
+    mupdf
     nacelle
     ncmpcpp
     ncurses
     ncurses
     neovide
-    unstable.nil
+    nethogs
     ninja
     nix-zsh-completions
-    unstable.nixd
     nixfmt-rfc-style
     nodePackages.bash-language-server
     nodePackages.prettier
     nodePackages.typescript-language-server
     nuclear
+    nvme-cli
     nvtopPackages.full
-    # unstable.nyxt
     obfs4
+    obs-cmd
     ollama
+    openttd
     osdlyrics
     pandoc
     pastebinit
     patchelf
+    pavucontrol
     peek
     pharo
     picard
     pipenv
     piper-tts
     pkg-config
-    glibc_multi
+    pnpm
+    podman-tui
     poppler_utils
     powershell
+    powerstat
     powertop
     pprof
     protobuf
+    psmisc
     pyright
     qrcp
-    qrscan
     qrencode
+    qrscan
+    qtcreator
     readability-cli
     retry
     rig
@@ -372,19 +349,25 @@
     semgrep-core
     shellcheck
     shfmt
+    shotcut
     silver-searcher
     simplescreenrecorder
     sioyek
     slack
+    smartmontools
     sops
     spotdl
     spotify
     spotify-player
     sqlite
     sshfs
+    stress-ng
     sunshine
+    swaybg
+    swaylock
     syncthing
     sysstat
+    thunderbird
     tintin
     tmux
     tokei
@@ -397,40 +380,57 @@
     unconvert
     unison
     unstable.babashka
-    # unstable.ghostty
+    unstable.clash-meta
     unstable.ddgr
+    unstable.devenv
+    unstable.direnv
+    unstable.geoipWithDatabase
     unstable.gopls
+    unstable.isync
+    unstable.jdt-language-server
+    unstable.labwc-menu-generator
+    unstable.labwc-tweaks-gtk
+    unstable.nil
+    unstable.niriswitcher
+    unstable.nix-direnv
     unstable.nix-search-cli
+    unstable.nixd
     unstable.obsidian
-    obs-cmd
     unstable.qbittorrent
+    unstable.quickemu
+    unstable.quickshell
+    unstable.rfc
     unstable.shell-gpt
     unstable.warp-terminal
     unstable.wezterm
     unstable.youtube-music
+    unstable.zls
     unzip
+    uv
     variety
     vimpager
     vlc
     w3m
     wakatime
+    watchexec
     waypipe
     wev
-    # unstable.whisper-ctranslate2
     wine64Packages.stagingFull
     winetricks
     wl-clipboard
+    wlr-randr
     wmctrl
     wofi
+    xfce.xfce4-panel
+    xwayland-satellite
     yaml-language-server
+    yazi
     yq
     yt-dlp
     ytmdl
     zerotierone
     zip
     zlib-ng
-    unstable.zls
-    swaybg
     zoxide
     zsh
     zsh-autosuggestions
