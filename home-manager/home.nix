@@ -432,11 +432,7 @@
     zip
     zlib-ng
     zoxide
-    zsh
-    zsh-autosuggestions
-    zsh-fzf-tab
     zsh-nix-shell
-    zsh-powerlevel10k
     zulip
   ];
   # home.file.".Xmodmap" = { source = ./Xmodmap; };
@@ -690,11 +686,33 @@
 
     zsh = {
       enable = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
+      # autosuggestion.enable = true;
+      # syntaxHighlighting.enable = true;
       enableCompletion = true;
       defaultKeymap = "emacs";
+      initExtraFirst = ''
+        # zmodload zsh/zprof
+        
+        ZSH_DISABLE_COMPFIX=true
+
+        autoload -Uz compinit
+        for dump in ~/.zcompdump(N.mh+24); do
+          compinit
+        done
+        compinit -C
+
+        DISABLE_AUTO_UPDATE="true"
+        DISABLE_MAGIC_FUNCTIONS="true"
+        DISABLE_COMPFIX="true"
+
+        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+        ZSH_AUTOSUGGEST_USE_ASYNC=1
+      '';
+      initExtra = ''
+      '';
       envExtra = ''
+        setopt no_global_rcs
+        skip_global_compinit=1
         export SPACESHIP_EXIT_CODE_SHOW=true;
         export LESS='-R -j7';
         export FZF_BASE="/home/exec/Projects/github.com/junegunn/fzf";
@@ -724,8 +742,9 @@
         setopt NO_HUP
       '';
       initContent = ''
-        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh;
         if [[ "$ALACRITTY_SOCKET" != "" && "$TMUX" = "" ]]; then tmux a; fi
+
+        # zprof
       '';
 
       shellAliases = {
@@ -753,13 +772,14 @@
         enable = true;
         plugins = [
           "git"
-          "fzf"
           "man"
-          "warhol"
-          "zsh-wakatime"
+          # "warhol"  # Rarely used, disable for faster startup
+          # "zsh-wakatime"  # Tracks every command, adds overhead
           "fzf-tab"
+          "zsh-autosuggestions"
           "nix-shell"
           "colored-man-pages"
+          "fast-syntax-highlighting"
         ];
         # theme = "mlh";
         custom = "/home/exec/.oh-my-zsh/custom";

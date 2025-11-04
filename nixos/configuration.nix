@@ -894,6 +894,9 @@
   programs.neovim.defaultEditor = true;
   programs.fish.enable = false;
   programs.zsh.enable = true;
+  programs.zsh.enableCompletion = false;
+  programs.zsh.promptInit = "";
+  programs.zsh.setOptions = [ ];
   programs.wshowkeys.enable = true;
   programs.virt-manager.enable = true;
 
