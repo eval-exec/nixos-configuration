@@ -254,6 +254,13 @@
 
   # services.system76-scheduler.enable = true;
 
+  services.gpsd = {
+    enable = true;
+    devices = [
+      "/dev/ttyACM0"
+    ];
+  };
+
   services.scx = {
     enable = true;
     scheduler = "scx_lavd";

@@ -151,7 +151,9 @@
     cog
     comma
     cool-retro-term
-    copyq
+    # copyq
+    foliate
+    gopass
     coreutils-full
     cppcheck
     cpulimit
@@ -379,6 +381,7 @@
     typos
     unconvert
     unison
+    unstable.gpsd
     unstable.babashka
     unstable.clash-meta
     unstable.ddgr
@@ -406,6 +409,7 @@
     unstable.youtube-music
     unstable.zls
     unzip
+    usbutils
     uv
     variety
     vimpager
@@ -692,7 +696,7 @@
       defaultKeymap = "emacs";
       initExtraFirst = ''
         # zmodload zsh/zprof
-        
+
         ZSH_DISABLE_COMPFIX=true
 
         autoload -Uz compinit
@@ -708,8 +712,7 @@
         ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
         ZSH_AUTOSUGGEST_USE_ASYNC=1
       '';
-      initExtra = ''
-      '';
+      initExtra = '''';
       envExtra = ''
         setopt no_global_rcs
         skip_global_compinit=1
@@ -1022,6 +1025,8 @@
           Type = "forking";
           ExecStart = "${pkgs.tmux}/bin/tmux new-session -d";
           ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
+          Restart = "always";
+          RestartSec = 1;
         };
       };
 
