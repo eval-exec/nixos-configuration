@@ -995,6 +995,7 @@
       openssl
       pango
       pcsclite
+      rocksdb
       sqlite
       stdenv.cc.cc.lib
       systemd
