@@ -154,6 +154,7 @@
     # copyq
     foliate
     gopass
+    gflags
     coreutils-full
     cppcheck
     cpulimit

@@ -949,29 +949,12 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      stdenv.cc.cc.lib
-      glibc
-      glibc_multi
-      wayland
-      vulkan-loader
       # cudaPackages.cuda_cudart
-      mpv
-      sqlite
-      libaio
-      pcsclite
-      libxml2
-      fuse3
-      fuse
-      libgcc
-      gcc-unwrapped.lib
-      libgccjit
-      libgit2
-      boost
-      libevent
       alsa-lib
       at-spi2-atk
       at-spi2-core
       atk
+      boost
       cairo
       cups
       curl
@@ -979,48 +962,65 @@
       expat
       fontconfig
       freetype
+      fuse
+      fuse3
+      gcc-unwrapped.lib
       gdk-pixbuf
       glib
+      glibc
+      glibc_multi
       gtk3
-      libcxx
+      icu
       libGL
+      libaio
       libappindicator-gtk3
+      libcxx
       libdrm
+      libevent
+      libgcc
+      libgccjit
+      libgit2
+      libgbm
       libkrb5
       libnotify
       libpulseaudio
-      libuuid
       libusb1
+      libuuid
       libxkbcommon
+      libxml2
       mesa
+      mpv
       nspr
       nss
-      pango
-      systemd
-      icu
       openssl
+      pango
+      pcsclite
+      sqlite
+      stdenv.cc.cc.lib
+      systemd
+      vulkan-loader
+      wayland
       xcb-util-cursor
       xorg.libX11
-      xorg.libxcb
+      xorg.libXScrnSaver
       xorg.libXcomposite
       xorg.libXcursor
       xorg.libXdamage
       xorg.libXext
       xorg.libXfixes
       xorg.libXi
-      xorg.libxkbfile
       xorg.libXrandr
       xorg.libXrender
-      xorg.libXScrnSaver
-      xorg.libxshmfence
       xorg.libXtst
-      xorg.xcbutilwm
-      xorg.xcbutilimage
-      xorg.xcbutilrenderutil
-      xorg.xcbutilkeysyms
-      xorg.xcbutilerrors
+      xorg.libxcb
+      xorg.libxkbfile
+      xorg.libxshmfence
       xorg.xcbutil
-
+      xorg.xcbutilerrors
+      xorg.xcbutilimage
+      xorg.xcbutilkeysyms
+      xorg.xcbutilrenderutil
+      xorg.xcbutilwm
       zlib-ng
     ];
   };
