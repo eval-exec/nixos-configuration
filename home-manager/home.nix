@@ -373,7 +373,7 @@
     sysstat
     thunderbird
     tintin
-    tmux
+    unstable.tmux
     tokei
     tor
     tor-browser
@@ -435,6 +435,7 @@
     yt-dlp
     ytmdl
     zerotierone
+    tig
     zip
     zlib-ng
     zoxide
