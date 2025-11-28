@@ -374,6 +374,7 @@
     thunderbird
     tintin
     unstable.tmux
+    xmlstarlet
     tokei
     tor
     tor-browser
@@ -1026,8 +1027,8 @@
         };
         Service = {
           Type = "forking";
-          ExecStart = "${pkgs.tmux}/bin/tmux new-session -d";
-          ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
+          ExecStart = "${pkgs.unstable.tmux}/bin/tmux new-session -d";
+          ExecStop = "${pkgs.unstable.tmux}/bin/tmux kill-server";
           Restart = "always";
           RestartSec = 1;
         };
