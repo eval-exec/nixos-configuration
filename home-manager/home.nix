@@ -333,7 +333,6 @@
     pyright
     qrcp
     qrencode
-    qrscan
     qtcreator
     readability-cli
     retry
