@@ -226,9 +226,9 @@
 
         addons = with pkgs; [
           fcitx5-rime
-          fcitx5-chinese-addons
-          fcitx5-with-addons
-          fcitx5-configtool
+          qt6Packages.fcitx5-chinese-addons
+          qt6Packages.fcitx5-with-addons
+          qt6Packages.fcitx5-configtool
           fcitx5-gtk
           fcitx5-pinyin-zhwiki
           kdePackages.fcitx5-qt
@@ -381,9 +381,9 @@
       '';
     };
 
-    logind.extraConfig = ''
-      RuntimeDirectorySize=16G
-    '';
+    logind.settings.Login = {
+      RuntimeDirectorySize = "16G";
+    };
 
     thermald.enable = false;
     thermald.debug = false;
@@ -710,12 +710,12 @@
       nerd-fonts.jetbrains-mono
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       sarasa-gothic
       source-han-sans
       source-han-serif
       liberation_ttf
-      ubuntu_font_family
+      ubuntu-classic
       fira-code
       fira-code-symbols
       mplus-outline-fonts.githubRelease
@@ -807,7 +807,6 @@
     libnvidia-container
     # inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
 
-    qt6.full
     qt6.qtwebsockets
     kdePackages.qtwebsockets
     wayland-utils
@@ -849,11 +848,11 @@
     stdmanpages
     steam-run
     sysfsutils
-    tdesktop
+    telegram-desktop
     tdrop
     tree
     vim
-    wakatime
+    wakatime-cli
     wget
     xclip
     xdotool

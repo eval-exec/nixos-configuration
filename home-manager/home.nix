@@ -418,7 +418,7 @@
     vimpager
     vlc
     w3m
-    wakatime
+    wakatime-cli
     watchexec
     waypipe
     wev
