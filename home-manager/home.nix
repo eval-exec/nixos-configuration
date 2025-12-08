@@ -286,7 +286,7 @@
     moonlight-qt
     moreutils
     most
-    mpc-cli
+    mpc
     mpv
     mu
     mudlet
