@@ -237,7 +237,7 @@
     inotify-tools
     intel-gpu-tools
     iotop
-    ipfs
+    kubo
     jemalloc
     joker
     jq
