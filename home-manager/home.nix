@@ -174,7 +174,7 @@
     dmidecode
     dpkg
     droidcam
-    du-dust
+    dust
     dwarf-fortress
     element-desktop
     epubcheck
