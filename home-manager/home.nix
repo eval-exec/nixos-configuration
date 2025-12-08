@@ -204,7 +204,7 @@
     gimp
     gitstatus
     glibc_multi
-    glxinfo
+    mesa-demos
     gnuplot
     gnutls
     go-ethereum
