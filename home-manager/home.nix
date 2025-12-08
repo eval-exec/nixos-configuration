@@ -148,7 +148,6 @@
     clojure-lsp
     cloudflared
     cmake
-    cog
     comma
     cool-retro-term
     # copyq
