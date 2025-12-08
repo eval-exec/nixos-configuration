@@ -323,7 +323,7 @@
     pkg-config
     pnpm
     podman-tui
-    poppler_utils
+    poppler-utils
     powershell
     powerstat
     powertop
