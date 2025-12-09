@@ -19,6 +19,7 @@ switch-os: fmt
 switch-hm: fmt
 	git diff --exit-code
 	home-manager switch --flake .#exec@Mufasa --verbose --show-trace --print-build-logs
+	# --option substituters "https://mirrors.ustc.edu.cn/nix-channels/store"
 
 boot: fmt
 	git diff --exit-code

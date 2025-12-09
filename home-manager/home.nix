@@ -128,7 +128,7 @@
     bc
     bear
     bison
-    bitcoin
+    # bitcoin
     blender
     bottles
     brave
@@ -213,7 +213,7 @@
     golangci-lint
     google-cloud-sdk
     gperf
-    gptcommit
+    # gptcommit
     graphviz
     grc
     gst_all_1.gst-libav
@@ -262,7 +262,7 @@
     llvmPackages.libllvm
     lm_sensors
     log4cxx
-    logseq
+    # logseq
     lolcat
     lrzsz
     lshw
@@ -289,7 +289,7 @@
     mpc
     mpv
     mu
-    mudlet
+    # mudlet
     mupdf
     nacelle
     ncmpcpp
@@ -309,7 +309,7 @@
     obfs4
     obs-cmd
     ollama
-    openttd
+    # openttd
     osdlyrics
     pandoc
     pastebinit
@@ -333,7 +333,7 @@
     pyright
     qrcp
     qrencode
-    qtcreator
+    # qtcreator
     readability-cli
     retry
     rig
@@ -360,7 +360,7 @@
     sops
     spotdl
     spotify
-    spotify-player
+    # spotify-player
     sqlite
     sshfs
     stress-ng
@@ -404,7 +404,7 @@
     unstable.quickemu
     unstable.quickshell
     unstable.rfc
-    unstable.shell-gpt
+    # unstable.shell-gpt
     unstable.warp-terminal
     unstable.wezterm
     unstable.youtube-music
@@ -417,11 +417,11 @@
     vlc
     w3m
     wakatime-cli
-    watchexec
+    # watchexec
     waypipe
     wev
-    wine64Packages.stagingFull
-    winetricks
+    # wine64Packages.stagingFull
+    # winetricks
     wl-clipboard
     wlr-randr
     wmctrl
@@ -598,6 +598,7 @@
   };
   programs.nh = {
     enable = true;
+    package = pkgs.unstable.nh;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/exec/Projects/github.com/eval-exec/nixos-configuration";
@@ -607,7 +608,7 @@
     home-manager.enable = true;
 
     obs-studio = {
-      enable = true;
+      enable = false;
       package = (
         pkgs.obs-studio.override {
           cudaSupport = true;
