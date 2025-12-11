@@ -435,6 +435,7 @@
     ytmdl
     zerotierone
     tig
+    uhubctl
     zip
     zlib-ng
     zoxide
@@ -453,6 +454,7 @@
 
   home.sessionPath = [
     "/home/exec/.exec/bin"
+    "/home/exec/.moon/bin"
     "/home/exec/.npm-global/bin"
     "/home/exec/.cargo/bin"
     "/home/exec/.zvm/bin"
@@ -598,7 +600,6 @@
   };
   programs.nh = {
     enable = true;
-    package = pkgs.unstable.nh;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/home/exec/Projects/github.com/eval-exec/nixos-configuration";
@@ -715,7 +716,9 @@
         ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
         ZSH_AUTOSUGGEST_USE_ASYNC=1
       '';
-      initExtra = '''';
+      initExtra = ''
+        [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+      '';
       envExtra = ''
         setopt no_global_rcs
         skip_global_compinit=1
