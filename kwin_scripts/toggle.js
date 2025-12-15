@@ -1,5 +1,5 @@
-function toggleClient(p_app_name, p_desktopFileName) {	
-	console.log("try to toggle", p_app_name, p_desktopFileName)
+function toggleClient(p_app_name, p_desktopFileName) {
+  console.log("try to toggle", p_app_name, p_desktopFileName);
   const getMethods = (obj) => {
     let properties = new Set();
     let currentObj = obj;
@@ -21,17 +21,34 @@ function toggleClient(p_app_name, p_desktopFileName) {
     let resource_name = clients[i].resourceName;
     let caption = clients[i].caption;
     let desktopFileName = clients[i].desktopFileName;
-	
+
     if (p_desktopFileName) {
-      if (resource_name == p_app_name && desktopFileName.startsWith(p_desktopFileName)) {
+      if (
+        resource_name == p_app_name &&
+        desktopFileName.startsWith(p_desktopFileName)
+      ) {
         client = clients[i];
-	    console.log("found", resource_name, ", caption:" , caption, ", desktopFileName: ", desktopFileName);
+        console.log(
+          "found",
+          resource_name,
+          ", caption:",
+          caption,
+          ", desktopFileName: ",
+          desktopFileName,
+        );
         break;
       }
     } else {
       if (resource_name == p_app_name) {
         client = clients[i];
-	    console.log("found", resource_name, ", caption:" , caption, ", desktopFileName: ", desktopFileName);
+        console.log(
+          "found",
+          resource_name,
+          ", caption:",
+          caption,
+          ", desktopFileName: ",
+          desktopFileName,
+        );
         break;
       }
     }
@@ -47,11 +64,22 @@ function toggleClient(p_app_name, p_desktopFileName) {
       }
     }
   } else {
-    console.log("not found target client ",p_app_name, p_caption, ", we theses:", p_app_name);
+    console.log(
+      "not found target client ",
+      p_app_name,
+      p_caption,
+      ", we theses:",
+      p_app_name,
+    );
     for (var i = 0; i < clients.length; i++) {
       let resource_name = clients[i].resourceName;
-    let caption = clients[i].caption;
-      console.log("we have: ", resource_name.padEnd(20), ", caption: ", caption);
+      let caption = clients[i].caption;
+      console.log(
+        "we have: ",
+        resource_name.padEnd(20),
+        ", caption: ",
+        caption,
+      );
     }
   }
 }
@@ -69,17 +97,16 @@ function toggleOkular() {
 }
 
 function toggleChrome() {
-  toggleClient("chrome");
+  toggleClient("chrome", "google-chrome");
 }
 
- function toggleChatGPT() {
--  toggleClient("chrome", "chrome-cadlk");
- }
- 
- function toggleClaude() {
--  toggleClient("chrome", "chrome-fmpnliohjhemenmnlpbfagaolkdacoja-Default");
- }
- 
+function toggleChatGPT() {
+  -toggleClient("chrome", "chrome-cadlk");
+}
+
+function toggleClaude() {
+  -toggleClient("chrome", "chrome-fmpnliohjhemenmnlpbfagaolkdacoja-Default");
+}
 
 {
   let registed = registerShortcut(
