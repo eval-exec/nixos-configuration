@@ -108,6 +108,10 @@ function toggleClaude() {
   -toggleClient("chrome", "chrome-fmpnliohjhemenmnlpbfagaolkdacoja-Default");
 }
 
+function toggleMusic() {
+  toggleClient("electron");
+}
+
 {
   let registed = registerShortcut(
     "ToggleTermWindow",
@@ -170,6 +174,21 @@ function toggleClaude() {
     "ToggleChatGPT",
     "Meta+9",
     toggleChatGPT,
+  );
+
+  if (registed) {
+    console.log("registed ChatGPT");
+  } else {
+    console.log("failed to registed ChatGPT");
+  }
+}
+
+{
+  let registed = registerShortcut(
+    "ToggleMusic",
+    "ToggleMusic",
+    "Meta+7",
+    toggleMusic,
   );
 
   if (registed) {
