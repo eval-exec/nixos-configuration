@@ -36,6 +36,9 @@
     # chaotic.inputs.rust-overlay.follows = "rust-overlay";
     # chaotic.inputs.home-manager.follows = "home-manager";
 
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
   };
 
   outputs =

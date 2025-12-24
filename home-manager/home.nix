@@ -31,6 +31,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
+      outputs.overlays.emacs-overlay
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -121,6 +122,7 @@
     at
     atool
     autoconf
+    emacs-git
     automake
     autotools-language-server
     awscli2
@@ -515,7 +517,7 @@
             '';
             onNotifyPost = ''
               ${pkgs.libnotify}/bin/notify-send 'goimapnotify received new emails'
-              /home/exec/.local/bin/emacsclient -e "
+              ${pkgs.emacs-git}/bin/emacsclient -e "
               (progn
                 (unless (boundp 'mu4e--server-process)
                   (mu4e t))
@@ -1050,7 +1052,7 @@
           Type = "simple";
           Restart = "always";
           # RestartSec = 0;
-          ExecStart = "${pkgs.nix}/bin/nix develop --impure /home/exec/Projects/github.com/emacs-mirror/emacs -c /home/exec/.local/bin/emacs";
+          ExecStart = "${pkgs.emacs-git}/bin/emacs";
           StandardOutput = "journal";
           StandardError = "journal";
         };
