@@ -114,6 +114,7 @@
     alsa-utils
     amdgpu_top
     android-tools
+    android-studio
     ascii
     asciidoc
     ast-grep
@@ -609,12 +610,12 @@
     home-manager.enable = true;
 
     obs-studio = {
-      enable = false;
-      package = (
-        pkgs.obs-studio.override {
-          cudaSupport = true;
-        }
-      );
+      enable = true;
+      # package = (
+      #   pkgs.obs-studio.override {
+      #     cudaSupport = true;
+      #   }
+      # );
       plugins = with pkgs.obs-studio-plugins; [
         obs-backgroundremoval
         obs-websocket
