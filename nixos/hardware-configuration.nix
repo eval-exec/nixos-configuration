@@ -13,8 +13,6 @@
   boot.consoleLogLevel = 7;
   boot.supportedFilesystems = [ "ntfs" ];
 
-  # system.modulesTree = [ (lib.getOutput "modules" pkgs.linuxPackages_cachyos.kernel) ];
-
   #   hardware.nvidia-container-toolkit.enable = true;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
