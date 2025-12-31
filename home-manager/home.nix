@@ -701,27 +701,6 @@
       # syntaxHighlighting.enable = true;
       enableCompletion = true;
       defaultKeymap = "emacs";
-      initExtraFirst = ''
-        # zmodload zsh/zprof
-
-        ZSH_DISABLE_COMPFIX=true
-
-        autoload -Uz compinit
-        for dump in ~/.zcompdump(N.mh+24); do
-          compinit
-        done
-        compinit -C
-
-        DISABLE_AUTO_UPDATE="true"
-        DISABLE_MAGIC_FUNCTIONS="true"
-        DISABLE_COMPFIX="true"
-
-        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
-        ZSH_AUTOSUGGEST_USE_ASYNC=1
-      '';
-      initExtra = ''
-        [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-      '';
       envExtra = ''
         setopt no_global_rcs
         skip_global_compinit=1
@@ -753,11 +732,33 @@
 
         setopt NO_HUP
       '';
-      initContent = ''
-        if [[ "$ALACRITTY_SOCKET" != "" && "$TMUX" = "" ]]; then tmux a; fi
+      initContent =
+        ''
+          # zmodload zsh/zprof
 
-        # zprof
-      '';
+          ZSH_DISABLE_COMPFIX=true
+
+          autoload -Uz compinit
+          for dump in ~/.zcompdump(N.mh+24); do
+            compinit
+          done
+          compinit -C
+
+          DISABLE_AUTO_UPDATE="true"
+          DISABLE_MAGIC_FUNCTIONS="true"
+          DISABLE_COMPFIX="true"
+
+          ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+          ZSH_AUTOSUGGEST_USE_ASYNC=1
+        ''
+        + ''
+          if [[ "$ALACRITTY_SOCKET" != "" && "$TMUX" = "" ]]; then tmux a; fi
+
+          # zprof
+        ''
+        + ''
+          [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+        '';
 
       shellAliases = {
         ding = "mpv ~/Music/notifications/ding-1-14705.mp3 &> /dev/null";
