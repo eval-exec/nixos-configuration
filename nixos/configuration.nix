@@ -262,15 +262,15 @@
     ];
   };
 
-  services.scx = {
-    enable = true;
-    scheduler = "scx_lavd";
-    extraArgs = [ "--autopilot" ];
-  };
+  #   services.scx = {
+  #     enable = true;
+  #     scheduler = "scx_lavd";
+  #     extraArgs = [ "--autopilot" ];
+  #   };
 
-  services.journald.extraConfig = ''
-    Storage=volatile
-  '';
+  # services.journald.extraConfig = ''
+  # Storage=volatile
+  # # '';
 
   services = {
     power-profiles-daemon.enable = false;
@@ -313,7 +313,7 @@
     };
 
     samba = {
-      enable = true;
+      enable = false;
       settings = {
         public = {
           path = "/home/exec/Temp/samba";
@@ -442,7 +442,7 @@
 
       videoDrivers = [
         "modesetting"
-        "nvidia"
+        #         "nvidia"
       ];
 
       #   config = lib.mkAfter ''
