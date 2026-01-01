@@ -13,7 +13,7 @@
   boot.consoleLogLevel = 7;
   boot.supportedFilesystems = [ "ntfs" ];
 
-  #   hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -145,7 +145,7 @@
   ];
   hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
   hardware.nvidia = {
-    open = false;
+    open = true;
     nvidiaSettings = true;
     # package = config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
