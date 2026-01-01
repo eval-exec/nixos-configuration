@@ -262,11 +262,20 @@
     ];
   };
 
-  #   services.scx = {
-  #     enable = true;
-  #     scheduler = "scx_lavd";
-  #     extraArgs = [ "--autopilot" ];
-  #   };
+  services.scx = {
+    enable = true;
+    scheduler = "scx_bpfland";
+    extraArgs = [
+      "-s"
+      "20000"
+      "-m"
+      "powersave"
+      "-I"
+      "100"
+      "-t"
+      "100"
+    ];
+  };
 
   # services.journald.extraConfig = ''
   # Storage=volatile
@@ -833,7 +842,6 @@
     wireplumber
     ncurses
     ncurses5
-    neovim
     nodejs
     openssl
     pciutils

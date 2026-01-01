@@ -133,6 +133,7 @@
     bison
     libxml2
     # bitcoin
+    bcc
     blender
     bottles
     brave
