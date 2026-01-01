@@ -131,6 +131,7 @@
     bc
     bear
     bison
+    libxml2
     # bitcoin
     blender
     bottles
@@ -732,33 +733,32 @@
 
         setopt NO_HUP
       '';
-      initContent =
-        ''
-          # zmodload zsh/zprof
+      initContent = ''
+        # zmodload zsh/zprof
 
-          ZSH_DISABLE_COMPFIX=true
+        ZSH_DISABLE_COMPFIX=true
 
-          autoload -Uz compinit
-          for dump in ~/.zcompdump(N.mh+24); do
-            compinit
-          done
-          compinit -C
+        autoload -Uz compinit
+        for dump in ~/.zcompdump(N.mh+24); do
+          compinit
+        done
+        compinit -C
 
-          DISABLE_AUTO_UPDATE="true"
-          DISABLE_MAGIC_FUNCTIONS="true"
-          DISABLE_COMPFIX="true"
+        DISABLE_AUTO_UPDATE="true"
+        DISABLE_MAGIC_FUNCTIONS="true"
+        DISABLE_COMPFIX="true"
 
-          ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
-          ZSH_AUTOSUGGEST_USE_ASYNC=1
-        ''
-        + ''
-          if [[ "$ALACRITTY_SOCKET" != "" && "$TMUX" = "" ]]; then tmux a; fi
+        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+        ZSH_AUTOSUGGEST_USE_ASYNC=1
+      ''
+      + ''
+        if [[ "$ALACRITTY_SOCKET" != "" && "$TMUX" = "" ]]; then tmux a; fi
 
-          # zprof
-        ''
-        + ''
-          [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-        '';
+        # zprof
+      ''
+      + ''
+        [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+      '';
 
       shellAliases = {
         ding = "mpv ~/Music/notifications/ding-1-14705.mp3 &> /dev/null";
