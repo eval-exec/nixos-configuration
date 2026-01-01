@@ -784,7 +784,7 @@
     # libsForQt5.xdg-desktop-portal-kde
     # libinput
     kdePackages.xdg-desktop-portal-kde
-    linuxKernel.packages.linux_6_18.perf
+    perf
     kdePackages.kde-gtk-config
     kdePackages.qtvirtualkeyboard
     kdePackages.plasma-sdk
