@@ -815,7 +815,7 @@
     nvidia-container-toolkit
     nvidia-container-toolkit.tools
     libnvidia-container
-    # inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
+    inputs.kwin-effects-forceblur.packages.${pkgs.system}.default # Wayland
 
     qt6.qtwebsockets
     kdePackages.qtwebsockets
