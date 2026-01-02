@@ -136,6 +136,7 @@
     bcc
     blender
     bottles
+    melonDS
     brave
     brightnessctl
     browsh
