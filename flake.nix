@@ -44,6 +44,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -54,6 +58,7 @@
       sops-nix,
       claude-desktop,
       chaotic,
+      nix-alien,
       ...
     }@inputs:
     let

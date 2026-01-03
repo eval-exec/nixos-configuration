@@ -32,6 +32,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
+      inputs.nix-alien.overlays.default
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -816,6 +817,7 @@
     nvidia-container-toolkit.tools
     libnvidia-container
     inputs.kwin-effects-forceblur.packages.${pkgs.system}.default # Wayland
+    nix-alien
 
     qt6.qtwebsockets
     kdePackages.qtwebsockets
