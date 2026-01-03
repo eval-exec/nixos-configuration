@@ -47,7 +47,7 @@
     nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     nix-cachyos-kernel = {
-      url = "github:xddxdd/nix-cachyos-kernel?rev=a756f0662fbdcbdac8addc2f48313d911b362215";
+      url = "github:xddxdd/nix-cachyos-kernel/release";
     };
   };
 

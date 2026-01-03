@@ -33,7 +33,7 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
       inputs.nix-alien.overlays.default
-      inputs.nix-cachyos-kernel.overlays.default
+      inputs.nix-cachyos-kernel.overlays.pinned
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
