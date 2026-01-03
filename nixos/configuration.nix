@@ -33,6 +33,7 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
       inputs.nix-alien.overlays.default
+      inputs.cachyos-kernel.overlays.pinned
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -93,6 +94,8 @@
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
           "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+          "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         ];
 
         substituters = [
@@ -104,6 +107,8 @@
           "https://nix-community.cachix.org"
           "https://devenv.cachix.org"
           "https://chaotic-nyx.cachix.org"
+          "https://attic.xuyh0120.win/lantian"
+          "https://cache.garnix.io"
         ];
         experimental-features = [
           "nix-command"

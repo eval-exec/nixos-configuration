@@ -48,6 +48,11 @@
       url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -59,6 +64,7 @@
       claude-desktop,
       chaotic,
       nix-alien,
+      cachyos-kernel,
       ...
     }@inputs:
     let

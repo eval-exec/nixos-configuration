@@ -26,7 +26,7 @@
     "rtsx_pci_sdmmc"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v4;
   boot.extraModulePackages = [
     # pkgs.linuxPackages_latest.v4l2loopback
   ];
