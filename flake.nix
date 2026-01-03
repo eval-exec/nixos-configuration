@@ -31,10 +31,6 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    # chaotic.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # chaotic.inputs.rust-overlay.follows = "rust-overlay";
-    # chaotic.inputs.home-manager.follows = "home-manager";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
@@ -48,10 +44,10 @@
       url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nixpkgs-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
-    cachyos-kernel = {
-      url = "github:xddxdd/nix-cachyos-kernel/release";
-      inputs.nixpkgs.follows = "nixpkgs";
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel?rev=a756f0662fbdcbdac8addc2f48313d911b362215";
     };
   };
 
@@ -62,9 +58,8 @@
       home-manager,
       sops-nix,
       claude-desktop,
-      chaotic,
       nix-alien,
-      cachyos-kernel,
+      nix-cachyos-kernel,
       ...
     }@inputs:
     let
@@ -110,7 +105,6 @@
             # > Our main nixos configuration file <
             ./nixos/configuration.nix
             sops-nix.nixosModules.sops
-            chaotic.nixosModules.default # IMPORTANT
           ];
         };
       };

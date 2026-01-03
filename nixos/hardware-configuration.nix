@@ -27,6 +27,7 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v4;
+  # boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
   boot.extraModulePackages = [
     # pkgs.linuxPackages_latest.v4l2loopback
   ];
