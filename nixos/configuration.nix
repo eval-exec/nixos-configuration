@@ -270,7 +270,7 @@
     enable = true;
     scheduler = "scx_lavd";
     extraArgs = [
-      "powersave"
+      "--powersave"
     ];
   };
 
