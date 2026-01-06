@@ -268,16 +268,9 @@
 
   services.scx = {
     enable = true;
-    scheduler = "scx_bpfland";
+    scheduler = "scx_lavd";
     extraArgs = [
-      "-s"
-      "20000"
-      "-m"
       "powersave"
-      "-I"
-      "100"
-      "-t"
-      "100"
     ];
   };
 

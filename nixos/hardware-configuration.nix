@@ -152,10 +152,10 @@
     #  config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
     powerManagement = {
-      enable = false;
+      enable = true;
       finegrained = true;
     };
-    nvidiaPersistenced = false;
+    nvidiaPersistenced = true;
     prime = {
       # sync.enable = true;
 
