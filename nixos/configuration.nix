@@ -267,11 +267,8 @@
   };
 
   services.scx = {
-    enable = true;
-    scheduler = "scx_lavd";
-    extraArgs = [
-      "--powersave"
-    ];
+    enable = false;
+    scheduler = "scx_bpfland";
   };
 
   # services.journald.extraConfig = ''
