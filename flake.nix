@@ -16,10 +16,6 @@
     # 2. Override the flake-utils default to your version
     flake-utils.inputs.systems.follows = "systems";
 
-    claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
-    claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
-    claude-desktop.inputs.flake-utils.follows = "flake-utils";
-
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -56,7 +52,6 @@
       nixpkgs,
       home-manager,
       sops-nix,
-      claude-desktop,
       nix-alien,
       nix-cachyos-kernel,
       ...

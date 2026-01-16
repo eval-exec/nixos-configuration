@@ -82,7 +82,6 @@
     # github-copilot-cli
     # github-desktop
     # graalvm-ce
-    # inputs.claude-desktop.packages.x86_64-linux.claude-desktop-with-fhs
     # inputs.ghostty.packages.x86_64-linux.default
     # inputs.quickshell.packages.x86_64-linux.default
     # ionshare
