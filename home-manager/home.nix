@@ -106,7 +106,7 @@
     # vivaldi
     # vivaldi-ffmpeg-codecs
     # webkitgtk
-    # wpewebkit
+    wpewebkit
     age
     aileron
     alacritty
