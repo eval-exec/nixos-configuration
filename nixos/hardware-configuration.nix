@@ -45,6 +45,8 @@
   #   }
   # ];
   boot.kernelParams = [
+    "xe.force_probe=0"
+    "i915.force_probe=*"
     "i915.enable_fbc=1"
     "i915.enable_guc=3"
     "i915.enable_psr=1"
