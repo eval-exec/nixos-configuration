@@ -412,7 +412,7 @@
     # unstable.shell-gpt
     unstable.warp-terminal
     unstable.wezterm
-    unstable.youtube-music
+    unstable.pear-desktop
     unstable.zls
     unzip
     usbutils
