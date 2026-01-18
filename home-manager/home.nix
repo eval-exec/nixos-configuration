@@ -121,7 +121,7 @@
     at
     atool
     autoconf
-    emacs-git-pgtk
+    emacs-git
     automake
     autotools-language-server
     awscli2
@@ -519,7 +519,7 @@
             '';
             onNotifyPost = ''
               ${pkgs.libnotify}/bin/notify-send 'goimapnotify received new emails'
-              ${pkgs.emacs-git-pgtk}/bin/emacsclient -e "
+              ${pkgs.emacs-git}/bin/emacsclient -e "
               (progn
                 (unless (boundp 'mu4e--server-process)
                   (mu4e t))
@@ -750,7 +750,7 @@
         rustrover = "~/.local/share/JetBrains/Toolbox/apps/rustrover/bin/rustrover.sh";
         clion = "~/.local/share/JetBrains/Toolbox/apps/clion-nova/bin/clion.sh";
         idea = "~/.local/share/JetBrains/Toolbox/apps/intellij-idea-ultimate/bin/idea.sh";
-        # emacs = "${pkgs.emacs-git-pgtk}/bin/emacsclient -nw";
+        # emacs = "${pkgs.emacs-git}/bin/emacsclient -nw";
         magit = ''
           \emacs -Q -nw -l ~/.emacs.d/init-nw.el --funcall magit
         '';
@@ -1035,7 +1035,7 @@
           Type = "simple";
           Restart = "always";
           # RestartSec = 0;
-          ExecStart = "${pkgs.emacs-git-pgtk}/bin/emacs";
+          ExecStart = "${pkgs.emacs-git}/bin/emacs";
           StandardOutput = "journal";
           StandardError = "journal";
         };

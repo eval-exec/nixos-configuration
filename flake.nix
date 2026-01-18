@@ -28,7 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay?rev=c0b6ffb9edfb7ca5ccc36c3723690768ed8b8471";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     kwin-effects-forceblur = {
       url = "github:taj-ny/kwin-effects-forceblur";
