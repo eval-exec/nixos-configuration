@@ -45,22 +45,23 @@
   #   }
   # ];
   boot.kernelParams = [
-    "nvme.noacpi=1"
+    "i915.enable_fbc=1"
+    "i915.enable_guc=3"
+    "i915.enable_psr=1"
+    "i915.enable_psr2_sel_fetch=1"
+    "intel_idle.max_cstate=9"
     "laptop_mode=1"
+    "maxcpus=20"
+    "mem_sleep_default=deep"
+    "nowatchdog"
+    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+    "nvme.noacpi=1"
+    "processor.max_cstate=9"
     "rcu_nocbs=all"
     "rcutree.enable_rcu_lazy=1"
-    "nowatchdog"
-    "mem_sleep_default=deep"
     "resume_offset=89067520"
-    "maxcpus=20"
     # "video=eDP-1:3456x2160@60"
-    "i915.enable_psr=1"
-    "i915.enable_fbc=1"
-    "i915.enable_psr2_sel_fetch=1"
-    "i915.enable_guc=3"
-    "intel_idle.max_cstate=9"
-    "processor.max_cstate=9"
-    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+    "vm.swappiness=0"
   ];
   # options snd-intel-dspcfg dsp_driver=1
   # options snd-hda-intel model=generic
