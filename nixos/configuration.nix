@@ -123,6 +123,7 @@
       # Opinionated: make flake registry and nix path match flake inputs
       # registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
       registry.nixpkgs.flake = inputs.nixpkgs;
+      registry.nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
 
