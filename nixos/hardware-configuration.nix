@@ -13,7 +13,7 @@
   boot.consoleLogLevel = 7;
   boot.supportedFilesystems = [ "ntfs" ];
 
-  hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia-container-toolkit.enable = false;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -36,7 +36,10 @@
     # "snd_aloop"
     "nvidia_uvm"
   ];
-  boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.blacklistedKernelModules = [
+    "nouveau"
+    "xe"
+  ];
   boot.resumeDevice = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
   # boot.kernelPatches = [
   #   {

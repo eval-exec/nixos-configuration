@@ -445,8 +445,8 @@
       };
 
       videoDrivers = [
-        "modesetting"
-        "nvidia"
+        "intel"
+        # "nvidia"
       ];
 
       #   config = lib.mkAfter ''

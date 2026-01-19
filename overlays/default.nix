@@ -50,6 +50,14 @@
       ];
     });
 
+    libwpe-fdo = prev.libwpe-fdo.overrideAttrs (_oldAttrs: {
+      version = "1.16.1";
+      src = final.fetchurl {
+        url = "https://wpewebkit.org/releases/wpebackend-fdo-1.16.1.tar.xz";
+        hash = "sha256-VErhQBL45+QmuMtSLrCqqsgxrXw1YB0c8x03Zw4Ouzs=";
+      };
+    });
+
     # # Use the master branch of bluez/bluez
     # unstable.bluez = prev.bluez.overrideAttrs (oldAttrs: {
     #   src = final.fetchFromGitHub {
