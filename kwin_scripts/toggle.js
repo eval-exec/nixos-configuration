@@ -89,7 +89,7 @@ function toggleTerm() {
 }
 
 function toggleEmacs() {
-  toggleClient("emacs");
+  toggleClient("emacs-31.0.50");
 }
 
 function toggleOkular() {

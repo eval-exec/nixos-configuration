@@ -962,6 +962,7 @@
       boost
       cairo
       cups
+      libsoup_3
       curl
       dbus
       expat

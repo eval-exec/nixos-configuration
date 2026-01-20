@@ -105,7 +105,6 @@
     # unstable.zed-editor # I installed zed by https://zed.dev/install.sh | ZED_CHANNEL=preivew sh
     # vivaldi
     # vivaldi-ffmpeg-codecs
-    # webkitgtk
     # wpewebkit
     age
     aileron
@@ -132,6 +131,8 @@
     bison
     libxml2
     # bitcoin
+    glib
+    glib-networking
     bcc
     blender
     bottles
@@ -1034,8 +1035,7 @@
         Service = {
           Type = "simple";
           Restart = "always";
-          # RestartSec = 0;
-          ExecStart = "${pkgs.emacs-git}/bin/emacs";
+          ExecStart = "${pkgs.nix}/bin/nix-shell /home/exec/.config/emacs/default.nix --run /home/exec/Projects/github.com/emacs-mirror/build/bin/emacs";
           StandardOutput = "journal";
           StandardError = "journal";
         };
