@@ -49,6 +49,7 @@
   sqlite,
   stdenv,
   systemd,
+  testers,
   unifdef,
   wayland,
   wayland-protocols,
@@ -60,11 +61,19 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "wpewebkit";
-  version = "2.50.0";
+  version = "2.50.4";
+
+  outputs = [
+    "out"
+    "dev"
+    "devdoc"
+  ];
+
+  outputBin = "dev";
 
   src = fetchurl {
     url = "https://wpewebkit.org/releases/wpewebkit-${finalAttrs.version}.tar.xz";
-    hash = "sha256-qa9ixeGFUbc4a324ZOi6gVbyGbjmxjmTS/bzpWeWmSI=";
+    hash = "sha256-0gTkBbCXVQh0jAJzwYCQMEqXnhFw/6KgpSj62QGR74c=";
   };
 
   nativeBuildInputs = [
@@ -132,19 +141,66 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   cmakeFlags = [
-    "-DPORT=WPE"
-    "-DENABLE_DOCUMENTATION=ON"
-    "-DENABLE_INTROSPECTION=ON"
-    "-DENABLE_MINIBROWSER=ON"
-    "-DENABLE_SPEECH_SYNTHESIS=OFF"
-    "-DUSE_LIBBACKTRACE=OFF"
+    (lib.cmakeFeature "PORT" "WPE")
+    (lib.cmakeBool "ENABLE_DOCUMENTATION" true)
+    (lib.cmakeBool "ENABLE_INTROSPECTION" true)
+    (lib.cmakeBool "ENABLE_MINIBROWSER" true)
+    (lib.cmakeBool "ENABLE_SPEECH_SYNTHESIS" false)
+    (lib.cmakeBool "USE_LIBBACKTRACE" false)
   ];
+
+  postFixup = ''
+    moveToOutput "share/doc" "$devdoc"
+  '';
+
+  passthru.tests = {
+    pkg-config = testers.hasPkgConfigModules {
+      package = finalAttrs.finalPackage;
+    };
+
+    simple-compilation = stdenv.mkDerivation {
+      name = "wpewebkit-test-simple-compilation";
+
+      nativeBuildInputs = [ pkg-config ];
+      buildInputs = [
+        finalAttrs.finalPackage
+        glib
+        libwpe
+        libsoup_3
+      ];
+
+      dontUnpack = true;
+
+      buildPhase = ''
+        cat > test.c <<EOF
+        #include <wpe/webkit.h>
+        #include <stdio.h>
+
+        int main(void) {
+            printf("WPE WebKit version: %d.%d.%d\n",
+                   webkit_get_major_version(),
+                   webkit_get_minor_version(),
+                   webkit_get_micro_version());
+            return 0;
+        }
+        EOF
+
+        $CC test.c -o test $(pkg-config --cflags --libs wpe-webkit-2.0)
+      '';
+
+      installPhase = ''
+        mkdir -p $out/bin
+        install -m755 test $out/bin/wpewebkit-test
+      '';
+    };
+  };
 
   meta = {
     description = "WPE WebKit port optimized for embedded devices";
     homepage = "https://wpewebkit.org";
     license = lib.licenses.bsd2;
     maintainers = with lib.maintainers; [ eval-exec ];
-    platforms = lib.platforms.linux ++ lib.platforms.darwin;
+    platforms = with lib.platforms; linux ++ darwin;
+    pkgConfigModules = [ "wpe-webkit-2.0" ];
   };
 })
