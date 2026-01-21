@@ -308,7 +308,7 @@
 
     };
     kmscon = {
-      enable = false;
+      enable = true;
       useXkbConfig = true;
     };
 
