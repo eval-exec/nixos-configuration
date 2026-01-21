@@ -1028,13 +1028,16 @@
           Description = "emacs";
           X-SwitchMethod = "keep-old";
           After = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
+          ConditionEnvironment = "DISPLAY";
         };
         Install = {
           WantedBy = [ "graphical-session.target" ];
         };
         Service = {
           Type = "simple";
-          Restart = "always";
+          Restart = "on-failure";
+          RestartSec = 1;
           ExecStart = "${pkgs.nix}/bin/nix-shell /home/exec/.config/emacs/default.nix --run /home/exec/Projects/github.com/emacs-mirror/build/bin/emacs";
           StandardOutput = "journal";
           StandardError = "journal";
