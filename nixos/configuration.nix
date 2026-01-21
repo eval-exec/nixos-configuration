@@ -447,7 +447,7 @@
 
       videoDrivers = [
         "intel"
-        # "nvidia"
+        "nvidia"
       ];
 
       #   config = lib.mkAfter ''
