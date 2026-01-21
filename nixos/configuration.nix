@@ -446,7 +446,7 @@
       };
 
       videoDrivers = [
-        "intel"
+        "modesetting"
         "nvidia"
       ];
 
