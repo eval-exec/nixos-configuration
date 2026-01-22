@@ -310,6 +310,15 @@
     kmscon = {
       enable = true;
       useXkbConfig = true;
+      extraConfig = ''
+        font-size=18
+      '';
+      fonts = [
+        {
+          name = "JetBrainsMono Nerd Font";
+          package = pkgs.nerd-fonts.jetbrains-mono;
+        }
+      ];
     };
 
     fwupd.enable = false;
