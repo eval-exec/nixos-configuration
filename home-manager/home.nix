@@ -121,6 +121,8 @@
     atool
     autoconf
     emacs-git
+    skia
+    ydotool
     automake
     autotools-language-server
     awscli2
