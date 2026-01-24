@@ -124,6 +124,8 @@
     skia
     automake
     autotools-language-server
+    # grim grim not support on kwin/wayland
+    # slurp slurp not support on kwin/wayland
     awscli2
     bat
     bats
