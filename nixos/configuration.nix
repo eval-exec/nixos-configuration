@@ -795,6 +795,7 @@
     kdePackages.qtvirtualkeyboard
     kdePackages.plasma-sdk
     kdePackages.discover
+    tailscale
     xdg-desktop-portal
     xdg-utils
     xdg-desktop-portal-wlr
@@ -887,6 +888,7 @@
     # nvidia-vaapi-driver
   ];
 
+  services.tailscale.enable = true;
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -967,6 +969,16 @@
     libraries = with pkgs; [
       # cudaPackages.cuda_cudart
       alsa-lib
+      ncurses6
+      libselinux
+      gnutls
+      gmp
+      tree-sitter
+      gtk4
+      harfbuzz
+      graphene
+      libwpe
+      libwpe-fdo
       at-spi2-atk
       at-spi2-core
       atk
@@ -983,6 +995,10 @@
       fuse3
       gcc-unwrapped.lib
       gdk-pixbuf
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-base
+      gst_all_1.gstreamer
+
       glib
       glibc
       glibc_multi

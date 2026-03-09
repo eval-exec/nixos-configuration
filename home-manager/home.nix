@@ -440,7 +440,7 @@
     yaml-language-server
     yazi
     yq
-    yt-dlp
+    unstable.yt-dlp
     ytmdl
     zerotierone
     tig
