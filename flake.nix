@@ -30,11 +30,6 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
-    kwin-effects-forceblur = {
-      url = "github:taj-ny/kwin-effects-forceblur";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     nix-alien = {
       url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
