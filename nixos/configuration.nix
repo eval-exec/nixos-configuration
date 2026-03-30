@@ -342,6 +342,7 @@
       enable = true;
     };
     guix = {
+      package = pkgs.unstable.guix;
       enable = true;
     };
     fprintd = {
