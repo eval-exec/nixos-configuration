@@ -60,7 +60,7 @@
     "mem_sleep_default=deep"
     "nowatchdog"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
-    "nvme.noacpi=1"
+    # "nvme.noacpi=1" # may break suspend
     "processor.max_cstate=9"
     "rcu_nocbs=all"
     "rcutree.enable_rcu_lazy=1"
