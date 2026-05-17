@@ -213,7 +213,6 @@
     gimp
     gitstatus
     glibc_multi
-    mesa-demos
     gnuplot
     gnutls
     go-ethereum
