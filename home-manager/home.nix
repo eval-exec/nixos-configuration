@@ -215,6 +215,7 @@
     glibc_multi
     gnuplot
     gnutls
+    bubblewrap
     go-ethereum
     go2tv
     goimapnotify
