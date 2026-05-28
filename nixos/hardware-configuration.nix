@@ -158,7 +158,7 @@
     #  config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
     powerManagement = {
-      enable = true;
+      enable = false; # if true, nvidia cause kernel failed suspend
       finegrained = true;
     };
     nvidiaPersistenced = true;
