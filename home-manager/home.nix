@@ -216,6 +216,7 @@
     gnuplot
     gnutls
     bubblewrap
+    tcpdump
     go-ethereum
     go2tv
     goimapnotify
