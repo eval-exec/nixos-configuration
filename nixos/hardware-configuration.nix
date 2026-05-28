@@ -57,7 +57,6 @@
     "intel_idle.max_cstate=9"
     "laptop_mode=1"
     "maxcpus=20"
-    "mem_sleep_default=deep"
     "nowatchdog"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     # "nvme.noacpi=1" # may break suspend
@@ -113,7 +112,7 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = "powersave";
-  powerManagement.powertop.enable = false;
+  powerManagement.powertop.enable = true;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.bluetooth = {
