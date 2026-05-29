@@ -886,6 +886,7 @@
     xorg.xwininfo
     zlib-ng
     # nvidia-vaapi-driver
+    config.boot.kernelPackages.turbostat
   ];
 
   services.tailscale.enable = true;
