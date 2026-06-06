@@ -52,6 +52,7 @@
       permittedInsecurePackages = [
         "electron-27.3.11"
         "electron-32.3.3"
+        "electron-39.8.10"
       ];
 
     };
@@ -190,12 +191,11 @@
     errcheck
     evtest
     exercism
-    extra-cmake-modules
+    kdePackages.extra-cmake-modules
     fastfetch
     fd
     ffmpeg-full
     fftw
-    firefoxpwa
     fish
     flameshot
     flatpak-builder
@@ -310,9 +310,9 @@
     ninja
     nix-zsh-completions
     nixfmt-rfc-style
-    nodePackages.bash-language-server
-    nodePackages.prettier
-    nodePackages.typescript-language-server
+    bash-language-server
+    prettier
+    typescript-language-server
     nuclear
     nvme-cli
     nvtopPackages.full
@@ -352,7 +352,6 @@
     roswell
     ruff
     sbcl
-    sbclPackages.qlot
     sccache
     scrcpy
     scrot
@@ -606,7 +605,6 @@
   programs.firefox = {
     enable = true;
     package = pkgs.unstable.firefox;
-    nativeMessagingHosts = [ pkgs.unstable.firefoxpwa ];
   };
   programs.nh = {
     enable = true;
