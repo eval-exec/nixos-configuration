@@ -505,13 +505,12 @@
     };
     ollama = {
       enable = false;
-      package = pkgs.unstable.ollama;
+      package = pkgs.unstable.ollama-cuda;
       # sandbox = false;
       host = "127.0.0.1";
       port = 11435;
       # writablePaths = [ "/home/exec/.ollama" ];
       models = "/home/exec/.ollama/models";
-      acceleration = "cuda";
     };
 
     wyoming = {
@@ -907,7 +906,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 
   programs.ydotool.enable = true;
   programs.labwc.enable = true;
