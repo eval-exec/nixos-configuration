@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-set -evx
-qdbus org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.cleanUp
+set -euxo pipefail
 
-qdbus org.kde.KWin /Scripting org.kde.kwin.Scripting.unloadScript /home/exec/Projects/github.com/eval-exec/nixos-configuration/kwin_scripts/toggle.js
-qdbus org.kde.KWin /Scripting org.kde.kwin.Scripting.loadScript /home/exec/Projects/github.com/eval-exec/nixos-configuration/kwin_scripts/toggle.js
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+script_path="${script_dir}/toggle.js"
+
+qdbus org.kde.KWin /Scripting org.kde.kwin.Scripting.unloadScript "${script_path}"
+qdbus org.kde.KWin /Scripting org.kde.kwin.Scripting.loadScript "${script_path}"
 qdbus org.kde.KWin /Scripting org.kde.kwin.Scripting.start
 qdbus org.kde.KWin /KWin reconfigure
