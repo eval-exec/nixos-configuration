@@ -160,7 +160,7 @@
   documentation = {
     enable = true;
     dev.enable = true;
-    man.generateCaches = false;
+    man.cache.enable = false;
   };
 
   networking = {
@@ -415,10 +415,7 @@
 
     resolved = {
       enable = false;
-      fallbackDns = [
-        "1.1.1.1"
-        "8.8.8.8"
-      ];
+      settings.Resolve.FallbackDNS = "1.1.1.1 8.8.8.8";
     };
     displayManager = {
       defaultSession = "plasma";
@@ -873,16 +870,16 @@
     xclip
     xdotool
     xfsprogs
-    xorg.libxcb
-    xorg.xhost
-    xorg.xcbutil
-    xorg.xcbutilimage
-    xorg.xcbutilwm
-    xorg.xdpyinfo
-    xorg.xev
-    xorg.xkbcomp
-    xorg.xmodmap
-    xorg.xwininfo
+    libxcb
+    xhost
+    libxcb-util
+    libxcb-image
+    libxcb-wm
+    xdpyinfo
+    xev
+    xkbcomp
+    xmodmap
+    xwininfo
     zlib-ng
     # nvidia-vaapi-driver
     config.boot.kernelPackages.turbostat
@@ -1035,26 +1032,26 @@
       vulkan-loader
       wayland
       xcb-util-cursor
-      xorg.libX11
-      xorg.libXScrnSaver
-      xorg.libXcomposite
-      xorg.libXcursor
-      xorg.libXdamage
-      xorg.libXext
-      xorg.libXfixes
-      xorg.libXi
-      xorg.libXrandr
-      xorg.libXrender
-      xorg.libXtst
-      xorg.libxcb
-      xorg.libxkbfile
-      xorg.libxshmfence
-      xorg.xcbutil
-      xorg.xcbutilerrors
-      xorg.xcbutilimage
-      xorg.xcbutilkeysyms
-      xorg.xcbutilrenderutil
-      xorg.xcbutilwm
+      libx11
+      libxscrnsaver
+      libxcomposite
+      libxcursor
+      libxdamage
+      libxext
+      libxfixes
+      libxi
+      libxrandr
+      libxrender
+      libxtst
+      libxcb
+      libxkbfile
+      libxshmfence
+      libxcb-util
+      libxcb-errors
+      libxcb-image
+      libxcb-keysyms
+      libxcb-render-util
+      libxcb-wm
       zlib-ng
     ];
   };

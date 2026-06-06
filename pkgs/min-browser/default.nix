@@ -65,16 +65,16 @@ stdenv.mkDerivation rec {
     at-spi2-atk
     at-spi2-core
     dbus
-    pkgs.xorg.libxcb
-    pkgs.xorg.libX11
-    pkgs.xorg.libXcomposite
-    pkgs.xorg.libXdamage
-    pkgs.xorg.libXext
-    pkgs.xorg.libXfixes
-    pkgs.xorg.libXrandr
-    pkgs.xorg.libXi
-    pkgs.xorg.libXcursor
-    pkgs.xorg.libXtst
+    libxcb
+    libX11
+    libXcomposite
+    libXdamage
+    libXext
+    libXfixes
+    libXrandr
+    libXi
+    libXcursor
+    libXtst
     libxkbcommon
     alsa-lib
     cups
