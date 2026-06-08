@@ -379,13 +379,13 @@
           00000001)
             echo plugged in
             ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -g performance
-            ${pkgs.linuxPackages.cpupower}/bin/cpupower set -b 0 --epp performance
+            ${pkgs.linuxPackages.cpupower}/bin/cpupower set all -b 0 --epp performance
             ;;
           00000000)
             # AC unplugged - add your commands here
             echo unplugged
             ${pkgs.linuxPackages.cpupower}/bin/cpupower frequency-set -g powersave
-            ${pkgs.linuxPackages.cpupower}/bin/cpupower set -b 15 --epp power
+            ${pkgs.linuxPackages.cpupower}/bin/cpupower set all -b 15 --epp power
             echo disable turbo...
             echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo
             echo disable turbo done
