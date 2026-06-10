@@ -1040,8 +1040,8 @@
           Type = "simple";
           Restart = "on-failure";
           RestartSec = 1;
-          # ExecStart = "${pkgs.nix}/bin/nix-shell /home/exec/.config/emacs/default.nix --run /home/exec/Projects/github.com/emacs-mirror/build/bin/emacs";
-          ExecStart = "${pkgs.emacs-git}/bin/emacs";
+          ExecStart = "${pkgs.nix}/bin/nix-shell /home/exec/.config/emacs/default.nix --run /home/exec/Projects/github.com/emacs-mirror/build/bin/emacs";
+          # ExecStart = "${pkgs.emacs-git}/bin/emacs";
           StandardOutput = "journal";
           StandardError = "journal";
         };
