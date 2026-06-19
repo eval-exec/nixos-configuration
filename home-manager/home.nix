@@ -121,7 +121,6 @@
     at
     atool
     autoconf
-    emacs-git
     skia
     automake
     autotools-language-server
@@ -523,7 +522,7 @@
             '';
             onNotifyPost = ''
               ${pkgs.libnotify}/bin/notify-send 'goimapnotify received new emails'
-              ${pkgs.emacs-git}/bin/emacsclient -e "
+              /home/exec/Projects/github.com/emacs-mirror/build/bin/emacsclient -e "
               (progn
                 (unless (boundp 'mu4e--server-process)
                   (mu4e t))
