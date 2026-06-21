@@ -76,6 +76,7 @@
   boot.kernel.sysctl = {
     "vm.laptop_mode" = 5;
     "kernel.sysrq" = 1;
+    "kernel.yama.ptrace_scope" = 0;
     "fs.inotify.max_user_watches" = 524288;
   };
 

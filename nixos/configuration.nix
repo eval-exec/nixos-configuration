@@ -791,6 +791,7 @@
     kdePackages.kde-gtk-config
     kdePackages.qtvirtualkeyboard
     kdePackages.plasma-sdk
+    kdePackages.qtwebengine
     kdePackages.discover
     tailscale
     xdg-desktop-portal
