@@ -421,6 +421,7 @@
     usbutils
     uv
     variety
+    xvfb-run
     vimpager
     vlc
     w3m
