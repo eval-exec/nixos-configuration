@@ -418,7 +418,7 @@
       settings.Resolve.FallbackDNS = "1.1.1.1 8.8.8.8";
     };
     displayManager = {
-      defaultSession = "plasma";
+      # defaultSession = "plasma";
       enable = true;
       ly = {
         enable = false;

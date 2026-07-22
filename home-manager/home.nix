@@ -604,7 +604,7 @@
 
   programs.firefox = {
     enable = true;
-    package = pkgs.unstable.firefox;
+    package = pkgs.firefox;
   };
   programs.nh = {
     enable = true;
@@ -911,25 +911,25 @@
         };
       };
 
-      watchman = {
-        Unit = {
-          Description = "Watchman for user %i";
-          X-SwitchMethod = "keep-old";
-          Wants = [ "network-online.target" ];
-          After = [ "network-online.target" ];
-        };
-        Service = {
-          Environment = "TMPDIR=/tmp/watchman_tmp";
-          ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /tmp/watchman_tmp";
-          ExecStart = "${pkgs.watchman}/bin/watchman --foreground --log-level=2";
-          ExecStop = "${pkgs.watchman}/bin/watchman shutdown-server";
-          Restart = "always";
-          RestartSec = 3;
-        };
-        Install = {
-          WantedBy = [ "default.target" ];
-        };
-      };
+      # watchman = {
+      #   Unit = {
+      #     Description = "Watchman for user %i";
+      #     X-SwitchMethod = "keep-old";
+      #     Wants = [ "network-online.target" ];
+      #     After = [ "network-online.target" ];
+      #   };
+      #   Service = {
+      #     Environment = "TMPDIR=/tmp/watchman_tmp";
+      #     ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /tmp/watchman_tmp";
+      #     ExecStart = "${pkgs.watchman}/bin/watchman --foreground --log-level=2";
+      #     ExecStop = "${pkgs.watchman}/bin/watchman shutdown-server";
+      #     Restart = "always";
+      #     RestartSec = 3;
+      #   };
+      #   Install = {
+      #     WantedBy = [ "default.target" ];
+      #   };
+      # };
 
       # distccd_forward = {
       #   Unit = {
