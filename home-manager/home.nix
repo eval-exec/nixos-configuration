@@ -104,8 +104,8 @@
     # unstable.vagrant
     # unstable.whisper-ctranslate2
     # unstable.zed-editor # I installed zed by https://zed.dev/install.sh | ZED_CHANNEL=preivew sh
-    # vivaldi
-    # vivaldi-ffmpeg-codecs
+    vivaldi
+    vivaldi-ffmpeg-codecs
     # wpewebkit
     age
     aileron
