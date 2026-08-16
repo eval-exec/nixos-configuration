@@ -104,7 +104,7 @@
           "https://cache.nixos.org/"
           "https://nix-community.cachix.org"
           "https://devenv.cachix.org"
-          # "https://attic.xuyh0120.win/lantian"
+          "https://attic.xuyh0120.win/lantian"
         ];
         experimental-features = [
           "nix-command"
