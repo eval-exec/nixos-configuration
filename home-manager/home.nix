@@ -318,6 +318,7 @@
     obfs4
     obs-cmd
     unstable.ollama
+    unstable.wf-recorder
     # openttd
     osdlyrics
     pandoc
