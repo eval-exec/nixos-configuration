@@ -498,16 +498,6 @@
         #   "${pkgs.xorg.setxkbmap}/bin/setxkbmap -verbose 10 -layout us-mine";
       };
     };
-    ollama = {
-      enable = false;
-      package = pkgs.unstable.ollama-cuda;
-      # sandbox = false;
-      host = "127.0.0.1";
-      port = 11435;
-      # writablePaths = [ "/home/exec/.ollama" ];
-      models = "/home/exec/.ollama/models";
-    };
-
     wyoming = {
 
       # faster-whisper = {

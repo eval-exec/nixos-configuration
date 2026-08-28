@@ -317,7 +317,7 @@
     nvtopPackages.full
     obfs4
     obs-cmd
-    ollama
+    unstable.ollama
     # openttd
     osdlyrics
     pandoc
@@ -561,7 +561,21 @@
   # gtk.theme.package = pkgs.fluent-gtk-theme;
   # gtk.theme.name = "Fluent";
 
+
   services = {
+
+    # ollama = {
+    #   enable = true;
+    #   # package = pkgs.unstable.ollama;
+    #   acceleration = "cuda";
+    #   # sandbox = false;
+    #   host = "127.0.0.1";
+    #   port = 11435;
+    #   # writablePaths = [ "/home/exec/.ollama" ];
+    #   # models = "/home/exec/.ollama/models";
+    # };
+    #
+    #
     mpd = {
       enable = true;
       # extraArgs = [ "" ];

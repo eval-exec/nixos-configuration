@@ -34,7 +34,10 @@
   boot.kernelModules = [
     "kvm-intel"
     # "snd_aloop"
+    "nvidia"
+    "nvidia_modeset"
     "nvidia_uvm"
+    "nvidia_drm"
   ];
   boot.blacklistedKernelModules = [
     "nouveau"
@@ -154,6 +157,7 @@
   hardware.nvidia = {
     open = true;
     nvidiaSettings = true;
+    dynamicBoost.enable = true;
     # package = config.boot.kernelPackages.nvidiaPackages.beta;
     #  config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
