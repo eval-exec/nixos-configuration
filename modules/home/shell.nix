@@ -1,4 +1,9 @@
 { config, pkgs, ... }:
+let
+  commonShellAliases = {
+    ding = "mpv ~/Music/notifications/ding-1-14705.mp3 &> /dev/null";
+  };
+in
 {
   programs = {
     fish = {
@@ -68,8 +73,7 @@
         [ -f ~/.zshrc.local ] && source ~/.zshrc.local
       '';
 
-      shellAliases = {
-        ding = "mpv ~/Music/notifications/ding-1-14705.mp3 &> /dev/null";
+      shellAliases = commonShellAliases // {
         cat = "bat -p";
         vim = "nvim";
         goland = "~/.local/share/JetBrains/Toolbox/apps/goland/bin/goland.sh";
@@ -108,9 +112,7 @@
       enableVteIntegration = true;
       historyFile = "${config.home.homeDirectory}/.bash_history";
 
-      shellAliases = {
-        ding = "mpv ~/Music/notifications/ding-1-14705.mp3 &> /dev/null";
-      };
+      shellAliases = commonShellAliases;
     };
     fzf = {
       enable = true;

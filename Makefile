@@ -1,5 +1,4 @@
 HOST ?= Mufasa
-PRIMARY_USER ?= exec
 FLAKE ?= .\#$(HOST)
 NIX_FILES := $(shell rg --files -g '*.nix')
 
@@ -29,7 +28,8 @@ switch-os: fmt check
 
 switch-hm: fmt check
 	git diff --exit-code
-	activation="$$(nix build --no-link --print-out-paths ".#nixosConfigurations.$(HOST).config.home-manager.users.$(PRIMARY_USER).home.activationPackage")"; \
+	primary_user="$$(nix eval --raw ".#nixosConfigurations.$(HOST).config.users.primaryUser")"; \
+		activation="$$(nix build --no-link --print-out-paths ".#nixosConfigurations.$(HOST).config.home-manager.users.$$primary_user.home.activationPackage")"; \
 		"$$activation/activate"
 
 boot: fmt check

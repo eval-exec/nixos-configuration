@@ -23,7 +23,7 @@ make fmt        # format every Nix file
 make check      # evaluate all flake checks
 make dry-build  # evaluate and dry-build Mufasa
 make switch-os  # activate NixOS and Home Manager together
-make switch-hm  # activate only exec's Home Manager generation
+make switch-hm  # activate only the primary user's Home Manager generation
 make boot       # build and select the configuration for next boot
 ```
 
