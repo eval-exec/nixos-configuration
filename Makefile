@@ -1,30 +1,35 @@
+HOST ?= Mufasa
+FLAKE ?= .\#$(HOST)
+NIX_FILES := $(shell rg --files -g '*.nix')
+
+.PHONY: fmt check flake-update dry-build switch-os switch-hm boot
+
 fmt:
-	nixfmt *.nix
+	nixfmt $(NIX_FILES)
+
+check:
+	nix flake check --no-build
 
 flake-update:
 	nix flake update
-	notify-send "NixOS: \"nix flake update\" finished"
+	notify-send 'NixOS: nix flake update finished'
 
-dry-build: fmt
+dry-build: fmt check
 	git diff --exit-code
-	sudo -S nixos-rebuild dry-build --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose
+	sudo -S nixos-rebuild dry-build --flake $(FLAKE) --verbose
 
-switch-os: fmt
+switch-os: fmt check
 	git diff --exit-code
-	rm /home/exec/.config/fontconfig/conf.d/10-hm-fonts.conf || true
-	sudo -S nixos-rebuild switch --max-jobs 20 --cores 20 --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace --print-build-logs \
-	--option extra-trusted-public-keys 'lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc='
+	rm -f "$$HOME/.config/fontconfig/conf.d/10-hm-fonts.conf"
+	sudo -S nixos-rebuild switch --max-jobs 20 --cores 20 --flake $(FLAKE) \
+		--verbose --show-trace --print-build-logs \
+		--option extra-trusted-public-keys 'lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc='
+	notify-send 'NixOS: make switch finished'
 
-	# --option substituters "https://cache.nixos.org/"
-	# --option substituters "https://mirrors.ustc.edu.cn/nix-channels/store"
-	notify-send "NixOS: make switch finished"
+# Home Manager is integrated into the NixOS configuration.
+switch-hm: switch-os
 
-switch-hm: fmt
+boot: fmt check
 	git diff --exit-code
-	home-manager switch --flake .#exec@Mufasa --verbose --show-trace --print-build-logs
-	# --option substituters "https://mirrors.ustc.edu.cn/nix-channels/store"
-
-boot: fmt
-	git diff --exit-code
-	sudo -S nixos-rebuild boot --flake /home/exec/Projects/github.com/eval-exec/nixos-configuration/.#Mufasa --verbose --show-trace
-	notify-send "NixOS: make book finished"
+	sudo -S nixos-rebuild boot --flake $(FLAKE) --verbose --show-trace
+	notify-send 'NixOS: make boot finished'

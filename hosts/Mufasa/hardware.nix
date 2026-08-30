@@ -1,4 +1,3 @@
-# This is just an example, you should generate yours with nixos-generate-config and put it in here.
 {
   config,
   lib,
@@ -27,13 +26,10 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v4;
-  # boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
   boot.extraModulePackages = [
-    # pkgs.linuxPackages_latest.v4l2loopback
   ];
   boot.kernelModules = [
     "kvm-intel"
-    # "snd_aloop"
     "nvidia"
     "nvidia_modeset"
     "nvidia_uvm"
@@ -44,12 +40,6 @@
     "xe"
   ];
   boot.resumeDevice = "/dev/disk/by-uuid/80296411-3bbc-4222-a884-f123a39cb6a8";
-  # boot.kernelPatches = [
-  #   {
-  #     name = "max-hibernate-compress-speed";
-  #     patch = ./0001-Hack-hibernate-speedup.patch ;
-  #   }
-  # ];
   boot.kernelParams = [
     "xe.force_probe=0"
     "i915.force_probe=*"
@@ -62,16 +52,12 @@
     "maxcpus=20"
     "nowatchdog"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
-    # "nvme.noacpi=1" # may break suspend
     "processor.max_cstate=9"
     "rcu_nocbs=all"
     "rcutree.enable_rcu_lazy=1"
     "resume_offset=89067520"
-    # "video=eDP-1:3456x2160@60"
     "vm.swappiness=0"
   ];
-  # options snd-intel-dspcfg dsp_driver=1
-  # options snd-hda-intel model=generic
   boot.extraModprobeConfig = ''
     options iwlwifi power_save=Y power_level=5 disable_11ac=1 disable_11ax=1 uapsd_disable=1
     options iwlmvm power_scheme=3
@@ -99,50 +85,34 @@
   };
 
   swapDevices = [
-    # { device = "/dev/disk/by-uuid/5dd32dc4-e574-41b8-b0e0-3a6385924b79"; }
     {
       device = "/var/lib/swapfile";
       size = 128 * 1024;
     }
   ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp58s0u1u4.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp59s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = "powersave";
   powerManagement.powertop.enable = true;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  # high-resolution display
   hardware.bluetooth = {
     enable = true;
-    # package = pkgs.bluez-experimental; # This will now use our custom bluez from the overlay
     powerOnBoot = true;
     settings = {
       General = {
         ControllerMode = "dual";
-        # Enable = "Source,Sink,Media,Socket";
         FastConnectable = true;
         Experimental = true;
       };
     };
   };
-  # services.pulseaudio.enable = false;
   services.pulseaudio.package = pkgs.pulseaudioFull;
-  # services.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
 
   hardware.enableAllFirmware = true;
-  # hardware.xpadneo.enable = true;
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
-  # # nixpkgs.config.packageOverrides = pkgs: {
-  # #   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
-  # # };
   hardware.graphics.extraPackages = with pkgs; [
     intel-media-driver # LIBVA_DRIVER_NAME=iHD
     intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
@@ -158,8 +128,6 @@
     open = true;
     nvidiaSettings = true;
     dynamicBoost.enable = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.beta;
-    #  config.boot.kernelPackages.nvidiaPackages.production;
     modesetting.enable = true;
     powerManagement = {
       enable = false; # if true, nvidia cause kernel failed suspend
@@ -167,17 +135,14 @@
     };
     nvidiaPersistenced = true;
     prime = {
-      # sync.enable = true;
 
       offload = {
         enable = true;
         enableOffloadCmd = true;
       };
 
-      # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
       nvidiaBusId = "PCI:1:0:0";
 
-      # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
       intelBusId = "PCI:0:2:0";
     };
   };
