@@ -854,6 +854,7 @@
     tdrop
     tree
     vim
+    tesseract
     wakatime-cli
     wget
     xclip
