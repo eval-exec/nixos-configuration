@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ config, ... }:
 let
   inherit (config.users) primaryUser;
 in
@@ -25,7 +25,7 @@ in
 
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs primaryUser; };
+    extraSpecialArgs = { inherit primaryUser; };
     users.${primaryUser} = import ../../homes/exec;
   };
 }

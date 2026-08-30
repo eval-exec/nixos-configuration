@@ -1,12 +1,9 @@
 {
   config,
-  inputs,
   pkgs,
   ...
 }:
 {
-  home.packages = [ inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default ];
-
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -15,7 +12,6 @@
   };
 
   programs = {
-    home-manager.enable = true;
     bacon.enable = true;
 
     vscode = {
