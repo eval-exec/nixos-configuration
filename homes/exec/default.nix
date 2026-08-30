@@ -1,4 +1,4 @@
-{ ... }:
+{ primaryUser, ... }:
 {
   imports = [
     ../../modules/home/packages.nix
@@ -12,8 +12,8 @@
   ];
 
   home = {
-    username = "exec";
-    homeDirectory = "/home/exec";
+    username = primaryUser;
+    homeDirectory = "/home/${primaryUser}";
     stateVersion = "26.05";
   };
 }

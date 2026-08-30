@@ -1,4 +1,5 @@
 HOST ?= Mufasa
+PRIMARY_USER ?= exec
 FLAKE ?= .\#$(HOST)
 NIX_FILES := $(shell rg --files -g '*.nix')
 
@@ -26,8 +27,10 @@ switch-os: fmt check
 		--option extra-trusted-public-keys 'lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc='
 	notify-send 'NixOS: make switch finished'
 
-# Home Manager is integrated into the NixOS configuration.
-switch-hm: switch-os
+switch-hm: fmt check
+	git diff --exit-code
+	activation="$$(nix build --no-link --print-out-paths ".#nixosConfigurations.$(HOST).config.home-manager.users.$(PRIMARY_USER).home.activationPackage")"; \
+		"$$activation/activate"
 
 boot: fmt check
 	git diff --exit-code

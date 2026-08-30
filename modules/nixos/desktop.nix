@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   specialisation = {
     tty = {
@@ -49,7 +54,7 @@
       };
       autoLogin = {
         enable = false;
-        user = "exec";
+        user = config.users.primaryUser;
       };
     };
 

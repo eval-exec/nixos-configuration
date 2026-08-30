@@ -140,8 +140,6 @@
     imagemagick
     inetutils
     inotify-info
-    inotify-info
-    inotify-tools
     inotify-tools
     intel-gpu-tools
     iotop
@@ -199,7 +197,6 @@
     mupdf
     nacelle
     ncmpcpp
-    ncurses
     ncurses
     neovide
     nethogs

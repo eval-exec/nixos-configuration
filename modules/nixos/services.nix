@@ -38,7 +38,7 @@
       enable = false;
       settings = {
         public = {
-          path = "${config.users.users.exec.home}/Temp/samba";
+          path = "${config.users.users.${config.users.primaryUser}.home}/Temp/samba";
           browseable = true;
           writable = true;
           printable = false;

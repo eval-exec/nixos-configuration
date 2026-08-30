@@ -55,7 +55,7 @@
         auto-optimise-store = true;
         trusted-users = [
           "root"
-          "exec"
+          config.users.primaryUser
         ];
 
         trusted-public-keys = [

@@ -125,7 +125,6 @@
     libvterm
     lldb
     man-pages-posix
-    man-pages-posix
     wireplumber
     ncurses
     ncurses5
