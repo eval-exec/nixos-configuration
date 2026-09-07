@@ -9,6 +9,7 @@
     ../../modules/home/shell.nix
     ../../modules/home/services/network.nix
     ../../modules/home/services/session.nix
+    ../../modules/home/services/input-method.nix
   ];
 
   home = {
