@@ -88,11 +88,16 @@ function toggleTerm() {
   toggleClient("kitty");
 }
 
+
 function toggleEmacs() {
   toggleClient(
-    // "emacs-31.0.50"
-	  // "emacs"
-    "neomacs"
+    "emacs"
+  );
+}
+
+function toggleNeomacs() {
+  toggleClient(
+    "emacs"
   );
 }
 
@@ -147,8 +152,23 @@ function toggleMusic() {
   let registed = registerShortcut(
     "ToggleEmacsWindow",
     "ToggleEmacsWindow",
-    "Meta+S",
+    "Meta+Shift+S",
     toggleEmacs,
+  );
+
+  if (registed) {
+    console.log("registed emacs");
+  } else {
+    console.log("failed to registed emacs");
+  }
+}
+
+{
+  let registed = registerShortcut(
+    "ToggleNeomacsWindow",
+    "ToggleNeomacsWindow",
+    "Meta+S",
+    toggleNeomacs,
   );
 
   if (registed) {
