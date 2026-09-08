@@ -150,6 +150,7 @@
     just
     kanshi
     kdePackages.dolphin
+    kdePackages.kdenlive
     kew
     keyd
     kitty
