@@ -130,7 +130,7 @@
     dynamicBoost.enable = true;
     modesetting.enable = true;
     powerManagement = {
-      enable = false; # if true, nvidia cause kernel failed suspend
+      enable = true; # if true, nvidia cause kernel failed suspend
       finegrained = true;
     };
     nvidiaPersistenced = true;
