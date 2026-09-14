@@ -15,6 +15,7 @@
     aileron
     alacritty
     alejandra
+    forkstat
     alsa-utils
     amdgpu_top
     android-tools
@@ -68,6 +69,7 @@
     cppcheck
     cpulimit
     crate2nix
+    foliate
     ddcui
     ddcutil
     delta
@@ -270,7 +272,7 @@
     swaylock
     syncthing
     sysstat
-    thunderbird
+    unstable.thunderbird
     tintin
     unstable.tmux
     xmlstarlet
