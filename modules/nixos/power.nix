@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   services.scx = {
-    enable = false;
-    scheduler = "scx_bpfland";
+    enable = true;
+    scheduler = "scx_lavd";
   };
 
   services = {
