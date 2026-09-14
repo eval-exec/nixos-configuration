@@ -2,7 +2,12 @@
 {
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        # the ESP is only 511M and each cachyos v4 lto kernel+initrd is ~60M,
+        # so cap the number of boot entries to keep it from filling up
+        configurationLimit = 5;
+      };
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
