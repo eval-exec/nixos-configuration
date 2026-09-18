@@ -129,7 +129,10 @@
     intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
     libvdpau-va-gl
     intel-ocl
-    nvidia-vaapi-driver
+    # nvidia-vaapi-driver deliberately omitted: with it installed, VA-API
+    # enumeration opens /dev/nvidia0, which is how plasmashell ended up with
+    # 31 fds on the dGPU (runtime_usage=1, blocking runtime D3). The iGPU
+    # decodes video far more efficiently on battery anyway.
     intel-compute-runtime
     vpl-gpu-rt
     mesa
