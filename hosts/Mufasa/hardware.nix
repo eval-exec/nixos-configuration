@@ -53,7 +53,13 @@
     "nowatchdog"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "processor.max_cstate=9"
-    "rcu_nocbs=all"
+    # rcu_nocbs offloads RCU callbacks to per-CPU rcuo[g,p]/N kthreads so they
+    # cannot disturb CPUs reserved via isolcpus/nohz_full. Neither of those is
+    # set here, so it bought no isolation while every callback wakeup became a
+    # cross-CPU interrupt: measured rcuop/0 context-switching 4868x/s against
+    # 1.1/s for scx_lavd, accounting for ~95% of idle IRQs (IWI 2026/s + LOC
+    # 1504/s out of 3698/s total) at 23.6W. rcu_lazy is kept -- it reduces RCU
+    # wakeups rather than adding them.
     "rcutree.enable_rcu_lazy=1"
     "resume_offset=89067520"
     "vm.swappiness=0"
