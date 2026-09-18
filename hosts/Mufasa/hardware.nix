@@ -129,10 +129,9 @@
     intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
     libvdpau-va-gl
     intel-ocl
-    # nvidia-vaapi-driver deliberately omitted: with it installed, VA-API
-    # enumeration opens /dev/nvidia0, which is how plasmashell ended up with
-    # 31 fds on the dGPU (runtime_usage=1, blocking runtime D3). The iGPU
-    # decodes video far more efficiently on battery anyway.
+    # NOTE: omitting nvidia-vaapi-driver here does nothing on its own -- the
+    # nvidia module adds it back from hardware.nvidia.videoAcceleration, which
+    # is disabled above. That option is the lever; this list is not.
     intel-compute-runtime
     vpl-gpu-rt
     mesa
@@ -156,6 +155,14 @@
     # Measured with it enabled: runtime_suspended_time 958ms out of 3d17h
     # uptime, despite NVreg_DynamicPowerManagement=0x02 already being set.
     nvidiaPersistenced = false;
+    # The real lever for keeping the dGPU asleep. nvidia.nix:705 does
+    #   extraPackages = lib.optional cfg.videoAcceleration pkgs.nvidia-vaapi-driver
+    # so listing nothing in hardware.graphics.extraPackages is NOT enough --
+    # the module re-adds it. With nvidia_drv_video.so exported, VA-API
+    # enumeration opens /dev/nvidia0 and pins runtime_usage=1.
+    # Measured: plasmashell held 31 nvidia fds and runtime_suspended_time was
+    # 0ms across a full uptime, on a fresh boot, reproducibly.
+    videoAcceleration = false;
     prime = {
 
       offload = {
