@@ -58,8 +58,13 @@
     "resume_offset=89067520"
     "vm.swappiness=0"
   ];
+  # iwlwifi.uapsd_disable is a bitmap (1: BSS, 2: P2P client) that defaults to 3,
+  # i.e. U-APSD off everywhere. 0 enables WMM power save on both. The previous
+  # value of 1 left BSS (the infrastructure link that matters on a laptop) off.
+  # 11ac/11ax are left at their defaults: VHT/HE shorten airtime and 11ax adds
+  # TWT, so disabling them to "save power" costs more than it saves.
   boot.extraModprobeConfig = ''
-    options iwlwifi power_save=Y power_level=5 disable_11ac=1 disable_11ax=1 uapsd_disable=1
+    options iwlwifi power_save=Y power_level=5 uapsd_disable=0
     options iwlmvm power_scheme=3
   '';
   boot.kernel.sysctl = {
@@ -127,13 +132,21 @@
   hardware.nvidia = {
     open = true;
     nvidiaSettings = true;
-    dynamicBoost.enable = true;
+    # dynamicBoost runs nvidia-powerd, which only rebalances the power budget
+    # between CPU and GPU while on AC. On battery it is just another daemon
+    # holding the dGPU awake.
+    dynamicBoost.enable = false;
     modesetting.enable = true;
     powerManagement = {
       enable = true; # if true, nvidia cause kernel failed suspend
       finegrained = true;
     };
-    nvidiaPersistenced = true;
+    # nvidia-persistenced keeps /dev/nvidia* open for its entire lifetime, so
+    # runtime_usage stays 1 and the GPU never enters runtime D3 -- which is
+    # precisely what powerManagement.finegrained above is trying to achieve.
+    # Measured with it enabled: runtime_suspended_time 958ms out of 3d17h
+    # uptime, despite NVreg_DynamicPowerManagement=0x02 already being set.
+    nvidiaPersistenced = false;
     prime = {
 
       offload = {

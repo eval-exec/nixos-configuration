@@ -8,23 +8,6 @@
   services = {
     power-profiles-daemon.enable = false;
 
-    auto-cpufreq.enable = false;
-    auto-cpufreq.settings = {
-      battery = {
-        governor = "powersave"; # Or "conservative", "ondemand", etc.
-        energy_performance_preference = "power";
-        turbo = "never"; # Or "auto", "always"
-        energy_perf_bias = "power";
-      };
-      charger = {
-        governor = "performance"; # Or "powersave", "conservative", etc.
-        energy_performance_preference = "performance";
-        turbo = "auto"; # Or "always", "never"
-        energy_perf_bias = "performance";
-      };
-
-    };
-
     acpid = {
       enable = true;
       logEvents = true;
