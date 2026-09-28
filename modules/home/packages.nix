@@ -12,6 +12,7 @@
     vivaldi
     vivaldi-ffmpeg-codecs
     age
+    easytier
     aileron
     alacritty
     alejandra

@@ -18,7 +18,7 @@
           gpg = {
             key = "4B453CE70F2646044171BACE0F0272C0D3AC91F7";
           };
-          passwordCommand = "${pkgs.coreutils}/bin/cat ${config.home.homeDirectory}/pass/gapp.txt";
+          passwordCommand = "${pkgs.gopass}/bin/gopass show gapps";
           imap = {
             host = "imap.gmail.com";
             port = 993;
@@ -52,6 +52,9 @@
 
           msmtp = {
             enable = true;
+            extraConfig = {
+              timeout = "15";
+            };
           };
           mu = {
             enable = false;

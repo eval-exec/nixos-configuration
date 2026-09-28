@@ -51,6 +51,7 @@
         ncurses6
         libselinux
         gnutls
+        e2fsprogs
         gmp
         tree-sitter
         gtk4
@@ -69,6 +70,7 @@
         dbus
         expat
         fontconfig
+        fribidi
         freetype
         fuse
         fuse3
@@ -93,6 +95,7 @@
         libgccjit
         libgit2
         libgbm
+        libgpg-error
         libkrb5
         libnotify
         libpulseaudio
