@@ -115,7 +115,13 @@
       General = {
         ControllerMode = "dual";
         FastConnectable = true;
-        Experimental = true;
+        # NOTE: leaving Experimental off keeps LE Audio (BAP) out of BlueZ.
+        # With it on, the dual-mode Bose QC Ultra 2 Earbuds get the LE bearer
+        # as their "last-seen" preference; the LE connect is never answered and
+        # the attempt wedges 40s before aborting locally, which also makes every
+        # further Connect() fail with org.bluez.Error.InProgress until a
+        # `bluetoothctl disconnect` clears it. Classic BR/EDR connects in ~1s.
+        Experimental = false;
       };
     };
   };
