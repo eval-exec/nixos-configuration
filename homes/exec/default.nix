@@ -5,6 +5,7 @@
     ../../modules/home/environment.nix
     ../../modules/home/mail.nix
     ../../modules/home/desktop.nix
+    ../../modules/home/codex-desktop.nix
     ../../modules/home/development.nix
     ../../modules/home/shell.nix
     ../../modules/home/services/network.nix

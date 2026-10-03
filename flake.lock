@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "codex-desktop-linux": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791000063,
+        "narHash": "sha256-c31ri7SpsdKZoOimPbasl4hjoZlu8/bsI0TCfbJ60LU=",
+        "owner": "ilysenko",
+        "repo": "codex-desktop-linux",
+        "rev": "d0936534b3269e9c5f509bf2aa32dc3746879286",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ilysenko",
+        "repo": "codex-desktop-linux",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "inputs": {
         "nixpkgs": "nixpkgs",
@@ -84,6 +105,44 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "grok-bot-flake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790934884,
+        "narHash": "sha256-rr5UXZemZxE2u9EFt6KSl1TT5hdDFuWLQuox/4oMLCE=",
+        "owner": "jordangarrison",
+        "repo": "grok-bot-flake",
+        "rev": "df80932444e87f03087f99fa071662a26ea76a5d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jordangarrison",
+        "repo": "grok-bot-flake",
         "type": "github"
       }
     },
@@ -285,8 +344,10 @@
     },
     "root": {
       "inputs": {
+        "codex-desktop-linux": "codex-desktop-linux",
         "emacs-overlay": "emacs-overlay",
         "fcitx5-vinput": "fcitx5-vinput",
+        "grok-bot-flake": "grok-bot-flake",
         "home-manager": "home-manager",
         "nix-alien": "nix-alien",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
@@ -333,6 +394,21 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     }

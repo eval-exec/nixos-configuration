@@ -25,6 +25,16 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     fcitx5-vinput.url = "github:xifan2333/fcitx5-vinput";
+
+    grok-bot-flake = {
+      url = "github:jordangarrison/grok-bot-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    codex-desktop-linux = {
+      url = "github:ilysenko/codex-desktop-linux";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   nixConfig = {

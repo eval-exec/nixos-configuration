@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  grokBot = inputs.grok-bot-flake.packages.${pkgs.system}.default;
+in
 {
   home.packages = with pkgs; [
     (pkgs.symlinkJoin {
@@ -127,6 +130,7 @@
     gperf
     graphviz
     grc
+    grokBot
     gst_all_1.gst-libav
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
