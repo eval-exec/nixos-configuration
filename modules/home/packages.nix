@@ -17,6 +17,7 @@ in
     age
     easytier
     aileron
+    gptcommit
     alacritty
     alejandra
     forkstat
