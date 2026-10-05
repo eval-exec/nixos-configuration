@@ -97,7 +97,7 @@ function toggleEmacs() {
 
 function toggleNeomacs() {
   toggleClient(
-    "emacs"
+    "neomacs"
   );
 }
 
@@ -110,11 +110,11 @@ function toggleChrome() {
 }
 
 function toggleChatGPT() {
-  -toggleClient("chrome", "chrome-cadlk");
+  toggleClient("ChatGPT");
 }
 
-function toggleClaude() {
-  -toggleClient("chrome", "chrome-fmpnliohjhemenmnlpbfagaolkdacoja-Default");
+function toggleGrok() {
+  toggleClient("Grok");
 }
 
 function toggleMusic() {
@@ -172,18 +172,18 @@ function toggleMusic() {
   );
 
   if (registed) {
-    console.log("registed emacs");
+    console.log("registed neomacs");
   } else {
-    console.log("failed to registed emacs");
+    console.log("failed to registed neomacs");
   }
 }
 
 {
   let registed = registerShortcut(
-    "ToggleClaude",
-    "ToggleClaude",
+    "ToggleGrok",
+    "ToggleGrok",
     "Meta+8",
-    toggleClaude,
+    toggleGrok,
   );
 
   if (registed) {
