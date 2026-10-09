@@ -19,6 +19,7 @@ in
     aileron
     alacritty
     alejandra
+    kdotool
     forkstat
     alsa-utils
     amdgpu_top
