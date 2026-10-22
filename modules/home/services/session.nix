@@ -35,25 +35,5 @@
       };
     };
 
-    emacs = {
-      Unit = {
-        Description = "emacs";
-        X-SwitchMethod = "keep-old";
-        After = [ "graphical-session.target" ];
-        PartOf = [ "graphical-session.target" ];
-        ConditionEnvironment = "DISPLAY";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-      Service = {
-        Type = "simple";
-        Restart = "on-failure";
-        RestartSec = 1;
-        ExecStart = "${pkgs.nix}/bin/nix-shell ${config.home.homeDirectory}/.config/emacs/default.nix --run ${config.home.homeDirectory}/Projects/github.com/emacs-mirror/build/bin/emacs";
-        StandardOutput = "journal";
-        StandardError = "journal";
-      };
-    };
   };
 }
