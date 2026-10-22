@@ -40,25 +40,6 @@
         "type": "github"
       }
     },
-    "fcitx5-vinput": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2",
-        "sherpa-onnx": "sherpa-onnx"
-      },
-      "locked": {
-        "lastModified": 1792646401,
-        "narHash": "sha256-eOGsfgmuiPJqboupHKIW6okflEGSMcczUigpj/QQzkI=",
-        "owner": "xifan2333",
-        "repo": "fcitx5-vinput",
-        "rev": "b6b981c20ec66927a5fcdf9029067eb83813a703",
-        "type": "github"
-      },
-      "original": {
-        "owner": "xifan2333",
-        "repo": "fcitx5-vinput",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "locked": {
         "lastModified": 1767039857,
@@ -193,7 +174,7 @@
       "inputs": {
         "flake-compat": "flake-compat_2",
         "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1790564970,
@@ -296,22 +277,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1791594108,
-        "narHash": "sha256-XK4KceonkwD8LuMAt/vNrz982mXJM5jeHAxMwsUXXAQ=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "6510408d147d8c5e6d76043e899e9251756f6a75",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1790505892,
         "narHash": "sha256-/pAz2XfqHS//WRn2xRjoqes7Z92qZ0Q1gufZZ3PtuwA=",
         "owner": "NixOS",
@@ -326,7 +291,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1792615934,
         "narHash": "sha256-MlvRfa1O5Cqc2/a+gG+l9TSuowEoCKCmrJ1d9oAVm0I=",
@@ -346,35 +311,13 @@
       "inputs": {
         "codex-desktop-linux": "codex-desktop-linux",
         "emacs-overlay": "emacs-overlay",
-        "fcitx5-vinput": "fcitx5-vinput",
         "grok-bot-flake": "grok-bot-flake",
         "home-manager": "home-manager",
         "nix-alien": "nix-alien",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "sops-nix": "sops-nix"
-      }
-    },
-    "sherpa-onnx": {
-      "inputs": {
-        "nixpkgs": [
-          "fcitx5-vinput",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1785564218,
-        "narHash": "sha256-B1/qLagKXemMgyrmd7RqPEgz2polrZMUkeBT1dv3hso=",
-        "owner": "xifan2333",
-        "repo": "sherpa-onnx-flake",
-        "rev": "a8ef134239c923420becfa6870538dcc8e9c8eb8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "xifan2333",
-        "repo": "sherpa-onnx-flake",
-        "type": "github"
       }
     },
     "sops-nix": {

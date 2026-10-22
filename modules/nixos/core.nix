@@ -55,7 +55,7 @@
       LC_TIME = "C.UTF-8";
     };
 
-    # input method (fcitx5 + vinput) is managed by home-manager:
+    # input method (fcitx5) is managed by home-manager:
     # modules/home/services/input-method.nix
   };
 }

@@ -1,10 +1,5 @@
-{ pkgs, inputs, ... }:
-let
-  vinput = inputs.fcitx5-vinput.packages.${pkgs.system}.default;
-in
+{ pkgs, ... }:
 {
-  home.packages = [ vinput ];
-
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
@@ -19,24 +14,7 @@ in
         fcitx5-gtk
         fcitx5-pinyin-zhwiki
         kdePackages.fcitx5-qt
-        vinput
       ];
-    };
-  };
-
-  # mirrors the unit shipped by the package, with ExecStart in the nix store
-  systemd.user.services.vinput-daemon = {
-    Unit = {
-      Description = "Vinput Voice Input Daemon";
-      After = [ "pipewire.service" ];
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-    Service = {
-      Type = "dbus";
-      BusName = "org.fcitx.Vinput";
-      ExecStart = "${vinput}/bin/vinput-daemon";
     };
   };
 }
