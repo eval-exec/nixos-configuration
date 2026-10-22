@@ -27,7 +27,7 @@
             };
           };
           imapnotify = {
-            enable = true;
+            enable = false;
             boxes = [ "INBOX" ];
             extraArgs = [
               "-wait 1"
@@ -66,7 +66,7 @@
 
   services = {
     imapnotify = {
-      enable = true;
+      enable = false;
     };
     mbsync = {
       enable = false;
