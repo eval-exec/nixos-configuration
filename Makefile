@@ -2,7 +2,7 @@ HOST ?= Mufasa
 FLAKE ?= .\#$(HOST)
 NIX_FILES := $(shell rg --files -g '*.nix')
 
-.PHONY: fmt check flake-update dry-build switch-os switch-hm boot
+.PHONY: fmt check flake-update dry-build switch-os switch-hm switch-hm-fast boot
 
 fmt:
 	nixfmt $(NIX_FILES)
@@ -29,6 +29,13 @@ switch-os: fmt check
 
 switch-hm: fmt check
 	git diff --exit-code
+	primary_user="$$(nix eval --raw ".#nixosConfigurations.$(HOST).config.users.primaryUser")"; \
+		activation="$$(nix build --no-link --print-out-paths ".#nixosConfigurations.$(HOST).config.home-manager.users.$$primary_user.home.activationPackage")"; \
+		"$$activation/activate"
+
+# Fast iteration: activate only the Home Manager generation. No fmt, no
+# flake check, and no clean-tree requirement; use switch-hm to deploy.
+switch-hm-fast:
 	primary_user="$$(nix eval --raw ".#nixosConfigurations.$(HOST).config.users.primaryUser")"; \
 		activation="$$(nix build --no-link --print-out-paths ".#nixosConfigurations.$(HOST).config.home-manager.users.$$primary_user.home.activationPackage")"; \
 		"$$activation/activate"

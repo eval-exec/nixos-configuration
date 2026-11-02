@@ -1,0 +1,260 @@
+# Umbriel config is the source of truth for the compositor.
+# Home Manager symlinks this file out of the store; Umbriel watches it and
+# reloads immediately when it is edited. Run a Nix activation only when you
+# change something outside this file.
+
+[appearance.blur]
+radius = 3
+
+[general]
+autostart = ["/home/exec/.nix-profile/bin/noctalia"]
+
+[hot_corners.top_left]
+action = "overview-open"
+delay_ms = 500
+enabled = true
+
+[include]
+files = []
+
+[include.optional]
+files = ["/home/exec/.config/umbriel/noctalia.toml"]
+
+[input.keyboard]
+numlock_toggle = true
+options = "ctrl:hyper_capscontrol"
+repeat_delay = 250
+repeat_rate = 100
+
+[input.touchpad]
+accel_profile = "flat"
+natural_scroll = true
+sensitivity = 0.5
+tap = true
+
+[keybinds]
+"Alt+Shift+Tab" = "spawn /home/exec/.nix-profile/bin/noctalia msg window-switcher hold reverse"
+"Alt+Tab" = "spawn /home/exec/.nix-profile/bin/noctalia msg window-switcher hold"
+"Mod+1" = "workspace-switch 1"
+"Mod+2" = "workspace-switch 2"
+"Mod+3" = "workspace-switch 3"
+"Mod+4" = "workspace-switch 4"
+"Mod+5" = "workspace-switch 5"
+"Mod+6" = "workspace-switch 6"
+"Mod+7" = "workspace-switch 7"
+"Mod+8" = "workspace-switch 8"
+"Mod+9" = "workspace-switch 9"
+"Mod+Alt+Left" = "column-focus-tab-previous"
+"Mod+Alt+Right" = "column-focus-tab-next"
+"Mod+Comma" = "window-consume-left"
+"Mod+Ctrl+Comma" = "window-consume-from-left"
+"Mod+Ctrl+L" = "spawn /home/exec/.nix-profile/bin/noctalia msg session lock"
+"Mod+Ctrl+Period" = "window-consume-from-right"
+"Mod+Ctrl+S" = "spawn /home/exec/.nix-profile/bin/noctalia msg panel-toggle control-center"
+"Mod+Ctrl+Space" = "window-restore-from-scratchpad kitty"
+"Mod+Down" = "window-focus-down"
+"Mod+Escape" = "session-quit"
+"Mod+F" = "spawn /home/exec/.local/bin/umbriel-toggle-app kitty kitty"
+"Mod+F1" = "window-focus-next"
+"Mod+F3" = "spawn /home/exec/.nix-profile/bin/noctalia msg panel-toggle launcher"
+"Mod+H" = "window-focus-left"
+"Mod+J" = "window-focus-down"
+"Mod+K" = "window-focus-up"
+"Mod+L" = "window-focus-right"
+"Mod+Left" = "window-focus-left"
+"Mod+Period" = "window-consume-right"
+"Mod+R" = "window-cycle-primary-extent"
+"Mod+Right" = "window-focus-right"
+"Mod+S" = "spawn emacsclient -c -a emacs"
+"Mod+Shift+1" = "window-move-to-workspace 1"
+"Mod+Shift+2" = "window-move-to-workspace 2"
+"Mod+Shift+3" = "window-move-to-workspace 3"
+"Mod+Shift+4" = "window-move-to-workspace 4"
+"Mod+Shift+5" = "window-move-to-workspace 5"
+"Mod+Shift+6" = "window-move-to-workspace 6"
+"Mod+Shift+7" = "window-move-to-workspace 7"
+"Mod+Shift+8" = "window-move-to-workspace 8"
+"Mod+Shift+9" = "window-move-to-workspace 9"
+"Mod+Shift+Comma" = "spawn /home/exec/.nix-profile/bin/noctalia msg settings-toggle"
+"Mod+Shift+Down" = "window-move-down"
+"Mod+Shift+F" = "window-toggle-fullscreen"
+"Mod+Shift+Left" = "column-move-left"
+"Mod+Shift+R" = "window-cycle-primary-extent-back"
+"Mod+Shift+Right" = "column-move-right"
+"Mod+Shift+Slash" = "cheatsheet-toggle"
+"Mod+Shift+Space" = "window-move-to-scratchpad kitty"
+"Mod+Shift+Up" = "window-move-up"
+"Mod+Shift+W" = "column-toggle-tabbed"
+"Mod+Space" = "spawn /home/exec/.local/bin/umbriel-toggle-app kitty kitty"
+"Mod+Tab" = "scratchpad-focus-next kitty"
+"Mod+Up" = "window-focus-up"
+"Mod+W" = "spawn /home/exec/.local/bin/umbriel-toggle-app chrome google-chrome"
+"Mod+WheelDown" = "window-focus-right"
+"Mod+WheelUp" = "window-focus-left"
+Print = "spawn /home/exec/.nix-profile/bin/noctalia msg screenshot-region"
+
+[keybinds."Mod+Ctrl+F"]
+action = "window-toggle-maximize"
+repeat = false
+
+[keybinds."Mod+M"]
+action = "window-toggle-maximize-to-edges"
+repeat = false
+
+[keybinds."Mod+O"]
+action = "overview-toggle"
+repeat = false
+
+[keybinds."Mod+P"]
+action = "window-toggle-pinned"
+repeat = false
+
+[keybinds."Mod+Q"]
+action = "window-close"
+repeat = false
+
+[keybinds."Mod+Return"]
+action = "spawn /home/exec/.nix-profile/bin/kitty"
+repeat = false
+
+[keybinds."Mod+Shift+Escape"]
+action = "shortcuts-inhibit-toggle"
+allow_when_inhibited = true
+repeat = false
+
+[keybinds."Mod+Shift+T"]
+action = "window-focus-switch-floating"
+repeat = false
+
+[keybinds."Mod+T"]
+action = "window-toggle-floating"
+repeat = false
+
+[keybinds.XF86AudioLowerVolume]
+action = "spawn noctalia msg volume-down"
+allow_when_locked = true
+
+[keybinds.XF86AudioMute]
+action = "spawn noctalia msg volume-mute"
+allow_when_locked = true
+repeat = false
+
+[keybinds.XF86AudioNext]
+action = "spawn noctalia msg media next"
+allow_when_locked = true
+
+[keybinds.XF86AudioPlay]
+action = "spawn noctalia msg media toggle"
+allow_when_locked = true
+repeat = false
+
+[keybinds.XF86AudioPrev]
+action = "spawn noctalia msg media previous"
+allow_when_locked = true
+
+[keybinds.XF86AudioRaiseVolume]
+action = "spawn noctalia msg volume-up"
+allow_when_locked = true
+
+[keybinds.XF86MonBrightnessDown]
+action = "spawn noctalia msg brightness-down"
+allow_when_locked = true
+
+[keybinds.XF86MonBrightnessUp]
+action = "spawn noctalia msg brightness-up"
+allow_when_locked = true
+
+[[layer_rule]]
+blur = true
+blur_ignore_alpha = 0.5
+blur_popups = true
+
+[layer_rule.match]
+namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd|desktop-widget-[^\"]*)$"
+
+[[layer_rule]]
+blur_optimized = false
+
+[layer_rule.match]
+namespace = "^noctalia-(notification|dock|panel|attached-panel|osd)$"
+
+[layout]
+extent_presets = [0.333, 0.5, 0.667]
+gap = 5
+mode = "scrolling"
+
+[layout.scrolling]
+default_extent_fraction = 0.5
+
+[layout.stacking]
+
+[output.DP-2]
+scale = 1.7
+
+[output.eDP-1]
+scale = 1.7
+
+[[scratchpad]]
+name = "chrome"
+proportional_size = true
+spawn_when_empty = "/home/exec/.nix-profile/bin/google-chrome"
+
+[[scratchpad]]
+name = "kitty"
+proportional_size = true
+spawn_when_empty = "/home/exec/.nix-profile/bin/kitty"
+
+[[window_rule]]
+blur = true
+
+[[window_rule]]
+default_floating = true
+
+[window_rule.default_floating_size_px]
+height = 900
+width = 1020
+
+[window_rule.match]
+app_id = "^dev.noctalia.Noctalia$"
+
+[[window_rule]]
+default_floating = true
+
+[window_rule.default_floating_size_px]
+height = 600
+width = 800
+
+[window_rule.match]
+app_id = "^dev.noctalia.UmbrielSharePicker$"
+
+[[window_rule]]
+default_floating = true
+default_maximize = false
+
+[window_rule.default_position]
+anchor = "bottom_right"
+x = 20
+y = 20
+
+[window_rule.match]
+title = "^(Picture-in-Picture|Picture in picture)$"
+
+[[window_rule]]
+default_focused = false
+default_pinned = true
+
+[window_rule.default_position]
+anchor = "bottom_right"
+x = 0
+y = 0
+
+[window_rule.match]
+title = "^notificationtoasts_.+_desktop"
+
+[[window_rule]]
+[window_rule.default_floating_size]
+height = 1.0
+width = 1.0
+
+[window_rule.match]
+app_id = "^(google-chrome|kitty)$"
