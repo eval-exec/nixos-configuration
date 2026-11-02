@@ -23,6 +23,7 @@
       enable = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
+      symlinkToCacheHome = true;
     };
     go = {
       enable = true;

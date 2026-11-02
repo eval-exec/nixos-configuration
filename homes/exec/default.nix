@@ -1,6 +1,7 @@
-{ primaryUser, ... }:
+{ primaryUser, inputs, ... }:
 {
   imports = [
+    inputs.nix-index-database.homeModules.default
     ../../modules/home/packages.nix
     ../../modules/home/environment.nix
     ../../modules/home/mail.nix

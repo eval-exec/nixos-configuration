@@ -17,6 +17,14 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
+    # The lock currently pins the revision whose prebuilt database is in the
+    # store; refresh with `nix flake update nix-index-database` once GitHub
+    # release downloads are reachable.
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-alien = {
       url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
