@@ -23,8 +23,8 @@ switch-os: fmt check
 	rm -f "$$HOME/.config/fontconfig/conf.d/10-hm-fonts.conf"
 	sudo -S nixos-rebuild switch --max-jobs 20 --cores 20 --flake $(FLAKE) \
 		--verbose --show-trace --print-build-logs \
-		--option extra-substituters 'https://cache.lantian.pub/lantian https://noctalia.cachix.org https://umbriel.cachix.org' \
-		--option extra-trusted-public-keys 'lantian:WVGO7vsRMSEN+h7Lp7kv6SAmrkEXgUGbbXm7jMDjBuQ= noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4= umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw='
+		--option substituters "$$(nix eval --raw '.#nixosConfigurations.$(HOST).config.nix.settings.substituters' --apply 'builtins.concatStringsSep " "')" \
+		--option trusted-public-keys "$$(nix eval --raw '.#nixosConfigurations.$(HOST).config.nix.settings.trusted-public-keys' --apply 'builtins.concatStringsSep " "')"
 	notify-send 'NixOS: make switch finished'
 
 switch-hm: fmt check
