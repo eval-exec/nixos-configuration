@@ -52,7 +52,7 @@
 
     displayManager = {
       enable = true;
-      defaultSession = "umbriel";
+      defaultSession = "plasma";
       ly = {
         enable = false;
       };
