@@ -1,7 +1,9 @@
 # Umbriel config is the source of truth for the compositor.
-# Home Manager symlinks this file out of the store; Umbriel watches it and
-# reloads immediately when it is edited. Run a Nix activation only when you
-# change something outside this file.
+# Home Manager links it from the store; after editing, run
+# `make switch-hm-fast` to activate it.
+
+[appearance]
+border_width = 0
 
 [appearance.blur]
 radius = 3
