@@ -1,15 +1,5 @@
 { config, pkgs, ... }:
 {
-  xdg.portal = {
-    enable = true;
-    configPackages = [
-      pkgs.kdePackages.xdg-desktop-portal-kde
-    ];
-    extraPortals = [
-      pkgs.kdePackages.xdg-desktop-portal-kde
-    ];
-  };
-
   services = {
     mpd = {
       enable = true;

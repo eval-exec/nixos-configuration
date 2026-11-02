@@ -1,24 +1,34 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 {
+  imports = [ inputs.umbriel.nixosModules.default ];
+
+  programs.umbriel.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
   specialisation = {
     tty = {
       configuration = {
         services = {
           displayManager.sddm.enable = lib.mkForce false;
+          displayManager.defaultSession = lib.mkForce null;
           desktopManager.plasma6.enable = lib.mkForce false;
           flatpak.enable = lib.mkForce false;
           xserver.enable = lib.mkForce false;
         };
+        programs.umbriel.enable = lib.mkForce false;
       };
     };
   };
 
   services = {
+    upower.enable = true;
+
     desktopManager = {
       plasma6.enable = true;
     };
@@ -42,6 +52,7 @@
 
     displayManager = {
       enable = true;
+      defaultSession = "umbriel";
       ly = {
         enable = false;
       };
