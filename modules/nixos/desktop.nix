@@ -1,14 +1,10 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
 }:
 {
-  imports = [ inputs.umbriel.nixosModules.default ];
-
-  programs.umbriel.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   specialisation = {
@@ -21,7 +17,6 @@
           flatpak.enable = lib.mkForce false;
           xserver.enable = lib.mkForce false;
         };
-        programs.umbriel.enable = lib.mkForce false;
       };
     };
   };

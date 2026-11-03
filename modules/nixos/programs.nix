@@ -2,11 +2,6 @@
 {
   programs = {
     ydotool.enable = true;
-    labwc = {
-      enable = true;
-      package = pkgs.unstable.labwc;
-    };
-    niri.enable = true;
     xwayland.enable = true;
     criu.enable = true;
     noisetorch.enable = true;

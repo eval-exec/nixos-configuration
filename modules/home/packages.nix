@@ -301,10 +301,7 @@ in
     unstable.gopls
     unstable.isync
     unstable.jdt-language-server
-    unstable.labwc-menu-generator
-    unstable.labwc-tweaks-gtk
     unstable.nil
-    unstable.niriswitcher
     unstable.nix-direnv
     unstable.nix-search-cli
     unstable.nixd
