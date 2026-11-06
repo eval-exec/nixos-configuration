@@ -8,8 +8,7 @@
   # Boot to the text console; start SDDM on demand with
   # `systemctl start display-manager.service`.
   systemd.defaultUnit = lib.mkForce "multi-user.target";
-  # Keep SDDM installed but still start kmscon on tty1 at boot.
-  systemd.targets.getty.wants = lib.mkIf config.services.kmscon.enable (
+  systemd.services."getty.target".wants = lib.mkIf config.services.kmscon.enable (
     lib.mkForce [ "kmsconvt@tty1.service" ]
   );
 
