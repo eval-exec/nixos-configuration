@@ -26,6 +26,8 @@
         font-engine=pango
         font-size=18
         sb-size=10000
+        # Enable Ctrl+Super+Enter etc. for kmscon's built-in sessions.
+        session-control
 
         # Default palette blue (0,0,238) has ~2:1 contrast on black.
         palette=custom
