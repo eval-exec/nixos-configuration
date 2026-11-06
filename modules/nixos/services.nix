@@ -21,13 +21,32 @@
     kmscon = {
       enable = true;
       useXkbConfig = true;
+      term = "xterm-256color";
       extraConfig = ''
+        font-engine=pango
         font-size=18
+        sb-size=10000
       '';
       fonts = [
         {
           name = "JetBrainsMono Nerd Font";
           package = pkgs.nerd-fonts.jetbrains-mono;
+        }
+        {
+          name = "DejaVu Sans Mono";
+          package = pkgs.dejavu_fonts;
+        }
+        {
+          name = "Noto Sans Mono CJK SC";
+          package = pkgs.noto-fonts-cjk-sans;
+        }
+        {
+          name = "Noto Emoji";
+          package = pkgs.noto-fonts-monochrome-emoji;
+        }
+        {
+          name = "Symbola";
+          package = pkgs.symbola;
         }
       ];
     };
