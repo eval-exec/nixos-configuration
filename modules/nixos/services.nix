@@ -26,6 +26,11 @@
         font-engine=pango
         font-size=18
         sb-size=10000
+
+        # Default palette blue (0,0,238) has ~2:1 contrast on black.
+        palette=custom
+        palette-blue=97,175,239
+        palette-light-blue=137,180,250
       '';
       fonts = [
         {
