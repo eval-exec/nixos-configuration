@@ -16,6 +16,7 @@ in
     vivaldi-ffmpeg-codecs
     age
     easytier
+    nix-tree
     aileron
     alacritty
     alejandra
