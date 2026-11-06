@@ -10,7 +10,10 @@
   specialisation = {
     tty = {
       configuration = {
+        # Text-only rescue entry: kmscon on tty1, no display manager.
+        systemd.defaultUnit = lib.mkForce "multi-user.target";
         services = {
+          displayManager.enable = lib.mkForce false;
           displayManager.sddm.enable = lib.mkForce false;
           displayManager.defaultSession = lib.mkForce null;
           desktopManager.plasma6.enable = lib.mkForce false;
