@@ -29,6 +29,10 @@
         # Enable Ctrl+Super+Enter etc. for kmscon's built-in sessions.
         session-control
 
+        # Use only the boot/display GPU (Intel i915); leave the NVIDIA 3D
+        # controller untouched.
+        gpus=primary
+
         # Default palette blue (0,0,238) has ~2:1 contrast on black.
         palette=custom
         palette-blue=97,175,239
