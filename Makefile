@@ -2,6 +2,13 @@ HOST ?= Mufasa
 FLAKE ?= .\#$(HOST)
 NIX_FILES := $(shell rg --files -g '*.nix')
 
+# Only notify when a daemon owns org.freedesktop.Notifications. Without one
+# (e.g. booted to kmscon without Plasma), notify-send blocks for ~85s while
+# D-Bus activation waits for plasma_waitforname to time out.
+NOTIFY := busctl --user call org.freedesktop.DBus /org/freedesktop/DBus \
+	org.freedesktop.DBus GetNameOwner s org.freedesktop.Notifications \
+	>/dev/null 2>&1 && notify-send
+
 .PHONY: fmt check flake-update dry-build switch-os switch-hm switch-hm-fast boot
 
 fmt:
@@ -12,7 +19,7 @@ check:
 
 flake-update:
 	nix flake update
-	notify-send 'NixOS: nix flake update finished'
+	-$(NOTIFY) 'NixOS: nix flake update finished'
 
 dry-build: fmt check
 	git diff --exit-code
@@ -25,7 +32,7 @@ switch-os: fmt check
 		--verbose --show-trace --print-build-logs \
 		--option substituters "$$(nix eval --raw '.#nixosConfigurations.$(HOST).config.nix.settings.substituters' --apply 'builtins.concatStringsSep " "')" \
 		--option trusted-public-keys "$$(nix eval --raw '.#nixosConfigurations.$(HOST).config.nix.settings.trusted-public-keys' --apply 'builtins.concatStringsSep " "')"
-	notify-send 'NixOS: make switch finished'
+	-$(NOTIFY) 'NixOS: make switch finished'
 
 switch-hm: fmt check
 	git diff --exit-code
@@ -43,4 +50,4 @@ switch-hm-fast:
 boot: fmt check
 	git diff --exit-code
 	sudo -S nixos-rebuild boot --flake $(FLAKE) --verbose --show-trace
-	notify-send 'NixOS: make boot finished'
+	-$(NOTIFY) 'NixOS: make boot finished'
