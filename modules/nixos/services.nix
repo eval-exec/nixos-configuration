@@ -26,8 +26,8 @@
         font-engine=pango
         font-size=18
         sb-size=10000
-        # Enable Ctrl+Super+Enter etc. for kmscon's built-in sessions.
-        session-control
+        # kmscon session-control is disabled on real VTs; use tmux or
+        # multiple VTs instead.
 
         # Use only the boot/display GPU (Intel i915); leave the NVIDIA 3D
         # controller untouched.
