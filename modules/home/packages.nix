@@ -51,7 +51,7 @@ in
     brightnessctl
     browsh
     btop
-    bun
+    unstable.bun
     calibre
     ccls
     chafa
