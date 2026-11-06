@@ -5,6 +5,13 @@
   ...
 }:
 {
+  # Boot to the text console; start SDDM on demand with
+  # `systemctl start display-manager.service`.
+  systemd.defaultUnit = lib.mkForce "multi-user.target";
+  systemd.services."getty.target".wants = lib.mkIf config.services.kmscon.enable (
+    lib.mkForce [ "kmsconvt@tty1.service" ]
+  );
+
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   specialisation = {
