@@ -47,7 +47,6 @@ in
     blender
     bottles
     melonds
-    brave
     brightnessctl
     browsh
     btop
