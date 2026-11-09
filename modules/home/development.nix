@@ -12,6 +12,13 @@
   };
 
   programs = {
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
+
+    htop.enable = true;
+
     bacon.enable = true;
 
     vscode = {

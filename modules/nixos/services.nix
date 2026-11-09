@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 {
+  # kdeconnect's digitizer plugin needs /dev/uinput.
+  hardware.uinput.enable = true;
+
   services.gpsd = {
     enable = true;
     devices = [

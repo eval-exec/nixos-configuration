@@ -5,10 +5,6 @@
     xwayland.enable = true;
     criu.enable = true;
     noisetorch.enable = true;
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
     fish.enable = false;
     zsh = {
       enable = true;
@@ -17,7 +13,6 @@
       setOptions = [ ];
     };
     wshowkeys.enable = true;
-    virt-manager.enable = true;
 
     wayfire = {
       enable = false;
@@ -42,8 +37,6 @@
       enableSSHSupport = true;
       enableExtraSocket = true;
     };
-
-    kdeconnect.enable = true;
 
     nix-ld = {
       enable = true;
@@ -142,7 +135,6 @@
         zlib-ng
       ];
     };
-    htop.enable = true;
     mosh.enable = true;
   };
 

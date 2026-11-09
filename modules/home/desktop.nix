@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 {
   services = {
+    kdeconnect.enable = true;
+
     mpd = {
       enable = true;
       musicDirectory = "~/Music";
@@ -25,6 +27,13 @@
   xsession = {
     enable = false;
   };
+
+  dconf.settings."org/virt-manager/virt-manager/connections" = {
+    autoconnect = [ "qemu:///system" ];
+    uris = [ "qemu:///system" ];
+  };
+
+  home.packages = [ pkgs.virt-manager ];
 
   programs = {
     firefox = {

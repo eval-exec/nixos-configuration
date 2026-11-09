@@ -14,8 +14,6 @@
     MOZ_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     OLLAMA_HOST = "http://127.0.0.1:11434";
-    EDITOR = "nvim";
-    VISUAL = "nvim";
   };
 
   home.sessionPath = [

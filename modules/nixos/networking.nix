@@ -26,6 +26,19 @@
     ];
     firewall = {
       enable = false;
+      # kdeconnect. Unused while the firewall is off.
+      allowedTCPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
     };
   };
 
