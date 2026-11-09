@@ -11,6 +11,8 @@
     flake = "${config.home.homeDirectory}/Projects/github.com/eval-exec/nixos-configuration";
   };
 
+  programs.home-manager.enable = true;
+
   programs = {
     neovim = {
       enable = true;
