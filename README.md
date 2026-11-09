@@ -25,8 +25,8 @@ The host and home entrypoints are intentionally thin. They select cohesive modul
 make fmt        # format every Nix file
 make check      # evaluate all flake checks
 make dry-build  # evaluate and dry-build Mufasa
-make switch-os  # activate the NixOS generation
-make switch-hm  # activate standalone Home Manager; this survives reboot
+make switch-os  # nh os switch, after fmt and flake check
+make switch-hm  # nh home switch; this survives reboot
 make boot       # build and select the configuration for next boot
 ```
 

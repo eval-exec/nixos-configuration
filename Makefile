@@ -26,27 +26,28 @@ dry-build: fmt check
 	git diff --exit-code
 	sudo -S nixos-rebuild dry-build --flake $(FLAKE) --verbose
 
+# nh prompts for sudo itself. The cache list is still taken from this flake
+# so a newly added substituter works before /etc/nix/nix.conf has it.
+NIX_CACHE = \
+	--option substituters "$$(nix eval --raw '.\#nixosConfigurations.$(HOST).config.nix.settings.substituters' --apply 'builtins.concatStringsSep " "')" \
+	--option trusted-public-keys "$$(nix eval --raw '.\#nixosConfigurations.$(HOST).config.nix.settings.trusted-public-keys' --apply 'builtins.concatStringsSep " "')"
+
 switch-os: fmt check
 	git diff --exit-code
-	sudo -S nixos-rebuild switch --max-jobs 20 --cores 20 --flake $(FLAKE) \
-		--verbose --show-trace --print-build-logs \
-		--option substituters "$$(nix eval --raw '.#nixosConfigurations.$(HOST).config.nix.settings.substituters' --apply 'builtins.concatStringsSep " "')" \
-		--option trusted-public-keys "$$(nix eval --raw '.#nixosConfigurations.$(HOST).config.nix.settings.trusted-public-keys' --apply 'builtins.concatStringsSep " "')"
+	nh os switch . -H $(HOST) -j 20 --cores 20 -v $(NIX_CACHE)
 	$(NOTIFY) 'NixOS: make switch finished'
 
-# Standalone Home Manager. The activation writes ~/.nix-profile and the
-# home files; reboot does not run a system service that replaces them.
+# Standalone Home Manager. nh writes the profile and home files, and a
+# reboot does not run a system service that replaces them.
 switch-hm: fmt check
 	git diff --exit-code
-	activation="$$(nix build --no-link --print-out-paths ".#homeConfigurations.exec.activationPackage")"; \
-		HOME_MANAGER_BACKUP_EXT=hm-backup "$$activation/activate"
+	nh home switch . -c exec -b hm-backup -v $(NIX_CACHE)
 	$(NOTIFY) 'Home Manager: make switch-hm finished'
 
 switch-hm-fast:
-	activation="$$(nix build --no-link --print-out-paths ".#homeConfigurations.exec.activationPackage")"; \
-		HOME_MANAGER_BACKUP_EXT=hm-backup "$$activation/activate"
+	nh home switch . -c exec -b hm-backup $(NIX_CACHE)
 
 boot: fmt check
 	git diff --exit-code
-	sudo -S nixos-rebuild boot --flake $(FLAKE) --verbose --show-trace
+	nh os boot . -H $(HOST) -v $(NIX_CACHE)
 	$(NOTIFY) 'NixOS: make boot finished'
