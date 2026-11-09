@@ -339,6 +339,49 @@ in
     tig
     uhubctl
     zip
+    appimage-run
+    cachix
+    gpu-screen-recorder
+    gpu-screen-recorder-gtk
+    clang
+    clang_multi
+    wlrctl
+    gcc
+    (aspellWithDicts (
+      ds: with ds; [
+        en
+        en-computers
+        en-science
+      ]
+    ))
+    docker-compose
+    nix-alien
+    wayland-utils
+    vulkan-tools
+    easyeffects
+    dua
+    duf
+    file
+    git
+    git-lfs
+    gnumake
+    lldb
+    nodejs
+    proxychains-ng
+    python3
+    telegram-desktop
+    tdrop
+    tree
+    tesseract
+    wget
+    xclip
+    xdotool
+    xhost
+    xdpyinfo
+    xev
+    xkbcomp
+    xmodmap
+    xwininfo
     zlib-ng
     zoxide
     zsh-nix-shell

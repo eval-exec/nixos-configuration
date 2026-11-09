@@ -49,89 +49,39 @@
     xdg-utils
     xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
-    appimage-run
-    cachix
-    gpu-screen-recorder # CLI
-    gpu-screen-recorder-gtk # GUI
-    clang
-    clang_multi
-    wlrctl
     glibc
-    glibc_multi
-    gcc
     libgcc
-    (aspellWithDicts (
-      ds: with ds; [
-        en
-        en-computers
-        en-science
-      ]
-    ))
-    docker-compose
     nvidia-container-toolkit
     nvidia-container-toolkit.tools
     libnvidia-container
-    nix-alien
-
     qt6.qtwebsockets
     kdePackages.qtwebsockets
-    wayland-utils
-    vulkan-tools
-    easyeffects
     kdePackages.qtmultimedia
-    gst_all_1.gst-libav
-    dua
-    duf
-    file
-    git
-    git-lfs
     glibcInfo
-    gnumake
     interception-tools
     libclang
     libcxx
     libvterm
-    lldb
     man-pages-posix
     wireplumber
-    ncurses
     ncurses5
-    nodejs
     openssl
     pciutils
     pinentry-curses
     pinentry-emacs
     pinentry-qt
-    pkg-config
     polkit
-    proxychains-ng
-    python3
     qemu
     scheme-manpages
     stdmanpages
     steam-run
     sysfsutils
-    telegram-desktop
-    tdrop
-    tree
     vim
-    tesseract
-    wakatime-cli
-    wget
-    xclip
-    xdotool
     xfsprogs
     libxcb
-    xhost
     libxcb-util
     libxcb-image
     libxcb-wm
-    xdpyinfo
-    xev
-    xkbcomp
-    xmodmap
-    xwininfo
-    zlib-ng
     config.boot.kernelPackages.turbostat
   ];
 }
