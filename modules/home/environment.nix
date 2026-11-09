@@ -31,10 +31,24 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        emoji = [ "Noto Sans Emoji" ];
-        monospace = [ "JetBrainsMono Nerd Font" ];
-        sansSerif = [ "Noto Sans" ];
-        serif = [ "Noto Serif" ];
+        serif = [
+          "Noto Serif CJK SC"
+          "Noto Serif"
+          "Noto Color Emoji"
+          "Twitter Color Emoji"
+        ];
+        sansSerif = [
+          "Noto Sans CJK SC"
+          "Noto Color Emoji"
+        ];
+        monospace = [
+          "JetBrainsMono Nerd Font"
+          "Noto Color Emoji"
+        ];
+        emoji = [
+          "Noto Color Emoji"
+          "Noto Sans Egyptian Hieroglyphs"
+        ];
       };
     };
   };
