@@ -9,6 +9,13 @@
     FZF_ALT_C_OPTS = "--preview 'tree -C {}'";
     NPM_CONFIG_PREFIX = "${config.home.homeDirectory}/.npm-global";
     LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+    NIXOS_OZONE_WL = "1";
+    GDK_BACKEND = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    OLLAMA_HOST = "http://127.0.0.1:11434";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 
   home.sessionPath = [

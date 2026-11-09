@@ -53,16 +53,6 @@
 
   environment = {
     wordlist.enable = true;
-    variables = {
-      NIXOS_OZONE_WL = "1";
-      GDK_BACKEND = "wayland";
-      OLLAMA_HOST = "http://127.0.0.1:11434";
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-      MOZ_ENABLE_WAYLAND = "1";
-      LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
-      ELECTRON_OZONE_PLATFORM_HINT = "auto";
-    };
     localBinInPath = true;
     pathsToLink = [ ];
   };
