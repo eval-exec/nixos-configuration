@@ -5,38 +5,6 @@
   ...
 }:
 {
-  nixpkgs = {
-    overlays = [
-      inputs.self.overlays.additions
-      inputs.self.overlays.modifications
-      inputs.self.overlays.unstable-packages
-      inputs.self.overlays.emacs-overlay
-      inputs.nix-alien.overlays.default
-      inputs.nix-cachyos-kernel.overlays.pinned
-
-    ];
-    config = {
-      allowUnfree = true;
-      cudaSupport = false;
-      permittedInsecurePackages = [
-        "electron-11.5.0"
-        "electron-24.8.6"
-        "electron-25.9.0"
-        "electron-19.1.9"
-        "electron-28.3.3"
-        "electron-27.3.11"
-        "electron-32.3.3"
-        "electron-39.8.10"
-      ];
-      vivaldi = {
-        proprietaryCodecs = true;
-        enableWideVine = true;
-      };
-      nvidia.acceptLicense = true;
-
-    };
-  };
-
   nix =
     let
       flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;

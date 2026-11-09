@@ -52,21 +52,38 @@
     }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      plainPkgs = nixpkgs.legacyPackages.${system};
+      packageSet = import ./overlays/package-set.nix { inherit inputs; };
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = packageSet.pkgsOverlays;
+        inherit (packageSet) config;
+      };
     in
     {
-      packages.${system} = import ./pkgs pkgs;
-      formatter.${system} = pkgs.nixfmt;
+      packages.${system} = import ./pkgs plainPkgs;
+      formatter.${system} = plainPkgs.nixfmt;
 
-      overlays = import ./overlays { inherit inputs; };
+      overlays = packageSet.overlays;
 
       nixosConfigurations.Mufasa = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/Mufasa
-          home-manager.nixosModules.home-manager
+          { nixpkgs.pkgs = pkgs; }
           sops-nix.nixosModules.sops
         ];
+      };
+
+      # Standalone. A switch writes the home and stays there across reboot.
+      # The NixOS module service is what used to replace it on boot.
+      homeConfigurations.exec = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit inputs;
+          primaryUser = "exec";
+        };
+        modules = [ ./homes/exec ];
       };
     };
 }

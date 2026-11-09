@@ -28,25 +28,23 @@ dry-build: fmt check
 
 switch-os: fmt check
 	git diff --exit-code
-	rm -f "$$HOME/.config/fontconfig/conf.d/10-hm-fonts.conf"
 	sudo -S nixos-rebuild switch --max-jobs 20 --cores 20 --flake $(FLAKE) \
 		--verbose --show-trace --print-build-logs \
 		--option substituters "$$(nix eval --raw '.#nixosConfigurations.$(HOST).config.nix.settings.substituters' --apply 'builtins.concatStringsSep " "')" \
 		--option trusted-public-keys "$$(nix eval --raw '.#nixosConfigurations.$(HOST).config.nix.settings.trusted-public-keys' --apply 'builtins.concatStringsSep " "')"
 	$(NOTIFY) 'NixOS: make switch finished'
 
+# Standalone Home Manager. The activation writes ~/.nix-profile and the
+# home files; reboot does not run a system service that replaces them.
 switch-hm: fmt check
 	git diff --exit-code
-	primary_user="$$(nix eval --raw ".#nixosConfigurations.$(HOST).config.users.primaryUser")"; \
-		activation="$$(nix build --no-link --print-out-paths ".#nixosConfigurations.$(HOST).config.home-manager.users.$$primary_user.home.activationPackage")"; \
-		"$$activation/activate"
+	activation="$$(nix build --no-link --print-out-paths ".#homeConfigurations.exec.activationPackage")"; \
+		HOME_MANAGER_BACKUP_EXT=hm-backup "$$activation/activate"
+	$(NOTIFY) 'Home Manager: make switch-hm finished'
 
-# Fast iteration: activate only the Home Manager generation. No fmt, no
-# flake check, and no clean-tree requirement; use switch-hm to deploy.
 switch-hm-fast:
-	primary_user="$$(nix eval --raw ".#nixosConfigurations.$(HOST).config.users.primaryUser")"; \
-		activation="$$(nix build --no-link --print-out-paths ".#nixosConfigurations.$(HOST).config.home-manager.users.$$primary_user.home.activationPackage")"; \
-		"$$activation/activate"
+	activation="$$(nix build --no-link --print-out-paths ".#homeConfigurations.exec.activationPackage")"; \
+		HOME_MANAGER_BACKUP_EXT=hm-backup "$$activation/activate"
 
 boot: fmt check
 	git diff --exit-code

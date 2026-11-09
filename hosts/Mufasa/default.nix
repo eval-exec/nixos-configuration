@@ -1,7 +1,3 @@
-{ config, inputs, ... }:
-let
-  inherit (config.users) primaryUser;
-in
 {
   imports = [
     ./hardware.nix
@@ -22,11 +18,4 @@ in
   networking.hostName = "Mufasa";
   system.stateVersion = "26.05";
   users.primaryUser = "exec";
-
-  home-manager = {
-    useGlobalPkgs = true;
-    backupFileExtension = "hm-backup";
-    extraSpecialArgs = { inherit primaryUser inputs; };
-    users.${primaryUser} = import ../../homes/exec;
-  };
 }
