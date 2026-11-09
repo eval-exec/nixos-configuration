@@ -63,6 +63,8 @@
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
           "lantian:WVGO7vsRMSEN+h7Lp7kv6SAmrkEXgUGbbXm7jMDjBuQ="
+          "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+          "nix-wpe-webkit.cachix.org-1:ItCjHkz1Y5QcwqI9cTGNWHzcox4EqcXqKvOygxpwYHE="
         ];
 
         substituters = [
@@ -74,6 +76,8 @@
           "https://nix-community.cachix.org"
           "https://devenv.cachix.org"
           "https://cache.lantian.pub/lantian"
+          "https://chaotic-nyx.cachix.org"
+          "https://nix-wpe-webkit.cachix.org"
         ];
         experimental-features = [
           "nix-command"
