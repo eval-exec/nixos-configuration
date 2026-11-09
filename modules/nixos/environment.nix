@@ -51,6 +51,11 @@
     xdg-desktop-portal-gtk
     glibc
     libgcc
+    # These wrappers all install cc, ld, and ar. The user profile rejects that
+    # collision; the system profile keeps every one of them.
+    clang
+    clang_multi
+    gcc
     nvidia-container-toolkit
     nvidia-container-toolkit.tools
     libnvidia-container

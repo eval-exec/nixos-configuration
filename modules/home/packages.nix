@@ -342,10 +342,7 @@ in
     cachix
     gpu-screen-recorder
     gpu-screen-recorder-gtk
-    clang
-    clang_multi
     wlrctl
-    gcc
     (aspellWithDicts (
       ds: with ds; [
         en
