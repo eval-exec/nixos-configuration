@@ -3,12 +3,6 @@ _: {
     libvirtd.enable = true;
     waydroid.enable = true;
 
-    virtualbox = {
-      host = {
-        enable = false;
-      };
-      guest.enable = false;
-    };
     docker = {
       enable = true;
 
@@ -19,11 +13,6 @@ _: {
       dockerCompat = false;
 
       defaultNetwork.settings.dns_enabled = true;
-    };
-    vmware = {
-      host = {
-        enable = false;
-      };
     };
   };
 }

@@ -5,7 +5,6 @@
     xwayland.enable = true;
     criu.enable = true;
     noisetorch.enable = true;
-    fish.enable = false;
     zsh = {
       enable = true;
       enableCompletion = false;
@@ -13,15 +12,6 @@
       setOptions = [ ];
     };
     wshowkeys.enable = true;
-
-    wayfire = {
-      enable = false;
-      plugins = with pkgs.wayfirePlugins; [
-        wcm
-        wf-shell
-        wayfire-plugins-extra
-      ];
-    };
 
     steam = {
       enable = true;

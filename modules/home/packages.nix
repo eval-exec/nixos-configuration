@@ -65,7 +65,6 @@ in
     cmake
     comma
     cool-retro-term
-    foliate
     gopass
     gflags
     rocksdb.tools

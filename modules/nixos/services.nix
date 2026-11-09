@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   # kdeconnect's digitizer plugin needs /dev/uinput.
   hardware.uinput.enable = true;
@@ -12,7 +12,6 @@
 
   services = {
     atd.enable = true;
-    blueman.enable = false;
     dictd = {
       enable = true;
       DBs = with pkgs.dictdDBs; [
@@ -63,37 +62,6 @@
           package = pkgs.symbola;
         }
       ];
-    };
-
-    fwupd.enable = false;
-
-    samba = {
-      enable = false;
-      settings = {
-        public = {
-          path = "${config.users.users.${config.users.primaryUser}.home}/Temp/samba";
-          browseable = true;
-          writable = true;
-          printable = false;
-          createMask = "0777";
-        };
-      };
-    };
-
-    keyd = {
-      enable = false;
-      keyboards.default.settings = {
-        main = {
-          capslock = "layer(control)";
-          leftcontrol = "layer(hyper)";
-        };
-        "hyper:C-M-A" = { };
-      };
-    };
-
-    resolved = {
-      enable = false;
-      settings.Resolve.FallbackDNS = "1.1.1.1 8.8.8.8";
     };
 
     wyoming = {

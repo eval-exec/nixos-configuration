@@ -44,16 +44,9 @@
       tod.driver = pkgs.libfprint-2-tod1-goodix;
     };
 
-    touchegg = {
-      enable = false;
-    };
-
     displayManager = {
       enable = true;
       defaultSession = "plasma";
-      ly = {
-        enable = false;
-      };
 
       sddm = {
         enable = true;
@@ -86,7 +79,5 @@
         "nvidia"
       ];
     };
-
-    printing.enable = false;
   };
 }
