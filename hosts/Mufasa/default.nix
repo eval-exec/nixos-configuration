@@ -25,6 +25,7 @@ in
 
   home-manager = {
     useGlobalPkgs = true;
+    backupFileExtension = "hm-backup";
     extraSpecialArgs = { inherit primaryUser inputs; };
     users.${primaryUser} = import ../../homes/exec;
   };

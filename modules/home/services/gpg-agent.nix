@@ -4,7 +4,11 @@
     enable = true;
     enableSshSupport = true;
     enableExtraSocket = true;
+    defaultCacheTtl = 600;
     pinentry.package = pkgs.pinentry-qt;
+    extraConfig = ''
+      allow-emacs-pinentry
+    '';
   };
 
   # pinentry-qt also installs pinentry, pinentry-curses, and pinentry-tty.
