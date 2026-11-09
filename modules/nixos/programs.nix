@@ -49,6 +49,7 @@
       enable = true;
       libraries = with pkgs; [
         alsa-lib
+        libxshmfence
         ncurses6
         libselinux
         gnutls
