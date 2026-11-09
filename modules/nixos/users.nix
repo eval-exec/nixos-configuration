@@ -46,9 +46,6 @@ in
         "video"
         "render"
       ];
-      packages = with pkgs; [
-        firefox
-      ];
     };
     users.defaultUserShell = pkgs.zsh;
   };
