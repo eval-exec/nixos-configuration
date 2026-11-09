@@ -67,9 +67,6 @@
     ncurses5
     openssl
     pciutils
-    pinentry-curses
-    pinentry-emacs
-    pinentry-qt
     polkit
     qemu
     scheme-manpages

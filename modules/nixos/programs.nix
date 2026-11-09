@@ -31,13 +31,6 @@
       package = pkgs.steam.override { extraEnv.SDL_VIDEODRIVER = "x11"; };
     };
 
-    gnupg.agent = {
-      enable = true;
-      pinentryPackage = pkgs.pinentry-qt;
-      enableSSHSupport = true;
-      enableExtraSocket = true;
-    };
-
     nix-ld = {
       enable = true;
       libraries = with pkgs; [

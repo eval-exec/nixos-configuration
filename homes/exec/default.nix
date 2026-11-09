@@ -12,6 +12,7 @@
     ../../modules/home/services/network.nix
     ../../modules/home/services/session.nix
     ../../modules/home/services/input-method.nix
+    ../../modules/home/services/gpg-agent.nix
   ];
 
   # User-level Nix client settings. The system-wide equivalents live in
