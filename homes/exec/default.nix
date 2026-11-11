@@ -8,6 +8,7 @@
     ../../modules/home/desktop.nix
     ../../modules/home/codex-desktop.nix
     ../../modules/home/development.nix
+    ../../modules/home/emacs-dev.nix
     ../../modules/home/shell.nix
     ../../modules/home/services/network.nix
     ../../modules/home/services/session.nix
