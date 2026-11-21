@@ -63,6 +63,9 @@
     {
       packages.${system} = import ./pkgs plainPkgs;
       formatter.${system} = plainPkgs.nixfmt;
+      # The package set NixOS and Home Manager build. Shells that need the
+      # overlays import this. <nixpkgs> stays the raw pin.
+      legacyPackages.${system} = pkgs;
 
       overlays = packageSet.overlays;
 
