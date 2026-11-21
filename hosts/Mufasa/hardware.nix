@@ -77,6 +77,7 @@
     "vm.laptop_mode" = 5;
     "kernel.sysrq" = 1;
     "kernel.yama.ptrace_scope" = 0;
+    "kernel.perf_event_paranoid" = 1;
     "fs.inotify.max_user_watches" = 524288;
   };
 
