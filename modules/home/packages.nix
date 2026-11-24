@@ -16,6 +16,7 @@ in
     vivaldi-ffmpeg-codecs
     age
     easytier
+    ppsspp
     nix-tree
     aileron
     alacritty
