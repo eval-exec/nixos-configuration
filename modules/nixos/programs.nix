@@ -15,10 +15,6 @@
 
     steam = {
       enable = true;
-      # Steam's bundled SDL3 picks the Wayland EGL backend, which segfaults in
-      # NVIDIA's libnvidia-egl-wayland2 (driver 595) and makes steamwebhelper
-      # crash-loop. Run the client through XWayland instead.
-      package = pkgs.steam.override { extraEnv.SDL_VIDEODRIVER = "x11"; };
     };
 
     nix-ld = {
